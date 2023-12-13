@@ -1,38 +1,68 @@
 package br.senac.modelo.entidade.conselho;
 
 import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
 import br.senac.modelo.entidade.denuncia.Denuncia;
 import br.senac.modelo.entidade.relato.Relato;
 import br.senac.modelo.entidade.usuario.Usuario;
 
-public class Conselho {
-	private String conteudo;
-	private LocalDate data;
-	private Usuario usuario;
-	private String avaliacao;
-	private String conselho;
-	private Relato relato;
-	private Denuncia denuncia;
+@Entity
+@Table(name = "conselho")
+public class Conselho implements Serializable {
 
-	public Conselho(String conteudo, LocalDate data, Usuario usuario, String avaliacao, String conselho, Relato relato,
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_conselho")
+    private Long id;
+
+    @Column(name = "conteudo_conselho", length = 200, nullable = false)
+    private String conteudo;
+
+    @Column(name = "avaliacao_conselho", nullable = false)
+    private Integer avaliacao;  
+
+    @Column(name = "data_conselho", nullable = false)
+    private LocalDate data;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_relato")
+    private Relato relato;
+
+    @ManyToOne
+    @JoinColumn(name = "id_denuncia")
+    private Denuncia denuncia;
+
+    public Conselho(){}
+
+    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacao, Relato relato,
 			Denuncia denuncia) {
 
 		this.conteudo = conteudo;
 		this.data = data;
 		this.usuario = usuario;
 		this.avaliacao = avaliacao;
-		this.conselho = conselho;
 		this.relato = relato;
 		this.denuncia = denuncia;
 	}
 
-	public String getAvaliacao() {
+	public int getAvaliacao() {
 		return avaliacao;
-	}
-
-	public String getConselho() {
-		return conselho;
 	}
 
 	public String getConteudo() {
@@ -55,12 +85,8 @@ public class Conselho {
 		return usuario;
 	}
 
-	public void setAvaliacao(String avaliacao) {
+	public void setAvaliacao(int avaliacao) {
 		this.avaliacao = avaliacao;
-	}
-
-	public void setConselho(String conselho) {
-		this.conselho = conselho;
 	}
 
 	public void setConteudo(String conteudo) {
