@@ -1,4 +1,4 @@
-package br.senac.lugardefala.modelo.lugardefalada.conselho;
+package br.senac.lugardefala.modelo.dao.conselho;
 
 import java.util.List;
 
