@@ -6,13 +6,12 @@ import br.senac.modelo.entidade.categoria.Categoria;
 
 public interface CategoriaDAO {
 
-	void inserirCategoria();
+	void inserirCategoria(Categoria categoria);
 
-	void deletarCategoria();
+	void deletarCategoria(Categoria categoria);
 
-	void atualizarCategoria();
+	void atualizarCategoria(Categoria categoria);
 
-	List<Categoria> recuperarClientes();
+	List<Categoria> recuperarCategoria();
 
-	Categoria recuperarContatoCliente(Categoria categoria);
 }

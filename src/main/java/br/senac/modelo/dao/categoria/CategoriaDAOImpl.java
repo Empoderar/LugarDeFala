@@ -2,6 +2,10 @@ package br.senac.modelo.dao.categoria;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -11,8 +15,8 @@ import org.hibernate.service.ServiceRegistry;
 import br.senac.modelo.entidade.categoria.Categoria;
 
 public class CategoriaDAOImpl implements CategoriaDAO {
-	
-	public void inserirCliente(Categoria categoria) {
+
+	public void inserirCategoria(Categoria categoria) {
 
 		Session sessao = null;
 
@@ -97,11 +101,58 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
+	public List<Categoria> recuperarCategoria() {
+
+		Session sessao = null;
+		List<Categoria> categoria = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
+			Root<Categoria> raizCategoria = criteria.from(Categoria.class);
+
+			criteria.select(raizCategoria);
+
+			categoria = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return categoria;
+	}
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
 
 		configuracao.addAnnotatedClass(br.senac.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.conselho.Conselho.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.comunidade.Comunidade.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.contato.Contato.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.denuncia.Denuncia.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.moderador.Moderador.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.relato.Relato.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.status.Status.class);
+		configuracao.addAnnotatedClass(br.senac.modelo.entidade.usuario.Usuario.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
@@ -111,35 +162,5 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
 		return fabricaSessao;
 
-	}
-
-	@Override
-	public void inserirCategoria() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deletarCategoria() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void atualizarCategoria() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Categoria> recuperarClientes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Categoria recuperarContatoCliente(Categoria categoria) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
