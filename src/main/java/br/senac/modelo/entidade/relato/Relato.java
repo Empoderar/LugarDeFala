@@ -1,5 +1,6 @@
 package br.senac.modelo.entidade.relato;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +12,64 @@ import br.senac.modelo.entidade.moderador.Moderador;
 import br.senac.modelo.entidade.status.Status;
 import br.senac.modelo.entidade.usuario.Usuario;
 
-public class Relato {
-	private Conselho conselho;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Relato")
+public class Relato implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_relato")
+	private Long id;
+
+	@Column(name = "data_relato", nullable = false, unique = false)
 	private LocalDate data;
-	private Usuario usuario;
+
+	@Column(name = "avaliacao_relato", length = 200, nullable = true, unique = false)
 	private String avaliacao;
-	private List<Conselho> conselhoRelato;
-	private Moderador moderador;
+	
+	@OneToMany(mappedBy = "Relato", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Conselho> conselhoRelato = new ArrayList<Conselho>();
+	
+	@OneToMany(mappedBy = "Relato", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Categoria> categoriaRelato = new ArrayList<Categoria>();
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_denuncia")
 	private Denuncia denuncia;
-	private Categoria categoria;
-	private List<Categoria> categoriaRelato;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_moderador")
+	private Moderador moderador;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_conselho")
+	private Conselho conselho;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_status")
 	private Status status;
+
+	public Relato() {
+	}
 
 	public Relato(Conselho conselho, LocalDate data, Usuario usuario, String avaliacao, Moderador moderador,
 			Denuncia denuncia, Status status) {
