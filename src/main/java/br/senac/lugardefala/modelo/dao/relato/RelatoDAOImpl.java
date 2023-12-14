@@ -1,4 +1,4 @@
-package br.senac.lugardefala.modelo.dao.conselho;
+package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
@@ -8,11 +8,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
-public class ConselhoDAOImpl implements ConselhoDAO {
+public class RelatoDAOImpl implements RelatoDAO {
 
-	public void inserirConselho(Conselho conselho) {
+	public void inserirRelato(Relato relato) {
 
 		Session sessao = null;
 
@@ -21,8 +22,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(conselho);
-
+			sessao.save(relato);
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -41,7 +41,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public void deletarConselho(Conselho conselho) {
+	public void deletarRelato(Relato relato) {
 
 		Session sessao = null;
 
@@ -50,7 +50,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(conselho);
+			sessao.delete(relato);
 
 			sessao.getTransaction().commit();
 
@@ -68,36 +68,6 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 				sessao.close();
 			}
 		}
-	}
-
-	public void atualizar(Conselho conselho) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.update(conselho);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
 	}
 
 	private SessionFactory conectarBanco() {
@@ -105,6 +75,14 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		Configuration configuracao = new Configuration();
 
 		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.status.Status.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
@@ -116,32 +94,15 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 	}
 
 	@Override
-	public void inserirConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deletarConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void atualizarConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Conselho> recuperarClientes() {
+	public List<Relato> recuperarRelatos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Conselho recuperarContatoCliente(Conselho conselho) {
+	public Relato recuperarRelatoUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
