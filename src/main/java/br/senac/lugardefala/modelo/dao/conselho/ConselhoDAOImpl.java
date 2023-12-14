@@ -2,6 +2,10 @@ package br.senac.lugardefala.modelo.dao.conselho;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -70,7 +74,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public void atualizar(Conselho conselho) {
+	public void atualizarConselho(Conselho conselho) {
 
 		Session sessao = null;
 
@@ -100,11 +104,58 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 
 	}
 
+	public List<Conselho> recuperarConselho() {
+
+		Session sessao = null;
+		List<Conselho> conselho = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
+			Root<Conselho> raizConselho = criteria.from(Conselho.class);
+
+			criteria.select(raizConselho);
+
+			conselho = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return conselho;
+	}
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
 
 		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.status.Status.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 
@@ -115,33 +166,4 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		return fabricaSessao;
 	}
 
-	@Override
-	public void inserirConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deletarConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void atualizarConselho() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Conselho> recuperarClientes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Conselho recuperarContatoCliente(Conselho conselho) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
