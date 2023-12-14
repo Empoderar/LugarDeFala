@@ -6,13 +6,12 @@ import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 
 public interface ConselhoDAO {
 
-	void inserirConselho();
+	void inserirConselho(Conselho conselho);
 
-	void deletarConselho();
+	void deletarConselho(Conselho conselho);
 
-	void atualizarConselho();
+	void atualizarConselho(Conselho conselho);
 
-	List<Conselho> recuperarClientes();
+	List<Conselho> recuperarConselho();
 
-	Conselho recuperarContatoCliente(Conselho conselho);
 }
