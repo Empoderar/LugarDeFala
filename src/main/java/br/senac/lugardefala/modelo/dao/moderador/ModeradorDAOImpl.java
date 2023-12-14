@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.moderador;
+package br.senac.lugardefala.modelo.dao.moderador;
 
 import java.lang.module.Configuration;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import br.senac.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
 public abstract class ModeradorDAOImpl implements ModeradorDAO {
 
@@ -117,9 +117,9 @@ public abstract class ModeradorDAOImpl implements ModeradorDAO {
 
     private SessionFactory conectarBanco() {
         Configuration configuracao = new Configuration();
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.moderador.Moderador.class);
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.usuario.Usuario.class);
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.contato.Contato.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
 
         configuracao.configure("hibernate.cfg.xml");
 

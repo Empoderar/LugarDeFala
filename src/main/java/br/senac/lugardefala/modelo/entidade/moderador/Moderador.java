@@ -1,17 +1,10 @@
-package br.senac.modelo.entidade.moderador;
+package br.senac.lugardefala.modelo.entidade.moderador;
 
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.senac.modelo.entidade.categoria.Categoria;
-import br.senac.modelo.entidade.comunidade.Comunidade;
-import br.senac.modelo.entidade.conselho.Conselho;
-import br.senac.modelo.entidade.denuncia.Denuncia;
-import br.senac.modelo.entidade.relato.Relato;
-import br.senac.modelo.entidade.usuario.Usuario;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Entity
 @Table(name = "Moderador")
 public class Moderador extends Usuario implements Serializable {

@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.conselho;
+package br.senac.lugardefala.modelo.lugardefalada.conselho;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
 
@@ -104,7 +104,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 
 		Configuration configuracao = new Configuration();
 
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 

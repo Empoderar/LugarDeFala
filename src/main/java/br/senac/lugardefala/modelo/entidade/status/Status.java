@@ -1,4 +1,4 @@
-package br.senac.modelo.entidade.status;
+package br.senac.lugardefala.modelo.entidade.status;
 
 import java.io.Serializable;
 

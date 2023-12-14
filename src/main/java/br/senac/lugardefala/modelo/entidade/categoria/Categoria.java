@@ -1,11 +1,11 @@
-package br.senac.modelo.entidade.categoria;
+package br.senac.lugardefala.modelo.entidade.categoria;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senac.modelo.entidade.comunidade.Comunidade;
-import br.senac.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

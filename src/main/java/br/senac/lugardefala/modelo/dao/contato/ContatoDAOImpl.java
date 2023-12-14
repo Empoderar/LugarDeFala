@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.contato;
+package br.senac.lugardefala.modelo.dao.contato;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.modelo.entidade.contato.Contato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ContatoDAOImpl implements ContatoDAO {
 	 
@@ -75,15 +75,15 @@ public class ContatoDAOImpl implements ContatoDAO {
 
 		Configuration configuracao = new Configuration();
 
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.categoria.Categoria.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.conselho.Conselho.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.comunidade.Comunidade.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.contato.Contato.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.denuncia.Denuncia.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.moderador.Moderador.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.relato.Relato.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.status.Status.class);
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.usuario.Usuario.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.status.Status.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
 				
 		configuracao.configure("hibernate.cfg.xml");
 

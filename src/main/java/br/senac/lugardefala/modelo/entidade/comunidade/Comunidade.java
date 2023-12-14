@@ -1,4 +1,4 @@
-package br.senac.modelo.entidade.comunidade;
+package br.senac.lugardefala.modelo.entidade.comunidade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.senac.modelo.entidade.conselho.Conselho;
-import br.senac.modelo.entidade.moderador.Moderador;
-import br.senac.modelo.entidade.relato.Relato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "Comunidade")

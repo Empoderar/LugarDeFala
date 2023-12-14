@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.usuario;
+package br.senac.lugardefala.modelo.dao.usuario;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public abstract class UsuarioDAOImpl implements UsuarioDAO {
 
@@ -117,8 +117,8 @@ public abstract class UsuarioDAOImpl implements UsuarioDAO {
 
     private SessionFactory conectarBanco() {
         Configuration configuracao = new Configuration();
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.usuario.Usuario.class);
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.contato.Contato.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
         configuracao.configure("hibernate.cfg.xml");
         ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties()).build();
         SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);

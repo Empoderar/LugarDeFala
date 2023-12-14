@@ -1,8 +1,8 @@
-package br.senac.modelo.dao.usuario;
+package br.senac.lugardefala.modelo.dao.usuario;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface UsuarioDAO {
 

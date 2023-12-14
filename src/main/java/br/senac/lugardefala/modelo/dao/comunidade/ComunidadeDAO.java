@@ -1,9 +1,9 @@
-package br.senac.modelo.dao.comunidade;
+package br.senac.lugardefala.modelo.dao.comunidade;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.comunidade.Comunidade;
-import br.senac.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
 public interface ComunidadeDAO {
 

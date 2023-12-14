@@ -1,9 +1,9 @@
-package br.senac.modelo.dao.contato;
+package br.senac.lugardefala.modelo.dao.contato;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.contato.Contato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface ContatoDAO {
 

@@ -1,8 +1,8 @@
-package br.senac.modelo.dao.moderador;
+package br.senac.lugardefala.modelo.dao.moderador;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
 public interface ModeradorDAO {
 

@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.status;
+package br.senac.lugardefala.modelo.dao.status;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.modelo.entidade.status.Status;
+import br.senac.lugardefala.modelo.entidade.status.Status;
 
 public class StatusDAOImpl implements StatusDAO {
 
@@ -117,9 +117,9 @@ public class StatusDAOImpl implements StatusDAO {
 
     private SessionFactory conectarBanco() {
         Configuration configuracao = new Configuration();
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.status.Status.class);
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.relato.Relato.class);
-        configuracao.addAnnotatedClass(br.senac.modelo.entidade.denuncia.Denuncia.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.status.Status.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
+        configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
 
         configuracao.configure("hibernate.cfg.xml");
 

@@ -1,4 +1,4 @@
-package br.senac.modelo.dao.categoria;
+package br.senac.lugardefala.modelo.dao.categoria;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 
 public class CategoriaDAOImpl implements CategoriaDAO {
 	
@@ -101,7 +101,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
 		Configuration configuracao = new Configuration();
 
-		configuracao.addAnnotatedClass(br.senac.modelo.entidade.categoria.Categoria.class);
+		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
 
 		configuracao.configure("hibernate.cfg.xml");
 

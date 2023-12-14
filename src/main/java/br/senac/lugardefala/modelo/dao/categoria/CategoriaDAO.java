@@ -1,8 +1,8 @@
-package br.senac.modelo.dao.categoria;
+package br.senac.lugardefala.modelo.dao.categoria;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 
 public interface CategoriaDAO {
 

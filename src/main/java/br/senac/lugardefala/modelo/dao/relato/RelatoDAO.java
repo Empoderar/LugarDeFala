@@ -1,9 +1,9 @@
-package br.senac.modelo.dao.relato;
+package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.relato.Relato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface RelatoDAO {
 

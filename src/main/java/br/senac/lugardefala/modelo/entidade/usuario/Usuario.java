@@ -1,11 +1,11 @@
-package br.senac.modelo.entidade.usuario;
+package br.senac.lugardefala.modelo.entidade.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import br.senac.modelo.entidade.conselho.Conselho;
-import br.senac.modelo.entidade.contato.Contato;
-import br.senac.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

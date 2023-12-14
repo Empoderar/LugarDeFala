@@ -1,4 +1,4 @@
-package br.senac.modelo.entidade.conselho;
+package br.senac.lugardefala.modelo.entidade.conselho;
 
 import java.time.LocalDate;
 import java.io.Serializable;
@@ -12,9 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import br.senac.modelo.entidade.denuncia.Denuncia;
-import br.senac.modelo.entidade.relato.Relato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "conselho")

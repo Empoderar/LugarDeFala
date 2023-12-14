@@ -1,8 +1,8 @@
-package br.senac.modelo.dao.conselho;
+package br.senac.lugardefala.modelo.lugardefalada.conselho;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 
 public interface ConselhoDAO {
 

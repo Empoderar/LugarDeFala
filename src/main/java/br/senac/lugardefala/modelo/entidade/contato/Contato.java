@@ -1,4 +1,4 @@
-package br.senac.modelo.entidade.contato;
+package br.senac.lugardefala.modelo.entidade.contato;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "contato")

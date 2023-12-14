@@ -1,12 +1,12 @@
-package br.senac.modelo.entidade.denuncia;
+package br.senac.lugardefala.modelo.entidade.denuncia;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import br.senac.modelo.entidade.conselho.Conselho;
-import br.senac.modelo.entidade.moderador.Moderador;
-import br.senac.modelo.entidade.relato.Relato;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

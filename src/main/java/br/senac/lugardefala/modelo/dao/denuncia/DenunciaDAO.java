@@ -1,9 +1,9 @@
-package br.senac.modelo.dao.denuncia;
+package br.senac.lugardefala.modelo.dao.denuncia;
 
 import java.util.List;
 
-import br.senac.modelo.entidade.denuncia.Denuncia;
-import br.senac.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface DenunciaDAO {
 
