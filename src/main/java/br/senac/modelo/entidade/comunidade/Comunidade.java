@@ -1,21 +1,57 @@
 package br.senac.modelo.entidade.comunidade;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import br.senac.modelo.entidade.conselho.Conselho;
 import br.senac.modelo.entidade.moderador.Moderador;
 import br.senac.modelo.entidade.relato.Relato;
 import br.senac.modelo.entidade.usuario.Usuario;
 
-public class Comunidade {
+@Entity
+@Table(name = "Comunidade")
+public class Comunidade implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_Comunidade")
+	private Long id;
+
+	@Column(name = "nome_comunidade", length = 50, nullable = false, unique = true)
 	private String nome;
+
+	@Column(name = "descricao_comunidade", length = 500, nullable = false, unique = true)
 	private String descricao;
-	private List<Relato> listaRelatos;
-	private List<Moderador> listaModeradores;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_conselho")
 	private Conselho conselho;
+
+	@OneToMany(mappedBy = "Comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Relato> listaRelatos = new ArrayList<Relato>();
+
+	@OneToMany(mappedBy = "Comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Moderador> listaModeradores = new ArrayList<Moderador>();
+
+	public Comunidade() {
+	}
 
 	public Comunidade(String nome, String descricao, Usuario usuario, Conselho conselho) {
 		this.nome = nome;
