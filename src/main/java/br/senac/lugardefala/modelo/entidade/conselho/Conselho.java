@@ -1,17 +1,22 @@
 package br.senac.lugardefala.modelo.entidade.conselho;
 
-import java.time.LocalDate;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
@@ -36,29 +41,40 @@ public class Conselho implements Serializable {
     @Column(name = "data_conselho", nullable = false)
     private LocalDate data;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_relato")
     private Relato relato;
 
-    @ManyToOne
-    @JoinColumn(name = "id_denuncia")
-    private Denuncia denuncia;
-
+    @OneToMany(mappedBy = "conselho", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "denuncia_conselho", nullable = false)
+    private List<Denuncia> denuncia = new ArrayList<Denuncia>();
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_comunidade")
+    private Comunidade comunidade;
+    
     public Conselho(){}
 
-    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacao, Relato relato,
-			Denuncia denuncia) {
-
+    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacao, Relato relato, Comunidade comunidade) {
 		this.conteudo = conteudo;
 		this.data = data;
 		this.usuario = usuario;
 		this.avaliacao = avaliacao;
 		this.relato = relato;
-		this.denuncia = denuncia;
+		this.comunidade = comunidade;
+		denuncia = new ArrayList<>();
+	}
+
+	public Comunidade getComunidade() {
+		return comunidade;
+	}
+
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
 	}
 
 	public int getAvaliacao() {
@@ -71,10 +87,6 @@ public class Conselho implements Serializable {
 
 	public LocalDate getData() {
 		return data;
-	}
-
-	public Denuncia getDenuncia() {
-		return denuncia;
 	}
 
 	public Relato getRelato() {
@@ -95,10 +107,6 @@ public class Conselho implements Serializable {
 
 	public void setData(LocalDate data) {
 		this.data = data;
-	}
-
-	public void setDenuncia(Denuncia denuncia) {
-		this.denuncia = denuncia;
 	}
 
 	public void setRelato(Relato relato) {

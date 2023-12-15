@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,11 +17,12 @@ import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Entity
-@Table(name = "Moderador")
+@Table(name = "moderador")
 public class Moderador extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -52,33 +52,103 @@ public class Moderador extends Usuario implements Serializable {
     @Column(name = "data_nascimento_moderador", nullable = false)
     private LocalDate dataNascimento;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Relato> relatosModerados = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_conselho")
     private Conselho conselho;
 
-	@OneToMany
-	@JoinColumn(name = "id_comunidade")
-    private Comunidade comunidade;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_denuncia") 
     private Denuncia denuncia;
+    
+    @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comunidade> comunidadeModerador = new ArrayList<>();
 
 	public Moderador(){}
 
-	public Moderador(Comunidade comunidade, String nome, String sobrenome, LocalDate dataNascimento, String user,
-			String senha, Conselho conselho, Denuncia denuncia, String telefone, String email) {
-		super(nome, sobrenome, dataNascimento, user, senha, conselho, denuncia, telefone, email);
-		this.comunidade = comunidade;
+	public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone, String email, Comunidade comunidade, Contato contato, Conselho conselho, Denuncia denuncia) {
+		super(nome, sobrenome, dataNascimento, user, senha, telefone, email, comunidade, contato);
 		this.conselho = conselho;
         this.denuncia = denuncia;
+        comunidadeModerador = new ArrayList<>();
 		relatosModerados = new ArrayList<>();
 	}
+	
+	public String getNome() {
+		return nome;
+	}
 
-	 public void inserirRelato(Relato relato) {
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public Conselho getConselho() {
+		return conselho;
+	}
+
+	public void setConselho(Conselho conselho) {
+		this.conselho = conselho;
+	}
+
+	public Denuncia getDenuncia() {
+		return denuncia;
+	}
+
+	public void setDenuncia(Denuncia denuncia) {
+		this.denuncia = denuncia;
+	}
+
+	public void inserirRelato(Relato relato) {
 
     }
 
@@ -90,11 +160,4 @@ public class Moderador extends Usuario implements Serializable {
 
     }
 
-    public Comunidade getComunidade() {
-		return comunidade;
-	}
-
-	public void setComunidade(Comunidade comunidade) {
-		this.comunidade = comunidade;
-	}
 }

@@ -2,7 +2,10 @@ package br.senac.lugardefala.modelo.entidade.usuario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,15 +13,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
 public class Usuario extends Contato implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,39 +50,58 @@ public class Usuario extends Contato implements Serializable {
 	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
 	private String senha;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_conselho")
-	private Conselho conselho;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Conselho> conselho = new ArrayList<Conselho>();
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	private Contato contato;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_denuncia")
-	private Denuncia denuncia;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comunidade")
+	private Comunidade comunidade;
 
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Denuncia> denuncia = new ArrayList<Denuncia>();
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Relato> relato = new ArrayList<Relato>();
+	
 	public Usuario() {
 	}
 
-	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String user, String senha,
-			Conselho conselho, Denuncia denuncia, String telefone, String email) {
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone, String email, Comunidade comunidade, Contato contato) {
 		super(telefone, email);
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.user = user;
 		this.senha = senha;
-		this.conselho = conselho;
-		this.denuncia = denuncia;
+		
+		denuncia = new ArrayList<>();
+		relato = new ArrayList<>();
+		conselho = new ArrayList<>();
+		this.comunidade = comunidade;
+		this.contato = contato;
+	}
+	
+	public Contato getContato() {
+		return contato;
 	}
 
-	public Conselho getConselho() {
-		return conselho;
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+	public Comunidade getComunidade() {
+		return comunidade;
+	}
+
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
 	}
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
-	}
-
-	public Denuncia getDenuncia() {
-		return denuncia;
 	}
 
 	public String getNome() {
@@ -94,16 +120,8 @@ public class Usuario extends Contato implements Serializable {
 		return user;
 	}
 
-	public void setConselho(Conselho conselho) {
-		this.conselho = conselho;
-	}
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-
-	public void setDenuncia(Denuncia denuncia) {
-		this.denuncia = denuncia;
 	}
 
 	public void setNome(String nome) {
