@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,9 +39,8 @@ public class Categoria implements Serializable {
 	@OneToOne(mappedBy = "categoria")
 	private Comunidade comunidade;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_relato")
-	private List<Relato> relato = new ArrayList<Relato>();
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Relato> relatos;
 
 	public Categoria() {
 	}
@@ -49,7 +49,7 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 		this.cor = cor;
 		this.comunidade = comunidade;
-		relato = new ArrayList<>();
+		relatos = new ArrayList<>();
 	}
 
 	public String getNome() {

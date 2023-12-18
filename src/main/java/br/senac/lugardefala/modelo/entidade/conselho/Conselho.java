@@ -36,11 +36,17 @@ public class Conselho implements Serializable {
     private String conteudo;
 
     @Column(name = "avaliacao_conselho", nullable = false)
-    private Integer avaliacao;  
+    private Integer avaliacaoBoa;  
 
+    @Column(name = "avaliacao_conselho", nullable = false)
+    private Integer avaliacaoRuim;  
+    
     @Column(name = "data_conselho", nullable = false)
     private LocalDate data;
 
+    @Column(name = "resposta_conselho", nullable = true)
+    private Conselho conselhoResposta;
+    
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
@@ -53,34 +59,30 @@ public class Conselho implements Serializable {
     @Column(name = "denuncia_conselho", nullable = false)
     private List<Denuncia> denuncia = new ArrayList<Denuncia>();
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_comunidade")
-    private Comunidade comunidade;
+ 
     
     public Conselho(){}
 
-    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacao, Relato relato, Comunidade comunidade) {
+    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacaoBoa,int avaliacaoRuim, Relato relato, Conselho conselhoResposta) {
 		this.conteudo = conteudo;
 		this.data = data;
 		this.usuario = usuario;
-		this.avaliacao = avaliacao;
+		this.avaliacaoBoa = avaliacaoBoa;
+		this.avaliacaoRuim = avaliacaoRuim;
 		this.relato = relato;
-		this.comunidade = comunidade;
+		this.conselhoResposta = conselhoResposta;
+		
 		denuncia = new ArrayList<>();
 	}
 
-	public Comunidade getComunidade() {
-		return comunidade;
+	public int getAvaliacaoBoa() {
+		return avaliacaoBoa;
 	}
 
-	public void setComunidade(Comunidade comunidade) {
-		this.comunidade = comunidade;
+	public int getAvaliacaoRuim() {
+		return avaliacaoRuim;
 	}
-
-	public int getAvaliacao() {
-		return avaliacao;
-	}
-
+	
 	public String getConteudo() {
 		return conteudo;
 	}
@@ -97,8 +99,12 @@ public class Conselho implements Serializable {
 		return usuario;
 	}
 
-	public void setAvaliacao(int avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setAvaliacaoBoa(int avaliacaoBoa) {
+		this.avaliacaoBoa = avaliacaoBoa;
+	}
+
+	public void setAvaliacaoRuim(int avaliacaoRuim) {
+		this.avaliacaoRuim = avaliacaoRuim;
 	}
 
 	public void setConteudo(String conteudo) {
@@ -115,6 +121,15 @@ public class Conselho implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+		
+	}
+
+	public Conselho getConselhoResposta() {
+		return conselhoResposta;
+	}
+
+	public void setConselhoResposta(Conselho conselhoResposta) {
+		this.conselhoResposta = conselhoResposta;
 	}
 
 }
