@@ -12,22 +12,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
-@Table(name = "Comunidade")
+@Table(name = "comunidade")
 public class Comunidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_Comunidade")
+	@Column(name = "id_comunidade")
 	private Long id;
 
 	@Column(name = "nome_comunidade", length = 50, nullable = false, unique = true)
@@ -36,32 +38,43 @@ public class Comunidade implements Serializable {
 	@Column(name = "descricao_comunidade", length = 500, nullable = false, unique = true)
 	private String descricao;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Usuario> usuario = new ArrayList<Usuario>();
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_conselho")
-	private Conselho conselho;
+	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Conselho> conselhos = new ArrayList<Conselho>();
 
-	@OneToMany(mappedBy = "Comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Relato> listaRelatos = new ArrayList<Relato>();
+	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Relato> relatos = new ArrayList<Relato>();
 
-	@OneToMany(mappedBy = "Comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Moderador> listaModeradores = new ArrayList<Moderador>();
+	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Moderador> moderador = new ArrayList<Moderador>();
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
 
 	public Comunidade() {
 	}
 
-	public Comunidade(String nome, String descricao, Usuario usuario, Conselho conselho) {
+	public Comunidade(String nome, String descricao, Categoria categoria) {
 		this.nome = nome;
 		this.descricao = descricao;
-		listaRelatos = new ArrayList<>();
-		listaModeradores = new ArrayList<>();
-		this.usuario = usuario;
-		this.conselho = conselho;
+		relatos = new ArrayList<>();
+		moderador = new ArrayList<>();
+		usuario = new ArrayList<>();
+		conselhos = new ArrayList<>();
+		this.categoria = categoria;
 	}
-
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -94,19 +107,4 @@ public class Comunidade implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Conselho getConselho() {
-		return conselho;
-	}
-
-	public void setConselho(Conselho conselho) {
-		this.conselho = conselho;
-	}
 }

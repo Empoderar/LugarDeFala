@@ -3,9 +3,9 @@ package br.senac.lugardefala.modelo.entidade.denuncia;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +18,7 @@ import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Entity
-@Table(name = "Denuncia")
+@Table(name = "denuncia")
 public class Denuncia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,19 +34,19 @@ public class Denuncia implements Serializable {
 	@Column(name = "motivo_denuncia", length = 200, nullable = true, unique = false)
 	private String motivo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_relato")
 	private Relato relato;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_moderador")
 	private Moderador moderador;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_conselho")
 	private Conselho conselho;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 

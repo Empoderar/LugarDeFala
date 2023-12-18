@@ -2,10 +2,6 @@ package br.senac.lugardefala.modelo.dao.denuncia;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -13,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class DenunciaDAOImpl implements DenunciaDAO {
 
@@ -26,6 +23,35 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 			sessao.beginTransaction();
 
 			sessao.save(denuncia);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public void deletarDenuncia(Denuncia denuncia) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.delete(denuncia);
+
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -72,75 +98,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 			}
 		}
 	}
-	
-	public void deletarDenuncia(Denuncia denuncia) {
 
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.delete(denuncia);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
-
-	public List<Denuncia> recuperarDenuncias() {
-
-		Session sessao = null;
-		List<Denuncia> denuncias = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
-			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
-
-			criteria.select(raizDenuncia);
-
-			denuncias = sessao.createQuery(criteria).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return denuncias;
-	}
-	
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -162,6 +120,18 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
+	}
+
+	@Override
+	public List<Denuncia> recuperarDenuncias() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Denuncia recuperarDenunciaUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,41 +12,45 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
-	@Entity
-	@Table(name = "categoria")
-	public class Categoria implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
-    private Long id;
+@Entity
+@Table(name = "categoria")
+public class Categoria implements Serializable {
 
-    @Column(name = "nome_categoria", length = 50, nullable = false, unique = true)
-    private String nome;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "cor_categoria", length = 20, nullable = false, unique = true)
-    private String cor;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_categoria")
+	private Long id;
 
-    @OneToMany(mappedBy = "categoria")
-    private List<Comunidade> comunidades = new ArrayList<>();
+	@Column(name = "nome_categoria", length = 50, nullable = false, unique = true)
+	private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "id_relato")
-    private Relato relato;
+	@Column(name = "cor_categoria", length = 20, nullable = false, unique = true)
+	private String cor;
 
-    public Categoria() {}
+	@OneToOne(mappedBy = "categoria")
+	private Comunidade comunidade;
 
-    public Categoria(String nome, String cor, Relato relato) {
-        this.nome = nome;
-        this.cor = cor;
-        this.comunidades = new ArrayList<>();
-        this.relato = relato;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_relato")
+	private List<Relato> relato = new ArrayList<Relato>();
+
+	public Categoria() {
+	}
+
+	public Categoria(String nome, String cor, Comunidade comunidade) {
+		this.nome = nome;
+		this.cor = cor;
+		this.comunidade = comunidade;
+		relato = new ArrayList<>();
+	}
 
 	public String getNome() {
 		return nome;
@@ -63,21 +68,12 @@ import br.senac.lugardefala.modelo.entidade.relato.Relato;
 		this.cor = cor;
 	}
 
-	public Relato getRelato() {
-		return relato;
+	public Comunidade getComunidade() {
+		return comunidade;
 	}
 
-	public void setRelato(Relato relato) {
-		this.relato = relato;
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
 	}
-
-	public boolean adicionarComunidade(Comunidade comunidade){
-		return comunidades.add(comunidade);
-	}
-	
-	public boolean removerComunidade(Comunidade comunidade){
-          return comunidades.remove(comunidade);
-    }
-
 
 }

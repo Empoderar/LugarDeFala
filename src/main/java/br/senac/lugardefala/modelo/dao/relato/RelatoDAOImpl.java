@@ -2,10 +2,6 @@ package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -13,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class RelatoDAOImpl implements RelatoDAO {
 
@@ -41,36 +38,6 @@ public class RelatoDAOImpl implements RelatoDAO {
 			if (sessao != null) {
 				sessao.close();
 			}
-		}
-	}
-
-	public void atualizarRelato(Relato relato) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.update(relato);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-
 		}
 	}
 
@@ -103,45 +70,6 @@ public class RelatoDAOImpl implements RelatoDAO {
 		}
 	}
 
-	public List<Relato> recuperarRelatos() {
-		 
-		Session sessao = null;
-		List<Relato> Relato = null;
- 
-		try {
- 
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
- 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
- 
-			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-			Root<Relato> raizRelato = criteria.from(Relato.class);
- 
-			criteria.select(raizRelato);
- 
-			Relato = sessao.createQuery(criteria).getResultList();
- 
-			sessao.getTransaction().commit();
- 
-		} catch (Exception sqlException) {
- 
-			sqlException.printStackTrace();
- 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
- 
-		} finally {
- 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
- 
-		return Relato;
-	}
-
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -163,6 +91,18 @@ public class RelatoDAOImpl implements RelatoDAO {
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
+	}
+
+	@Override
+	public List<Relato> recuperarRelatos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Relato recuperarRelatoUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
