@@ -2,6 +2,10 @@ package br.senac.lugardefala.modelo.dao.comunidade;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -10,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
@@ -70,6 +75,121 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 	}
 
+	public void atualizarUsuario(Usuario usuario) {
+		Session sessao = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			sessao.update(usuario);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public List<Usuario> recuperarUsuario() {
+		Session sessao = null;
+		List<Usuario> usuarios = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			criteria.select(raizUsuario);
+			usuarios = sessao.createQuery(criteria).getResultList();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return usuarios;
+	}
+
+	public List<Comunidade> recuperarComunidade() {
+
+		Session sessao = null;
+
+		List<Comunidade> comunidades = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+
+			criteria.select(raizComunidade);
+			comunidades = sessao.createQuery(criteria).getResultList();
+			sessao.getTransaction().commit();
+		} 
+		catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return comunidades;
+	}
+
+	public Comunidade recuperarComunidadeModerador(Moderador moderador) {
+
+		Session sessao = null;
+		Comunidade comunidade = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+
+			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("moderador"), moderador));
+			comunidade = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return comunidade;
+	}
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -93,16 +213,5 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return fabricaSessao;
 	}
 
-	@Override
-	public List<Comunidade> recuperarComunidade() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Comunidade recuperarComunidadeModerador(Moderador moderador) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

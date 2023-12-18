@@ -2,6 +2,10 @@ package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -70,6 +74,125 @@ public class RelatoDAOImpl implements RelatoDAO {
 		}
 	}
 
+	public void atualizarRelato(Relato relato) {
+		Session sessao = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			sessao.update(relato);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public List<Relato> recuperarRelato() {
+		Session sessao = null;
+		List<Relato> relato = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+			Root<Relato> raizRelato = criteria.from(Relato.class);
+			criteria.select(raizRelato);
+			relato = sessao.createQuery(criteria).getResultList();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return relato;
+	}
+	
+	public List<Relato> recuperarRelatos() {
+        Session sessao = null;
+        List<Relato> relatos = null;
+ 
+        try {
+            sessao = conectarBanco().openSession();
+            sessao.beginTransaction();
+ 
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+            Root<Relato> raizRelato = criteria.from(Relato.class);
+            criteria.select(raizRelato);
+            relatos = sessao.createQuery(criteria).getResultList();
+ 
+            sessao.getTransaction().commit();
+ 
+        } catch (Exception sqlException) {
+            sqlException.printStackTrace();
+ 
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+ 
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+ 
+        return relatos;
+    }
+
+    public Relato recuperarRelatoUsuario(Usuario usuario) {
+        Session sessao = null;
+        Relato relato = null;
+ 
+        try {
+            sessao = conectarBanco().openSession();
+            sessao.beginTransaction();
+ 
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+            Root<Relato> raizRelato = criteria.from(Relato.class);
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usuario"), usuario));
+ 
+            relato = sessao.createQuery(criteria).uniqueResult();
+ 
+            sessao.getTransaction().commit();
+ 
+        } catch (Exception sqlException) {
+            sqlException.printStackTrace();
+ 
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+ 
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+ 
+        return relato;
+    }
+	
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -93,16 +216,5 @@ public class RelatoDAOImpl implements RelatoDAO {
 		return fabricaSessao;
 	}
 
-	@Override
-	public List<Relato> recuperarRelatos() {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
-
-	@Override
-	public Relato recuperarRelatoUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-}

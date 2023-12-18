@@ -116,7 +116,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
  
     private SessionFactory conectarBanco() {
+    	
         Configuration configuracao = new Configuration();
+        
         configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
         configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
         configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);

@@ -70,7 +70,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
     }
     public List<Moderador> recuperarModeradores() {
         Session sessao = null;
-        List<Moderador> moderadors = null;
+        List<Moderador> moderadores = null;
         try {
             sessao = conectarBanco().openSession();
             sessao.beginTransaction();
@@ -78,7 +78,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
             CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
             Root<Moderador> raizmoderador = criteria.from(Moderador.class);
             criteria.select(raizmoderador);
-            moderadors = sessao.createQuery(criteria).getResultList();
+            moderadores = sessao.createQuery(criteria).getResultList();
             sessao.getTransaction().commit();
         } catch (Exception sqlException) {
             sqlException.printStackTrace();
@@ -90,7 +90,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
                 sessao.close();
             }
         }
-        return moderadors;
+        return moderadores;
     }
     private SessionFactory conectarBanco() {
         Configuration configuracao = new Configuration();

@@ -2,6 +2,10 @@ package br.senac.lugardefala.modelo.dao.denuncia;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -99,6 +103,64 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 	}
 
+	public List<Denuncia> recuperarDenuncias() {
+		Session sessao = null;
+		List<Denuncia> denuncias = null;
+		
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
+			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
+			criteria.select(raizDenuncia);
+			denuncias = sessao.createQuery(criteria).getResultList();
+			sessao.getTransaction().commit();
+
+		} 
+		catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return denuncias;
+	}
+
+	public Denuncia recuperarDenunciaUsuario(Usuario usuario) {
+
+		Session sessao = null;
+
+		Denuncia denuncia = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
+			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
+
+			criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("usuario"), usuario));
+			denuncia = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return denuncia;
+	}
+
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();
@@ -120,18 +182,6 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
-	}
-
-	@Override
-	public List<Denuncia> recuperarDenuncias() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Denuncia recuperarDenunciaUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
