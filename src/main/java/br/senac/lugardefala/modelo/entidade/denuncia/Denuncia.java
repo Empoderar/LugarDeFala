@@ -3,21 +3,20 @@ package br.senac.lugardefala.modelo.entidade.denuncia;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
-import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
-import br.senac.lugardefala.modelo.entidade.relato.Relato;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "denuncia")
 public class Denuncia implements Serializable {
 
@@ -34,48 +33,24 @@ public class Denuncia implements Serializable {
 	@Column(name = "motivo_denuncia", length = 200, nullable = true, unique = false)
 	private String motivo;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_relato")
-	private Relato relato;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_moderador")
-	private Moderador moderador;
+	public Denuncia() {
+	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_conselho")
-	private Conselho conselho;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
-
-	public Denuncia() {}
-
-	public Denuncia(LocalDate data, String motivo, Usuario usuario, Conselho conselho, Relato relato,
-			Moderador moderador) {
+	public Denuncia(LocalDate data, String motivo, Status status) {
 		this.setData(data);
 		this.setMotivo(motivo);
-		this.setUsuario(usuario);
-		this.setConselho(conselho);
-		this.setRelato(relato);
-		this.setModerador(moderador);
+		this.setStatus(status);
 	}
 
-	public void DenunciaUsuario() {
-
+	public Status getStatus() {
+		return status;
 	}
 
-	public void DenunciaConselho() {
-
-	}
-
-	public void DenunciaRelato() {
-
-	}
-
-	public void DenunciaModerador() {
-
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public LocalDate getData() {
@@ -92,38 +67,6 @@ public class Denuncia implements Serializable {
 
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Conselho getConselho() {
-		return conselho;
-	}
-
-	public void setConselho(Conselho conselho) {
-		this.conselho = conselho;
-	}
-
-	public Relato getRelato() {
-		return relato;
-	}
-
-	public void setRelato(Relato relato) {
-		this.relato = relato;
-	}
-
-	public Moderador getModerador() {
-		return moderador;
-	}
-
-	public void setModerador(Moderador moderador) {
-		this.moderador = moderador;
 	}
 
 }

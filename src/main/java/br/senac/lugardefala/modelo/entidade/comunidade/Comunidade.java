@@ -3,6 +3,7 @@ package br.senac.lugardefala.modelo.entidade.comunidade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 @Entity
@@ -34,9 +35,6 @@ public class Comunidade implements Serializable {
 	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Relato> relatos;
 
-	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Moderador> moderadores;
-
 	public Comunidade() {
 	}
 
@@ -44,8 +42,6 @@ public class Comunidade implements Serializable {
 		this.nome = nome;
 		this.descricao = descricao;
 		relatos = new ArrayList<>();
-		moderadores = new ArrayList<>();
-
 	}
 
 	public String getNome() {

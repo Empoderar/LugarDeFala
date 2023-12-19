@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,7 @@ import javax.persistence.Table;
 import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
@@ -28,7 +30,7 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 @Entity
 @Table(name = "relato")
 public class Relato implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -40,16 +42,19 @@ public class Relato implements Serializable {
 	private LocalDate data;
 
 	@Column(name = "avaliacao_relato", length = 200, nullable = true, unique = false)
-	private String avaliacao;
-	
+	private int avaliacao;
+
+	@Column(name = "descricao_relato", length = 500, nullable = true, unique = false)
+	private String descricao;
+
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Conselho> conselhoRelato = new ArrayList<Conselho>();
-	
+
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Categoria> categoriaRelato = new ArrayList<Categoria>();
 
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Denuncia> denuncia = new ArrayList<Denuncia>();
+	private List<DenunciaRelato> denuncia = new ArrayList<DenunciaRelato>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_moderador")
@@ -62,25 +67,26 @@ public class Relato implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_status")
+	@Enumerated(EnumType.STRING)
 	private Status status;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_comunidade")
 	private Comunidade comunidade;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-	
+
 	public Relato() {
 	}
 
-	public Relato(LocalDate data, Usuario usuario, String avaliacao, Moderador moderador, Status status, Comunidade comunidade) {
+	public Relato(LocalDate data, Usuario usuario, int avaliacao, String descricao, Moderador moderador, Status status,
+			Comunidade comunidade) {
 		this.data = data;
 		this.usuario = usuario;
 		this.avaliacao = avaliacao;
+		this.descricao = descricao;
 		this.moderador = moderador;
 		this.status = status;
 		this.comunidade = comunidade;
@@ -90,14 +96,22 @@ public class Relato implements Serializable {
 		conselho = new ArrayList<>();
 	}
 
-	public String getComunidade() {
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public int getComunidade() {
 		return avaliacao;
 	}
 
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
-	
+
 	public void inserirConselhoRelato() {
 
 	}
@@ -114,10 +128,9 @@ public class Relato implements Serializable {
 
 	}
 
-	public String getAvaliacao() {
+	public int getAvaliacao() {
 		return avaliacao;
 	}
-
 
 	public LocalDate getData() {
 		return data;
@@ -131,10 +144,9 @@ public class Relato implements Serializable {
 		return usuario;
 	}
 
-	public void setAvaliacao(String avaliacao) {
+	public void setAvaliacao(int avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-
 
 	public void setData(LocalDate data) {
 		this.data = data;
