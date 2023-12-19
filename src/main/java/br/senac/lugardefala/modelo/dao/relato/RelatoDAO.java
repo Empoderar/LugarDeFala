@@ -1,17 +1,24 @@
 package br.senac.lugardefala.modelo.dao.relato;
 
-import java.util.List;
-
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public interface RelatoDAO {
 
 	void inserirRelato(Relato relato);
 
 	void deletarRelato(Relato relato);
-
-	List<Relato> recuperarRelatos();
+	
+	void atualizarRelato(Relato relato);
 
 	Relato recuperarRelatoUsuario(Usuario usuario);
+	
+	Relato recuperarRelatoStatus(Status status);
+	
+	Relato recuperarRelatoComunidade(Comunidade comunidade);
+	
+	Relato recuperarRelatoCategoria(Categoria categoria);
 }

@@ -1,8 +1,8 @@
 package br.senac.lugardefala.modelo.dao.conselho;
 
-import java.util.List;
-
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface ConselhoDAO {
 
@@ -12,6 +12,8 @@ public interface ConselhoDAO {
 
 	void atualizarConselho(Conselho conselho);
 
-	List<Conselho> recuperarConselho();
+	Conselho recuperarConselhoUsuario(Usuario usuario);
+	
+	Conselho recuperarConselhoRelato(Relato relato);
 
 }

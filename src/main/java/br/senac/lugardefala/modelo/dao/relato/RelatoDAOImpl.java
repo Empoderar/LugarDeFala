@@ -12,8 +12,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class RelatoDAOImpl implements RelatoDAO {
 
@@ -127,70 +130,121 @@ public class RelatoDAOImpl implements RelatoDAO {
 		return relato;
 	}
 	
-	public List<Relato> recuperarRelatos() {
-        Session sessao = null;
-        List<Relato> relatos = null;
- 
-        try {
-            sessao = conectarBanco().openSession();
-            sessao.beginTransaction();
- 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-            Root<Relato> raizRelato = criteria.from(Relato.class);
-            criteria.select(raizRelato);
-            relatos = sessao.createQuery(criteria).getResultList();
- 
-            sessao.getTransaction().commit();
- 
-        } catch (Exception sqlException) {
-            sqlException.printStackTrace();
- 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
- 
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
- 
-        return relatos;
-    }
+	public Relato recuperarRelatoUsuario(Usuario usuario) {
+		 
+		Session sessao = null;
+		Relato relato = null;
 
-    public Relato recuperarRelatoUsuario(Usuario usuario) {
-        Session sessao = null;
-        Relato relato = null;
- 
-        try {
-            sessao = conectarBanco().openSession();
-            sessao.beginTransaction();
- 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-            Root<Relato> raizRelato = criteria.from(Relato.class);
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usuario"), usuario));
- 
-            relato = sessao.createQuery(criteria).uniqueResult();
- 
-            sessao.getTransaction().commit();
- 
-        } catch (Exception sqlException) {
-            sqlException.printStackTrace();
- 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
- 
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
- 
-        return relato;
-    }
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+			Root<Relato> raizRelato = criteria.from(Relato.class);
+
+			criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usuario"), usuario));
+			relato = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return relato;
+	}
+	
+	public Relato recuperarRelatoStatus(Status status) {
+		 
+		Session sessao = null;
+		Relato relato = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+			Root<Relato> raizRelato = criteria.from(Relato.class);
+
+			criteria.select(raizRelato).where(construtor.equal(raizRelato.get("status"), status));
+			relato = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return relato;
+	}
+	
+	public Relato recuperarRelatoComunidade(Comunidade comunidade) {
+		 
+		Session sessao = null;
+		Relato relato = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+			Root<Relato> raizRelato = criteria.from(Relato.class);
+
+			criteria.select(raizRelato).where(construtor.equal(raizRelato.get("comunidade"), comunidade));
+			relato = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return relato;
+	}
+	
+	public Relato recuperarRelatoCategoria(Categoria categoria) {
+		 
+		Session sessao = null;
+		Relato relato = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+			Root<Relato> raizRelato = criteria.from(Relato.class);
+
+			criteria.select(raizRelato).where(construtor.equal(raizRelato.get("categoria"), categoria));
+			relato = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return relato;
+	}
 	
 
 	private SessionFactory conectarBanco() {
