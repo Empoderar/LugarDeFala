@@ -22,8 +22,8 @@ import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
-import br.senac.lugardefala.modelo.entidade.status.Status;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
 @Table(name = "relato")
@@ -69,6 +69,10 @@ public class Relato implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_comunidade")
 	private Comunidade comunidade;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
 	
 	public Relato() {
 	}
