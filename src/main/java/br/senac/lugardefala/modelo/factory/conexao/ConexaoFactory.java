@@ -18,7 +18,6 @@ package br.senac.lugardefala.modelo.factory.conexao;
 			configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
 			configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 			configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
-			configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.status.Status.class);
 			configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
 			configuracao.configure("hibernate.cfg.xml");
 
