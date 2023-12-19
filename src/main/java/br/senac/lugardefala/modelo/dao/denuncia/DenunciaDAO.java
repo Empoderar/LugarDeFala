@@ -1,9 +1,10 @@
 package br.senac.lugardefala.modelo.dao.denuncia;
 
-import java.util.List;
-
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public interface DenunciaDAO {
 
@@ -13,7 +14,17 @@ public interface DenunciaDAO {
 
 	void atualizarDenuncia(Denuncia denuncia);
 
-	List<Denuncia> recuperarDenuncias();
-
 	Denuncia recuperarDenunciaUsuario(Usuario usuario);
+	
+	Denuncia recuperarDenunciaDeRelatoStatus(Relato relato,Status status);
+	
+	Denuncia recuperarDenunciaDeRelatoRelato(Relato relato);
+	
+	Denuncia recuperarDenunciaDeConselhoStatus(Conselho conselho,Status status);
+	
+	Denuncia recuperarDenunciaDeConselhoRelato(Conselho conselho,Relato relato);
+	
+	Denuncia recuperarDenunciaDeUsuarioStatus(Usuario usuario, Status status);
+	
+	Denuncia recuperarDenunciaDeUsuarioUsuario(Usuario usuario);
 }

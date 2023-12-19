@@ -1,6 +1,7 @@
 package br.senac.lugardefala.modelo.dao.moderador;
 
 import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -11,6 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
 public class ModeradorDAOImpl implements ModeradorDAO {
@@ -92,6 +94,66 @@ public class ModeradorDAOImpl implements ModeradorDAO {
         }
         return moderadores;
     }
+    
+	public Moderador recuperarModeradorNome(String nome) {
+ 
+		Session sessao = null;
+		Moderador moderador = null;
+ 
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+ 
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
+ 
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("nome"), nome));
+			moderador = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return moderador;
+	}
+ 
+	public Moderador recuperarModeradorComunidade(Comunidade comunidade) {
+ 
+		Session sessao = null;
+		Moderador moderador = null;
+ 
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+ 
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
+ 
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("comunidade"), comunidade));
+			moderador = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return moderador;
+	}
+ 
+    
     private SessionFactory conectarBanco() {
         Configuration configuracao = new Configuration();
         configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);

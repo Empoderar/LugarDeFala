@@ -1,7 +1,5 @@
 package br.senac.lugardefala.modelo.dao.conselho;
 
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,6 +11,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
 
@@ -104,45 +104,66 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 
 	}
 
-	public List<Conselho> recuperarConselho() {
+	public Conselho recuperarConselhoUsuario(Usuario usuario) {
 
 		Session sessao = null;
-		List<Conselho> conselho = null;
+		Conselho conselho = null;
 
 		try {
-
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
 
-			criteria.select(raizConselho);
-
-			conselho = sessao.createQuery(criteria).getResultList();
-
+			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("usuario"), usuario));
+			conselho = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
-
 			sqlException.printStackTrace();
-
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
 		}
-
 		return conselho;
 	}
+	
+	public Conselho recuperarConselhoRelato(Relato relato){
 
+		Session sessao = null;
+		Conselho conselho = null;
+
+		try {
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
+			Root<Conselho> raizConselho = criteria.from(Conselho.class);
+
+			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("relato"), relato));
+			conselho = sessao.createQuery(criteria).uniqueResult();
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return conselho;
+	}
+	
 	private SessionFactory conectarBanco() {
 
 		Configuration configuracao = new Configuration();

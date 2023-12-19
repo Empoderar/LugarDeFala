@@ -1,7 +1,9 @@
 package br.senac.lugardefala.modelo.dao.usuario;
 
-import java.util.List;
-
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface UsuarioDAO {
@@ -12,5 +14,13 @@ public interface UsuarioDAO {
 
     void atualizarUsuario(Usuario usuario);
 
-    List<Usuario> recuperarUsuario();
+    Usuario recuperarUsuarioNome(String nome);
+   
+   	Usuario recuperarUsuarioComunidade(Comunidade comunidade);
+   	
+   	Usuario recuperarUsuarioConselho(Conselho conselho);
+   	
+   	Usuario recuperarUsuarioDenuncia(Denuncia denuncia);
+   	
+   	Usuario recuperarUsuarioRelato(Relato relato);
 }
