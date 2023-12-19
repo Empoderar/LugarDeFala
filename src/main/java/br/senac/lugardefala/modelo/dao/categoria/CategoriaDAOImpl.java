@@ -13,7 +13,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
-import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 public class CategoriaDAOImpl implements CategoriaDAO {
 
@@ -138,66 +137,6 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 			}
 		}
 
-		return categoria;
-	}
-	
-	public Categoria recuperarCategoriaNome(String nome) {
-
-		Session sessao = null;
-		Categoria categoria = null;
-
-		try {
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-			Root<Categoria> raizCategoria = criteria.from(Categoria.class);
-
-			criteria.select(raizCategoria).where(construtor.equal(raizCategoria.get("nome"), nome));
-			categoria = sessao.createQuery(criteria).uniqueResult();
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return categoria;
-	}
-	
-	public Categoria recuperarCategoriaRelato(Relato relato) {
-
-		Session sessao = null;
-		Categoria categoria = null;
-
-		try {
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-			Root<Categoria> raizCategoria = criteria.from(Categoria.class);
-
-			criteria.select(raizCategoria).where(construtor.equal(raizCategoria.get("relato"), relato));
-			categoria = sessao.createQuery(criteria).uniqueResult();
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
 		return categoria;
 	}
 

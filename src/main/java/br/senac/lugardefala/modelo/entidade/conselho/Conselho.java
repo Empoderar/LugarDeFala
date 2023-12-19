@@ -2,8 +2,6 @@ package br.senac.lugardefala.modelo.entidade.conselho;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,11 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
-import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
@@ -54,12 +49,6 @@ public class Conselho implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_relato")
     private Relato relato;
-
-    @OneToMany(mappedBy = "conselho", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "denuncia_conselho", nullable = false)
-    private List<Denuncia> denuncia = new ArrayList<Denuncia>();
-    
- 
     
     public Conselho(){}
 
@@ -71,8 +60,6 @@ public class Conselho implements Serializable {
 		this.avaliacaoRuim = avaliacaoRuim;
 		this.relato = relato;
 		this.conselhoResposta = conselhoResposta;
-		
-		denuncia = new ArrayList<>();
 	}
 
 	public int getAvaliacaoBoa() {

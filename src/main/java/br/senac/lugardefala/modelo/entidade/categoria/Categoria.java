@@ -10,10 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
@@ -36,9 +33,6 @@ public class Categoria implements Serializable {
 	@Column(name = "cor_categoria", length = 20, nullable = false, unique = true)
 	private String cor;
 
-	@OneToOne(mappedBy = "categoria")
-	private Comunidade comunidade;
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Relato> relatos;
 
@@ -48,7 +42,7 @@ public class Categoria implements Serializable {
 	public Categoria(String nome, String cor, Comunidade comunidade) {
 		this.nome = nome;
 		this.cor = cor;
-		this.comunidade = comunidade;
+
 		relatos = new ArrayList<>();
 	}
 
@@ -66,14 +60,6 @@ public class Categoria implements Serializable {
 
 	public void setCor(String cor) {
 		this.cor = cor;
-	}
-
-	public Comunidade getComunidade() {
-		return comunidade;
-	}
-
-	public void setComunidade(Comunidade comunidade) {
-		this.comunidade = comunidade;
 	}
 
 }
