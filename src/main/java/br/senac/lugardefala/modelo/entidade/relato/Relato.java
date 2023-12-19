@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +20,7 @@ import javax.persistence.Table;
 import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
@@ -30,7 +28,7 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 @Entity
 @Table(name = "relato")
 public class Relato implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,19 +40,16 @@ public class Relato implements Serializable {
 	private LocalDate data;
 
 	@Column(name = "avaliacao_relato", length = 200, nullable = true, unique = false)
-	private int avaliacao;
-
-	@Column(name = "descricao_relato", length = 500, nullable = true, unique = false)
-	private String descricao;
-
+	private String avaliacao;
+	
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Conselho> conselhoRelato = new ArrayList<Conselho>();
-
+	
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Categoria> categoriaRelato = new ArrayList<Categoria>();
 
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<DenunciaRelato> denuncia = new ArrayList<DenunciaRelato>();
+	private List<Denuncia> denuncia = new ArrayList<Denuncia>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_moderador")
@@ -67,26 +62,26 @@ public class Relato implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@Enumerated(EnumType.STRING)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_status")
 	private Status status;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_comunidade")
 	private Comunidade comunidade;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-
+	
 	public Relato() {
 	}
 
-	public Relato(LocalDate data, Usuario usuario, int avaliacao, String descricao, Moderador moderador, Status status,
-			Comunidade comunidade) {
+	public Relato(Long id, LocalDate data, Usuario usuario, String avaliacao, Moderador moderador, Status status, Comunidade comunidade) {
+		this.id = id;
 		this.data = data;
 		this.usuario = usuario;
 		this.avaliacao = avaliacao;
-		this.descricao = descricao;
 		this.moderador = moderador;
 		this.status = status;
 		this.comunidade = comunidade;
@@ -95,42 +90,29 @@ public class Relato implements Serializable {
 		denuncia = new ArrayList<>();
 		conselho = new ArrayList<>();
 	}
+	
 
-	public String getDescricao() {
-		return descricao;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public int getComunidade() {
+	public String getComunidade() {
 		return avaliacao;
 	}
 
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
+	
 
-	public void inserirConselhoRelato() {
-
-	}
-
-	public void removerConselhoRelato() {
-
-	}
-
-	public void inserirCategoriaRelato() {
-
-	}
-
-	public void removerCategoriaRelato() {
-
-	}
-
-	public int getAvaliacao() {
+	public String getAvaliacao() {
 		return avaliacao;
 	}
+
 
 	public LocalDate getData() {
 		return data;
@@ -144,9 +126,10 @@ public class Relato implements Serializable {
 		return usuario;
 	}
 
-	public void setAvaliacao(int avaliacao) {
+	public void setAvaliacao(String avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+
 
 	public void setData(LocalDate data) {
 		this.data = data;
@@ -168,4 +151,47 @@ public class Relato implements Serializable {
 		this.status = status;
 	}
 
+	public boolean inserirConselhoRelato(Conselho conselho) {
+		return conselhoRelato.add(conselho);
+	}
+	
+	public boolean removerConselhoPeloUsuario(String nome, String sobrenome){ 
+		for (Conselho conselho : conselhoRelato) {
+			if (usuario.getNome().equals(nome) && usuario.getSobrenome().equals(sobrenome)) {
+				conselhoRelato.remove(conselho);
+				return true;
+			}
+		}
+		return false;
+	} 
+	
+	public boolean inserirCategoriaRelato(Categoria categoria) {
+		return categoriaRelato.add(categoria);
+	}
+	
+	public boolean removerCategoriaRelatoPorNome(String nome) {
+		for (Categoria categoria : categoriaRelato) {
+			if (categoria.getNome().equals(nome)) {
+				categoriaRelato.remove(categoria);
+				return true;
+			}
+		}
+		return false;
+	} 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
