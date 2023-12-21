@@ -12,9 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "comunidade")
@@ -42,12 +42,29 @@ public class Comunidade implements Serializable {
 	public Comunidade() {
 	}
 
-	public Comunidade(String nome, String descricao) {
+	public Comunidade(long id, String nome, String descricao) {
+		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		relatos = new ArrayList<>();
 		moderadores = new ArrayList<>();
 
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public List<Moderador> getModeradores() {
+		return moderadores;
+	}
+
+	public List<Relato> getRelatos() {
+		return relatos;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -67,14 +84,14 @@ public class Comunidade implements Serializable {
 		}
 		return false;
     }
-
+	
 	public boolean inserirlistaModeradores(Moderador moderador) {
 		return moderadores.add(moderador);
 	}
 
-	public boolean removerListaModeradoresPorNome(String nome, String sobrenome){ 
-        for (Moderador moderador : moderadores) {
-			if (moderador.getNome().equals(nome)) {
+	public boolean removerListaModeradoresPorNome(long id){ 
+        for (Usuario moderador : moderadores) {
+			if (moderador.getId().equals(id)) {
 				moderadores.remove(moderador);
 				return true;
 			}

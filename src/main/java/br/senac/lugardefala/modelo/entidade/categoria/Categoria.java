@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 @Entity
@@ -30,20 +29,47 @@ public class Categoria implements Serializable {
 	@Column(name = "nome_categoria", length = 50, nullable = false, unique = true)
 	private String nome;
 
-	@Column(name = "cor_categoria", length = 20, nullable = false, unique = true)
-	private String cor;
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Relato> relatos;
 
 	public Categoria() {
 	}
 
-	public Categoria(String nome, String cor) {
+	public Categoria(long id, String nome) {
+		this.id = id;
 		this.nome = nome;
-		this.cor = cor;
-
 		relatos = new ArrayList<>();
+	}
+
+	public boolean inserirRelato(Relato relato) {
+        return relatos.add(relato);
+    }
+
+    public boolean removerRelatoPorId(long id) {
+        Relato relatoRemover = null;
+        for (Relato relato : relatos) {
+            if (relato.getId().equals(id)) {
+                relatoRemover = relato;
+                break;
+            }
+        }
+        if (relatoRemover != null) {
+            relatos.remove(relatoRemover);
+            return true;
+        }
+        return false;
+    }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Relato> getRelatos() {
+		return relatos;
 	}
 
 	public String getNome() {
@@ -52,14 +78,6 @@ public class Categoria implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
 	}
 
 }

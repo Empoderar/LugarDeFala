@@ -39,10 +39,15 @@ public class Denuncia implements Serializable {
 	public Denuncia() {
 	}
 
-	public Denuncia(LocalDate data, String motivo, Status status) {
+	public Denuncia(long id, LocalDate data, String motivo, Status status) {
+		this.id = id;
 		this.setData(data);
 		this.setMotivo(motivo);
 		this.setStatus(status);
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public Status getStatus() {
@@ -67,6 +72,10 @@ public class Denuncia implements Serializable {
 
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

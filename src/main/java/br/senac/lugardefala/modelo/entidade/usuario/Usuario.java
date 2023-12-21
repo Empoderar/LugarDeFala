@@ -43,54 +43,111 @@ public class Usuario implements Serializable {
 	@Column(name = "data_nascimento_usuario", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
-	@Column(name = "user_usuario", length = 25, nullable = false, unique = false)
-	private String user;
+	@Column(name = "usuario_usuario", length = 25, nullable = false, unique = false)
+	private String usuario;
 
 	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
 	private String senha;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Conselho> conselho = new ArrayList<Conselho>();
+	private List<Conselho> conselhos;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Contato contato;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<DenunciaUsuario> denunciaDeUsuario = new ArrayList<DenunciaUsuario>();
+	private List<DenunciaUsuario> denunciasDeUsuario;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Relato> relato = new ArrayList<Relato>();
+	private List<Relato> relatos;
 
 	public Usuario() {
 	}
 
-	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone,
-			String email, Contato contato) {
+	public Usuario(long id, String nome, String sobrenome, LocalDate dataNascimento, String usuario, String senha, String telefone, String email, Contato contato) {
+		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
-		this.user = user;
+		this.usuario = usuario;
 		this.senha = senha;
-		denunciaDeUsuario = new ArrayList<>();
-		relato = new ArrayList<>();
-		conselho = new ArrayList<>();
 		this.contato = contato;
+		denunciasDeUsuario = new ArrayList<>();
+		relatos = new ArrayList<>();
+		conselhos = new ArrayList<>();
+	}
+
+	public boolean inserirDenunciaDeUsuario(DenunciaUsuario denuncia) {
+        return denunciasDeUsuario.add(denuncia);
+    }
+
+    public boolean removerDenunciaRelato(long id){ 
+        for (DenunciaUsuario denuncia : denunciasDeUsuario) {
+			if (denuncia.getId().equals(id)) {
+				denunciasDeUsuario.remove(denuncia);
+				return true;
+			}
+		}
+
+		return false;
+    }
+
+	public boolean inserirRelatos(Relato relato) {
+        return relatos.add(relato);
+    }
+
+    public boolean removerRelatos(long id){ 
+        for (Relato relato : relatos) {
+			if (relato.getId().equals(id)) {
+				relatos.remove(relato);
+				return true;
+			}
+		}
+
+		return false;
+    }
+
+	public boolean inserirConselhos(Conselho conselho) {
+        return conselhos.add(conselho);
+    }
+
+    public boolean removerConselhos(long id){ 
+        for (Conselho conselho : conselhos) {
+			if (conselho.getId().equals(id)) {
+				conselhos.remove(conselho);
+				return true;
+			}
+		}
+
+		return false;
+    }
+
+	public List<Conselho> getConselho() {
+		return conselhos;
 	}
 
 	public Contato getContato() {
 		return contato;
 	}
 
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
-
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
+	public List<DenunciaUsuario> getDenunciaDeUsuario() {
+		return denunciasDeUsuario;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
+	}
+
+	public List<Relato> getRelato() {
+		return relatos;
 	}
 
 	public String getSenha() {
@@ -101,12 +158,20 @@ public class Usuario implements Serializable {
 		return sobrenome;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setNome(String nome) {
@@ -121,7 +186,11 @@ public class Usuario implements Serializable {
 		this.sobrenome = sobrenome;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
+
+
+	
+
 }

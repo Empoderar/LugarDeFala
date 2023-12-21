@@ -37,9 +37,14 @@ public class Contato implements Serializable {
 	
 	public Contato(){}
 
-	public Contato(String telefone, String email) {
+	public Contato(long id, String telefone, String email) {
+		this.id = id;
 		this.telefone = telefone;
 		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getEmail() {
@@ -48,6 +53,10 @@ public class Contato implements Serializable {
 
 	public String getTelefone() {
 		return telefone;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setEmail(String email) {
