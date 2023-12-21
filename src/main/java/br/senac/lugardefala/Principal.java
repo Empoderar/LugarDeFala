@@ -18,61 +18,77 @@ import br.senac.lugardefala.modelo.dao.relato.RelatoDAO;
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class Principal {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-		ContatoDAO contatoDAO = new ContatoDAOImpl();
-		ComunidadeDAO comunidadeDAO = new ComunidadeDAOImpl();
-		ConselhoDAO conselhoDAO = new ConselhoDAOImpl();
-		DenunciaDAO denunciaDAO = new DenunciaDAOImpl();
-		ModeradorDAO moderadorDAO = new ModeradorDAOImpl();
-		RelatoDAO relatoDAO = new RelatoDAOImpl();
-		CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+        UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        ContatoDAO contatoDAO = new ContatoDAOImpl();
+        ComunidadeDAO comunidadeDAO = new ComunidadeDAOImpl();
+        ConselhoDAO conselhoDAO = new ConselhoDAOImpl();
+        DenunciaDAO denunciaDAO = new DenunciaDAOImpl();
+        ModeradorDAO moderadorDAO = new ModeradorDAOImpl();
+        RelatoDAO relatoDAO = new RelatoDAOImpl();
+        CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
-		Comunidade programadores = new Comunidade("Programadores", "Uma comunidade para programadores");
-		Contato contato1 = new Contato("987654321", "joao.silva@gmail.com");
+        Comunidade programadores = new Comunidade(0,"Programadores", "Uma comunidade para programadores");
 
-		Usuario usuario = new Usuario("João", "Silva", LocalDate.of(1990, 1, 1), "joao.silva", "senha", "123456789",
-				"joao.silva@example.com", contato1);
+        Contato contato1 = new Contato();
+        contato1.setTelefone("987654321");
+        contato1.setEmail("joao.silva@gmail.com");
+        
+        Contato contato2 = new Contato();
+        contato1.setTelefone("987655213");
+        contato1.setEmail("moderador@example.com");
 
-		usuario.setContato(contato1);
+        Usuario usuario = new Usuario();
+        usuario.setNome("João");
+        usuario.setSobrenome("Silva");
+        usuario.setDataNascimento(LocalDate.of(1990, 1, 1));
+        usuario.setUsuario("joao.silva");
+        usuario.setSenha("senha");
+        contato1.setTelefone("987654321");
+        contato1.setEmail("joao.silva@example.com");
+        usuario.setContato(contato1);
 
-		usuario.setNome("Joao");
-		usuario.setSobrenome("Silva");
-		usuario.setDataNascimento(LocalDate.of(1990, 1, 1));
-		usuario.setUser("joao.silva");
-		usuario.setSenha("senha");
+        Status status = Status.APROVADO;
 
-//		Status status = new Status();
-//
-//		Relato relato = new Relato(LocalDate.now(), usuario, "Experiência positiva", null, status, comunidade);
-//
-//		Moderador moderador = new Moderador("Moderador", "Um", LocalDate.of(1985, 5, 5), "moderador", "senhaModerador",
-//				"987654321", "moderador@example.com", comunidade, contato, null, null);
-//
-//		Denuncia denuncia = new Denuncia(LocalDate.now(), "Conteúdo inadequado", usuario, null, relato, moderador);
-//
-//		Conselho conselho = new Conselho("Fornecer feedback construtivo", LocalDate.now(), usuario, 5, relato,
-//				comunidade);
-//
-//		Categoria categoria = new Categoria("Programação", "Azul", comunidade);
-//
-//		comunidade.setCategoria(categoria);
+        Moderador moderador = new Moderador(0,"Moderador", "Um", LocalDate.now(), "moderador", "senhaModerador",
+        		"987655213", "moderador@example.com", programadores, contato1);
 
-		usuarioDAO.inserirUsuario(usuario);
-//		contatoDAO.inserirContato(contato);
-//		comunidadeDAO.inserirComunidade(comunidade);
-//		conselhoDAO.inserirConselho(conselho);
-//		denunciaDAO.inserirDenuncia(denuncia);
-//		moderadorDAO.inserirModerador(moderador);
-//		relatoDAO.inserirRelato(relato);
-//		categoriaDAO.inserirCategoria(categoria);
+        Relato relato = new Relato();
+        relato.setConteudo("Conteúdo");
+        relato.setData(LocalDate.now());
+        relato.setAvaliacao(5);
+        relato.setModerador(moderador);
+        relato.setStatus(status);
+        relato.setComunidade(programadores);
+        
+        Denuncia denuncia = new Denuncia(0,LocalDate.now(), "Me irritou", Status.PENDENTE);
 
-	}
+        Conselho conselho = new Conselho(0, "Fornecer feedback construtivo", 5, 5, LocalDate.now(), null, usuario, relato);
+
+        Categoria categoria = new Categoria(0, "Programação");
+
+        //relato.inserirCategoriaRelato(categoria);
+
+        usuarioDAO.inserirUsuario(usuario);
+        contatoDAO.inserirContato(contato1);
+        comunidadeDAO.inserirComunidade(programadores);
+        conselhoDAO.inserirConselho(conselho);
+        denunciaDAO.inserirDenuncia(denuncia);
+        relatoDAO.inserirRelato(relato);
+        categoriaDAO.inserirCategoria(categoria);
+
+    }
 }
