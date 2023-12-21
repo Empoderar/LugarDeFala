@@ -39,7 +39,7 @@ public class Categoria implements Serializable {
 	public Categoria() {
 	}
 
-	public Categoria(String nome, String cor, Comunidade comunidade) {
+	public Categoria(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
 
