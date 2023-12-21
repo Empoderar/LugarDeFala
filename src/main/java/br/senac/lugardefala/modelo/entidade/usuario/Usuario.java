@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -53,6 +54,7 @@ public class Usuario implements Serializable {
 	private List<Conselho> conselhos;
 
 	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "contato_id_contato")
 	private Contato contato;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

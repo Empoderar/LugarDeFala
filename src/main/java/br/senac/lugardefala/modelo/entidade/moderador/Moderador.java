@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,14 +29,27 @@ public class Moderador extends Usuario {
     private List<Relato> relatosModerados;
 
 	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DenunciaModerador> denunciaDeModerador;
+	private List<DenunciaModerador> denunciaDeModerador;
+
+	@ManyToOne
+    @JoinColumn(name = "id_comunidade") 
+    private Comunidade comunidade;
 
 	public Moderador(){}
 
 	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone, String email, Comunidade comunidade, Contato contato) {
 		super(id, nome, sobrenome, dataNascimento, user, senha, telefone, email, contato);
+		this.comunidade = comunidade;
 		relatosModerados = new ArrayList<>();
 		denunciaDeModerador = new ArrayList<>();
+	}
+
+	public Comunidade getComunidade() {
+		return comunidade;
+	}
+
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
 	}
 
 	public List<DenunciaModerador> getDenunciaDeModerador() {
