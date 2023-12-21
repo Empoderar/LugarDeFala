@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -53,7 +55,12 @@ public class Relato implements Serializable {
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Conselho> conselhoRelato;
 	
-	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany
+	@JoinTable(
+    name = "relato_categoria", // Nome da tabela de junção
+    joinColumns = @JoinColumn(name = "id_relato"),
+    inverseJoinColumns = @JoinColumn(name = "id_categoria")
+	)
 	private List<Categoria> categoriaRelato;
 
 	@OneToMany(mappedBy = "relato", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -70,10 +77,6 @@ public class Relato implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_comunidade")
 	private Comunidade comunidade;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categoria")
-	private Categoria categoria;
 	
 	public Relato() {
 	}
@@ -145,10 +148,6 @@ public class Relato implements Serializable {
 		return avaliacao;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
 	public List<Categoria> getCategoriaRelato() {
 		return categoriaRelato;
 	}
@@ -187,10 +186,6 @@ public class Relato implements Serializable {
 
 	public void setAvaliacao(Integer avaliacao) {
 		this.avaliacao = avaliacao;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public void setComunidade(Comunidade comunidade) {

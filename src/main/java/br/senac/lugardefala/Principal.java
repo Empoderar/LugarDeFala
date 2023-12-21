@@ -18,7 +18,6 @@ import br.senac.lugardefala.modelo.dao.relato.RelatoDAO;
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
-import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
@@ -35,10 +34,9 @@ public class Principal {
 		RelatoDAO relatoDAO = new RelatoDAOImpl();
 		CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
-		Comunidade programadores = new Comunidade("Programadores", "Uma comunidade para programadores");
-		Contato contato1 = new Contato("987654321", "joao.silva@gmail.com");
+		Contato contato1 = new Contato(1,"987654321", "joao.silva@gmail.com");
 
-		Usuario usuario = new Usuario("João", "Silva", LocalDate.of(1990, 1, 1), "joao.silva", "senha", "123456789",
+		Usuario usuario = new Usuario(1,"João", "Silva", LocalDate.of(1990, 1, 1), "joao.silva", "senha", "123456789",
 				"joao.silva@example.com", contato1);
 
 		usuario.setContato(contato1);
@@ -46,7 +44,7 @@ public class Principal {
 		usuario.setNome("Joao");
 		usuario.setSobrenome("Silva");
 		usuario.setDataNascimento(LocalDate.of(1990, 1, 1));
-		usuario.setUser("joao.silva");
+		usuario.setUsuario("joao.silva");
 		usuario.setSenha("senha");
 
 //		Status status = new Status();

@@ -1,7 +1,6 @@
 package br.senac.lugardefala.modelo.entidade.denuncia;
 
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,21 +18,22 @@ public class DenunciaModerador extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_moderador")
-	private Moderador denunciaDeModerador;
+	private Moderador moderador;
 
-	public DenunciaModerador(Moderador denunciaDeModerador, long id, LocalDate data, String motivo, Status status) {
+
+	public DenunciaModerador(Moderador moderador, long id, LocalDate data, String motivo, Status status) {
 		super(id, data, motivo, status);
-		this.denunciaDeModerador = denunciaDeModerador;
+		this.moderador = moderador;
 	}
 
 	public Moderador getDenunciaDeModerador() {
-		return denunciaDeModerador;
+		return moderador;
 	}
 
-	public void setDenunciaDeModerador(Moderador denunciaDeModerador) {
-		this.denunciaDeModerador = denunciaDeModerador;
+	public void setDenunciaDeModerador(Moderador moderador) {
+		this.moderador = moderador;
 	}
 
 }

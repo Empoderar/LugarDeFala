@@ -30,10 +30,10 @@ public class Conselho implements Serializable {
     @Column(name = "conteudo_conselho", length = 200, nullable = false)
     private String conteudo;
 
-    @Column(name = "avaliacao_conselho", nullable = false)
+    @Column(name = "avaliacaoBoa_conselho", nullable = false)
     private Integer avaliacaoBoa;  
 
-    @Column(name = "avaliacao_conselho", nullable = false)
+    @Column(name = "avaliacaoRuim_conselho", nullable = false)
     private Integer avaliacaoRuim;  
     
     @Column(name = "data_conselho", nullable = false)
