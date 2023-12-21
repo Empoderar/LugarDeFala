@@ -69,7 +69,7 @@ public class Moderador extends Usuario implements Serializable {
 	public Moderador(){}
 
 	public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone, String email, Comunidade comunidade, Contato contato, Conselho conselho, Denuncia denuncia) {
-		super(nome, sobrenome, dataNascimento, user, senha, telefone, email, comunidade, contato);
+		super(nome, sobrenome, dataNascimento, user, senha, telefone, email, contato);
 		this.conselho = conselho;
         this.denuncia = denuncia;
         comunidadeModerador = new ArrayList<>();
@@ -152,7 +152,7 @@ public class Moderador extends Usuario implements Serializable {
 		return relatosModerados.add(relato);
     }
 
-	public boolean removerRelatoPorNome(String nome, String sobrenome){ 
+	public boolean removerRelatoPorNome(String nome, String sobrenome,Usuario usuario){ 
         for (Relato relato : relatosModerados) {
 			if (usuario.getNome().equals(nome) && usuario.getSobrenome().equals(sobrenome)) {
 				relatosModerados.remove(relato);
@@ -160,16 +160,6 @@ public class Moderador extends Usuario implements Serializable {
 			}
 		}
 		return false;
-    } 
-
-	public boolean atualizarRelatoPorNome(String nome, String sobrenome){ 
-        for (Relato relato : relatosModerados) {
-			if (usuario.getNome().equals(nome) && usuario.getSobrenome().equals(sobrenome)) {
-				relatosModerados.update(relato);
-				return true;
-			}
-		}
-		return false;
-    } 
+    }
 
 }
