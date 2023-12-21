@@ -45,19 +45,15 @@ public class Categoria implements Serializable {
         return relatos.add(relato);
     }
 
-    public boolean removerRelatoPorId(long id) {
-        Relato relatoRemover = null;
+    public boolean removerRelato(long id){ 
         for (Relato relato : relatos) {
-            if (relato.getId().equals(id)) {
-                relatoRemover = relato;
-                break;
-            }
-        }
-        if (relatoRemover != null) {
-            relatos.remove(relatoRemover);
-            return true;
-        }
-        return false;
+			if (relato.getId().equals(id)) {
+				relatos.remove(relato);
+				return true;
+			}
+		}
+
+		return false;
     }
 
 	public Long getId() {
