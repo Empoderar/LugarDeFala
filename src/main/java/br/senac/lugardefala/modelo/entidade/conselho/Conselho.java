@@ -52,14 +52,19 @@ public class Conselho implements Serializable {
     
     public Conselho(){}
 
-    public Conselho(String conteudo, LocalDate data, Usuario usuario, int avaliacaoBoa,int avaliacaoRuim, Relato relato, Conselho conselhoResposta) {
+    public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data, Conselho conselhoResposta, Usuario usuario, Relato relato) {
+		this.id = id;
 		this.conteudo = conteudo;
-		this.data = data;
-		this.usuario = usuario;
 		this.avaliacaoBoa = avaliacaoBoa;
 		this.avaliacaoRuim = avaliacaoRuim;
-		this.relato = relato;
+		this.data = data;
 		this.conselhoResposta = conselhoResposta;
+		this.usuario = usuario;
+		this.relato = relato;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public int getAvaliacaoBoa() {
@@ -84,6 +89,10 @@ public class Conselho implements Serializable {
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setAvaliacaoBoa(int avaliacaoBoa) {
