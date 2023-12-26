@@ -14,7 +14,7 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "denunciaUsuario")
+@Table(name = "denuncia_usuario")
 
 public class DenunciaUsuario extends Denuncia {
 

@@ -12,6 +12,9 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
@@ -133,24 +136,23 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
-	
-	public Denuncia recuperarDenunciaDeRelatoStatus(Relato relato,Status status) {
- 
+
+	public Denuncia recuperarDenunciaDeRelatoStatus(Relato relato, Status status) {
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(
-		            construtor.equal(raizDenuncia.get("relato"), relato),
-		            construtor.equal(raizDenuncia.get("status"), status)
-		        );
+					construtor.equal(raizDenuncia.get("relato"), relato),
+					construtor.equal(raizDenuncia.get("status"), status));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
 		} catch (Exception sqlException) {
@@ -165,20 +167,20 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
+
 	public Denuncia recuperarDenunciaDeRelatoRelato(Relato relato) {
- 
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("relato"), relato));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
@@ -194,24 +196,23 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
-	public Denuncia recuperarDenunciaDeConselhoStatus(Conselho conselho,Status status) {
- 
+
+	public Denuncia recuperarDenunciaDeConselhoStatus(Conselho conselho, Status status) {
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(
-		            construtor.equal(raizDenuncia.get("conselho"), conselho),
-		            construtor.equal(raizDenuncia.get("status"), status)
-		        );
+					construtor.equal(raizDenuncia.get("conselho"), conselho),
+					construtor.equal(raizDenuncia.get("status"), status));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
 		} catch (Exception sqlException) {
@@ -226,24 +227,23 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
-	public Denuncia recuperarDenunciaDeConselhoRelato(Conselho conselho,Relato relato) {
- 
+
+	public Denuncia recuperarDenunciaDeConselhoRelato(Conselho conselho, Relato relato) {
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(
-		            construtor.equal(raizDenuncia.get("conselho"), conselho),
-		            construtor.equal(raizDenuncia.get("relato"), relato)
-		        );
+					construtor.equal(raizDenuncia.get("conselho"), conselho),
+					construtor.equal(raizDenuncia.get("relato"), relato));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
 		} catch (Exception sqlException) {
@@ -258,24 +258,23 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
+
 	public Denuncia recuperarDenunciaDeUsuarioStatus(Usuario usuario, Status status) {
- 
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(
-		            construtor.equal(raizDenuncia.get("usuario"), usuario),
-		            construtor.equal(raizDenuncia.get("status"), status)
-		        );
+					construtor.equal(raizDenuncia.get("usuario"), usuario),
+					construtor.equal(raizDenuncia.get("status"), status));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
 		} catch (Exception sqlException) {
@@ -290,20 +289,20 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
+
 	public Denuncia recuperarDenunciaDeUsuarioUsuario(Usuario usuario) {
- 
+
 		Session sessao = null;
 		Denuncia denuncia = null;
- 
+
 		try {
 			sessao = conectarBanco().openSession();
 			sessao.beginTransaction();
- 
+
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
 			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
- 
+
 			criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("usuario"), usuario));
 			denuncia = sessao.createQuery(criteria).uniqueResult();
 			sessao.getTransaction().commit();
@@ -319,7 +318,6 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		}
 		return denuncia;
 	}
- 
 
 	private SessionFactory conectarBanco() {
 
@@ -345,6 +343,87 @@ public class DenunciaDAOImpl implements DenunciaDAO {
 		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
 
 		return fabricaSessao;
+	}
+
+	public void inserirDenunciaModerador(DenunciaModerador denunciaModerador) {
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.save(denunciaModerador);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public void inserirDenunciaRelato(DenunciaRelato denunciaRelato) {
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.save(denunciaRelato);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario) {
+		Session sessao = null;
+
+		try {
+
+			sessao = conectarBanco().openSession();
+			sessao.beginTransaction();
+
+			sessao.save(denunciaUsuario);
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 	}
 
 }

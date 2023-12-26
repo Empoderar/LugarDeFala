@@ -54,8 +54,8 @@ public class Usuario implements Serializable {
 	private List<Conselho> conselhos;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contato_id_contato")
-	private Contato contato;
+    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
+    private Contato contato;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DenunciaUsuario> denunciasDeUsuario;
@@ -66,13 +66,13 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(long id, String nome, String sobrenome, LocalDate dataNascimento, String usuario, String senha, String telefone, String email, Contato contato) {
-		this.id = id;
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String usuario, String senha, Contato contato) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.usuario = usuario;
 		this.senha = senha;
+		this.id = id;
 		this.contato = contato;
 		denunciasDeUsuario = new ArrayList<>();
 		relatos = new ArrayList<>();
