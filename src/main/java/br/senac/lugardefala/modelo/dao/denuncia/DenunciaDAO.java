@@ -2,6 +2,9 @@ package br.senac.lugardefala.modelo.dao.denuncia;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
@@ -9,6 +12,12 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 public interface DenunciaDAO {
 
 	void inserirDenuncia(Denuncia denuncia);
+
+	void inserirDenunciaModerador(DenunciaModerador denunciaModerador);
+
+    void inserirDenunciaRelato(DenunciaRelato denunciaRelato);
+
+    void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario);
 
 	void deletarDenuncia(Denuncia denuncia);
 
@@ -27,4 +36,6 @@ public interface DenunciaDAO {
 	Denuncia recuperarDenunciaDeUsuarioStatus(Usuario usuario, Status status);
 	
 	Denuncia recuperarDenunciaDeUsuarioUsuario(Usuario usuario);
+
+	
 }

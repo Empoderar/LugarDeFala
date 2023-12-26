@@ -5,6 +5,8 @@ import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
 public interface ModeradorDAO {
 
+	void inserirModerador(Moderador moderador);
+
 	Moderador recuperarModeradorNome(String nome);
 
 	Moderador recuperarModeradorComunidade(Comunidade comunidade);

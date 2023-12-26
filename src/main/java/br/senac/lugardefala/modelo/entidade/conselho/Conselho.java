@@ -52,6 +52,16 @@ public class Conselho implements Serializable {
     
     public Conselho(){}
 
+	public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data, Usuario usuario, Relato relato) {
+		this.id = id;
+		this.conteudo = conteudo;
+		this.avaliacaoBoa = avaliacaoBoa;
+		this.avaliacaoRuim = avaliacaoRuim;
+		this.data = data;
+		this.usuario = usuario;
+		this.relato = relato;
+	}
+
     public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data, Conselho conselhoResposta, Usuario usuario, Relato relato) {
 		this.id = id;
 		this.conteudo = conteudo;

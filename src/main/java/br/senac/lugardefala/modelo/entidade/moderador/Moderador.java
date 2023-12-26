@@ -37,8 +37,8 @@ public class Moderador extends Usuario {
 
 	public Moderador(){}
 
-	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, String telefone, String email, Comunidade comunidade, Contato contato) {
-		super(id, nome, sobrenome, dataNascimento, user, senha, telefone, email, contato);
+	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String user, String senha, Comunidade comunidade, Contato contato) {
+		super(id, nome, sobrenome, dataNascimento, user, senha, contato);
 		this.comunidade = comunidade;
 		relatosModerados = new ArrayList<>();
 		denunciaDeModerador = new ArrayList<>();

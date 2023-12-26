@@ -7,7 +7,7 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 public interface ComunidadeDAO {
 
 	void inserirComunidade(Comunidade comunidade);
-
+	
 	void deletarComunidade(Comunidade comunidade);
 
 	Comunidade recuperarComunidadeModerador(Moderador moderador);

@@ -15,7 +15,7 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "denunciaRelato")
+@Table(name = "denuncia_relato")
 public class DenunciaRelato extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
