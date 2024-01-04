@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.dao.denuncia;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
@@ -18,6 +19,8 @@ public interface DenunciaDAO {
     void inserirDenunciaRelato(DenunciaRelato denunciaRelato);
 
     void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario);
+    
+    void inserirDenunciaConselho(DenunciaConselho denunciaConselho);
 
 	void deletarDenuncia(Denuncia denuncia);
 

@@ -1,4 +1,4 @@
-package br.senac.lugardefala.modelo.dao.contato;
+package br.senac.lugardefala.modelo.dao.denuncia.relato;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -6,14 +6,16 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.contato.Contato;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
-public class ContatoDAOImpl implements ContatoDAO {
+public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 
     private static final SessionFactory sessionFactory;
 
@@ -44,39 +46,61 @@ public class ContatoDAOImpl implements ContatoDAO {
         return sessionFactory;
     }
 
-    public void inserirContato(Contato contato) {
+    public void inserirDenunciaRelato(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
-            session.beginTransaction();
-            session.save(contato);
-            session.getTransaction().commit();
+            Transaction transaction = session.beginTransaction();
+            session.save(denunciaRelato);
+            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void atualizarContato(Contato contato) {
+    public void deletarDenunciaRelato(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
-            session.beginTransaction();
-            session.update(contato);
-            session.getTransaction().commit();
+            Transaction transaction = session.beginTransaction();
+            session.delete(denunciaRelato);
+            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Contato recuperarContatoUsuario(Usuario usuario) {
+    public DenunciaRelato recuperarDenunciaDeRelatoStatus(Relato relato, Status status) {
         try (Session session = getSessionFactory().openSession()) {
-            session.beginTransaction();
             CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
-            Root<Contato> raizContato = criteria.from(Contato.class);
-            criteria.select(raizContato).where(construtor.equal(raizContato.get("usuario"), usuario));
-            Contato contato = session.createQuery(criteria).uniqueResult();
-            session.getTransaction().commit();
-            return contato;
+            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
+            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
+            criteria.select(raizDenuncia).where(
+                    construtor.equal(raizDenuncia.get("relato"), relato),
+                    construtor.equal(raizDenuncia.get("status"), status));
+            return session.createQuery(criteria).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public DenunciaRelato recuperarDenunciaDeRelatoRelato(Relato relato) {
+        try (Session session = getSessionFactory().openSession()) {
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
+            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
+            criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("relato"), relato));
+            return session.createQuery(criteria).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void atualizarDenunciaRelato(DenunciaRelato denunciaRelato) {
+        try (Session session = getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.update(denunciaRelato);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

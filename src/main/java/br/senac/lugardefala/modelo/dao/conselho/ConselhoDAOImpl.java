@@ -16,178 +16,104 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
 
+	private static final SessionFactory sessionFactory;
+
+	static {
+		Configuration configuration = new Configuration();
+
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+
+		configuration.configure("hibernate.cfg.xml");
+
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
+
+		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+	}
+
+	private SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
 	public void inserirConselho(Conselho conselho) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.save(conselho);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.save(conselho);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deletarConselho(Conselho conselho) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.delete(conselho);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.delete(conselho);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void atualizarConselho(Conselho conselho) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			sessao.update(conselho);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.update(conselho);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	public Conselho recuperarConselhoUsuario(Usuario usuario) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
 
-		Session sessao = null;
-		Conselho conselho = null;
-
-		try {
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
 
 			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("usuario"), usuario));
-			conselho = sessao.createQuery(criteria).uniqueResult();
-			sessao.getTransaction().commit();
+			Conselho conselho = session.createQuery(criteria).uniqueResult();
 
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
+			session.getTransaction().commit();
+
+			return conselho;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return conselho;
 	}
-	
-	public Conselho recuperarConselhoRelato(Relato relato){
 
-		Session sessao = null;
-		Conselho conselho = null;
+	public Conselho recuperarConselhoRelato(Relato relato) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
 
-		try {
-			sessao = conectarBanco().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
 
 			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("relato"), relato));
-			conselho = sessao.createQuery(criteria).uniqueResult();
-			sessao.getTransaction().commit();
+			Conselho conselho = session.createQuery(criteria).uniqueResult();
 
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
+			session.getTransaction().commit();
+
+			return conselho;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return conselho;
-	}
-	
-	private SessionFactory conectarBanco() {
-
-		Configuration configuracao = new Configuration();
-
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.categoria.Categoria.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.conselho.Conselho.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.contato.Contato.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
-		configuracao.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
-
-		configuracao.configure("hibernate.cfg.xml");
-
-		ServiceRegistry servico = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
-				.build();
-		SessionFactory fabricaSessao = configuracao.buildSessionFactory(servico);
-
-		return fabricaSessao;
 	}
 
 }

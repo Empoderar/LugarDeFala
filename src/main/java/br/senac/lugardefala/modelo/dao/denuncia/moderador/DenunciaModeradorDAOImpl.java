@@ -1,8 +1,4 @@
-package br.senac.lugardefala.modelo.dao.contato;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+package br.senac.lugardefala.modelo.dao.denuncia.moderador;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +6,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.contato.Contato;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
 
-public class ContatoDAOImpl implements ContatoDAO {
+public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
 
     private static final SessionFactory sessionFactory;
 
@@ -44,36 +39,30 @@ public class ContatoDAOImpl implements ContatoDAO {
         return sessionFactory;
     }
 
-    public void inserirContato(Contato contato) {
+    public void inserirDenunciaModerador(DenunciaModerador denunciaModerador) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.save(contato);
+            session.save(denunciaModerador);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void atualizarContato(Contato contato) {
+    public void deletarDenunciaModerador(DenunciaModerador denunciaModerador) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.update(contato);
+            session.delete(denunciaModerador);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Contato recuperarContatoUsuario(Usuario usuario) {
+    public DenunciaModerador recuperarDenunciaModeradorPorId(long id) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
-            Root<Contato> raizContato = criteria.from(Contato.class);
-            criteria.select(raizContato).where(construtor.equal(raizContato.get("usuario"), usuario));
-            Contato contato = session.createQuery(criteria).uniqueResult();
-            session.getTransaction().commit();
-            return contato;
+            return session.get(DenunciaModerador.class, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
