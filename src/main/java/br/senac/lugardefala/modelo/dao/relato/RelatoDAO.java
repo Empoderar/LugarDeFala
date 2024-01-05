@@ -21,4 +21,6 @@ public interface RelatoDAO {
 	Relato recuperarRelatoComunidade(Comunidade comunidade);
 	
 	Relato recuperarRelatoCategoria(Categoria categoria);
+	
+	Relato buscarRelatoPorId(Long id);
 }
