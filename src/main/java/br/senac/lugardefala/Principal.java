@@ -154,6 +154,11 @@ public class Principal {
         contato21.setEmail("patricia.bernardo@gmail.com");
         contatoDAO.inserirContato(contato21);
         
+        Contato contato22 = new Contato();
+        contato22.setTelefone("(47)95402-3311");
+        contato22.setEmail("mathias.garcia@gmail.com");
+        contatoDAO.inserirContato(contato22);
+        
         // Criação de usuários
         Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.toureiro", "whey", contato2);
         usuarioDAO.inserirUsuario(usuario2);
@@ -214,6 +219,9 @@ public class Principal {
         
         Usuario usuario21 = new Usuario(null, "Patricia", "Bernardo", LocalDate.of(1996, 2, 11), "patricia.bernardo", "senha203", contato21);
         usuarioDAO.inserirUsuario(usuario21);
+        
+        Usuario usuario22 = new Usuario(null, "Mathias", "Garcia", LocalDate.of(1996, 2, 11), "mathias.garcia", "senha204", contato22);
+        usuarioDAO.inserirUsuario(usuario22);
 
         // Criação de categorias
         Categoria categoria = new Categoria(null, "Sororidade");
