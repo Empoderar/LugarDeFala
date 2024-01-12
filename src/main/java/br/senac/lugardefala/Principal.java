@@ -159,6 +159,46 @@ public class Principal {
         contato22.setEmail("mathias.garcia@gmail.com");
         contatoDAO.inserirContato(contato22);
         
+        Contato contato23 = new Contato();
+        contato8.setTelefone("(11)97777-7777");
+        contato8.setEmail("bruna.koprowisk@gmail.com");
+        contatoDAO.inserirContato(contato23);
+        
+        Contato contato24 = new Contato();
+        contato9.setTelefone("(48)96666-6666");
+        contato9.setEmail("vera.cruz@gmail.com");
+        contatoDAO.inserirContato(contato24);
+        
+        Contato contato25 = new Contato();
+        contato10.setTelefone("(48)95555-5555");
+        contato10.setEmail("rafaela.gomes@gmail.com");
+        contatoDAO.inserirContato(contato25);
+        
+        Contato contato26 = new Contato();
+        contato11.setTelefone("(75)94444-4444");
+        contato11.setEmail("marcela.arruda@gmail.com");
+        contatoDAO.inserirContato(contato26);
+        
+        Contato contato27 = new Contato();
+        contato12.setTelefone("(21)93333-3333");
+        contato12.setEmail("leticia.farias@gmail.com");
+        contatoDAO.inserirContato(contato27);
+        
+        Contato contato28 = new Contato();
+        contato13.setTelefone("(11)92222-2222");
+        contato13.setEmail("carla.spudeit@gmail.com");
+        contatoDAO.inserirContato(contato28);
+        
+        Contato contato29 = new Contato();
+        contato14.setTelefone("(23)91111-1111");
+        contato14.setEmail("luiza.durangi@gmail.com");
+        contatoDAO.inserirContato(contato29);
+        
+        Contato contato30 = new Contato();
+        contato15.setTelefone("(13)90000-0000");
+        contato15.setEmail("patricia.aguiar@gmail.com");
+        contatoDAO.inserirContato(contato30);
+        
         // Criação de usuários
         Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.toureiro", "whey", contato2);
         usuarioDAO.inserirUsuario(usuario2);
@@ -222,6 +262,30 @@ public class Principal {
         
         Usuario usuario22 = new Usuario(null, "Mathias", "Garcia", LocalDate.of(1996, 2, 11), "mathias.garcia", "senha204", contato22);
         usuarioDAO.inserirUsuario(usuario22);
+        
+        Usuario usuario23 = new Usuario(null, "Bruna", "Koprowisk", LocalDate.of(2005, 2, 6), "bruna.koprowisk", "senha777", contato23);
+        usuarioDAO.inserirUsuario(usuario23);
+        
+        Usuario usuario24 = new Usuario(null, "Vera", "Cruz", LocalDate.of(1980, 12, 17), "vera.cruz", "senha645", contato24);
+        usuarioDAO.inserirUsuario(usuario24);
+        
+        Usuario usuario25 = new Usuario(null, "Rafaela", "Gomes", LocalDate.of(2003, 8, 22), "rafaela.gomes", "senha207", contato25);
+        usuarioDAO.inserirUsuario(usuario25);
+        
+       Usuario usuario26 = new Usuario(null, "Marcela", "Arruda", LocalDate.of(2002, 2, 28), "marcela.arruda", "senha456", contato26);
+        usuarioDAO.inserirUsuario(usuario26);
+        
+        Usuario usuario27 = new Usuario(null, "Leticia", "Farias", LocalDate.of(1998, 6, 12), "leticia.farias", "senha987", contato27);
+        usuarioDAO.inserirUsuario(usuario12);
+        
+        Usuario usuario28 = new Usuario(null, "Carla", "Spudeit", LocalDate.of(2000, 3, 16), "karla.spudeit", "senha654", contato28);
+        usuarioDAO.inserirUsuario(usuario27);
+        
+        Usuario usuario29 = new Usuario(null, "Luiza", "Durangi", LocalDate.of(1994, 7, 23), "luiza.durangi", "senha321", contato29);
+        usuarioDAO.inserirUsuario(usuario29);
+        
+        Usuario usuario30 = new Usuario(null, "Patricia", "Aguiar", LocalDate.of(1994, 4, 6), "patricia.aguiar", "senha123", contato30);
+        usuarioDAO.inserirUsuario(usuario30);
 
         // Criação de categorias
         Categoria categoria = new Categoria(null, "Sororidade");
@@ -251,6 +315,12 @@ public class Principal {
 
         Comunidade comunidade3 = new Comunidade(3, "Violência Sexual", "Comunidade de relatos sobre qualquer forma de coerção ou forçar uma mulher a se envolver em atividades sexuais contra a sua vontade.");
         comunidadeDAO.inserirComunidade(comunidade3);
+        
+        Comunidade comunidade4 = new Comunidade(4, "Violência Patrimonial", "Comunidade de relatos sobre a retenção, subtração, ou destruição dos bens pessoais da mulher, feitas pelo agressor.");
+        comunidadeDAO.inserirComunidade(comunidade4);
+        
+        Comunidade comunidade5 = new Comunidade(5, "Violência Moral", "Comunidade de relatos sobre qualquer conduta que configure calúnia, difamação ou injúria contra a mulher.");
+        comunidadeDAO.inserirComunidade(comunidade5);
 
         // Criação de moderadores
         Contato contatoModeradorAmanda = new Contato();
@@ -260,6 +330,48 @@ public class Principal {
 
         Moderador moderadorAmanda = new Moderador(1, "Amanda", "Lucs", LocalDate.of(2002, 11, 27), "amanda.lsc", "senhaModerador", comunidade2, contatoModeradorAmanda);
         moderadorDAO.inserirModerador(moderadorAmanda);
+        
+        Contato contatoModeradorBrenda = new Contato();
+        contatoModeradorBrenda.setTelefone("(48)98646-7254");
+        contatoModeradorBrenda.setEmail("brenda.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorBrenda);
+        Moderador moderadorBrenda = new Moderador(2, "Brenda", "Monteiro", LocalDate.of(2000, 8, 30), "brenda.monteiro", "senhaModerador2", comunidade1, contatoModeradorBrenda);
+        moderadorDAO.inserirModerador(moderadorBrenda);
+        
+        Contato contatoModeradorLuciene = new Contato();
+        contatoModeradorLuciene.setTelefone("(21)98734-5477");
+        contatoModeradorLuciene.setEmail("luciene.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorLuciene);
+        Moderador moderadorLuciene = new Moderador(3, "Luciene", "Queiroz", LocalDate.of(1975, 5, 31), "luciene.queiroz", "senhaModerador3", comunidade3, contatoModeradorLuciene);
+        moderadorDAO.inserirModerador(moderadorLuciene);
+        
+        Contato contatoModeradorMariana = new Contato();
+       contatoModeradorMariana.setTelefone("(68)98525-4121");
+        contatoModeradorMariana.setEmail("mariana.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorMariana);
+        Moderador moderadorMariana = new Moderador(4, "Mariana", "Abreu", LocalDate.of(2001, 5, 20), "mariana.abreu", "senhaModerador4", comunidade4, contatoModeradorMariana);
+        moderadorDAO.inserirModerador(moderadorMariana);
+        
+        Contato contatoModeradorGiovanna = new Contato();
+        contatoModeradorGiovanna.setTelefone("(54)96465-9876");
+        contatoModeradorGiovanna.setEmail("giovanna.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorGiovanna);
+        Moderador moderadorGiovanna = new Moderador(5, "Giovanna", "Soriano", LocalDate.of(1991, 12, 27), "giovanna.soriano", "senhaModerador5", comunidade5, contatoModeradorGiovanna);
+        moderadorDAO.inserirModerador(moderadorGiovanna);
+        
+        Contato contatoModeradorMarcella = new Contato();
+        contatoModeradorMarcella.setTelefone("(21)9345-1234");
+        contatoModeradorMarcella.setEmail("marcella.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorMarcella);
+        Moderador moderadorMarcella = new Moderador(6, "Marcella", "Barboza", LocalDate.of(2002, 3, 21), "marcella.barboza", "senhaModerador6", comunidade2, contatoModeradorMarcella);
+        moderadorDAO.inserirModerador(moderadorMarcella);
+        
+        Contato contatoModeradorBruna = new Contato();
+        contatoModeradorBruna.setTelefone("(47)99645-4121");
+        contatoModeradorBruna.setEmail("bruna.moderadora@gmail.com");
+        contatoDAO.inserirContato(contatoModeradorBruna);
+        Moderador moderadorBruna = new Moderador(7, "Bruna", "Caria", LocalDate.of(1987, 11, 7), "bruna.caria", "senhaModerador7", comunidade3, contatoModeradorBruna);
+        moderadorDAO.inserirModerador(moderadorBruna);
         
      // Criação de relatos
         Relato relato1 = new Relato(
@@ -287,6 +399,33 @@ public class Principal {
         );
         relato2.inserirCategoriaRelato(categoria);
         relatoDAO.inserirRelato(relato2);
+        
+        Relato relato3 = new Relato(
+        null,
+         "Relato sobre acolhimento temporário",
+         LocalDate.now(),
+         usuario13,
+         2,
+         moderadorBruna,
+         Status.ARQUIVADO,
+         comunidade3
+       );
+        
+        relato3.inserirCategoriaRelato(categoria);
+        relatoDAO.inserirRelato(relato3);
+        Relato relato4 = new Relato(
+        null,
+        "Relato sobre desabafo",
+        LocalDate.now(),
+        usuario7,
+        3,
+        moderadorBrenda,
+        Status.ARQUIVADO,
+        comunidade1
+        );
+        
+       relato4.inserirCategoriaRelato(categoria);
+       relatoDAO.inserirRelato(relato4);
 
         // Criação de conselhos
         Conselho conselho1 = new Conselho(
@@ -321,6 +460,29 @@ public class Principal {
                 relato2
         );
         conselhoDAO.inserirConselho(conselho3);
+        
+        Conselho conselho4 = new Conselho(
+        		4,
+        		"Quanto drama",
+        		0,
+        		10,
+        		LocalDate.now(),
+        		usuario2,
+        		relato3
+        );
+        conselhoDAO.inserirConselho(conselho4);
+        
+        Conselho conselho5 = new Conselho(
+        		3,
+        		"Espero que tudo melhore.",
+        		8,
+        		0,
+        		LocalDate.now(),
+        		usuario8,
+        		relato4
+        );
+        
+        conselhoDAO.inserirConselho(conselho5);
 
         // Criação de denúncias
         DenunciaConselho denunciaConselho = new DenunciaConselho(
@@ -358,5 +520,7 @@ public class Principal {
         	    Status.PENDENTE
         	);
         	denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);     
+        	
+        	
     }
 }
