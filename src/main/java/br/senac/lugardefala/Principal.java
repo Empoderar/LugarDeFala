@@ -160,68 +160,68 @@ public class Principal {
         contatoDAO.inserirContato(contato22);
         
         Contato contato23 = new Contato();
-        contato8.setTelefone("(11)97777-7777");
-        contato8.setEmail("bruna.koprowisk@gmail.com");
+        contato23.setTelefone("(11)97777-7777");
+        contato23.setEmail("bruna.koprowisk@gmail.com");
         contatoDAO.inserirContato(contato23);
         
         Contato contato24 = new Contato();
-        contato9.setTelefone("(48)96666-6666");
-        contato9.setEmail("vera.cruz@gmail.com");
+        contato24.setTelefone("(48)96666-6666");
+        contato24.setEmail("vera.cruz@gmail.com");
         contatoDAO.inserirContato(contato24);
         
         Contato contato25 = new Contato();
-        contato10.setTelefone("(48)95555-5555");
-        contato10.setEmail("rafaela.gomes@gmail.com");
+        contato25.setTelefone("(48)95555-5555");
+        contato25.setEmail("rafaela.gomes@gmail.com");
         contatoDAO.inserirContato(contato25);
         
         Contato contato26 = new Contato();
-        contato11.setTelefone("(75)94444-4444");
-        contato11.setEmail("marcela.arruda@gmail.com");
+        contato26.setTelefone("(75)94444-4444");
+        contato26.setEmail("marcela.arruda@gmail.com");
         contatoDAO.inserirContato(contato26);
         
         Contato contato27 = new Contato();
-        contato12.setTelefone("(21)93333-3333");
-        contato12.setEmail("leticia.farias@gmail.com");
+        contato27.setTelefone("(21)93333-3333");
+        contato27.setEmail("leticia.farias@gmail.com");
         contatoDAO.inserirContato(contato27);
         
         Contato contato28 = new Contato();
-        contato13.setTelefone("(11)92222-2222");
-        contato13.setEmail("carla.spudeit@gmail.com");
+        contato28.setTelefone("(11)92222-2222");
+        contato28.setEmail("carla.spudeit@gmail.com");
         contatoDAO.inserirContato(contato28);
         
         Contato contato29 = new Contato();
-        contato14.setTelefone("(23)91111-1111");
-        contato14.setEmail("luiza.durangi@gmail.com");
+        contato29.setTelefone("(23)91111-1111");
+        contato29.setEmail("luiza.durangi@gmail.com");
         contatoDAO.inserirContato(contato29);
         
         Contato contato30 = new Contato();
-        contato15.setTelefone("(13)90000-0000");
-        contato15.setEmail("patricia.aguiar@gmail.com");
+        contato30.setTelefone("(13)90000-0000");
+        contato30.setEmail("patricia.aguiar@gmail.com");
         contatoDAO.inserirContato(contato30);
         
         Contato contato31 = new Contato();
-        contato15.setTelefone("(91)99234-8976");
-        contato15.setEmail("flavia.diniz@gmail.com");
+        contato31.setTelefone("(91)99234-8976");
+        contato31.setEmail("flavia.diniz@gmail.com");
         contatoDAO.inserirContato(contato31);
         
         Contato contato32= new Contato();
-        contato15.setTelefone("47)99237-8946");
-        contato15.setEmail("elena.cardoso@gmail.com");
+        contato32.setTelefone("47)99237-8946");
+        contato32.setEmail("elena.cardoso@gmail.com");
         contatoDAO.inserirContato(contato32);
         
         Contato contato33= new Contato();
-        contato15.setTelefone("(48)99837-2946");
-        contato15.setEmail("bianca.shmitt@gmail.com");
+        contato33.setTelefone("(48)99837-2946");
+        contato33.setEmail("bianca.shmitt@gmail.com");
         contatoDAO.inserirContato(contato33);
         
         Contato contato34= new Contato();
-        contato15.setTelefone("(46)99817-2646");
-        contato15.setEmail("aparecida.conceicao@gmail.com");
+        contato34.setTelefone("(46)99817-2646");
+        contato34.setEmail("aparecida.conceicao@gmail.com");
         contatoDAO.inserirContato(contato34);
         
         Contato contato35= new Contato();
-        contato15.setTelefone("(12)99887-2226");
-        contato15.setEmail("felipe.borba@gmail.com");
+        contato35.setTelefone("(12)99887-2226");
+        contato35.setEmail("felipe.borba@gmail.com");
         contatoDAO.inserirContato(contato35);
         
         // Criação de usuários
