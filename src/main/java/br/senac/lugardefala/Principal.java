@@ -91,7 +91,7 @@ public class Principal {
         
         Contato contato9 = new Contato();
         contato9.setTelefone("(47)98509-1502");
-        contato9.setEmail("renato.santos@gmail.com");
+        contato9.setEmail("renato.junior@gmail.com");
         contatoDAO.inserirContato(contato9);
         
         Contato contato10 = new Contato();
@@ -116,11 +116,11 @@ public class Principal {
         
         Contato contato14 = new Contato();
         contato14.setTelefone("(47)95703-4167");
-        contato14.setEmail("joao.sanguanini@gmail.com");
+        contato14.setEmail("gleidson.sanguanini@gmail.com");
         contatoDAO.inserirContato(contato14);
         
         Contato contato15 = new Contato();
-        contato15.setTelefone("(47)95703-4167");
+        contato15.setTelefone("(47)95703-4168");
         contato15.setEmail("silvio.luiz@gmail.com");
         contatoDAO.inserirContato(contato15);
         
@@ -136,7 +136,7 @@ public class Principal {
         
         Contato contato18 = new Contato();
         contato18.setTelefone("(47)99567-0792");
-        contato18.setEmail("kaio.silva@gmail.com");
+        contato18.setEmail("kaio.aleixo@gmail.com");
         contatoDAO.inserirContato(contato18);
         
         Contato contato19 = new Contato();
@@ -151,7 +151,7 @@ public class Principal {
         
         Contato contato21 = new Contato();
         contato21.setTelefone("(47)91482-8310");
-        contato21.setEmail("patricia.bernardo@gmail.com");
+        contato21.setEmail("pamela.bernardo@gmail.com");
         contatoDAO.inserirContato(contato21);
         
         Contato contato22 = new Contato();
@@ -246,7 +246,7 @@ public class Principal {
         Usuario usuario8 = new Usuario(null, "Renan", "Batista", LocalDate.of(1985, 1, 19), "renan.bastista", "senha190", contato8);
         usuarioDAO.inserirUsuario(usuario8);
         
-        Usuario usuario9 = new Usuario(null, "Renato", "Santos", LocalDate.of(1979, 5, 29), "renato.santos", "senha191", contato9);
+        Usuario usuario9 = new Usuario(null, "Renato", "Júnior", LocalDate.of(1979, 5, 29), "renato.junior", "senha191", contato9);
         usuarioDAO.inserirUsuario(usuario9);
         
         Usuario usuario10 = new Usuario(null, "Yan", "Silva", LocalDate.of(1991, 1, 8), "yan.silva", "senha192", contato10);
@@ -261,7 +261,7 @@ public class Principal {
         Usuario usuario13 = new Usuario(null, "Marlon", "Krause", LocalDate.of(2001, 4, 19), "marlon.krause", "senha195", contato13);
         usuarioDAO.inserirUsuario(usuario13);
         
-        Usuario usuario14 = new Usuario(null, "Joao", "Sanguanini", LocalDate.of(2002, 1, 18), "joao.sanguanini", "senha196", contato14);
+        Usuario usuario14 = new Usuario(null, "Gleidson", "Sanguanini", LocalDate.of(2002, 1, 18), "gleidson.sanguanini", "senha196", contato14);
         usuarioDAO.inserirUsuario(usuario14);
         
         Usuario usuario15 = new Usuario(null, "Silvio", "Luiz", LocalDate.of(1996, 2, 11), "silvio.luiz", "senha197", contato15);
@@ -273,7 +273,7 @@ public class Principal {
         Usuario usuario17 = new Usuario(null, "Arthur", "Fernandes", LocalDate.of(1996, 2, 11), "arthur.fernandes", "senha199", contato17);
         usuarioDAO.inserirUsuario(usuario17);
         
-        Usuario usuario18 = new Usuario(null, "Kaio", "Silva", LocalDate.of(1996, 2, 11), "kaio.silva", "senha200", contato18);
+        Usuario usuario18 = new Usuario(null, "Kaio", "Aleixo", LocalDate.of(1996, 2, 11), "kaio.aleixo", "senha200", contato18);
         usuarioDAO.inserirUsuario(usuario18);
         
         Usuario usuario19 = new Usuario(null, "Beatriz", "Rodrigues", LocalDate.of(1996, 2, 11), "beatriz.rodrigues", "senha201", contato19);
@@ -282,7 +282,7 @@ public class Principal {
         Usuario usuario20 = new Usuario(null, "Cristiane", "Santos", LocalDate.of(1996, 2, 11), "cristiane.santos", "senha202", contato20);
         usuarioDAO.inserirUsuario(usuario20);
         
-        Usuario usuario21 = new Usuario(null, "Patricia", "Bernardo", LocalDate.of(1996, 2, 11), "patricia.bernardo", "senha203", contato21);
+        Usuario usuario21 = new Usuario(null, "Pamela", "Bernardo", LocalDate.of(1996, 2, 11), "pamela.bernardo", "senha203", contato21);
         usuarioDAO.inserirUsuario(usuario21);
         
         Usuario usuario22 = new Usuario(null, "Mathias", "Garcia", LocalDate.of(1996, 2, 11), "mathias.garcia", "senha204", contato22);
