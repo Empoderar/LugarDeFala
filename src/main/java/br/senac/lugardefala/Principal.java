@@ -1,6 +1,7 @@
 package br.senac.lugardefala;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAO;
 import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAOImpl;
@@ -581,6 +582,11 @@ public class Principal {
         	);
         	denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);     
         	
+        	List<Relato> relatos= relatoDAO.recuperarRelatoStatus(Status.APROVADO);
         	
+        	for (Relato relato : relatos) {
+				System.out.println(relato.getConteudo());
+			}
     }
+    
 }

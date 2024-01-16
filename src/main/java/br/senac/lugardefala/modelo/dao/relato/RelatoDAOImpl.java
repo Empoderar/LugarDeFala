@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -15,6 +16,7 @@ import org.hibernate.service.ServiceRegistry;
 import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.relato.Relato_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
@@ -96,36 +98,57 @@ public class RelatoDAOImpl implements RelatoDAO {
         }
     }
 
-    public Relato recuperarRelatoUsuario(Usuario usuario) {
+    public List <Relato> recuperarRelatoUsuario(Usuario usuario) {
+    	List<Relato> relatosUsuario = null;
+  	  
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
+            
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usuario"), usuario));
-            Relato relato = session.createQuery(criteria).uniqueResult();
+            
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usário"), usuario));
+            
+            ParameterExpression<Usuario> relatoUsuario = construtor.parameter(Usuario.class);
+			criteria.where(construtor.equal(raizRelato.get(Relato_.usuario), relatoUsuario));
+            
+            relatosUsuario = session.createQuery(criteria).setParameter(relatoUsuario, usuario).getResultList();
+            
             session.getTransaction().commit();
-            return relato;
+            
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return relatosUsuario;
     }
 
-    public Relato recuperarRelatoStatus(Status status) {
+    public List<Relato> recuperarRelatoStatus(Status status) {
+    	
+    	List<Relato> relatosStatus = null;
+    	  
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
+            
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
+            
             criteria.select(raizRelato).where(construtor.equal(raizRelato.get("status"), status));
-            Relato relato = session.createQuery(criteria).uniqueResult();
+            
+            ParameterExpression<Status> relatoStatus = construtor.parameter(Status.class);
+			criteria.where(construtor.equal(raizRelato.get(Relato_.status), relatoStatus));
+            
+            relatosStatus= session.createQuery(criteria).setParameter(relatoStatus, status).getResultList();
+            
             session.getTransaction().commit();
-            return relato;
+            
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return relatosStatus;
     }
 
     public Relato recuperarRelatoComunidade(Comunidade comunidade) {
