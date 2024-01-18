@@ -587,6 +587,11 @@ public class Principal {
         	for (Relato relato : relatos) {
 				System.out.println(relato.getConteudo());
 			}
-    }
-    
-}
+        	
+        	 List<Moderador> moderador = moderadorDAO.recuperarModeradorPeloId(36L);
+        	    
+        	    for (Moderador moderadorRecuperado : moderador) { 
+        	    		System.out.print("Nome do moderador: " + moderadorRecuperado.getNome());
+        	  }
+    	}
+   }   

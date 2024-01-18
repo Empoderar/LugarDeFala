@@ -1,5 +1,7 @@
 package br.senac.lugardefala.modelo.dao.moderador;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -12,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador_;
 
 public class ModeradorDAOImpl implements ModeradorDAO {
 
@@ -85,4 +88,37 @@ public class ModeradorDAOImpl implements ModeradorDAO {
             return null;
         }
     }
+public List<Moderador> recuperarModeradorPeloId(Long id) {
+		
+		Session session = null;
+		List<Moderador> moderador = null;
+		
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            
+            CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+            Root<Moderador> raizModerador = criteria.from(Moderador.class);
+			
+			criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
+
+			moderador = session.createQuery(criteria).getResultList();
+			
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return null;
+			}
+		 finally {
+			
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+		return moderador;
+	}
 }
