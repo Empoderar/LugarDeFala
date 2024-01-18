@@ -16,13 +16,13 @@ public interface RelatoDAO {
 	
 	void atualizarRelato(Relato relato);
 
-	List <Relato> recuperarRelatoUsuario(Usuario usuario);
+	List <Relato> recuperarRelatosUsuario(Usuario usuario);
 	
 	List <Relato> recuperarRelatoStatus(Status status);
 	
-	Relato recuperarRelatoComunidade(Comunidade comunidade);
+	List <Relato> recuperarRelatosPelaComunidade(Comunidade comunidade);
 	
-	Relato recuperarRelatoCategoria(Categoria categoria);
+	List <Relato> recuperarRelatosPelaCategoria(Categoria categoria);
 	
 	Relato buscarRelatoPorId(Long id);
 }
