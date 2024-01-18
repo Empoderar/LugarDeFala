@@ -1,4 +1,7 @@
+
 package br.senac.lugardefala.modelo.dao.conselho;
+
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,7 +15,6 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
 
@@ -76,44 +78,30 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public Conselho recuperarConselhoUsuario(Usuario usuario) {
-		try (Session session = getSessionFactory().openSession()) {
+	public List<Conselho> recuperarConselhoRelato(Relato relato) {
+		Session session = null;
+		List<Conselho> conselho = null;
+		try {
+			session = getSessionFactory().openSession();
 			session.beginTransaction();
 
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
-
-			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("usuario"), usuario));
-			Conselho conselho = session.createQuery(criteria).uniqueResult();
-
-			session.getTransaction().commit();
-
-			return conselho;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public Conselho recuperarConselhoRelato(Relato relato) {
-		try (Session session = getSessionFactory().openSession()) {
-			session.beginTransaction();
-
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
-			Root<Conselho> raizConselho = criteria.from(Conselho.class);
-
 			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("relato"), relato));
-			Conselho conselho = session.createQuery(criteria).uniqueResult();
+			conselho = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();
-
 			return conselho;
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
 		}
+		return conselho;
 	}
 
 }
