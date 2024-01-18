@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	@Column(name = "data_nascimento_usuario", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
-	@Column(name = "usuario_usuario", length = 35, nullable = false, unique = true)
+	@Column(name = "apelid_usuario", length = 35, nullable = false, unique = true)
 	private String usuario;
 
 	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
