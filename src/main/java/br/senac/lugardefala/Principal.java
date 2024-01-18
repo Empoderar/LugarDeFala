@@ -298,7 +298,7 @@ public class Principal {
         Usuario usuario25 = new Usuario(null, "Rafaela", "Gomes", LocalDate.of(2003, 8, 22), "rafaela.gomes", "senha207", contato25);
         usuarioDAO.inserirUsuario(usuario25);
         
-       Usuario usuario26 = new Usuario(null, "Marcela", "Arruda", LocalDate.of(2002, 2, 28), "marcela.arruda", "senha456", contato26);
+        Usuario usuario26 = new Usuario(null, "Marcela", "Arruda", LocalDate.of(2002, 2, 28), "marcela.arruda", "senha456", contato26);
         usuarioDAO.inserirUsuario(usuario26);
         
         Usuario usuario27 = new Usuario(null, "Leticia", "Farias", LocalDate.of(1998, 6, 12), "leticia.farias", "senha987", contato27);
@@ -587,6 +587,27 @@ public class Principal {
         	for (Relato relato : relatos) {
 				System.out.println(relato.getConteudo());
 			}
+        	
+        	List<Relato> usuario = relatoDAO.recuperarRelatosUsuario(usuario2);
+        	
+        	for (Relato relato : usuario) {
+	        	System.out.println(relato.getConteudo());
+        	}
+        	
+        	List<Relato> comunidade = relatoDAO.recuperarRelatosPelaComunidade(comunidade1);
+        	
+        	for (Relato relato : comunidade) {
+	        	System.out.println(relato.getConteudo());
+        	}
+        	
+//        	List<Relato> categorias = relatoDAO.recuperarRelatosPelaCategoria(categoria2);
+//        	
+//        	for (Relato relato : categorias) {
+//	        	System.out.println(relato.getConteudo());
+//        	}
+        	
+        	Relato relatoPorId = relatoDAO.buscarRelatoPorId(2L);
+        	System.out.println(relatoPorId);
     }
     
 }
