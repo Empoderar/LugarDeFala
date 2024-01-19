@@ -80,6 +80,38 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			}
 		}
 		return moderador;
+	}	
+		public List<Moderador> recuperarModeradorPeloId(Long id) {
+			Session session = null;
+			List<Moderador> moderador = null;
+
+			try {
+				session = getSessionFactory().openSession();
+				session.beginTransaction();
+	            CriteriaBuilder construtor = session.getCriteriaBuilder();
+
+	            CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+	            Root<Moderador> raizModerador = criteria.from(Moderador.class);
+
+				criteria.where(construtor.equal(raizModerador.get("id"), id));
+
+				moderador = session.createQuery(criteria).getResultList();
+
+				session.getTransaction().commit();
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				return null;
+				}
+			 finally {
+
+				if(session != null) {
+					session.close();
+				}
+			}
+
+			return moderador;
+		}
 
 	}
-}

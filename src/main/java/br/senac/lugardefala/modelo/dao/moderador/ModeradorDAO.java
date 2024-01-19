@@ -10,4 +10,6 @@ public interface ModeradorDAO {
 	void inserirModerador(Moderador moderador);
 
 	List<Moderador> recuperarModeradorComunidade(Comunidade comunidade);
+	
+	List<Moderador> recuperarModeradorPeloId(Long id);
 }

@@ -535,6 +535,12 @@ public class Principal {
 		Usuario usuarioPeloNome = usuarioDAO.buscarUsuarioPeloNome("Alice");
 		System.out.println(usuarioPeloNome.getNome());
 		
+		List<Moderador> moderador = moderadorDAO.recuperarModeradorPeloId(40L);
+		
+		for (Moderador moderadorRecuperado : moderador) { 
+			System.out.print("Nome do moderador: " + moderadorRecuperado.getNome());
+		}
+		
 		List<Usuario> usuarios =usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
 
 		for (Usuario usuario : usuarios) {
@@ -559,11 +565,11 @@ public class Principal {
 			System.out.println(usuario.getNome());
 		}
 		
-		List<Moderador> moderadores = moderadorDAO.recuperarModeradorComunidade(comunidade1);
-
-		for (Moderador moderador : moderadores) {
-			System.out.println(moderador.getNome());
-		}
+//		List<Moderador> moderadores = moderadorDAO.recuperarModeradorComunidade(comunidade1);
+//
+//		for (Moderador moderador : moderadores) {
+//			System.out.println(moderador.getNome());
+//		}
 	
 		
 		List<Conselho> conselhos = conselhoDAO.recuperarConselhoRelato(relato1);
@@ -583,6 +589,7 @@ public class Principal {
 		for (Relato relato : usuario) {
 			System.out.println(relato.getConteudo());
 		}
+		
 
 		List<Relato> comunidade = relatoDAO.recuperarRelatosPelaComunidade(comunidade1);
 
@@ -598,6 +605,32 @@ public class Principal {
 
 		Relato relatoPorId = relatoDAO.buscarRelatoPorId(2L);
 		System.out.println(relatoPorId.getConteudo());
+		
+		List<Usuario> usuarios =usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios1 =usuarioDAO.recuperarUsuariosPorConselho(conselho1);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios2 =usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios3 =usuarioDAO.recuperarUsuariosPorRelato(relato2);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		}
 	}
 
-}
+
