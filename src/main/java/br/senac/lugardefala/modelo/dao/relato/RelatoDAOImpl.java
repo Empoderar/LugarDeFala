@@ -110,7 +110,7 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("usuario"), usuario));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.usuario), usuario));
             
             ParameterExpression<Usuario> relatoUsuario = construtor.parameter(Usuario.class);
 			criteria.where(construtor.equal(raizRelato.get(Relato_.usuario), relatoUsuario));
@@ -145,7 +145,7 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("status"), status));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.status), status));
             
             ParameterExpression<Status> relatoStatus = construtor.parameter(Status.class);
 			criteria.where(construtor.equal(raizRelato.get(Relato_.status), relatoStatus));
@@ -180,7 +180,7 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("comunidade"), comunidade));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.comunidade), comunidade));
             
             ParameterExpression<Comunidade> relatoComunidade = construtor.parameter(Comunidade.class);
 			criteria.where(construtor.equal(raizRelato.get(Relato_.comunidade), relatoComunidade));
@@ -215,7 +215,7 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("categoria"), categoria));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
             
             ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
 			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
@@ -250,7 +250,7 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get("id"), id));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.id), id));
             
             ParameterExpression<Long> relatoPorId = construtor.parameter(Long.TYPE);
 			criteria.where(construtor.equal(raizRelato.get(Relato_.id), relatoPorId));

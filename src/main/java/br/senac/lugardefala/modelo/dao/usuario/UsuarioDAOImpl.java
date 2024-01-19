@@ -18,6 +18,7 @@ import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -140,7 +141,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("conselho"), conselho));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.conselhos), conselho));
 			usuario = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 			return usuario;
@@ -166,7 +167,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("denuncia"), denuncia));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.denunciasDeUsuario), denuncia));
 			usuario = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 
@@ -191,7 +192,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("relato"), relato));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.relatos), relato));
 			usuario = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 			return usuario;
