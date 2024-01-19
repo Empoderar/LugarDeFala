@@ -64,4 +64,9 @@ public class Contato implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public char[] getConteudo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

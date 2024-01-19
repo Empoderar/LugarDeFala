@@ -9,5 +9,5 @@ public interface ContatoDAO {
 
 	void atualizarContato(Contato contato);
 
-	Contato recuperarContatoUsuario(Usuario usuario);
+	Contato recuperarContatoDoUsuarioPeloId(Long id);
 }

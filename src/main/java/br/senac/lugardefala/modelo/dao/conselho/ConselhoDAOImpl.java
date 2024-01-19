@@ -14,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho_;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
@@ -88,7 +89,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
-			criteria.select(raizConselho).where(construtor.equal(raizConselho.get("relato"), relato));
+			criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.relato), relato));
 			conselho = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();

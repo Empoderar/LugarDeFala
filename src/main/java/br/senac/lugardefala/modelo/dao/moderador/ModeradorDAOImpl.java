@@ -14,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador_;
 
 public class ModeradorDAOImpl implements ModeradorDAO {
 
@@ -66,7 +67,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("comunidade"), comunidade));
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.comunidade), comunidade));
 			moderador = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 			return moderador;
@@ -93,7 +94,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	            CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 	            Root<Moderador> raizModerador = criteria.from(Moderador.class);
 
-				criteria.where(construtor.equal(raizModerador.get("id"), id));
+				criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
 
 				moderador = session.createQuery(criteria).getResultList();
 
