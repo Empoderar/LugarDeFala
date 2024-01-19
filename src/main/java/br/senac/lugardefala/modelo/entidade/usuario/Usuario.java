@@ -44,8 +44,8 @@ public class Usuario implements Serializable {
 	@Column(name = "data_nascimento_usuario", nullable = false, unique = false)
 	private LocalDate dataNascimento;
 
-	@Column(name = "apelid_usuario", length = 35, nullable = false, unique = true)
-	private String usuario;
+	@Column(name = "apelido_usuario", length = 35, nullable = false, unique = true)
+	private String apelido;
 
 	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
 	private String senha;
@@ -54,8 +54,8 @@ public class Usuario implements Serializable {
 	private List<Conselho> conselhos;
 
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
-    private Contato contato;
+	@JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
+	private Contato contato;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DenunciaUsuario> denunciasDeUsuario;
@@ -66,11 +66,12 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String usuario, String senha, Contato contato) {
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			Contato contato) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
-		this.usuario = usuario;
+		this.apelido = apelido;
 		this.senha = senha;
 		this.id = id;
 		this.contato = contato;
@@ -80,11 +81,11 @@ public class Usuario implements Serializable {
 	}
 
 	public boolean inserirDenunciaDeUsuario(DenunciaUsuario denuncia) {
-        return denunciasDeUsuario.add(denuncia);
-    }
+		return denunciasDeUsuario.add(denuncia);
+	}
 
-    public boolean removerDenunciaRelato(long id){ 
-        for (DenunciaUsuario denuncia : denunciasDeUsuario) {
+	public boolean removerDenunciaRelato(long id) {
+		for (DenunciaUsuario denuncia : denunciasDeUsuario) {
 			if (denuncia.getId().equals(id)) {
 				denunciasDeUsuario.remove(denuncia);
 				return true;
@@ -92,14 +93,14 @@ public class Usuario implements Serializable {
 		}
 
 		return false;
-    }
+	}
 
 	public boolean inserirRelatos(Relato relato) {
-        return relatos.add(relato);
-    }
+		return relatos.add(relato);
+	}
 
-    public boolean removerRelatos(long id){ 
-        for (Relato relato : relatos) {
+	public boolean removerRelatos(long id) {
+		for (Relato relato : relatos) {
 			if (relato.getId().equals(id)) {
 				relatos.remove(relato);
 				return true;
@@ -107,14 +108,14 @@ public class Usuario implements Serializable {
 		}
 
 		return false;
-    }
+	}
 
 	public boolean inserirConselhos(Conselho conselho) {
-        return conselhos.add(conselho);
-    }
+		return conselhos.add(conselho);
+	}
 
-    public boolean removerConselhos(long id){ 
-        for (Conselho conselho : conselhos) {
+	public boolean removerConselhos(long id) {
+		for (Conselho conselho : conselhos) {
 			if (conselho.getId().equals(id)) {
 				conselhos.remove(conselho);
 				return true;
@@ -122,7 +123,7 @@ public class Usuario implements Serializable {
 		}
 
 		return false;
-    }
+	}
 
 	public List<Conselho> getConselho() {
 		return conselhos;
@@ -160,8 +161,8 @@ public class Usuario implements Serializable {
 		return sobrenome;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getApelido() {
+		return apelido;
 	}
 
 	public void setContato(Contato contato) {
@@ -188,11 +189,8 @@ public class Usuario implements Serializable {
 		this.sobrenome = sobrenome;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsuario(String apelido) {
+		this.apelido = apelido;
 	}
-
-
-	
 
 }

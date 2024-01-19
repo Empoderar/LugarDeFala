@@ -386,7 +386,7 @@ public class Principal {
 				"Comunidade de relatos sobre agressões físicas, como bater, empurrar, chutar, entre outras formas de violência que causem dano ao corpo.");
 		comunidadeDAO.inserirComunidade(comunidade1);
 
-		Comunidade comunidade2 = new Comunidade(2, "Violência Psicológica/Emocional",
+		Comunidade comunidade2 = new Comunidade(2, "Violência Psicológical",
 				"Comunidade de relatos sobre humilhação, ameaças, manipulação emocional, controle excessivo, isolamento social e outras formas de abuso psicológico.");
 		comunidadeDAO.inserirComunidade(comunidade2);
 
@@ -525,19 +525,47 @@ public class Principal {
 		DenunciaUsuario denunciaUsuario = new DenunciaUsuario(usuario5, 0, LocalDate.now(),
 				"Uso indevido do aplicativo", Status.PENDENTE);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
-
+		
 		DenunciaRelato denunciaRelato = new DenunciaRelato(relato1, 0, LocalDate.now(), "Conteúdo falso",
 				Status.PENDENTE);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
 		// Criação de consultas
 
+		Usuario usuarioPeloNome = usuarioDAO.buscarUsuarioPeloNome("Alice");
+		System.out.println(usuarioPeloNome.getNome());
+		
+		List<Usuario> usuarios =usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
 
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios1 =usuarioDAO.recuperarUsuariosPorConselho(conselho1);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios2 =usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
+		List<Usuario> usuarios3 =usuarioDAO.recuperarUsuariosPorRelato(relato2);
+
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNome());
+		}
+		
 		List<Moderador> moderadores = moderadorDAO.recuperarModeradorComunidade(comunidade1);
 
 		for (Moderador moderador : moderadores) {
 			System.out.println(moderador.getNome());
 		}
+	
+		
 		List<Conselho> conselhos = conselhoDAO.recuperarConselhoRelato(relato1);
 
 		for (Conselho conselho : conselhos) {

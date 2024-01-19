@@ -2,6 +2,6 @@
 	
 	public enum Status {
 	
-		        APROVADO, REJEITADO, PENDENTE, ARQUIVADO
+		        APROVADO, REJEITADO, PENDENTE, ARQUIVADO;
 	
 	}
