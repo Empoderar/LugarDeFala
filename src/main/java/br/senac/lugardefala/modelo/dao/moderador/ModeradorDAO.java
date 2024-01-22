@@ -9,7 +9,10 @@ public interface ModeradorDAO {
 
 	void inserirModerador(Moderador moderador);
 
-	List<Moderador> recuperarModeradorComunidade(Comunidade comunidade);
+	List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade);
 	
-	List<Moderador> recuperarModeradorPeloId(Long id);
+	List<Moderador> consultarModeradoresPeloId(Long id);
+	
+	Moderador consultarModeradorPeloNome(String nome);
+	Moderador consultarModeradorPelaComunidade (Comunidade comunidade);
 }

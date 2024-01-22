@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -57,7 +58,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 
-	public List<Moderador> recuperarModeradorComunidade(Comunidade comunidade) {
+	public List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade) {
 		Session session = null;
 		List<Moderador> moderador = null;
 
@@ -67,7 +68,8 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.comunidade), comunidade));
+			criteria.select(raizModerador)
+					.where(construtor.equal(raizModerador.get(Moderador_.comunidade), comunidade));
 			moderador = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 			return moderador;
@@ -81,38 +83,87 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			}
 		}
 		return moderador;
-	}	
-		public List<Moderador> recuperarModeradorPeloId(Long id) {
-			Session session = null;
-			List<Moderador> moderador = null;
+	}
 
-			try {
-				session = getSessionFactory().openSession();
-				session.beginTransaction();
-	            CriteriaBuilder construtor = session.getCriteriaBuilder();
+	public List<Moderador> consultarModeradoresPeloId(Long id) {
+		Session session = null;
+		List<Moderador> moderador = null;
 
-	            CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
-	            Root<Moderador> raizModerador = criteria.from(Moderador.class);
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
 
-				criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
 
-				moderador = session.createQuery(criteria).getResultList();
+			criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
 
-				session.getTransaction().commit();
+			moderador = session.createQuery(criteria).getResultList();
 
-			} catch (Exception e) {
+			session.getTransaction().commit();
 
-				e.printStackTrace();
-				return null;
-				}
-			 finally {
+		} catch (Exception e) {
 
-				if(session != null) {
-					session.close();
-				}
+			e.printStackTrace();
+			return null;
+		} finally {
+
+			if (session != null) {
+				session.close();
 			}
-
-			return moderador;
 		}
 
+		return moderador;
+
 	}
+
+	public Moderador consultarModeradorPeloNome(String nome) {
+		Session session = null;
+		Moderador moderadoresPeloNome = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
+			ParameterExpression<String> moderadorPeloNome = construtor.parameter(String.class, "nome");
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("nome"), moderadorPeloNome));
+			moderadoresPeloNome = session.createQuery(criteria).setParameter(moderadorPeloNome, nome).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return moderadoresPeloNome;
+
+	}
+
+	public Moderador consultarModeradorPelaComunidade(Comunidade comunidade) {
+		Session session = null;
+		Moderador moderadorPelaComunidade = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
+			ParameterExpression<Comunidade> parametroComunidade = construtor.parameter(Comunidade.class, "comunidade");
+			criteria.select(raizModerador)
+					.where(construtor.equal(raizModerador.get("comunidade"), parametroComunidade));
+			moderadorPelaComunidade = session.createQuery(criteria).setParameter(parametroComunidade, comunidade)
+					.getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return moderadorPelaComunidade;
+	}
+}
