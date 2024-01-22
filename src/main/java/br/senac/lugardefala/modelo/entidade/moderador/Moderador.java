@@ -8,12 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
@@ -31,25 +30,13 @@ public class Moderador extends Usuario {
 	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DenunciaModerador> denunciaDeModerador;
 
-	@ManyToOne
-    @JoinColumn(name = "id_comunidade") 
-    private Comunidade comunidade;
 
 	public Moderador(){}
 
-	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Comunidade comunidade, Contato contato) {
-		super(id, nome, sobrenome, dataNascimento, apelido, senha, contato);
-		this.comunidade = comunidade;
+	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Conselho conselho, Contato contato, Comunidade comunidade) {
+		super(id, nome, sobrenome, dataNascimento, apelido, senha, conselho, contato, comunidade);
 		relatosModerados = new ArrayList<>();
 		denunciaDeModerador = new ArrayList<>();
-	}
-
-	public Comunidade getComunidade() {
-		return comunidade;
-	}
-
-	public void setComunidade(Comunidade comunidade) {
-		this.comunidade = comunidade;
 	}
 
 	public List<DenunciaModerador> getDenunciaDeModerador() {

@@ -15,9 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
@@ -62,12 +65,16 @@ public class Usuario implements Serializable {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Relato> relatos;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "id_comunidade")
+	    private Comunidade comunidade;
 
 	public Usuario() {
 	}
 
 	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
-			Contato contato) {
+			Conselho conselho, Contato contato, Comunidade comunidade) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
@@ -78,6 +85,7 @@ public class Usuario implements Serializable {
 		denunciasDeUsuario = new ArrayList<>();
 		relatos = new ArrayList<>();
 		conselhos = new ArrayList<>();
+		this.comunidade = comunidade;
 	}
 
 	public boolean inserirDenunciaDeUsuario(DenunciaUsuario denuncia) {
@@ -133,6 +141,10 @@ public class Usuario implements Serializable {
 		return contato;
 	}
 
+	public Comunidade getComunidade() {
+		return comunidade;
+	}
+	
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
@@ -168,6 +180,12 @@ public class Usuario implements Serializable {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
+	
+	
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
+	}
+	
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
