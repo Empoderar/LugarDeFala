@@ -3,6 +3,7 @@ package br.senac.lugardefala.modelo.entidade.comunidade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +39,9 @@ public class Comunidade implements Serializable {
 
 	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Moderador> moderadores;
+	
+	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Usuario> usuarios;
 
 	public Comunidade() {
 	}
@@ -48,7 +52,7 @@ public class Comunidade implements Serializable {
 		this.descricao = descricao;
 		relatos = new ArrayList<>();
 		moderadores = new ArrayList<>();
-
+		usuarios = new ArrayList<>();
 	}
 
 	public Long getId() {
@@ -57,6 +61,10 @@ public class Comunidade implements Serializable {
 
 	public List<Moderador> getModeradores() {
 		return moderadores;
+	}
+	
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 	public List<Relato> getRelatos() {
