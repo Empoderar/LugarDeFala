@@ -555,14 +555,25 @@ public class Principal {
 		System.out.println(usuarioPeloNome.getNome());
 
 		// --------------------------------------------------------------------
+		
+		Moderador moderadorPeloNome = moderadorDAO.consultarModeradorPeloNome("Bruna");
+		System.out.println(moderadorPeloNome.getNome());
 
-		List<Moderador> moderador = moderadorDAO.recuperarModeradorPeloId(36L);
+		// --------------------------------------------------------------------
+
+		List<Moderador> moderador = moderadorDAO.consultarModeradoresPeloId(36L);
 
 		for (Moderador moderadorRecuperado : moderador) {
 			System.out.print("Nome do moderador: " + moderadorRecuperado.getNome());
 		}
 
 		// ----------------------------------------------------------------------
+		
+		Moderador parametroComunidade = moderadorDAO.consultarModeradorPelaComunidade(comunidade1);
+		System.out.println(parametroComunidade.getNome());
+
+		// --------------------------------------------------------------------
+
 
 		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
 
@@ -611,16 +622,18 @@ public class Principal {
 		}
 
 		// ----------------------------------------------------------------------
+		
 
-		List<Relato> relatos = relatoDAO.recuperarRelatoStatus(Status.APROVADO);
+		List<Relato> relatos = relatoDAO.consultarRelatosPeloStatus(Status.APROVADO);
 
 		for (Relato relato : relatos) {
 			System.out.println(relato.getConteudo());
 		}
-
+		
+		
 		// ----------------------------------------------------------------------
 
-		List<Relato> usuario = relatoDAO.recuperarRelatosUsuario(usuario2);
+		List<Relato> usuario = relatoDAO.consultarRelatosPeloUsuario(usuario2);
 
 		for (Relato relato : usuario) {
 			System.out.println(relato.getConteudo());
@@ -628,7 +641,7 @@ public class Principal {
 
 		// ----------------------------------------------------------------------
 
-		List<Relato> comunidade = relatoDAO.recuperarRelatosPelaComunidade(comunidade1);
+		List<Relato> comunidade = relatoDAO.consultarRelatosPelaComunidade(comunidade1);
 
 		for (Relato relato : comunidade) {
 			System.out.println(relato.getConteudo());
@@ -636,21 +649,32 @@ public class Principal {
 
 		// ----------------------------------------------------------------------
 
-//        	List<Relato> categorias = relatoDAO.recuperarRelatosPelaCategoria(categoria2);
-//        	
-//        	for (Relato relato : categorias) {
-//	        	System.out.println(relato.getConteudo());
-//        	}
+		List<Relato> categorias = relatoDAO.consultarRelatosPelaCategoria(categoria2);
+        	
+        	for (Relato relato : categorias) {
+	        	System.out.println(relato.getConteudo());
+        	}
 
 		// ----------------------------------------------------------------------
 		
-		Relato relatoPorId = relatoDAO.buscarRelatoPorId(2L);
+		Relato relatoPorId = relatoDAO.consultarRelatoPorId(2L);
 		System.out.println(relatoPorId.getConteudo());
 
 		// ----------------------------------------------------------------------
 		
+		Relato parametroUsuario = relatoDAO.consultarRelatoPeloUsuario(usuario35);
+		System.out.println(parametroUsuario.getConteudo());
+
+		// ----------------------------------------------------------------------
+		
+		
 		Contato contatoRecupetado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
 		System.out.println(contatoRecupetado.getTelefone());
-
+		
+		
+	// ----------------------------------------------------------------------
+		
+		Relato parametroStatus= relatoDAO.consultarRelatoPeloStatus(Status.REJEITADO);
+		System.out.println(parametroStatus.getConteudo());
 	}
 }
