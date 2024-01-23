@@ -18,11 +18,11 @@ public interface UsuarioDAO {
 
 	Usuario buscarUsuarioPeloNome(String nome);
 
-	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
+//	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
 
-	List<Usuario> recuperarUsuariosPorConselho(Conselho conselho);
+//	Usuario recuperarUsuarioPorConselho(Conselho conselho);
+//
+//	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
 
-	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
-
-	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
+//	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
 }

@@ -13,9 +13,9 @@ public interface CategoriaDAO {
 
 	void atualizarCategoria(Categoria categoria);
 
-	List<Categoria> recuperarCategoria();
+	List<Categoria> recuperarCategoria(String nome);
 	
-	Categoria recuperarCategoriaNome(String nome);
+	Categoria recuperarCategoriaPeloId(Long id);
 
 	Categoria recuperarCategoriaRelato(Relato relato);
 

@@ -22,11 +22,7 @@ public interface RelatoDAO {
 	
 	List <Relato> consultarRelatosPelaComunidade(Comunidade comunidade);
 	
-	List <Relato> consultarRelatosPelaCategoria(Categoria categoria);
+//	List <Relato> consultarRelatosPelaCategoria(Categoria categoria);
 	
 	Relato consultarRelatoPorId(Long id);
-	
-	Relato consultarRelatoPeloUsuario(Usuario usuario);
-	
-	Relato consultarRelatoPeloStatus(Status status);
 }

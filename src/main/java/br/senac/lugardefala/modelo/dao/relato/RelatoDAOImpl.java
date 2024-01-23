@@ -202,40 +202,40 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-    public List <Relato> consultarRelatosPelaCategoria(Categoria categoria) {
-    	
-    	List<Relato> relatosCategoria = null;
-    	Session session = null;
-    	  
-    	try {
-        	session = getSessionFactory().openSession();
-            session.beginTransaction();
-            
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-            Root<Relato> raizRelato = criteria.from(Relato.class);
-            
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
-            
-            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
-            
-            relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
-            
-            session.getTransaction().commit();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
-
-    	}
-        return relatosCategoria;
-    }
+//    public List <Relato> consultarRelatosPelaCategoria(Categoria categoria) {
+//    	
+//    	List<Relato> relatosCategoria = null;
+//    	Session session = null;
+//    	  
+//    	try {
+//        	session = getSessionFactory().openSession();
+//            session.beginTransaction();
+//            
+//            CriteriaBuilder construtor = session.getCriteriaBuilder();
+//            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+//            Root<Relato> raizRelato = criteria.from(Relato.class);
+//            
+//            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
+//            
+//            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
+//			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
+//            
+//            relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
+//            
+//            session.getTransaction().commit();
+//            
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    	finally {
+//    		if (session != null) {
+//    			session.close();
+//    			}
+//
+//    	}
+//        return relatosCategoria;
+//    }
     
     public Relato consultarRelatoPorId(Long id) {
 
@@ -271,59 +271,5 @@ public class RelatoDAOImpl implements RelatoDAO {
     	}
         return relatosPorId;
     }
-        
-        public Relato consultarRelatoPeloUsuario(Usuario usuario) {
-
-        	Relato relatosPorUsuario = null;
-        	Session session = null;
-        	  
-        	try {
-        		session = getSessionFactory().openSession();
-    			session.beginTransaction();
-    			CriteriaBuilder construtor = session.getCriteriaBuilder();
-    			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-    			Root<Relato> raizRelato = criteria.from(Relato.class);
-    			ParameterExpression<Usuario> parametroUsuario = construtor.parameter(Usuario.class, "usuario");
-    			criteria.select(raizRelato)
-    					.where(construtor.equal(raizRelato.get("usuario"), parametroUsuario));
-    			relatosPorUsuario = session.createQuery(criteria).setParameter(parametroUsuario, usuario)
-    					.getSingleResult();
-    			session.getTransaction().commit();
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		} finally {
-    			if (session != null) {
-    				session.close();
-    			}
-    		}
-    		return relatosPorUsuario;
-    		
-        }
-    		
-    		public Relato consultarRelatoPeloStatus(Status status) {
-
-            	Relato relatosPorStatus = null;
-            	Session session = null;
-            	  
-            	try {
-            		session = getSessionFactory().openSession();
-        			session.beginTransaction();
-        			CriteriaBuilder construtor = session.getCriteriaBuilder();
-        			CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-        			Root<Relato> raizRelato = criteria.from(Relato.class);
-        			ParameterExpression<Status> parametroStatus = construtor.parameter(Status.class, "status");
-        			criteria.select(raizRelato)
-        					.where(construtor.equal(raizRelato.get("status"), parametroStatus));
-        			relatosPorStatus = session.createQuery(criteria).setParameter(parametroStatus, status)
-        					.getSingleResult();
-        			session.getTransaction().commit();
-        		} catch (Exception e) {
-        			e.printStackTrace();
-        		} finally {
-        			if (session != null) {
-        				session.close();
-        			}
-        		}
-        		return relatosPorStatus;
-    }
+	
 }

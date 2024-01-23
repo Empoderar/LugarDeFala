@@ -14,5 +14,4 @@ public interface ModeradorDAO {
 	List<Moderador> consultarModeradoresPeloId(Long id);
 	
 	Moderador consultarModeradorPeloNome(String nome);
-	Moderador consultarModeradorPelaComunidade (Comunidade comunidade);
 }
