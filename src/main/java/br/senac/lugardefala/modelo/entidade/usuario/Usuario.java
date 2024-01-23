@@ -72,6 +72,14 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 	}
+	
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido,String senha) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+	}
 
 	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
 			Conselho conselho, Contato contato, Comunidade comunidade) {
