@@ -13,11 +13,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
-import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
+
 
 
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -103,6 +100,46 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    }
 	    return usuariosPeloNome;
 	}
+	
+	public List<Usuario> recuperarUsuarios() {
+
+		Session sessao = null;
+		List<Usuario> usuarios = null;
+
+		try {
+
+			sessao = getSessionFactory().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+			criteria.select(raizUsuario);
+
+			usuarios = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return usuarios;
+	}
+
 
 //	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
 //		Session session = null;

@@ -578,8 +578,8 @@ public class Principal {
 //
 //		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
 //
-//		for (Usuario usuario : usuarios) {
-//			System.out.println("Usuario por comunidade:" + usuario.getNome());
+//		for (Usuario usuario1 : usuarios) {
+//			System.out.println("Usuario por comunidade:" + usuario1.getNome());
 //		}
 
 		// ----------------------------------------------------------------------
