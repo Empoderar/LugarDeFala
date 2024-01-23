@@ -142,28 +142,4 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 
 	}
 
-	public Moderador consultarModeradorPelaComunidade(Comunidade comunidade) {
-		Session session = null;
-		Moderador moderadorPelaComunidade = null;
-		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
-			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			ParameterExpression<Comunidade> parametroComunidade = construtor.parameter(Comunidade.class, "comunidade");
-			criteria.select(raizModerador)
-					.where(construtor.equal(raizModerador.get("comunidade"), parametroComunidade));
-			moderadorPelaComunidade = session.createQuery(criteria).setParameter(parametroComunidade, comunidade)
-					.getSingleResult();
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return moderadorPelaComunidade;
-	}
 }
