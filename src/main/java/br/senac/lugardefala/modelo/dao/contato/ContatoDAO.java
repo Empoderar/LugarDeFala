@@ -7,6 +7,8 @@ public interface ContatoDAO {
 	void inserirContato(Contato contato);
 
 	void atualizarContato(Contato contato);
+	
+	void deletarContato (Contato contato);
 
 	Contato recuperarContatoDoUsuarioPeloId(Long id);
 }

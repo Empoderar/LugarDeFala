@@ -50,7 +50,7 @@ public class ContatoDAOImpl implements ContatoDAO {
             session.save(contato);
             session.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+        	System.out.println("Erro ao inserir contato: " + e.getMessage());
         }
     }
 
@@ -60,9 +60,20 @@ public class ContatoDAOImpl implements ContatoDAO {
             session.update(contato);
             session.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+        	System.out.println("Erro ao atualizar contato: " + e.getMessage());
         }
     }
+    
+
+	public void deletarContato(Contato contato) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.delete(contato);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Erro ao deletar contato: " + e.getMessage());
+		}
+	}
 
     public Contato recuperarContatoDoUsuarioPeloId(Long id) {
         try (Session session = getSessionFactory().openSession()) {
