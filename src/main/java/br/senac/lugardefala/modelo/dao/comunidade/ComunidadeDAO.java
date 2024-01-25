@@ -9,6 +9,8 @@ public interface ComunidadeDAO {
 	void inserirComunidade(Comunidade comunidade);
 	
 	void deletarComunidade(Comunidade comunidade);
+	
+	void atualizarComunidade(Comunidade comunidade);
 
 	Comunidade recuperarComunidadeModerador(Moderador moderador);
 

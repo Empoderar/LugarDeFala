@@ -39,11 +39,17 @@ public class Comunidade implements Serializable {
 
 	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Moderador> moderadores;
-	
+
 	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Usuario> usuarios;
 
 	public Comunidade() {
+	}
+
+	public Comunidade(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+
 	}
 
 	public Comunidade(long id, String nome, String descricao) {
@@ -62,7 +68,7 @@ public class Comunidade implements Serializable {
 	public List<Moderador> getModeradores() {
 		return moderadores;
 	}
-	
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -80,32 +86,32 @@ public class Comunidade implements Serializable {
 	}
 
 	public boolean inserirListaRelato(Relato relato) {
-        return relatos.add(relato);
-    }
+		return relatos.add(relato);
+	}
 
-    public boolean removerListaRelatoPorId(long id){ 
-        for (Relato relato : relatos) {
+	public boolean removerListaRelatoPorId(long id) {
+		for (Relato relato : relatos) {
 			if (relato.getId().equals(id)) {
 				relatos.remove(relato);
 				return true;
 			}
 		}
 		return false;
-    }
-	
+	}
+
 	public boolean inserirlistaModeradores(Moderador moderador) {
 		return moderadores.add(moderador);
 	}
 
-	public boolean removerListaModeradoresPorNome(long id){ 
-        for (Usuario moderador : moderadores) {
+	public boolean removerListaModeradoresPorNome(long id) {
+		for (Usuario moderador : moderadores) {
 			if (moderador.getId().equals(id)) {
 				moderadores.remove(moderador);
 				return true;
 			}
 		}
 		return false;
-    }
+	}
 
 	public void setNome(String nome) {
 		this.nome = nome;

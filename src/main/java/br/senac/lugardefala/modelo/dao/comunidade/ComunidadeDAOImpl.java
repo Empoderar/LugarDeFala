@@ -52,7 +52,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			session.save(comunidade);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Erro ao inserir comunidade: " + e.getMessage());
 		}
 	}
 
@@ -62,9 +62,20 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			session.delete(comunidade);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Erro ao deletar comunidade: " + e.getMessage());
 		}
 	}
+	
+	public void atualizarComunidade(Comunidade comunidade) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.update(comunidade);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Erro ao atualizar comunidade: " + e.getMessage());
+		}
+	}
+
 
 	public Comunidade recuperarComunidadeModerador(Moderador moderador) {
 		try (Session session = getSessionFactory().openSession()) {
