@@ -17,6 +17,7 @@ import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "moderador")
@@ -24,16 +25,21 @@ public class Moderador extends Usuario {
 
 	private static final long serialVersionUID = 1L;
 
-    @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Relato> relatosModerados;
+	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Relato> relatosModerados;
 
 	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DenunciaModerador> denunciaDeModerador;
 
+	public Moderador() {
+	}
 
-	public Moderador(){}
+	public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
+		super(nome, sobrenome, dataNascimento, apelido, senha);
+	}
 
-	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Conselho conselho, Contato contato, Comunidade comunidade) {
+	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			Conselho conselho, Contato contato, Comunidade comunidade) {
 		super(id, nome, sobrenome, dataNascimento, apelido, senha, conselho, contato, comunidade);
 		relatosModerados = new ArrayList<>();
 		denunciaDeModerador = new ArrayList<>();
@@ -48,30 +54,30 @@ public class Moderador extends Usuario {
 	}
 
 	public boolean inserirRelatosModerados(Relato relato) {
-        return relatosModerados.add(relato);
-    }
+		return relatosModerados.add(relato);
+	}
 
-    public boolean removerRelatoPorId(long id){ 
-        for (Relato relato : relatosModerados) {
+	public boolean removerRelatoPorId(long id) {
+		for (Relato relato : relatosModerados) {
 			if (relato.getId().equals(id)) {
 				relatosModerados.remove(relato);
 				return true;
 			}
 		}
 		return false;
-    }
+	}
 
 	public boolean inserirDenunciaDeModerador(DenunciaModerador denuncia) {
-        return denunciaDeModerador.add(denuncia);
-    }
+		return denunciaDeModerador.add(denuncia);
+	}
 
-    public boolean removerDenunciaDeModerador(long id){ 
-        for (DenunciaModerador denuncia : denunciaDeModerador) {
+	public boolean removerDenunciaDeModerador(long id) {
+		for (DenunciaModerador denuncia : denunciaDeModerador) {
 			if (denuncia.getId().equals(id)) {
 				denunciaDeModerador.remove(denuncia);
 				return true;
 			}
 		}
 		return false;
-    }
+	}
 }

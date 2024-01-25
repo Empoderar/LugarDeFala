@@ -54,7 +54,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			session.save(usuario);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Erro ao inserir usuário: " + e.getMessage());
 		}
 	}
 
@@ -64,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			session.delete(usuario);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Erro ao deletar usuário: " + e.getMessage());
 		}
 	}
 
@@ -74,7 +74,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			session.update(usuario);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
 		}
 	}
 

@@ -57,6 +57,26 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void deletarModerador(Moderador moderador) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.delete(moderador);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Erro ao deletar moderador: " + e.getMessage());
+		}
+	}
+
+	public void atualizarModerador(Moderador moderador) {
+		try (Session session = getSessionFactory().openSession()) {
+			session.beginTransaction();
+			session.update(moderador);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Erro ao atualizar moderador: " + e.getMessage());
+		}
+	}
 
 	public List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade) {
 		Session session = null;
