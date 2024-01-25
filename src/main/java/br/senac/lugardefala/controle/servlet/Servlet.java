@@ -83,18 +83,23 @@ public class Servlet extends HttpServlet {
 				mostrarTelaPerfilDoUsuario(request, response);
 				break;
 
-			case "/tela-inserir-usuario":
-				inserirUsuario(request, response);
-				break;
-
 			case "/tela-perfil-comunidade":
 				mostrarTelaPerfilDaComunidade(request, response);
 				break;
 
 			case "/tela-atualizar-senha":
-				mostrarTelaPerfilDaComunidade(request, response);
+				mostrarTelaAtualizarSenha(request, response);
+				break;
+				
+			case "/inserir-usuario":
+				inserirUsuario(request, response);
 				break;
 
+			case "/inserir-relato":
+				inserirRelato(request, response);
+				break;
+
+				
 			case "/inserir-comunidade":
 				inserirComunidade(request, response);
 				break;
@@ -124,12 +129,11 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/atualizar-comunidade":
-				mostrarTelaAtualizarSenha(request, response);
+				atualizarComunidade(request, response);
 				break;
 
 			default:
-				response.sendError(HttpServletResponse.SC_NOT_FOUND,
-						"Desculpe, não conseguimos encontrar o que você procura :(");
+				mostrarTelaDeErro (request, response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -277,6 +281,22 @@ public class Servlet extends HttpServlet {
 		contatoDao.inserirContato(contatoParaInserir);
 
 	}
+	
+	private void inserirRelato(HttpServletRequest request, HttpServletResponse response) {
+
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		String apelido = request.getParameter("apelido");
+		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
+
+		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
+		moderadorDao.inserirModerador(moderadorParaInserir);
+
+		
+	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -363,7 +383,12 @@ public class Servlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
 		dispatcher.forward(request, response);
+	}
+	private void mostrarTelaDeErro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
