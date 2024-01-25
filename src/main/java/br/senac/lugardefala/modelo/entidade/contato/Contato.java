@@ -32,8 +32,14 @@ public class Contato implements Serializable {
 
 	@OneToOne(mappedBy = "contato", fetch = FetchType.LAZY)
 	private Usuario usuario;
-	
-	public Contato(){}
+
+	public Contato() {
+	}
+
+	public Contato(String telefone, String email) {
+		this.telefone = telefone;
+		this.email = email;
+	}
 
 	public Contato(long id, String telefone, String email) {
 		this.id = id;

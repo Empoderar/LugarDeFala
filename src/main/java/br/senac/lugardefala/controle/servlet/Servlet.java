@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAO;
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAOImpl;
+import br.senac.lugardefala.modelo.dao.contato.ContatoDAO;
+import br.senac.lugardefala.modelo.dao.contato.ContatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAO;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAOImpl;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
@@ -28,11 +31,13 @@ public class Servlet extends HttpServlet {
 	private UsuarioDAO usuarioDao;
 	private ModeradorDAO moderadorDao;
 	private ComunidadeDAO comunidadeDao;
+	private ContatoDAO contatoDao;
 
 	public void init() {
 		usuarioDao = new UsuarioDAOImpl();
 		moderadorDao = new ModeradorDAOImpl();
 		comunidadeDao = new ComunidadeDAOImpl();
+		contatoDao = new ContatoDAOImpl();
 
 	}
 
@@ -70,8 +75,24 @@ public class Servlet extends HttpServlet {
 				mostrarTelaLoginUsuario(request, response);
 				break;
 
-			case "/inserir-usuario":
+			case "/tela-inicial":
+				mostrarTelaInicial(request, response);
+				break;
+
+			case "/tela-perfil-usuario":
+				mostrarTelaPerfilDoUsuario(request, response);
+				break;
+
+			case "/tela-inserir-usuario":
 				inserirUsuario(request, response);
+				break;
+
+			case "/tela-perfil-comunidade":
+				mostrarTelaPerfilDaComunidade(request, response);
+				break;
+
+			case "/tela-atualizar-senha":
+				mostrarTelaPerfilDaComunidade(request, response);
 				break;
 
 			case "/inserir-comunidade":
@@ -103,7 +124,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/atualizar-comunidade":
-				atualizarComunidade(request, response);
+				mostrarTelaAtualizarSenha(request, response);
 				break;
 
 			default:
@@ -124,10 +145,15 @@ public class Servlet extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, dataNascimento, apelido, senha);
 		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
-		response.sendRedirect("perfil");
+
+		Contato contatoParaAtualizar = new Contato(telefone, email);
+		contatoDao.atualizarContato(contatoParaAtualizar);
+		response.sendRedirect("tela-perfil-usuario");
 	}
 
 	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
@@ -138,10 +164,16 @@ public class Servlet extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
 		moderadorDao.atualizarModerador(moderadorParaAtualizar);
-		response.sendRedirect("perfil");
+
+		Contato contatoParaAtualizar = new Contato(telefone, email);
+		contatoDao.atualizarContato(contatoParaAtualizar);
+
+		response.sendRedirect("tela-perfil-usuario");
 	}
 
 	private void atualizarComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -152,7 +184,7 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaAtualizar = new Comunidade(nome, descricao);
 		comunidadeDao.atualizarComunidade(comunidadeParaAtualizar);
-		response.sendRedirect("home");
+		response.sendRedirect("/home");
 	}
 
 	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -163,10 +195,16 @@ public class Servlet extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, dataNascimento, apelido, senha);
 		usuarioDao.deletarUsuario(usuarioParaDeletar);
-		response.sendRedirect("home");
+
+		Contato contatoParaDeletar = new Contato(telefone, email);
+		contatoDao.deletarContato(contatoParaDeletar);
+
+		response.sendRedirect("/home");
 	}
 
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
@@ -177,10 +215,16 @@ public class Servlet extends HttpServlet {
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Moderador moderadorParaDeletar = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
 		moderadorDao.deletarModerador(moderadorParaDeletar);
-		response.sendRedirect("home");
+
+		Contato contatoParaDeletar = new Contato(telefone, email);
+		contatoDao.inserirContato(contatoParaDeletar);
+
+		response.sendRedirect("/home");
 	}
 
 	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -191,35 +235,47 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaDeletar = new Comunidade(nome, descricao);
 		comunidadeDao.deletarComunidade(comunidadeParaDeletar);
-		response.sendRedirect("home");
+		response.sendRedirect("/home");
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Usuario usuarioParaInserir = new Usuario(nome, sobrenome, dataNascimento, apelido, senha);
+		Contato contatoParaInserir = new Contato(telefone, email);
+
+		usuarioParaInserir.setContato(contatoParaInserir);
+		contatoDao.inserirContato(contatoParaInserir);
 		usuarioDao.inserirUsuario(usuarioParaInserir);
-		response.sendRedirect("home");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login-usuario.jsp");
+		dispatcher.forward(request, response);
 	}
 
-	private void inserirModerador(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+	private void inserirModerador(HttpServletRequest request, HttpServletResponse response) {
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
 
 		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
 		moderadorDao.inserirModerador(moderadorParaInserir);
-		response.sendRedirect("home");
+
+		Contato contatoParaInserir = new Contato(telefone, email);
+		contatoDao.inserirContato(contatoParaInserir);
+
 	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -230,7 +286,7 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaInserir = new Comunidade(nome, descricao);
 		comunidadeDao.inserirComunidade(comunidadeParaInserir);
-		response.sendRedirect("home");
+		response.sendRedirect("/home");
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -277,4 +333,37 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+
+	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-inicial.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarTelaAtualizarSenha(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
 }
