@@ -148,25 +148,25 @@ public class Principal {
 		relatoDAO.inserirRelato(relato4);
 
 		// Criação de conselhos
-		Conselho conselho1 = new Conselho(1, "Mantenha-se forte!", 5, 0, LocalDate.now(), null, relato1);
+		Conselho conselho1 = new Conselho(1, "Mantenha-se forte!", 5, 0, LocalDate.now(), null, null, relato1);
 		conselhoDAO.inserirConselho(conselho1);
 
-		Conselho conselho2 = new Conselho(2, "Isso já aconteceu comigo também...", 2, 0, LocalDate.now(), null,
+		Conselho conselho2 = new Conselho(2, "Isso já aconteceu comigo também...", 2, 0, LocalDate.now(), null,null,
 				relato1);
 		conselhoDAO.inserirConselho(conselho2);
 
 		Conselho conselho3 = new Conselho(3, "Você é forte só por compartilhar isso conosco :)", 9, 0, LocalDate.now(),
-				null, relato2);
+				null, null,relato2);
 		conselhoDAO.inserirConselho(conselho3);
 
-		Conselho conselho4 = new Conselho(4, "Quanto drama", 0, 10, LocalDate.now(), null, relato3);
+		Conselho conselho4 = new Conselho(4, "Quanto drama", 0, 10, LocalDate.now(), null, null,relato3);
 		conselhoDAO.inserirConselho(conselho4);
 
-		Conselho conselho5 = new Conselho(3, "Espero que tudo melhore.", 8, 0, LocalDate.now(), null, relato4);
+		Conselho conselho5 = new Conselho(3, "Espero que tudo melhore.", 8, 0, LocalDate.now(), null,null, relato4);
 
 		conselhoDAO.inserirConselho(conselho5);
 
-		Conselho conselho6 = new Conselho(1, "Eu sinto muito por isso.", 7, 0, LocalDate.now(), null, relato4);
+		Conselho conselho6 = new Conselho(1, "Eu sinto muito por isso.", 7, 0, LocalDate.now(), null, null,relato4);
 
 		conselhoDAO.inserirConselho(conselho6);
 

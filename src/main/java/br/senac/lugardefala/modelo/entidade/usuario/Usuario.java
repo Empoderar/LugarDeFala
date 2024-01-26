@@ -87,7 +87,8 @@ public class Usuario implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Usuario(String nome, String sobrenome, String apelido) {
+	public Usuario(Long id, String nome, String sobrenome, String apelido) {
+		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.apelido = apelido;

@@ -81,7 +81,8 @@ public class Relato implements Serializable {
 	public Relato() {
 	}
 	
-	public Relato(String conteudo, LocalDate data, Integer avaliacao,  Status status) {
+	public Relato(Long id, String conteudo, LocalDate data, Integer avaliacao,  Status status) {
+		this.id = id;
 		this.conteudo = conteudo;
 		this.data = data;
 		this.avaliacao = avaliacao;
