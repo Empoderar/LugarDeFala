@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAO;
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAOImpl;
+import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAO;
+import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAOImpl;
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAO;
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAO;
@@ -22,6 +24,7 @@ import br.senac.lugardefala.modelo.dao.relato.RelatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
@@ -37,6 +40,7 @@ public class Servlet extends HttpServlet {
 	private ComunidadeDAO comunidadeDao;
 	private ContatoDAO contatoDao;
 	private RelatoDAO relatoDao;
+	private ConselhoDAO conselhoDao;
 
 	public void init() {
 		usuarioDao = new UsuarioDAOImpl();
@@ -44,6 +48,7 @@ public class Servlet extends HttpServlet {
 		comunidadeDao = new ComunidadeDAOImpl();
 		contatoDao = new ContatoDAOImpl();
 		relatoDao = new RelatoDAOImpl();
+		conselhoDao = new ConselhoDAOImpl();
 
 	}
 
@@ -97,12 +102,20 @@ public class Servlet extends HttpServlet {
 				mostrarTelaAtualizarSenha(request, response);
 				break;
 
+			case "/tela-conselhos":
+				mostrarTelaConselhos(request, response);
+				break;
+
 			case "/inserir-usuario":
 				inserirUsuario(request, response);
 				break;
 
 			case "/inserir-relato":
 				inserirRelato(request, response);
+				break;
+
+			case "/inserir-conselho":
+				inserirConselho(request, response);
 				break;
 
 			case "/inserir-comunidade":
@@ -129,6 +142,10 @@ public class Servlet extends HttpServlet {
 				deletarRelato(request, response);
 				break;
 
+			case "/deletar-conselho":
+				deletarConselho(request, response);
+				break;
+
 			case "/atualizar-usuario":
 				atualizarUsuario(request, response);
 				break;
@@ -145,6 +162,10 @@ public class Servlet extends HttpServlet {
 				atualizarRelato(request, response);
 				break;
 
+			case "/atualizar-conselho":
+				atualizarConselho(request, response);
+				break;
+
 			default:
 				mostrarTelaDeErro(request, response);
 				break;
@@ -157,7 +178,7 @@ public class Servlet extends HttpServlet {
 	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = 1;
+		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -174,12 +195,14 @@ public class Servlet extends HttpServlet {
 		Contato contatoParaAtualizar = new Contato(telefone, email);
 		contatoDao.atualizarContato(contatoParaAtualizar);
 		response.sendRedirect("tela-perfil-usuario");
+
+		usuarioParaAtualizar.setContato(contatoParaAtualizar);
 	}
 
 	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = 1;
+		long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
@@ -196,22 +219,24 @@ public class Servlet extends HttpServlet {
 		Contato contatoParaAtualizar = new Contato(telefone, email);
 		contatoDao.atualizarContato(contatoParaAtualizar);
 
-		response.sendRedirect("tela-perfil-usuario");
+		response.sendRedirect("tela-perfil-moderador");
+
+		moderadorParaAtualizar.setContato(contatoParaAtualizar);
 	}
 
 	private void atualizarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 
-		Comunidade comunidadeParaAtualizar = new Comunidade(nome, descricao);
+		Comunidade comunidadeParaAtualizar = new Comunidade(id, nome, descricao);
 		comunidadeDao.atualizarComunidade(comunidadeParaAtualizar);
-		response.sendRedirect("/home");
+		response.sendRedirect("tela-perfil-comunidade");
 	}
 
 	private void atualizarRelato(HttpServletRequest request, HttpServletResponse response) {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String conteudo = request.getParameter("conteudo");
 		LocalDate data = LocalDate.parse(request.getParameter("data"));
 		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
@@ -220,21 +245,50 @@ public class Servlet extends HttpServlet {
 		String sobrenome = request.getParameter("sobrenome");
 		String apelido = request.getParameter("apelido");
 
-		Relato relatoParaAtualizar = new Relato(conteudo, data, avaliacao, status);
+		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
 		relatoDao.atualizarRelato(relatoParaAtualizar);
 
-		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, apelido);
+		Moderador moderadorParaAtualizar = new Moderador(id, nome, sobrenome, apelido);
 		moderadorDao.atualizarModerador(moderadorParaAtualizar);
 
-		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
+		Usuario usuarioParaAtualizar = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		relatoParaAtualizar.setUsuario(usuarioParaAtualizar);
+		relatoParaAtualizar.setModerador(moderadorParaAtualizar);
+	}
+
+	private void atualizarConselho(HttpServletRequest request, HttpServletResponse response) {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
+		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaAtualizar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
+		conselhoDao.atualizarConselho(conselhoParaAtualizar);
+
+		Usuario usuarioParaAtualizar = new Usuario(id, nome, sobrenome, apelido);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
+		relatoDao.atualizarRelato(relatoParaAtualizar);
+
+		conselhoParaAtualizar.setUsuario(usuarioParaAtualizar);
+		conselhoParaAtualizar.setRelato(relatoParaAtualizar);
 
 	}
 
 	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = 1;
+		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -251,13 +305,15 @@ public class Servlet extends HttpServlet {
 		Contato contatoParaDeletar = new Contato(telefone, email);
 		contatoDao.deletarContato(contatoParaDeletar);
 
+		usuarioParaDeletar.setContato(contatoParaDeletar);
+
 		response.sendRedirect("/home");
 	}
 
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = 1;
+		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -274,22 +330,24 @@ public class Servlet extends HttpServlet {
 		Contato contatoParaDeletar = new Contato(telefone, email);
 		contatoDao.inserirContato(contatoParaDeletar);
 
+		moderadorParaDeletar.setContato(contatoParaDeletar);
+
 		response.sendRedirect("/home");
 	}
 
 	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 
-		Comunidade comunidadeParaDeletar = new Comunidade(nome, descricao);
+		Comunidade comunidadeParaDeletar = new Comunidade(id, nome, descricao);
 		comunidadeDao.deletarComunidade(comunidadeParaDeletar);
 		response.sendRedirect("/home");
 	}
 
 	private void deletarRelato(HttpServletRequest request, HttpServletResponse response) {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String conteudo = request.getParameter("conteudo");
 		LocalDate data = LocalDate.parse(request.getParameter("data"));
 		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
@@ -298,21 +356,50 @@ public class Servlet extends HttpServlet {
 		String sobrenome = request.getParameter("sobrenome");
 		String apelido = request.getParameter("apelido");
 
-		Relato relatoParaDeletar = new Relato(conteudo, data, avaliacao, status);
+		Relato relatoParaDeletar = new Relato(id, conteudo, data, avaliacao, status);
 		relatoDao.deletarRelato(relatoParaDeletar);
 
-		Moderador moderadorParaDeletar = new Moderador(nome, sobrenome, apelido);
+		Moderador moderadorParaDeletar = new Moderador(id, nome, sobrenome, apelido);
 		moderadorDao.deletarModerador(moderadorParaDeletar);
 
-		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, apelido);
+		Usuario usuarioParaDeletar = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.deletarUsuario(usuarioParaDeletar);
+
+		relatoParaDeletar.setUsuario(usuarioParaDeletar);
+		relatoParaDeletar.setModerador(moderadorParaDeletar);
+	}
+
+	private void deletarConselho(HttpServletRequest request, HttpServletResponse response) {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
+		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaDeletar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
+		conselhoDao.deletarConselho(conselhoParaDeletar);
+
+		Usuario usuarioParaDeletar = new Usuario(id, nome, sobrenome, apelido);
+		usuarioDao.deletarUsuario(usuarioParaDeletar);
+
+		Relato relatoParaDeletar = new Relato(id, conteudo, data, avaliacao, status);
+		relatoDao.deletarRelato(relatoParaDeletar);
+
+		conselhoParaDeletar.setUsuario(usuarioParaDeletar);
+		conselhoParaDeletar.setRelato(relatoParaDeletar);
 
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		long id = 1;
+		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -334,9 +421,9 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirModerador(HttpServletRequest request, HttpServletResponse response) {
-
-		long id = 1;
+	private void inserirModerador(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -348,15 +435,18 @@ public class Servlet extends HttpServlet {
 		String descricao = request.getParameter("descricao");
 
 		Moderador moderadorParaInserir = new Moderador(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
-		moderadorDao.inserirModerador(moderadorParaInserir);
-
 		Contato contatoParaInserir = new Contato(telefone, email);
 		contatoDao.inserirContato(contatoParaInserir);
+		moderadorDao.inserirModerador(moderadorParaInserir);
+		moderadorParaInserir.setContato(contatoParaInserir);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login-moderador.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
 	private void inserirRelato(HttpServletRequest request, HttpServletResponse response) {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String conteudo = request.getParameter("conteudo");
 		LocalDate data = LocalDate.parse(request.getParameter("data"));
 		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
@@ -365,26 +455,57 @@ public class Servlet extends HttpServlet {
 		String sobrenome = request.getParameter("sobrenome");
 		String apelido = request.getParameter("apelido");
 
-		Relato relatoParaInserir = new Relato(conteudo, data, avaliacao, status);
+		Relato relatoParaInserir = new Relato(id, conteudo, data, avaliacao, status);
 		relatoDao.inserirRelato(relatoParaInserir);
 
-		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, apelido);
+		Moderador moderadorParaInserir = new Moderador(id, nome, sobrenome, apelido);
 		moderadorDao.inserirModerador(moderadorParaInserir);
 
-		Usuario usuarioParaInserir = new Usuario(nome, sobrenome, apelido);
+		Usuario usuarioParaInserir = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.inserirUsuario(usuarioParaInserir);
 
+		relatoParaInserir.setUsuario(usuarioParaInserir);
+		relatoParaInserir.setModerador(moderadorParaInserir);
 	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-
+		long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 
-		Comunidade comunidadeParaInserir = new Comunidade(nome, descricao);
+		Comunidade comunidadeParaInserir = new Comunidade(id, nome, descricao);
 		comunidadeDao.inserirComunidade(comunidadeParaInserir);
-		response.sendRedirect("/home");
+		response.sendRedirect("tela-perfil-comunidade");
+	}
+
+	private void inserirConselho(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, IOException {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
+		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaInserir = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
+		conselhoDao.inserirConselho(conselhoParaInserir);
+
+		Usuario usuarioParaInserir = new Usuario(id, nome, sobrenome, apelido);
+		usuarioDao.inserirUsuario(usuarioParaInserir);
+
+		Relato relatoParaInserir = new Relato(id, conteudo, data, avaliacao, status);
+		relatoDao.inserirRelato(relatoParaInserir);
+
+		conselhoParaInserir.setUsuario(usuarioParaInserir);
+		conselhoParaInserir.setRelato(relatoParaInserir);
+		
+		response.sendRedirect("tela-conselhos");
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -459,7 +580,7 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaAtualizarSenha(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -470,4 +591,10 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void mostrarTelaConselhos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
+		dispatcher.forward(request, response);
+	}
 }

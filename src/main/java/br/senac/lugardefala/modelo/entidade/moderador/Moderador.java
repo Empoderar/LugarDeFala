@@ -39,8 +39,8 @@ public class Moderador extends Usuario {
 		super(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
 	}
 
-	public Moderador(String nome, String sobrenome, String apelido) {
-		super(nome, sobrenome, apelido);
+	public Moderador(Long id,String nome, String sobrenome, String apelido) {
+		super(id,nome, sobrenome, apelido);
 	}
 
 	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
