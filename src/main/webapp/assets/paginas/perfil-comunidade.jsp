@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade</title>
+<style>
+</style>
 </head>
 <body>
 	<div>
@@ -27,16 +32,18 @@
 				<a href="#">Filtros</a>
 				<form>
 					<input type="checkbox" id="filtroUsuario" name="filtro1"
-						value="usuarios"> <label for="filtro1">Usuários</label> <input
-						type="checkbox" id="filtroRelato" name="filtro2" value="relatos">
-					<label for="filtro2">Relatos</label> <input type="checkbox"
-						id="filtroConselho" name="filtro3" value="conselho"> <label
-						for="filtro3">Conselhos</label> <input type="checkbox"
-						id="filtroData" name="filtro4" value="data"> <label
-						for="filtro4">Data</label> <label for="dataInicio" id="dataInicio">De</label>
-					<input type="date" id="dataInicio" name="DataInicial"> <label
-						for="dataFinal" id="dataFinal">Até</label> <input type="date"
-						id="dataFinal" name="DataFinal">
+						value="usuarios"> 
+							<label for="filtro1">Usuários</label> 
+						<input type="checkbox" id="filtroRelato" name="filtro2" value="relatos">
+							<label for="filtro2">Relatos</label> 
+						<input type="checkbox" id="filtroConselho" name="filtro3" value="conselho">
+							 <label for="filtro3">Conselhos</label> 
+						<input type="checkbox" id="filtroData" name="filtro4" value="data">
+							 <label for="filtro4">Data</label> 
+							 <label for="dataInicio" id="dataInicio">De</label>
+					<input type="date" id="dataInicio" name="DataInicial"> 
+							<label for="dataFinal" id="dataFinal">Até</label> 
+					<input type="date" id="dataFinal" name="DataFinal">
 				</form>
 				<button type="button">Filtrar</button>
 			</div>

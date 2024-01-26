@@ -38,10 +38,10 @@ public class Usuario implements Serializable {
 	@Column(name = "id_usuario")
 	private Long id;
 
-	@Column(name = "nome_Usuario", length = 50, nullable = false, unique = false)
+	@Column(name = "nome_usuario", length = 50, nullable = false, unique = false)
 	private String nome;
 
-	@Column(name = "sobrenome_Usuario", length = 50, nullable = false, unique = false)
+	@Column(name = "sobrenome_usuario", length = 50, nullable = false, unique = false)
 	private String sobrenome;
 
 	@Column(name = "data_nascimento_usuario", nullable = false, unique = false)
@@ -52,6 +52,9 @@ public class Usuario implements Serializable {
 
 	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
 	private String senha;
+
+	@Column(name = "descricao_usuario", length = 500, nullable = false, unique = false)
+	private String descricao;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Conselho> conselhos;
@@ -65,29 +68,39 @@ public class Usuario implements Serializable {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Relato> relatos;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	    @JoinColumn(name = "id_comunidade")
-	    private Comunidade comunidade;
+	@JoinColumn(name = "id_comunidade")
+	private Comunidade comunidade;
 
 	public Usuario() {
 	}
-	
-	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido,String senha) {
+
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao) {
+		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.apelido = apelido;
 		this.senha = senha;
+		this.descricao = descricao;
+	}
+
+	public Usuario(String nome, String sobrenome, String apelido) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.apelido = apelido;
 	}
 
 	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
-			Conselho conselho, Contato contato, Comunidade comunidade) {
+			String descricao, Conselho conselho, Contato contato, Comunidade comunidade) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.apelido = apelido;
 		this.senha = senha;
+		this.descricao = descricao;
 		this.id = id;
 		this.contato = contato;
 		denunciasDeUsuario = new ArrayList<>();
@@ -152,7 +165,7 @@ public class Usuario implements Serializable {
 	public Comunidade getComunidade() {
 		return comunidade;
 	}
-	
+
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
@@ -167,6 +180,10 @@ public class Usuario implements Serializable {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
 	}
 
 	public List<Relato> getRelato() {
@@ -188,12 +205,10 @@ public class Usuario implements Serializable {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
-	
+
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
-	
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
@@ -205,6 +220,10 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public void setSenha(String senha) {
