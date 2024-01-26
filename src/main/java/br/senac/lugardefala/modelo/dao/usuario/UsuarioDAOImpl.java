@@ -13,7 +13,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 
 
@@ -141,118 +146,118 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 
-//	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
-//		Session session = null;
-//		List<Usuario> usuario = null;
-//
-//		try {
-//			session = getSessionFactory().openSession();
-//			session.beginTransaction();
-//			CriteriaBuilder construtor = session.getCriteriaBuilder();
-//			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-//			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-//			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("comunidade"), comunidade));
-//			usuario = session.createQuery(criteria).getResultList();
-//			session.getTransaction().commit();
-//			return usuario;
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//
-//		} finally {
-//			if (session != null) {
-//				session.close();
-//			}
-//		}
-//		return usuario;
-//	}
+	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
+		Session session = null;
+		List<Usuario> usuario = null;
 
-//	public Usuario recuperarUsuarioPorConselho(Conselho conselho) {
-//		Session session = null;
-//		Usuario usuario = null;
-//
-//		try {
-//			session = getSessionFactory().openSession();
-//			session.beginTransaction();
-//			
-//			CriteriaBuilder construtor = session.getCriteriaBuilder();
-//			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-//			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-//			
-//			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.conselhos), conselho));
-//			usuario = session.createQuery(criteria).getSingleResult();
-//			session.getTransaction().commit();
-//			return usuario;
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//
-//		} finally {
-//			if (session != null) {
-//				session.close();
-//			}
-//		}
-//		return usuario;
-//	}
-//
-//	public 	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia) {
-//		Session session = null;
-//		List<Usuario> usuario = null;
-//
-//		try {
-//			session = getSessionFactory().openSession();
-//			session.beginTransaction();
-//			CriteriaBuilder construtor = session.getCriteriaBuilder();
-//
-//			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-//			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-//
-//			criteria.where(construtor.equal(raizUsuario.get(Usuario_.denunciasDeUsuario), denuncia));
-//
-//			usuario = session.createQuery(criteria).getResultList();
-//
-//			session.getTransaction().commit();
-//
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//			return null;
-//		} finally {
-//
-//			if (session != null) {
-//				session.close();
-//			}
-//		}
-//
-//		return usuario;
-//
-//	}
-//
-//	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
-//		Session session = null;
-//		List<Usuario> usuario = null;
-//
-//		try {
-//			session = getSessionFactory().openSession();
-//			session.beginTransaction();
-//			CriteriaBuilder construtor = session.getCriteriaBuilder();
-//			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-//			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-//			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.relatos), relato));
-//			usuario = session.createQuery(criteria).getResultList();
-//			session.getTransaction().commit();
-//			return usuario;
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//
-//		} finally {
-//			if (session != null) {
-//				session.close();
-//			}
-//		}
-//		return usuario;
-//
-//	}
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("comunidade"), comunidade));
+			usuario = session.createQuery(criteria).getResultList();
+			session.getTransaction().commit();
+			return usuario;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuario;
+	}
+
+	public Usuario recuperarUsuarioPorConselho(Conselho conselho) {
+		Session session = null;
+		Usuario usuario = null;
+
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.conselhos), conselho));
+			usuario = session.createQuery(criteria).getSingleResult();
+			session.getTransaction().commit();
+			return usuario;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuario;
+	}
+
+	public 	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia) {
+		Session session = null;
+		List<Usuario> usuario = null;
+
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+			criteria.where(construtor.equal(raizUsuario.get(Usuario_.denunciasDeUsuario), denuncia));
+
+			usuario = session.createQuery(criteria).getResultList();
+
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		} finally {
+
+			if (session != null) {
+				session.close();
+			}
+		}
+
+		return usuario;
+
+	}
+
+	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
+		Session session = null;
+		List<Usuario> usuario = null;
+
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.relatos), relato));
+			usuario = session.createQuery(criteria).getResultList();
+			session.getTransaction().commit();
+			return usuario;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuario;
+
+	}
 
 }
