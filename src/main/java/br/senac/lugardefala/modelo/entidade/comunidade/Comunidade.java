@@ -31,7 +31,7 @@ public class Comunidade implements Serializable {
 	@Column(name = "nome_comunidade", length = 50, nullable = false, unique = true)
 	private String nome;
 
-	@Column(name = "descricao_comunidade", length = 500, nullable = false, unique = true)
+	@Column(name = "descricao_comunidade", length = 500, nullable = false, unique = false)
 	private String descricao;
 
 	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
