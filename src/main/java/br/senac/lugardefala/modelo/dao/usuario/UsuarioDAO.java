@@ -2,6 +2,10 @@ package br.senac.lugardefala.modelo.dao.usuario;
 
 import java.util.List;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 
@@ -18,11 +22,11 @@ public interface UsuarioDAO {
 	List<Usuario> recuperarUsuarios();
 	
 
-//	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
+	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
 
-//	Usuario recuperarUsuarioPorConselho(Conselho conselho);
-//
-//	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
+	List <Usuario> recuperarUsuariosPorConselho(Conselho conselho);
 
-//	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
+	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
+
+	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
 }
