@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
@@ -38,9 +39,6 @@ public class Conselho implements Serializable {
     
     @Column(name = "data_conselho", nullable = false)
     private LocalDate data;
-
-    @Column(name = "resposta_conselho", nullable = true)
-    private Conselho conselhoResposta;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
@@ -49,6 +47,10 @@ public class Conselho implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_relato")
     private Relato relato;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_comunidade")
+    private Comunidade comunidade;
     
     public Conselho(){}
 
@@ -61,15 +63,15 @@ public class Conselho implements Serializable {
 	
 	}
 
-    public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data, Conselho conselhoResposta, Usuario usuario, Relato relato) {
+	public Conselho(long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data, Usuario usuario, Relato relato, Comunidade comunidade) {
 		this.id = id;
 		this.conteudo = conteudo;
 		this.avaliacaoBoa = avaliacaoBoa;
 		this.avaliacaoRuim = avaliacaoRuim;
 		this.data = data;
-		this.conselhoResposta = conselhoResposta;
 		this.usuario = usuario;
 		this.relato = relato;
+		this.comunidade = comunidade;
 	}
 
 	public Long getId() {
@@ -128,13 +130,13 @@ public class Conselho implements Serializable {
 		this.usuario = usuario;
 		
 	}
-
-	public Conselho getConselhoResposta() {
-		return conselhoResposta;
+	
+	public Comunidade getComunidade() {
+		return comunidade;
 	}
-
-	public void setConselhoResposta(Conselho conselhoResposta) {
-		this.conselhoResposta = conselhoResposta;
+	
+	public void setComunidade(Comunidade comunidade) {
+		this.comunidade = comunidade;
 	}
 
 }

@@ -10,6 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,108 +25,133 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Table(name = "comunidade")
 public class Comunidade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_comunidade")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comunidade")
+    private Long id;
 
-	@Column(name = "nome_comunidade", length = 50, nullable = false, unique = true)
-	private String nome;
+    @Column(name = "nome_comunidade", length = 50, nullable = false, unique = true)
+    private String nome;
 
-	@Column(name = "descricao_comunidade", length = 500, nullable = false, unique = false)
-	private String descricao;
+    @Column(name = "descricao_comunidade", length = 500, nullable = false, unique = true)
+    private String descricao;
 
-	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Relato> relatos;
+    @OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Relato> relatos;
 
-	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Moderador> moderadores;
+    @ManyToOne
+    @JoinColumn(name = "id_moderador")
+    private Moderador moderador;
 
-	@OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Usuario> usuarios;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "comunidade_usuario", 
+    		joinColumns = @JoinColumn(name = "id_comunidade"),
+            inverseJoinColumns = @JoinColumn(name = "id_usuario")
+    )
+    private List<Usuario> usuarios;
 
-	public Comunidade() {
-	}
 
-	public Comunidade(String nome, String descricao) {
-		this.nome = nome;
-		this.descricao = descricao;
+    @ManyToMany
+    @JoinTable(
+            name = "comunidade_moderador",
+            joinColumns = @JoinColumn(name = "id_comunidade"),
+            inverseJoinColumns = @JoinColumn(name = "id_moderador")
+    )
+    private List<Moderador> moderadores;
 
-	}
+    public Comunidade() {
+    }
 
-	public Comunidade(long id, String nome, String descricao) {
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		relatos = new ArrayList<>();
-		moderadores = new ArrayList<>();
-		usuarios = new ArrayList<>();
-	}
+    public Comunidade(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Comunidade(long id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        relatos = new ArrayList<>();
+        moderadores = new ArrayList<>();
+        usuarios = new ArrayList<>();
+    }
 
-	public List<Moderador> getModeradores() {
-		return moderadores;
-	}
+    public Comunidade(String nome, String descricao, Moderador moderador) {
+        this(nome, descricao);
+        this.moderador = moderador;
+    }
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public List<Relato> getRelatos() {
-		return relatos;
-	}
+    public List<Moderador> getModeradores() {
+        return moderadores;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public List<Relato> getRelatos() {
+        return relatos;
+    }
 
-	public boolean inserirListaRelato(Relato relato) {
-		return relatos.add(relato);
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public boolean removerListaRelatoPorId(long id) {
-		for (Relato relato : relatos) {
-			if (relato.getId().equals(id)) {
-				relatos.remove(relato);
-				return true;
-			}
-		}
-		return false;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public boolean inserirlistaModeradores(Moderador moderador) {
-		return moderadores.add(moderador);
-	}
+    public boolean inserirListaRelato(Relato relato) {
+        return relatos.add(relato);
+    }
 
-	public boolean removerListaModeradoresPorNome(long id) {
-		for (Usuario moderador : moderadores) {
-			if (moderador.getId().equals(id)) {
-				moderadores.remove(moderador);
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean removerListaRelatoPorId(long id) {
+        for (Relato relato : relatos) {
+            if (relato.getId().equals(id)) {
+                relatos.remove(relato);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+//    public boolean inserirListaModeradores(Moderador moderador) {
+//        return moderadores.add(moderador);
+//    }
+//
+//    public boolean removerListaModeradoresPorId(long id) {
+//        for (Moderador moderador : moderadores) {
+//            if (moderador.getId().equals(id)) {
+//                moderadores.remove(moderador);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Moderador getModerador() {
+        return moderador;
+    }
+
+    public void setModerador(Moderador moderador) {
+        this.moderador = moderador;
+    }
 }

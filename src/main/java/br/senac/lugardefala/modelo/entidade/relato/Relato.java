@@ -57,7 +57,7 @@ public class Relato implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-    name = "relato_categoria", // Nome da tabela de junção
+    name = "relato_categoria", 
     joinColumns = @JoinColumn(name = "id_relato"),
     inverseJoinColumns = @JoinColumn(name = "id_categoria")
 	)
@@ -81,11 +81,11 @@ public class Relato implements Serializable {
 	public Relato() {
 	}
 	
-	public Relato(Long id, String conteudo, LocalDate data, Integer avaliacao,  Status status) {
-		this.id = id;
+	public Relato(String conteudo, LocalDate data, Integer avaliacao, Moderador moderador, Status status) {
 		this.conteudo = conteudo;
 		this.data = data;
 		this.avaliacao = avaliacao;
+		this.moderador = moderador;
 		this.status = status;
 		conselhoRelato = new ArrayList<>();
 		categoriaRelato = new ArrayList<>();
@@ -228,7 +228,6 @@ public class Relato implements Serializable {
 		this.usuario = usuario;
 	}
 }
-
 
 
 

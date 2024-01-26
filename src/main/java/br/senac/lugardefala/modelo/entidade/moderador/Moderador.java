@@ -23,66 +23,63 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Table(name = "moderador")
 public class Moderador extends Usuario {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Relato> relatosModerados;
+    @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Relato> relatosModerados;
 
-	@OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<DenunciaModerador> denunciaDeModerador;
+    @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DenunciaModerador> denunciaDeModerador;
 
-	public Moderador() {
-	}
+    public Moderador() {
+    }
 
-	public Moderador(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
-			String descricao) {
-		super(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
-	}
+    public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
+        super(nome, sobrenome, dataNascimento, apelido, senha);
+        relatosModerados = new ArrayList<>();
+        denunciaDeModerador = new ArrayList<>();
+    }
 
-	public Moderador(Long id,String nome, String sobrenome, String apelido) {
-		super(id,nome, sobrenome, apelido);
-	}
+    public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+            Conselho conselho, Contato contato, Comunidade comunidade) {
+        super(id, nome, sobrenome, dataNascimento, apelido, senha, conselho, contato, comunidade);
+        relatosModerados = new ArrayList<>();
+        denunciaDeModerador = new ArrayList<>();
+    }
 
-	public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
-			String descricao, Conselho conselho, Contato contato, Comunidade comunidade) {
-		super(id, nome, sobrenome, dataNascimento, apelido, senha, descricao, conselho, contato, comunidade);
-		relatosModerados = new ArrayList<>();
-		denunciaDeModerador = new ArrayList<>();
-	}
+    public List<DenunciaModerador> getDenunciaDeModerador() {
+        return denunciaDeModerador;
+    }
 
-	public List<DenunciaModerador> getDenunciaDeModerador() {
-		return denunciaDeModerador;
-	}
+    public List<Relato> getRelatosModerados() {
+        return relatosModerados;
+    }
 
-	public List<Relato> getRelatosModerados() {
-		return relatosModerados;
-	}
+    public boolean inserirRelatosModerados(Relato relato) {
+        return relatosModerados.add(relato);
+    }
 
-	public boolean inserirRelatosModerados(Relato relato) {
-		return relatosModerados.add(relato);
-	}
+    public boolean removerRelatoPorId(long id) {
+        for (Relato relato : relatosModerados) {
+            if (relato.getId().equals(id)) {
+                relatosModerados.remove(relato);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean removerRelatoPorId(long id) {
-		for (Relato relato : relatosModerados) {
-			if (relato.getId().equals(id)) {
-				relatosModerados.remove(relato);
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean inserirDenunciaDeModerador(DenunciaModerador denuncia) {
+        return denunciaDeModerador.add(denuncia);
+    }
 
-	public boolean inserirDenunciaDeModerador(DenunciaModerador denuncia) {
-		return denunciaDeModerador.add(denuncia);
-	}
-
-	public boolean removerDenunciaDeModerador(long id) {
-		for (DenunciaModerador denuncia : denunciaDeModerador) {
-			if (denuncia.getId().equals(id)) {
-				denunciaDeModerador.remove(denuncia);
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean removerDenunciaDeModerador(long id) {
+        for (DenunciaModerador denuncia : denunciaDeModerador) {
+            if (denuncia.getId().equals(id)) {
+                denunciaDeModerador.remove(denuncia);
+                return true;
+            }
+        }
+        return false;
+    }
 }

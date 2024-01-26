@@ -12,7 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
@@ -36,14 +40,20 @@ public class Denuncia implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
+	@ManyToOne
+	@JoinColumn(name = "id_usuario_denunciante")
+	protected Usuario usuarioDenunciante;
+	
+
 	public Denuncia() {
 	}
 
-	public Denuncia(long id, LocalDate data, String motivo, Status status) {
+	public Denuncia(Long id, LocalDate data, String motivo, Status status, Usuario usuarioDenunciante) {
 		this.id = id;
-		this.setData(data);
-		this.setMotivo(motivo);
-		this.setStatus(status);
+		this.data = data;
+		this.motivo = motivo;
+		this.status = status;
+		this.usuarioDenunciante = usuarioDenunciante;
 	}
 
 	public Long getId() {
@@ -74,8 +84,15 @@ public class Denuncia implements Serializable {
 		this.motivo = motivo;
 	}
 
+	public Usuario getUsuarioDenunciante() {
+		return usuarioDenunciante;
+	}
+
+	public void setUsuarioDenunciante(Usuario usuarioDenunciante) {
+		this.usuarioDenunciante= usuarioDenunciante;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 }

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
@@ -20,21 +21,21 @@ public class DenunciaConselho extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_conselho")
-	private Conselho denunciaDeConselho;
+	  @ManyToOne(cascade = CascadeType.ALL)
+	  @JoinColumn(name = "id_conselho_denunciado")
+	  private Conselho conselhoDenunciado;
+	  
+	    public DenunciaConselho(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, 
+	    		Status status, Conselho conselhoDenunciado) {
+	        super(id, data, motivo, status, usuarioDenunciante);
+	        this.conselhoDenunciado = conselhoDenunciado;
+	    }
 
-	public DenunciaConselho(Conselho denunciaDeConselho, long id, LocalDate data, String motivo, Status status) {
-		super(id, data, motivo, status);
-		this.denunciaDeConselho = denunciaDeConselho;
+	    public Conselho getConselhoDenunciado() {
+	        return conselhoDenunciado;
+	    }
+
+	    public void setConselhoDenunciado(Conselho conselhoDenunciado) {
+	        this.conselhoDenunciado = conselhoDenunciado;
+	    }
 	}
-
-	public Conselho getDenunciaDeconselho() {
-		return denunciaDeConselho;
-	}
-
-	public void setDenunciaDeConselho(Conselho denunciaDeConselho) {
-		this.denunciaDeConselho = denunciaDeConselho;
-	}
-
-}
