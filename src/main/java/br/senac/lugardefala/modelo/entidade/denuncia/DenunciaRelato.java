@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.entidade.denuncia;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @Entity
@@ -23,10 +25,18 @@ public class DenunciaRelato extends Denuncia {
 	@JoinColumn(name = "id_relato")
 	private Relato relato;
 
-
-	public DenunciaRelato(Relato relato, long id, LocalDate data, String motivo, Status status) {
-		super(id, data, motivo, status);
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario")
+	private Relato relatoDenunciado;
+	
+	@JoinColumn(name = "id_usuario_denunciante")
+	protected Usuario usuario;
+	
+	public DenunciaRelato(Relato relato, long id, LocalDate data, String motivo, Status status,
+			Usuario usuarioDenunciante,Relato relatoDenunciado) {
+		super(id, data, motivo, status, usuarioDenunciante);
 		this.relato = relato;
+		this.relatoDenunciado = relatoDenunciado;
 	}
 
 	public Relato getDenunciaDeRelato() {

@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.entidade.denuncia;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -23,18 +24,21 @@ public class DenunciaUsuario extends Denuncia {
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario_denunciado")
+    protected Usuario usuarioDenunciado;
 
-	public DenunciaUsuario(Usuario usuario, long id, LocalDate data, String motivo, Status status) {
-		super(id, data, motivo, status);
-		this.usuario = usuario;
-	}
+    public DenunciaUsuario(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, Status status, Usuario usuarioDenunciado) {
+        super(id, data, motivo, status, usuarioDenunciante);
+        this.usuarioDenunciado = usuarioDenunciado;
+    }
 
-	public Usuario getDenunciaDeUsuario() {
-		return usuario;
-	}
+    public Usuario getUsuarioDenunciado() {
+        return usuarioDenunciado;
+    }
 
-	public void setDenunciaDeUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
+    public void setUsuarioDenunciado(Usuario usuarioDenunciado) {
+        this.usuarioDenunciado = usuarioDenunciado;
+    }
 }
