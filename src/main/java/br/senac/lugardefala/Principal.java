@@ -1,3 +1,5 @@
+
+
 package br.senac.lugardefala;
 
 import java.time.LocalDate;
@@ -40,6 +42,9 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class Principal {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
@@ -331,7 +336,27 @@ public class Principal {
 
 		Usuario usuarioPeloNome = usuarioDAO.buscarUsuarioPeloNome("Alice");
 		System.out.println("Buscar usuário pelo nome: " + usuarioPeloNome.getNome());
-
+		
+		// --------------------------------------------------------------------
+		
+//		List <Comunidade> comunidades = comunidadeDAO.recuperarComunidadePorModerador(moderadorAmanda);
+//		for (Comunidade comunidade : comunidades) {
+//			System.out.println("Comunidade pelo Moderador: " + comunidade.getNome());
+//		}
+		
+		// --------------------------------------------------------------------
+		
+//		List <Comunidade> comunidades = comunidadeDAO.recuperarComunidadePorUsuario(usuario3);
+//		for (Comunidade comunidade : comunidades) {
+//			System.out.println("Comunidade pelo Usuario: " + comunidade.getNome());
+//		}
+		
+		// --------------------------------------------------------------------
+		
+		Comunidade comunidade = comunidadeDAO.recuperarComunidadeNome("violencia fisica");
+			System.out.println("Comunidade pelo nome: " + comunidade.getNome());
+		
+		
 		// --------------------------------------------------------------------
 		
 		Moderador moderadorPeloNome = moderadorDAO.consultarModeradorPeloNome("Bruna");
@@ -418,9 +443,9 @@ public class Principal {
 
 		// ----------------------------------------------------------------------
 
-		List<Relato> comunidade = relatoDAO.consultarRelatosPelaComunidade(comunidade1);
+		List<Relato> comunidade10 = relatoDAO.consultarRelatosPelaComunidade(comunidade1);
 
-		for (Relato relato : comunidade) {
+		for (Relato relato : comunidade10) {
 			System.out.println("Relato por comunidade:" + relato.getConteudo());
 		}
 
@@ -447,12 +472,12 @@ public class Principal {
 		
 		// ----------------------------------------------------------------------
 		
-		Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloId(1L);
-		System.out.println("Recuperar categoria pelo nome :" + recuperarCategoriaNome);
+		Categoria categoriaRecuperada = categoriaDAO.recuperarCategoriaPeloId(1L);
+		System.out.println("Recuperar categoria pelo nome :" + categoriaRecuperada.getNome());
 		
 		// ----------------------------------------------------------------------
 		
 		Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
-		System.out.println("Recuperar categoria pelo relato :" + recuperarCategoriaRelato);
+		System.out.println("Recuperar categoria pelo relato :" + recuperarCategoriaRelato.getNome());
 	}
 }
