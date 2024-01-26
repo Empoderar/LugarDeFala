@@ -183,4 +183,6 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         return categoriaRelato;
     }
 
+	
+
 }
