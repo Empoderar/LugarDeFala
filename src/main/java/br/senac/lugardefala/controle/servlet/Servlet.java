@@ -11,18 +11,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAO;
+import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAOImpl;
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAO;
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAOImpl;
 import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAO;
 import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAOImpl;
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAO;
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAOImpl;
+import br.senac.lugardefala.modelo.dao.denuncia.DenunciaDAO;
+import br.senac.lugardefala.modelo.dao.denuncia.DenunciaDAOImpl;
+import br.senac.lugardefala.modelo.dao.denuncia.conselho.DenunciaConselhoDAO;
+import br.senac.lugardefala.modelo.dao.denuncia.conselho.DenunciaConselhoDAOImpl;
+import br.senac.lugardefala.modelo.dao.denuncia.moderador.DenunciaModeradorDAO;
+import br.senac.lugardefala.modelo.dao.denuncia.moderador.DenunciaModeradorDAOImpl;
+import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAO;
+import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAOImpl;
+import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAO;
+import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAOImpl;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAO;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAOImpl;
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAO;
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
@@ -41,6 +54,12 @@ public class Servlet extends HttpServlet {
 	private ContatoDAO contatoDao;
 	private RelatoDAO relatoDao;
 	private ConselhoDAO conselhoDao;
+	private DenunciaDAO denunciaDao;
+	private DenunciaConselhoDAO denunciaConselhoDao;
+	private DenunciaModeradorDAO denunciaModeradorDao;
+	private DenunciaRelatoDAO denunciaRelatoDao;
+	private DenunciaUsuarioDAO denunciaUsuarioDao;
+	private CategoriaDAO categoriaDao;
 
 	public void init() {
 		usuarioDao = new UsuarioDAOImpl();
@@ -49,6 +68,12 @@ public class Servlet extends HttpServlet {
 		contatoDao = new ContatoDAOImpl();
 		relatoDao = new RelatoDAOImpl();
 		conselhoDao = new ConselhoDAOImpl();
+		denunciaDao = new DenunciaDAOImpl();
+		denunciaConselhoDao = new DenunciaConselhoDAOImpl();
+		denunciaModeradorDao = new DenunciaModeradorDAOImpl();
+		denunciaRelatoDao = new DenunciaRelatoDAOImpl();
+		denunciaUsuarioDao = new DenunciaUsuarioDAOImpl();
+		categoriaDao = new CategoriaDAOImpl();
 
 	}
 
@@ -66,44 +91,48 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
-			case "/tela-cadastro-usuario":
+			case "/cadastro-usuario":
 				mostrarTelaCadastroUsuario(request, response);
 				break;
 
-			case "/tela-cadastro-moderador":
+			case "/cadastro-moderador":
 				mostrarTelaCadastroModerador(request, response);
 				break;
 
-			case "/tela-cadastro-comunidade":
+			case "/cadastro-comunidade":
 				mostrarTelaCadastroComunidade(request, response);
 				break;
 
-			case "/tela-formulario-moderador":
+			case "/formulario-moderador":
 				mostrarTelaFormularioModerador(request, response);
 				break;
 
-			case "/tela-login-usuario":
+			case "/login-usuario":
 				mostrarTelaLoginUsuario(request, response);
 				break;
 
-			case "/tela-inicial":
-				mostrarTelaInicial(request, response);
+			case "/home":
+				mostrarHome(request, response);
 				break;
 
-			case "/tela-perfil-usuario":
+			case "/perfil-usuario":
 				mostrarTelaPerfilDoUsuario(request, response);
 				break;
 
-			case "/tela-perfil-comunidade":
+			case "/perfil-comunidade":
 				mostrarTelaPerfilDaComunidade(request, response);
 				break;
 
-			case "/tela-atualizar-senha":
+			case "/atualizar-senha":
 				mostrarTelaAtualizarSenha(request, response);
 				break;
 
 			case "/tela-conselhos":
 				mostrarTelaConselhos(request, response);
+				break;
+
+			case "/cadastro-categoria":
+				mostrarTelaCadastroCategoria(request, response);
 				break;
 
 			case "/inserir-usuario":
@@ -120,6 +149,10 @@ public class Servlet extends HttpServlet {
 
 			case "/inserir-comunidade":
 				inserirComunidade(request, response);
+				break;
+
+			case "/inserir-categoria":
+				inserirCategoria(request, response);
 				break;
 
 			case "/inserir-moderador":
@@ -194,7 +227,7 @@ public class Servlet extends HttpServlet {
 
 		Contato contatoParaAtualizar = new Contato(telefone, email);
 		contatoDao.atualizarContato(contatoParaAtualizar);
-		response.sendRedirect("tela-perfil-usuario");
+		response.sendRedirect("perfil-usuario.jsp");
 
 		usuarioParaAtualizar.setContato(contatoParaAtualizar);
 	}
@@ -219,7 +252,7 @@ public class Servlet extends HttpServlet {
 		Contato contatoParaAtualizar = new Contato(telefone, email);
 		contatoDao.atualizarContato(contatoParaAtualizar);
 
-		response.sendRedirect("tela-perfil-moderador");
+		response.sendRedirect("perfil-moderador.jsp");
 
 		moderadorParaAtualizar.setContato(contatoParaAtualizar);
 	}
@@ -232,7 +265,7 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaAtualizar = new Comunidade(id, nome, descricao);
 		comunidadeDao.atualizarComunidade(comunidadeParaAtualizar);
-		response.sendRedirect("tela-perfil-comunidade");
+		response.sendRedirect("perfil-comunidade.jsp");
 	}
 
 	private void atualizarRelato(HttpServletRequest request, HttpServletResponse response) {
@@ -307,7 +340,7 @@ public class Servlet extends HttpServlet {
 
 		usuarioParaDeletar.setContato(contatoParaDeletar);
 
-		response.sendRedirect("/home");
+		response.sendRedirect("/home.jsp");
 	}
 
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
@@ -332,7 +365,7 @@ public class Servlet extends HttpServlet {
 
 		moderadorParaDeletar.setContato(contatoParaDeletar);
 
-		response.sendRedirect("/home");
+		response.sendRedirect("/home.jsp");
 	}
 
 	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -343,7 +376,7 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaDeletar = new Comunidade(id, nome, descricao);
 		comunidadeDao.deletarComunidade(comunidadeParaDeletar);
-		response.sendRedirect("/home");
+		response.sendRedirect("/home.jsp");
 	}
 
 	private void deletarRelato(HttpServletRequest request, HttpServletResponse response) {
@@ -464,8 +497,24 @@ public class Servlet extends HttpServlet {
 		Usuario usuarioParaInserir = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.inserirUsuario(usuarioParaInserir);
 
+//		List <Categoria> categoriaParaInserir = new ArrayList <Categoria> ();
+//		categoriaDao.inserirCategoria(categoriaParaInserir);
+
 		relatoParaInserir.setUsuario(usuarioParaInserir);
 		relatoParaInserir.setModerador(moderadorParaInserir);
+//		relatoParaInserir.setCategoriaRelato((List<Categoria>) categoriaParaInserir);;
+	}
+
+	private void inserirCategoria(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		String nome = request.getParameter("nome");
+
+		Categoria categoria = new Categoria(nome);
+		categoriaDao.inserirCategoria(categoria);
+
+		response.sendRedirect("cadastro-relato.jsp");
+
 	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -476,10 +525,10 @@ public class Servlet extends HttpServlet {
 
 		Comunidade comunidadeParaInserir = new Comunidade(id, nome, descricao);
 		comunidadeDao.inserirComunidade(comunidadeParaInserir);
-		response.sendRedirect("tela-perfil-comunidade");
+		response.sendRedirect("perfil-comunidade.jsp");
 	}
 
-	private void inserirConselho(HttpServletRequest request, HttpServletResponse response) 
+	private void inserirConselho(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
 		long id = Long.parseLong(request.getParameter("id"));
@@ -504,7 +553,7 @@ public class Servlet extends HttpServlet {
 
 		conselhoParaInserir.setUsuario(usuarioParaInserir);
 		conselhoParaInserir.setRelato(relatoParaInserir);
-		
+
 		response.sendRedirect("tela-conselhos");
 	}
 
@@ -553,11 +602,11 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarHome(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-inicial.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -595,6 +644,12 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
+		dispatcher.forward(request, response);
+	}
+	private void mostrarTelaCadastroCategoria(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
 		dispatcher.forward(request, response);
 	}
 }

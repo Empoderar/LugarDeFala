@@ -12,11 +12,34 @@
 <body>
 	<div>
 		<h1>Cadastrar Comunidade</h1>
-		<input type="text" placeholder="Nome da Comunidade" required
-			maxlength="50"> <br> <br> <input type="text"
-			placeholder="Descrição da Comunidade" required maxlength="500">
-		<br> <br>
-		<button>enviar</button>
+		<label for="cor">Cor</label> <input type="color" name="cor" id="cor">
+		<label for="nomeComunidade">Nome</label> <input type="text"
+			id="nomeComunidade" name="nome" required maxlength="50">
+		<label for="descricao">Descrição</label> <input type="text"
+			id="descricao" name="descricao" required maxlength="500">
+		<button>Salvar</button>
+	</div>
+	<div>
+		<footer>
+			<div>
+				<p>Lugar de Fala</p>
+				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+			</div>
+			<div>
+				<p>Atendimento</p>
+				<a href="#">Contato</a> <a href="#">Termos de uso</a>
+			</div>
+			<div>
+				<p>Redes Sociais</p>
+				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+			</div>
+			<div>
+				<p>Lugar de Fala</p>
+			</div>
+			<div>
+				<p>2023 Todos os direitos reservados</p>
+			</div>
+		</footer>
 	</div>
 </body>
 </html>
