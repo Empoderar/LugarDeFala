@@ -116,72 +116,46 @@ public class CategoriaDAOImpl implements CategoriaDAO {
    
 
 	public Categoria recuperarCategoriaPeloId(Long id) {
-		Categoria categoriaRelatoNome = null;
-    	Session session = null;
-    	  
-    	try {
-        	session = getSessionFactory().openSession();
-            session.beginTransaction();
+		try (Session session = getSessionFactory().openSession()) {
+	        session.beginTransaction();
             
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-            Root<Categoria> raizCategoria = criteria.from(Categoria.class);
-            
-            criteria.select(raizCategoria).where(construtor.equal(raizCategoria.get(Categoria_.id), id));
-            	
-            ParameterExpression<Categoria> recuperarCategoriaRelato = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizCategoria.get(Categoria_.id), recuperarCategoriaRelato));
-            
-			categoriaRelatoNome = session.createQuery(criteria).getSingleResult();
-            
-            session.getTransaction().commit();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
+	        CriteriaBuilder builder = session.getCriteriaBuilder();
+	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
+	        Root<Categoria> root = criteria.from(Categoria.class);
 
-    	}
-        return categoriaRelatoNome;
-    }
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.id), id));
+
+	        Categoria categoria = session.createQuery(criteria).uniqueResult();
+
+	        session.getTransaction().commit();
+
+	        return categoria;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 
 	public Categoria recuperarCategoriaRelato(Relato relato) {
-		Categoria categoriaRelato = null;
-    	Session session = null;
-    	  
-    	try {
-        	session = getSessionFactory().openSession();
-            session.beginTransaction();
+		 try (Session session = getSessionFactory().openSession()) {
+		        session.beginTransaction();
             
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-            Root<Categoria> raizCategoria = criteria.from(Categoria.class);
-            
-            criteria.select(raizCategoria).where(construtor.equal(raizCategoria.get(Categoria_.relatos), relato));
-            	
-            ParameterExpression<Categoria> recuperarCategoriaRelato = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizCategoria.get(Categoria_.relatos), recuperarCategoriaRelato));
-            
-			categoriaRelato = session.createQuery(criteria).getSingleResult();
-			
-            session.getTransaction().commit();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
+		        CriteriaBuilder builder = session.getCriteriaBuilder();
+		        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
+		        Root<Categoria> root = criteria.from(Categoria.class);
 
-    	}
-        return categoriaRelato;
-    }
+		        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.relatos)));
+
+		        Categoria categoria = session.createQuery(criteria).uniqueResult();
+
+		        session.getTransaction().commit();
+
+		        return categoria;
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        return null;
+		    }
+		}
 
 	
 

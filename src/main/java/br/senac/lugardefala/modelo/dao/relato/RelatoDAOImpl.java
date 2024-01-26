@@ -13,6 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.relato.Relato_;
@@ -201,40 +202,40 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-//    public List <Relato> consultarRelatosPelaCategoria(Categoria categoria) {
-//    	
-//    	List<Relato> relatosCategoria = null;
-//    	Session session = null;
-//    	  
-//    	try {
-//        	session = getSessionFactory().openSession();
-//            session.beginTransaction();
-//            
-//            CriteriaBuilder construtor = session.getCriteriaBuilder();
-//            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
-//            Root<Relato> raizRelato = criteria.from(Relato.class);
-//            
-//            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
-//            
-//            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-//			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
-//            
-//            relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
-//            
-//            session.getTransaction().commit();
-//            
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    	finally {
-//    		if (session != null) {
-//    			session.close();
-//    			}
-//
-//    	}
-//        return relatosCategoria;
-//    }
+    public List <Relato> consultarRelatosPelaCategoria(Categoria categoria) {
+    	
+    	List<Relato> relatosCategoria = null;
+    	Session session = null;
+    	  
+    	try {
+        	session = getSessionFactory().openSession();
+            session.beginTransaction();
+            
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
+            Root<Relato> raizRelato = criteria.from(Relato.class);
+            
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
+            
+            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
+			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
+            
+            relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
+            
+            session.getTransaction().commit();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    	finally {
+    		if (session != null) {
+    			session.close();
+    			}
+
+    	}
+        return relatosCategoria;
+    }
     
     public Relato consultarRelatoPorId(Long id) {
 

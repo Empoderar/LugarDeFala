@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
@@ -21,7 +22,7 @@ public interface RelatoDAO {
 	
 	List <Relato> consultarRelatosPelaComunidade(Comunidade comunidade);
 	
-//	List <Relato> consultarRelatosPelaCategoria(Categoria categoria);
+	List <Relato> consultarRelatosPelaCategoria(Categoria categoria);
 	
 	Relato consultarRelatoPorId(Long id);
 }

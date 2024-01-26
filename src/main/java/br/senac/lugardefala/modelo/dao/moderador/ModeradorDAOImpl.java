@@ -1,9 +1,11 @@
 package br.senac.lugardefala.modelo.dao.moderador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
@@ -79,35 +81,27 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	}
 
 	public List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade) {
-		Session session = null;
-		List<Moderador> moderador = null;
+		 try (Session session = getSessionFactory().openSession()) {
+		        session.beginTransaction();
+		        
+		        CriteriaBuilder construtor = session.getCriteriaBuilder();
+		        CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+		        Root<Moderador> raizModerador = criteria.from(Moderador.class);
+		        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
+		        
+		        List<Moderador> moderadores = session.createQuery(criteria).getResultList();
 
-		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
-			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			criteria.select(raizModerador)
-					.where(construtor.equal(raizModerador.get(Moderador_.comunidade), comunidade));
-			moderador = session.createQuery(criteria).getResultList();
-			session.getTransaction().commit();
-			return moderador;
+		        session.getTransaction().commit();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return moderador;
+		        return moderadores;
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        return null;
+		    }
 	}
-
 	public List<Moderador> consultarModeradoresPeloId(Long id) {
 		Session session = null;
-		List<Moderador> moderador = null;
+		List<Moderador> moderador = new ArrayList<>();
 
 		try {
 			session = getSessionFactory().openSession();
