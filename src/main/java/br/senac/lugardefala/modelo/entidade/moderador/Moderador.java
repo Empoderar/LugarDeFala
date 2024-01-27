@@ -34,18 +34,22 @@ public class Moderador extends Usuario {
     public Moderador() {
     }
 
-    public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
-        super(nome, sobrenome, dataNascimento, apelido, senha);
+    public Moderador(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+        super(id,nome, sobrenome, dataNascimento, apelido, senha, descricao);
         relatosModerados = new ArrayList<>();
         denunciaDeModerador = new ArrayList<>();
     }
 
-    public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+    public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
             Conselho conselho, Contato contato, Comunidade comunidade) {
-        super(id, nome, sobrenome, dataNascimento, apelido, senha, conselho, contato, comunidade);
+        super(id, nome, sobrenome, dataNascimento, apelido, senha,descricao, conselho, contato, comunidade);
         relatosModerados = new ArrayList<>();
         denunciaDeModerador = new ArrayList<>();
     }
+    
+    public Moderador(Long id,String nome, String sobrenome, String apelido) {
+		super(id,nome, sobrenome, apelido);
+	}
 
     public List<DenunciaModerador> getDenunciaDeModerador() {
         return denunciaDeModerador;

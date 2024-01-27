@@ -81,17 +81,17 @@ public class Relato implements Serializable {
 	public Relato() {
 	}
 	
-	public Relato(String conteudo, LocalDate data, Integer avaliacao, Moderador moderador, Status status) {
+	public Relato(Long id, String conteudo, LocalDate data, Integer avaliacao, Status status) {
+		this.id = id;
 		this.conteudo = conteudo;
 		this.data = data;
 		this.avaliacao = avaliacao;
-		this.moderador = moderador;
 		this.status = status;
 		conselhoRelato = new ArrayList<>();
 		categoriaRelato = new ArrayList<>();
 		denunciaRelato = new ArrayList<>();
 	}
-	
+
 
 	public Relato(Long id, String conteudo, LocalDate data, Usuario usuario, Integer avaliacao, Moderador moderador, Status status, Comunidade comunidade) {
 		this.id = id;
@@ -226,6 +226,10 @@ public class Relato implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public void setCategoriaRelato(List<Categoria> categoriaRelato) {
+	    this.categoriaRelato = categoriaRelato;
 	}
 }
 

@@ -3,6 +3,8 @@ package br.senac.lugardefala.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -281,10 +283,10 @@ public class Servlet extends HttpServlet {
 		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
 		relatoDao.atualizarRelato(relatoParaAtualizar);
 
-		Moderador moderadorParaAtualizar = new Moderador(id, nome, sobrenome, apelido);
+		Moderador moderadorParaAtualizar = new Moderador(id,nome, sobrenome,  apelido);
 		moderadorDao.atualizarModerador(moderadorParaAtualizar);
 
-		Usuario usuarioParaAtualizar = new Usuario(id, nome, sobrenome, apelido);
+		Usuario usuarioParaAtualizar = new Usuario(id,nome, sobrenome, apelido);
 		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
 
 		relatoParaAtualizar.setUsuario(usuarioParaAtualizar);
@@ -497,12 +499,14 @@ public class Servlet extends HttpServlet {
 		Usuario usuarioParaInserir = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.inserirUsuario(usuarioParaInserir);
 
-//		List <Categoria> categoriaParaInserir = new ArrayList <Categoria> ();
-//		categoriaDao.inserirCategoria(categoriaParaInserir);
+		List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
+		for (Categoria categoria : categoriasParaInserir) {
+		    categoriaDao.inserirCategoria(categoria);
+		}
 
 		relatoParaInserir.setUsuario(usuarioParaInserir);
 		relatoParaInserir.setModerador(moderadorParaInserir);
-//		relatoParaInserir.setCategoriaRelato((List<Categoria>) categoriaParaInserir);;
+		relatoParaInserir.setCategoriaRelato((List<Categoria>) categoriasParaInserir);;
 	}
 
 	private void inserirCategoria(HttpServletRequest request, HttpServletResponse response)
