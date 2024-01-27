@@ -39,10 +39,10 @@ public class Usuario implements Serializable {
     @Column(name = "id_usuario")
     private Long id;
 
-    @Column(name = "nome_Usuario", length = 50, nullable = false, unique = false)
+    @Column(name = "nome_usuario", length = 50, nullable = false, unique = false)
     private String nome;
 
-    @Column(name = "sobrenome_Usuario", length = 50, nullable = false, unique = false)
+    @Column(name = "sobrenome_usuario", length = 50, nullable = false, unique = false)
     private String sobrenome;
 
     @Column(name = "data_nascimento_usuario", nullable = false, unique = false)
@@ -53,6 +53,9 @@ public class Usuario implements Serializable {
 
     @Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
     private String senha;
+    
+    @Column(name = "descricao_usuario", length = 500, nullable = false, unique = false)
+	private String descricao;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conselho> conselhos;
@@ -81,25 +84,44 @@ public class Usuario implements Serializable {
         comunidades = new ArrayList<>();
     }
 
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
-        this.nome = nome;
+    public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+       this.id = id;
+    	this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.apelido = apelido;
         this.senha = senha;
+        this.descricao = descricao;
         denunciasDeUsuario = new ArrayList<>();
         relatos = new ArrayList<>();
         conselhos = new ArrayList<>();
         comunidades = new ArrayList<>();
     }
 
-    public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+    public Usuario(Long id,String nome, String sobrenome, String apelido) {
+    	this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.apelido = apelido;
+	}
+    
+    
+    public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
             Conselho conselho, Contato contato, Comunidade comunidade) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.apelido = apelido;
         this.senha = senha;
+        this.descricao = descricao;
         this.id = id;
         this.contato = contato;
         denunciasDeUsuario = new ArrayList<>();
