@@ -107,22 +107,22 @@ public class Principal {
 		comunidadeDAO.inserirComunidade(comunidade5);
 
 		// Criação de categorias
-		Categoria categoria = new Categoria(null, "Sororidade");
+		Categoria categoria = new Categoria("Sororidade");
 		categoriaDAO.inserirCategoria(categoria);
 
-		Categoria categoria2 = new Categoria(null, "Ajude-me");
+		Categoria categoria2 = new Categoria("Ajude-me");
 		categoriaDAO.inserirCategoria(categoria2);
 
-		Categoria categoria3 = new Categoria(null, "Desabafo");
+		Categoria categoria3 = new Categoria("Desabafo");
 		categoriaDAO.inserirCategoria(categoria3);
 
-		Categoria categoria4 = new Categoria(null, "Aconselhamento Jurídico");
+		Categoria categoria4 = new Categoria("Aconselhamento Jurídico");
 		categoriaDAO.inserirCategoria(categoria4);
 
-		Categoria categoria5 = new Categoria(null, "Acolhimento Temporário");
+		Categoria categoria5 = new Categoria("Acolhimento Temporário");
 		categoriaDAO.inserirCategoria(categoria5);
 
-		Categoria categoria6 = new Categoria(null, "Assistência Social");
+		Categoria categoria6 = new Categoria("Assistência Social");
 		categoriaDAO.inserirCategoria(categoria6);
 
 		// Criação de relatos
@@ -175,27 +175,27 @@ public class Principal {
 		conselhoDAO.inserirConselho(conselho6);
 
 		// Criação de usuários
-		Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.tourei1ro", "whey",
+		Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.tourei1ro", "whey", "Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
 				conselho1, contato2, comunidade1);
 		usuarioDAO.inserirUsuario(usuario2);
 
 		Usuario usuario3 = new Usuario(null, "Maria Fernanda", "Rengel", LocalDate.of(1995, 3, 22), "maria.fernanda",
-				"senha123", conselho1, contato3, comunidade1);
+				"senha123","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato3, comunidade1);
 		usuarioDAO.inserirUsuario(usuario3);
 
-		Usuario usuario4 = new Usuario(null, "Lucas", "Loes", LocalDate.of(1990, 7, 15), "lucas.loes", "senha456",
+		Usuario usuario4 = new Usuario(null, "Lucas", "Loes", LocalDate.of(1990, 7, 15), "lucas.loes", "senha456","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
 				conselho1, contato4, comunidade1);
 		usuarioDAO.inserirUsuario(usuario4);
 
 		Usuario usuario5 = new Usuario(null, "Aquila", "Hapuque", LocalDate.of(1988, 5, 10), "aquila.hapuque",
-				"senha789", conselho1, contato5, comunidade1);
+				"senha789","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",conselho1, contato5, comunidade1);
 		usuarioDAO.inserirUsuario(usuario5);
 
 		Usuario usuario6 = new Usuario(null, "Gabriela", "Adara", LocalDate.of(1998, 12, 3), "gabriela.adara",
-				"senha101", conselho1, contato6, comunidade1);
+				"senha101","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato6, comunidade1);
 		usuarioDAO.inserirUsuario(usuario6);
 
-		Usuario usuario7 = new Usuario(null, "Ana", "de Abreu", LocalDate.of(1992, 6, 7), "ana.abreu", "senha111",
+		Usuario usuario7 = new Usuario(null, "Ana", "de Abreu", LocalDate.of(1992, 6, 7), "ana.abreu", "senha111","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
 				conselho1, contato7, comunidade1);
 		usuarioDAO.inserirUsuario(usuario7);
 
@@ -208,7 +208,7 @@ public class Principal {
 		contatoDAO.inserirContato(contatoModeradorAmanda);
 
 		Moderador moderadorAmanda = new Moderador(1, "Amanda", "Lucs", LocalDate.of(2002, 11, 27), "amanda.lsc",
-				"senhaModerador", conselho1, contatoModeradorAmanda, comunidade2);
+				"senhaModerador", "“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorAmanda, comunidade2);
 		moderadorDAO.inserirModerador(moderadorAmanda);
 
 		Contato contatoModeradorBrenda = new Contato();
@@ -216,7 +216,7 @@ public class Principal {
 		contatoModeradorBrenda.setEmail("brenda.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorBrenda);
 		Moderador moderadorBrenda = new Moderador(2, "Brenda", "Monteiro", LocalDate.of(2000, 8, 30), "brenda.monteiro",
-				"senhaModerador2", conselho1, contatoModeradorBrenda, comunidade1);
+				"senhaModerador2","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi",conselho1, contatoModeradorBrenda, comunidade1);
 		moderadorDAO.inserirModerador(moderadorBrenda);
 
 		Contato contatoModeradorLuciene = new Contato();
@@ -224,7 +224,7 @@ public class Principal {
 		contatoModeradorLuciene.setEmail("luciene.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorLuciene);
 		Moderador moderadorLuciene = new Moderador(3, "Luciene", "Queiroz", LocalDate.of(1975, 5, 31),
-				"luciene.queiroz", "senhaModerador3", conselho1, contatoModeradorLuciene, comunidade3);
+				"luciene.queiroz", "senhaModerador3","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorLuciene, comunidade3);
 		moderadorDAO.inserirModerador(moderadorLuciene);
 
 		Contato contatoModeradorMariana = new Contato();
@@ -232,7 +232,7 @@ public class Principal {
 		contatoModeradorMariana.setEmail("mariana.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorMariana);
 		Moderador moderadorMariana = new Moderador(4, "Mariana", "Abreu", LocalDate.of(2001, 5, 20), "mariana.abreu",
-				"senhaModerador4", conselho1, contatoModeradorMariana, comunidade4);
+				"senhaModerador4","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorMariana, comunidade4);
 		moderadorDAO.inserirModerador(moderadorMariana);
 
 		Contato contatoModeradorGiovanna = new Contato();
@@ -240,7 +240,7 @@ public class Principal {
 		contatoModeradorGiovanna.setEmail("giovanna.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorGiovanna);
 		Moderador moderadorGiovanna = new Moderador(5, "Giovanna", "Soriano", LocalDate.of(1991, 12, 27),
-				"giovanna.soriano", "senhaModerador5", conselho1, contatoModeradorGiovanna, comunidade5);
+				"giovanna.soriano", "senhaModerador5","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorGiovanna, comunidade5);
 		moderadorDAO.inserirModerador(moderadorGiovanna);
 
 		Contato contatoModeradorMarcella = new Contato();
@@ -248,7 +248,7 @@ public class Principal {
 		contatoModeradorMarcella.setEmail("marcella.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorMarcella);
 		Moderador moderadorMarcella = new Moderador(6, "Marcella", "Barboza", LocalDate.of(2002, 3, 21),
-				"marcella.barboza", "senhaModerador6", conselho1, contatoModeradorMarcella, comunidade2);
+				"marcella.barboza", "senhaModerador6", "“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorMarcella, comunidade2);
 		moderadorDAO.inserirModerador(moderadorMarcella);
 
 		Contato contatoModeradorBruna = new Contato();
@@ -256,7 +256,7 @@ public class Principal {
 		contatoModeradorBruna.setEmail("bruna.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorBruna);
 		Moderador moderadorBruna = new Moderador(7, "Bruna", "Caria", LocalDate.of(1987, 11, 7), "bruna.caria",
-				"senhaModerador7", conselho1, contatoModeradorBruna, comunidade3);
+				"senhaModerador7","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorBruna, comunidade3);
 		moderadorDAO.inserirModerador(moderadorBruna);
 
 		Contato contatoModeradorAlice = new Contato();
@@ -264,7 +264,7 @@ public class Principal {
 		contatoModeradorAlice.setEmail("alice.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorAlice);
 		Moderador moderadorAlice = new Moderador(8, "Alice", "Rocha", LocalDate.of(1992, 4, 7), "alice.rocha",
-				"senhaModerador8", conselho1, contatoModeradorAlice, comunidade1);
+				"senhaModerador8","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorAlice, comunidade1);
 		moderadorDAO.inserirModerador(moderadorAlice);
 
 		// Criação de denúncias
