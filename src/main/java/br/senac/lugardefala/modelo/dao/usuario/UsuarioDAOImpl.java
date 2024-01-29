@@ -257,4 +257,27 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
+	public Usuario recuperarUsuarioPeloId(Long id) {
+		Session session = null;
+		Usuario usuariosPeloId = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
+			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuariosPeloId;
+	}
+
 }
