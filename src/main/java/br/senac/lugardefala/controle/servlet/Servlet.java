@@ -136,6 +136,10 @@ public class Servlet extends HttpServlet {
 			case "/cadastro-categoria":
 				mostrarTelaCadastroCategoria(request, response);
 				break;
+				
+			case "/tela-denuncias":
+				mostrarTelaDenuncias(request, response);
+				break;
 
 			case "/inserir-usuario":
 				inserirUsuario(request, response);
@@ -159,6 +163,10 @@ public class Servlet extends HttpServlet {
 
 			case "/inserir-moderador":
 				inserirModerador(request, response);
+				break;
+				
+			case "/inserir-denuncia-de-conselho":
+				inserirDenunciaConselho (request, response);
 				break;
 
 			case "/deletar-usuario":
@@ -560,6 +568,28 @@ public class Servlet extends HttpServlet {
 
 		response.sendRedirect("tela-conselhos");
 	}
+	
+	private void inserirDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		Usuario usuario1 = new Usuario(0l, "Joao", "Silva", "joao.silva");
+		usuarioDao.inserirUsuario(usuario1);
+		
+		Conselho conselho1 = new Conselho(0l, "lalalaala", 05, 02, LocalDate.of(1992, 6, 7));
+		conselhoDao.inserirConselho(conselho1);
+		
+		long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuarioDenunciante = usuarioDao.recuperarUsuarioPeloId((Long.parseLong(request.getParameter("usuario"))));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String motivo = request.getParameter("motivo");
+		Conselho conselhoDenunciado = conselhoDao.recuperarConselhoPeloId((Long.parseLong(request.getParameter("conselho"))));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaInserir = new Conselho(id, usuario1, data, motivo, conselho1, status);
+		conselhoDao.inserirConselho(conselhoParaInserir);
+
+		response.sendRedirect("tela-conselhos");
+	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
 
@@ -654,6 +684,13 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
 		dispatcher.forward(request, response);
 	}
 }

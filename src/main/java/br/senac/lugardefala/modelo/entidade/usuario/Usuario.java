@@ -76,13 +76,17 @@ public class Usuario implements Serializable {
     )
     private List<Comunidade> comunidades;
 
-
     public Usuario() {
-        denunciasDeUsuario = new ArrayList<>();
-        relatos = new ArrayList<>();
-        conselhos = new ArrayList<>();
-        comunidades = new ArrayList<>();
+    	
     }
+    
+    
+//    public Usuario(denunciasDeUsuario {
+//        denunciasDeUsuario = new ArrayList<>();
+//        relatos = new ArrayList<>();
+//        conselhos = new ArrayList<>();
+//        comunidades = new ArrayList<>();
+//    }
 
     public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
        this.id = id;

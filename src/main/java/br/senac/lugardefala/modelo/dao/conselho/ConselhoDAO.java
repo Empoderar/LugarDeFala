@@ -12,6 +12,8 @@ public interface ConselhoDAO {
 	void deletarConselho(Conselho conselho);
 
 	void atualizarConselho(Conselho conselho);
+	
+	Conselho recuperarConselhoPeloId (Long id);
 
 	List<Conselho> recuperarConselhoRelato(Relato relato);
 

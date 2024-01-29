@@ -148,58 +148,60 @@ public class Principal {
 		relatoDAO.inserirRelato(relato4);
 
 		// Criação de conselhos
-		Conselho conselho1 = new Conselho(1, "Mantenha-se forte!", 5, 0, LocalDate.now(), null, 
-				relato1,comunidade1);
+		Conselho conselho1 = new Conselho(1, "Mantenha-se forte!", 5, 0, LocalDate.now(), null, relato1, comunidade1);
 		conselhoDAO.inserirConselho(conselho1);
 
-		Conselho conselho2 = new Conselho(2, "Isso já aconteceu comigo também...", 2, 0, LocalDate.now(), null,
-				relato1,comunidade2);
+		Conselho conselho2 = new Conselho(2, "Isso já aconteceu comigo também...", 2, 0, LocalDate.now(), null, relato1,
+				comunidade2);
 		conselhoDAO.inserirConselho(conselho2);
 
 		Conselho conselho3 = new Conselho(3, "Você é forte só por compartilhar isso conosco :)", 9, 0, LocalDate.now(),
-				null, relato2,comunidade3);
+				null, relato2, comunidade3);
 		conselhoDAO.inserirConselho(conselho3);
 
-		Conselho conselho4 = new Conselho(4, "Quanto drama", 0, 10, LocalDate.now(), null,
-				relato3,comunidade4);
+		Conselho conselho4 = new Conselho(4, "Quanto drama", 0, 10, LocalDate.now(), null, relato3, comunidade4);
 		conselhoDAO.inserirConselho(conselho4);
 
-		Conselho conselho5 = new Conselho(3, "Espero que tudo melhore.", 8, 0, LocalDate.now(), null, 
-				relato4,comunidade5);
+		Conselho conselho5 = new Conselho(3, "Espero que tudo melhore.", 8, 0, LocalDate.now(), null, relato4,
+				comunidade5);
 
 		conselhoDAO.inserirConselho(conselho5);
 
-		Conselho conselho6 = new Conselho(1, "Eu sinto muito por isso.", 7, 0, LocalDate.now(), null,
-				relato4,comunidade5);
+		Conselho conselho6 = new Conselho(1, "Eu sinto muito por isso.", 7, 0, LocalDate.now(), null, relato4,
+				comunidade5);
 
 		conselhoDAO.inserirConselho(conselho6);
 
 		// Criação de usuários
-		Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.tourei1ro", "whey", "Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
-				conselho1, contato2, comunidade1);
+		Usuario usuario2 = new Usuario(null, "João", "Toureiro", LocalDate.of(2004, 8, 10), "joao.tourei1ro", "whey",
+				"Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato2,
+				comunidade1);
 		usuarioDAO.inserirUsuario(usuario2);
 
 		Usuario usuario3 = new Usuario(null, "Maria Fernanda", "Rengel", LocalDate.of(1995, 3, 22), "maria.fernanda",
-				"senha123","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato3, comunidade1);
+				"senha123", "Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1,
+				contato3, comunidade1);
 		usuarioDAO.inserirUsuario(usuario3);
 
-		Usuario usuario4 = new Usuario(null, "Lucas", "Loes", LocalDate.of(1990, 7, 15), "lucas.loes", "senha456","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
-				conselho1, contato4, comunidade1);
+		Usuario usuario4 = new Usuario(null, "Lucas", "Loes", LocalDate.of(1990, 7, 15), "lucas.loes", "senha456",
+				"Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato4,
+				comunidade1);
 		usuarioDAO.inserirUsuario(usuario4);
 
 		Usuario usuario5 = new Usuario(null, "Aquila", "Hapuque", LocalDate.of(1988, 5, 10), "aquila.hapuque",
-				"senha789","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",conselho1, contato5, comunidade1);
+				"senha789", "Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1,
+				contato5, comunidade1);
 		usuarioDAO.inserirUsuario(usuario5);
 
 		Usuario usuario6 = new Usuario(null, "Gabriela", "Adara", LocalDate.of(1998, 12, 3), "gabriela.adara",
-				"senha101","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato6, comunidade1);
+				"senha101", "Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1,
+				contato6, comunidade1);
 		usuarioDAO.inserirUsuario(usuario6);
 
-		Usuario usuario7 = new Usuario(null, "Ana", "de Abreu", LocalDate.of(1992, 6, 7), "ana.abreu", "senha111","Aceite seus limites sem jamais desacreditar na sua capacidade de superação.",
-				conselho1, contato7, comunidade1);
+		Usuario usuario7 = new Usuario(null, "Ana", "de Abreu", LocalDate.of(1992, 6, 7), "ana.abreu", "senha111",
+				"Aceite seus limites sem jamais desacreditar na sua capacidade de superação.", conselho1, contato7,
+				comunidade1);
 		usuarioDAO.inserirUsuario(usuario7);
-
-	
 
 		// Criação de moderadores
 		Contato contatoModeradorAmanda = new Contato();
@@ -208,7 +210,9 @@ public class Principal {
 		contatoDAO.inserirContato(contatoModeradorAmanda);
 
 		Moderador moderadorAmanda = new Moderador(1, "Amanda", "Lucs", LocalDate.of(2002, 11, 27), "amanda.lsc",
-				"senhaModerador", "“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorAmanda, comunidade2);
+				"senhaModerador",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorAmanda, comunidade2);
 		moderadorDAO.inserirModerador(moderadorAmanda);
 
 		Contato contatoModeradorBrenda = new Contato();
@@ -216,7 +220,9 @@ public class Principal {
 		contatoModeradorBrenda.setEmail("brenda.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorBrenda);
 		Moderador moderadorBrenda = new Moderador(2, "Brenda", "Monteiro", LocalDate.of(2000, 8, 30), "brenda.monteiro",
-				"senhaModerador2","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi",conselho1, contatoModeradorBrenda, comunidade1);
+				"senhaModerador2",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorBrenda, comunidade1);
 		moderadorDAO.inserirModerador(moderadorBrenda);
 
 		Contato contatoModeradorLuciene = new Contato();
@@ -224,7 +230,9 @@ public class Principal {
 		contatoModeradorLuciene.setEmail("luciene.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorLuciene);
 		Moderador moderadorLuciene = new Moderador(3, "Luciene", "Queiroz", LocalDate.of(1975, 5, 31),
-				"luciene.queiroz", "senhaModerador3","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorLuciene, comunidade3);
+				"luciene.queiroz", "senhaModerador3",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorLuciene, comunidade3);
 		moderadorDAO.inserirModerador(moderadorLuciene);
 
 		Contato contatoModeradorMariana = new Contato();
@@ -232,7 +240,9 @@ public class Principal {
 		contatoModeradorMariana.setEmail("mariana.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorMariana);
 		Moderador moderadorMariana = new Moderador(4, "Mariana", "Abreu", LocalDate.of(2001, 5, 20), "mariana.abreu",
-				"senhaModerador4","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorMariana, comunidade4);
+				"senhaModerador4",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorMariana, comunidade4);
 		moderadorDAO.inserirModerador(moderadorMariana);
 
 		Contato contatoModeradorGiovanna = new Contato();
@@ -240,7 +250,9 @@ public class Principal {
 		contatoModeradorGiovanna.setEmail("giovanna.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorGiovanna);
 		Moderador moderadorGiovanna = new Moderador(5, "Giovanna", "Soriano", LocalDate.of(1991, 12, 27),
-				"giovanna.soriano", "senhaModerador5","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorGiovanna, comunidade5);
+				"giovanna.soriano", "senhaModerador5",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorGiovanna, comunidade5);
 		moderadorDAO.inserirModerador(moderadorGiovanna);
 
 		Contato contatoModeradorMarcella = new Contato();
@@ -248,7 +260,9 @@ public class Principal {
 		contatoModeradorMarcella.setEmail("marcella.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorMarcella);
 		Moderador moderadorMarcella = new Moderador(6, "Marcella", "Barboza", LocalDate.of(2002, 3, 21),
-				"marcella.barboza", "senhaModerador6", "“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorMarcella, comunidade2);
+				"marcella.barboza", "senhaModerador6",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorMarcella, comunidade2);
 		moderadorDAO.inserirModerador(moderadorMarcella);
 
 		Contato contatoModeradorBruna = new Contato();
@@ -256,7 +270,9 @@ public class Principal {
 		contatoModeradorBruna.setEmail("bruna.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorBruna);
 		Moderador moderadorBruna = new Moderador(7, "Bruna", "Caria", LocalDate.of(1987, 11, 7), "bruna.caria",
-				"senhaModerador7","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorBruna, comunidade3);
+				"senhaModerador7",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorBruna, comunidade3);
 		moderadorDAO.inserirModerador(moderadorBruna);
 
 		Contato contatoModeradorAlice = new Contato();
@@ -264,43 +280,27 @@ public class Principal {
 		contatoModeradorAlice.setEmail("alice.moderadora@gmail.com");
 		contatoDAO.inserirContato(contatoModeradorAlice);
 		Moderador moderadorAlice = new Moderador(8, "Alice", "Rocha", LocalDate.of(1992, 4, 7), "alice.rocha",
-				"senhaModerador8","“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1, contatoModeradorAlice, comunidade1);
+				"senhaModerador8",
+				"“A força não vem da capacidade física. Ela vem de uma vontade indomável.” - Mahatma Gandhi", conselho1,
+				contatoModeradorAlice, comunidade1);
 		moderadorDAO.inserirModerador(moderadorAlice);
 
 		// Criação de denúncias
-		DenunciaConselho denunciaConselho = new DenunciaConselho(usuario2, 
-				0, 
-				LocalDate.now(), 
-				"Conteúdo inadequado", 
-				Status.PENDENTE, 
-				conselho1);
+		DenunciaConselho denunciaConselho = new DenunciaConselho(usuario2, 0, LocalDate.now(), "Conteúdo inadequado",
+				Status.PENDENTE, conselho1);
 		denunciaConselhoDAO.inserirDenunciaConselho(denunciaConselho);
 
-		DenunciaModerador denunciaModerador = new DenunciaModerador(0, 
-				LocalDate.now(),
-				"Comportamento inadequado", 
-				Status.PENDENTE,
-				usuario5, 
-				moderadorAlice);
+		DenunciaModerador denunciaModerador = new DenunciaModerador(0, LocalDate.now(), "Comportamento inadequado",
+				Status.PENDENTE, usuario5, moderadorAlice);
 		denunciaModeradorDAO.inserirDenunciaModerador(denunciaModerador);
 
-		DenunciaUsuario denunciaUsuario = new DenunciaUsuario(usuario5,
-				0,
-				LocalDate.now(), 
-				"Motivo da denúncia", 
-				Status.PENDENTE, 
-				usuario2);
+		DenunciaUsuario denunciaUsuario = new DenunciaUsuario(usuario5, 0, LocalDate.now(), "Motivo da denúncia",
+				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
-		DenunciaRelato denunciaRelato = new DenunciaRelato(relato1, 
-				0, 
-				LocalDate.now(),
-				"Conteúdo falso",
-				Status.PENDENTE, 
-				usuario5, 
-				relato2);
+		DenunciaRelato denunciaRelato = new DenunciaRelato(relato1, 0, LocalDate.now(), "Conteúdo falso",
+				Status.PENDENTE, usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
-
 
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
 
@@ -312,14 +312,14 @@ public class Principal {
 		relato2.setModerador(moderadorAmanda);
 		relato3.setModerador(moderadorBrenda);
 		relato4.setModerador(moderadorBruna);
-		
+
 		conselho1.setUsuario(usuario2);
 		conselho2.setUsuario(usuario3);
 		conselho3.setUsuario(usuario4);
 		conselho4.setUsuario(usuario5);
 		conselho5.setUsuario(usuario6);
 		conselho6.setUsuario(usuario7);
-		
+
 		conselhoDAO.atualizarConselho(conselho1);
 		conselhoDAO.atualizarConselho(conselho2);
 		conselhoDAO.atualizarConselho(conselho3);
@@ -333,9 +333,9 @@ public class Principal {
 		System.out.println("Buscar usuário pelo nome: " + usuarioPeloNome.getNome());
 
 		// --------------------------------------------------------------------
-		
+
 		Moderador moderadorPeloNome = moderadorDAO.consultarModeradorPeloNome("Bruna");
-		System.out.println("Consultar moderador pelo nome: " +moderadorPeloNome.getNome());
+		System.out.println("Consultar moderador pelo nome: " + moderadorPeloNome.getNome());
 
 		// --------------------------------------------------------------------
 
@@ -346,8 +346,8 @@ public class Principal {
 		}
 
 		// ----------------------------------------------------------------------
-		
-		List <Moderador> parametroComunidade = moderadorDAO.consultarModeradoresPelaComunidade(comunidade1);
+
+		List<Moderador> parametroComunidade = moderadorDAO.consultarModeradoresPelaComunidade(comunidade1);
 		for (Moderador moderadores : parametroComunidade) {
 			System.out.println("Moderador pela comunidade: " + moderadores.getNome());
 		}
@@ -406,8 +406,7 @@ public class Principal {
 		for (Relato relato : relatos) {
 			System.out.println("Relato por status:" + relato.getConteudo());
 		}
-		
-		
+
 		// ----------------------------------------------------------------------
 
 		List<Relato> usuario = relatoDAO.consultarRelatosPeloUsuario(usuario2);
@@ -433,26 +432,34 @@ public class Principal {
 //        	}
 
 		// ----------------------------------------------------------------------
-		
+
 		Relato relatoPorId = relatoDAO.consultarRelatoPorId(2L);
 		System.out.println("Relato por ID:" + relatoPorId.getConteudo());
 
-
 		// ----------------------------------------------------------------------
-		
-		
+
 		Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
 		System.out.println("Usuario pelo ID:" + contatoRecuperado.getTelefone());
-		
-		
+
 		// ----------------------------------------------------------------------
-		
+
 		Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloId(1L);
 		System.out.println("Recuperar categoria pelo nome :" + recuperarCategoriaNome);
-		
+
 		// ----------------------------------------------------------------------
-		
+
 		Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
 		System.out.println("Recuperar categoria pelo relato :" + recuperarCategoriaRelato);
+
+		// ----------------------------------------------------------------------
+
+		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
+		System.out.println("Buscar usuário pelo id: " + recuperarUsuarioId.getNome());
+		
+		// ----------------------------------------------------------------------
+
+		Conselho recuperarPeloId = conselhoDAO.recuperarConselhoPeloId(1L);
+		System.out.println("Buscar conselho pelo id " + recuperarPeloId.getConteudo());
 	}
+
 }

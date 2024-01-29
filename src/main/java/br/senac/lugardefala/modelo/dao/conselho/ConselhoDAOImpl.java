@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -104,6 +105,31 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 		return conselho;
 		
+	}
+
+	public Conselho recuperarConselhoPeloId(Long id) {
+		Session session = null;
+		Conselho conselhosPeloId = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
+			Root<Conselho> raizUsuario = criteria.from(Conselho.class);
+			ParameterExpression<Long> conselhoPeloId = construtor.parameter(Long.class, "id");
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), conselhoPeloId));
+			conselhosPeloId = session.createQuery(criteria).setParameter(conselhoPeloId, id).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return conselhosPeloId;
 	}
 
 }
