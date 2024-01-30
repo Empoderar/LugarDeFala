@@ -16,6 +16,6 @@ public interface ComunidadeDAO {
 
 	Comunidade recuperarComunidadeUsuario(Usuario usuario);
 	
-	Comunidade recuperarComunidadeNome(String nome);
+	Comunidade recuperarComunidadePeloId(Long id);
 	
 }
