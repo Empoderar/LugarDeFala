@@ -129,7 +129,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	    return comunidade;
 	}
 
-	public Comunidade recuperarComunidadeNome(String nome) {
+	public Comunidade recuperarComunidadePeloId(Long id) {
 	    Comunidade comunidade = null;
 	    Session session = null;
 	    try {
@@ -140,7 +140,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	        CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 	        Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("nome"), nome));
+	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
 	        comunidade = session.createQuery(criteria).uniqueResult();
 
 	        session.getTransaction().commit();
