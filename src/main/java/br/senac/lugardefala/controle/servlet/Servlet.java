@@ -109,11 +109,11 @@ public class Servlet extends HttpServlet {
 				mostrarTelaFormularioModerador(request, response);
 				break;
 
-			case "/login-usuario":
+			case "/login":
 				mostrarTelaLoginUsuario(request, response);
 				break;
 
-			case "/home":
+			case "/":
 				mostrarHome(request, response);
 				break;
 
@@ -136,7 +136,7 @@ public class Servlet extends HttpServlet {
 			case "/cadastro-categoria":
 				mostrarTelaCadastroCategoria(request, response);
 				break;
-				
+
 			case "/tela-denuncias":
 				mostrarTelaDenuncias(request, response);
 				break;
@@ -164,10 +164,10 @@ public class Servlet extends HttpServlet {
 			case "/inserir-moderador":
 				inserirModerador(request, response);
 				break;
-				
-			case "/inserir-denuncia-de-conselho":
-				inserirDenunciaConselho (request, response);
-				break;
+//
+//			case "/inserir-denuncia-de-conselho":
+//				inserirDenunciaConselho(request, response);
+//				break;
 
 			case "/deletar-usuario":
 				deletarUsuario(request, response);
@@ -221,8 +221,6 @@ public class Servlet extends HttpServlet {
 	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = Long.parseLong(request.getParameter("id"));
-
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
@@ -231,8 +229,8 @@ public class Servlet extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 		String email = request.getParameter("email");
 		String descricao = request.getParameter("descricao");
-
-		Usuario usuarioParaAtualizar = new Usuario(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
+		
+		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, dataNascimento, apelido, senha, descricao);
 		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
 
 		Contato contatoParaAtualizar = new Contato(telefone, email);
@@ -245,7 +243,6 @@ public class Servlet extends HttpServlet {
 	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
@@ -255,7 +252,7 @@ public class Servlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String descricao = request.getParameter("descricao");
 
-		Moderador moderadorParaAtualizar = new Moderador(id, nome, sobrenome, dataNascimento, apelido, senha,
+		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, dataNascimento, apelido, senha,
 				descricao);
 		moderadorDao.atualizarModerador(moderadorParaAtualizar);
 
@@ -291,10 +288,10 @@ public class Servlet extends HttpServlet {
 		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
 		relatoDao.atualizarRelato(relatoParaAtualizar);
 
-		Moderador moderadorParaAtualizar = new Moderador(id,nome, sobrenome,  apelido);
+		Moderador moderadorParaAtualizar = new Moderador(id, nome, sobrenome, apelido);
 		moderadorDao.atualizarModerador(moderadorParaAtualizar);
 
-		Usuario usuarioParaAtualizar = new Usuario(id,nome, sobrenome, apelido);
+		Usuario usuarioParaAtualizar = new Usuario(id, nome, sobrenome, apelido);
 		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
 
 		relatoParaAtualizar.setUsuario(usuarioParaAtualizar);
@@ -442,7 +439,6 @@ public class Servlet extends HttpServlet {
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -451,39 +447,36 @@ public class Servlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String telefone = request.getParameter("telefone");
 		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
 
-		Usuario usuarioParaInserir = new Usuario(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
+		Usuario usuarioParaInserir = new Usuario(nome, sobrenome, dataNascimento, apelido, senha);
 		Contato contatoParaInserir = new Contato(telefone, email);
 
 		usuarioParaInserir.setContato(contatoParaInserir);
 		contatoDao.inserirContato(contatoParaInserir);
 		usuarioDao.inserirUsuario(usuarioParaInserir);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login-usuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void inserirModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		long id = Long.parseLong(request.getParameter("id"));
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
 		String apelido = request.getParameter("apelido");
 		String senha = request.getParameter("senha");
 		String telefone = request.getParameter("telefone");
 		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
 
-		Moderador moderadorParaInserir = new Moderador(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
+		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
 		Contato contatoParaInserir = new Contato(telefone, email);
 		contatoDao.inserirContato(contatoParaInserir);
 		moderadorDao.inserirModerador(moderadorParaInserir);
 		moderadorParaInserir.setContato(contatoParaInserir);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login-moderador.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -509,12 +502,13 @@ public class Servlet extends HttpServlet {
 
 		List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
 		for (Categoria categoria : categoriasParaInserir) {
-		    categoriaDao.inserirCategoria(categoria);
+			categoriaDao.inserirCategoria(categoria);
 		}
 
 		relatoParaInserir.setUsuario(usuarioParaInserir);
 		relatoParaInserir.setModerador(moderadorParaInserir);
-		relatoParaInserir.setCategoriaRelato((List<Categoria>) categoriasParaInserir);;
+		relatoParaInserir.setCategoriaRelato((List<Categoria>) categoriasParaInserir);
+		;
 	}
 
 	private void inserirCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -568,34 +562,36 @@ public class Servlet extends HttpServlet {
 
 		response.sendRedirect("tela-conselhos");
 	}
-	
-	private void inserirDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
 
-		Usuario usuario1 = new Usuario(0l, "Joao", "Silva", "joao.silva");
-		usuarioDao.inserirUsuario(usuario1);
-		
-		Conselho conselho1 = new Conselho(0l, "lalalaala", 05, 02, LocalDate.of(1992, 6, 7));
-		conselhoDao.inserirConselho(conselho1);
-		
-		long id = Long.parseLong(request.getParameter("id"));
-		Usuario usuarioDenunciante = usuarioDao.recuperarUsuarioPeloId((Long.parseLong(request.getParameter("usuario"))));
-		LocalDate data = LocalDate.parse(request.getParameter("data"));
-		String motivo = request.getParameter("motivo");
-		Conselho conselhoDenunciado = conselhoDao.recuperarConselhoPeloId((Long.parseLong(request.getParameter("conselho"))));
-		Status status = Status.valueOf(request.getParameter("status"));
-
-		Conselho conselhoParaInserir = new Conselho(id, usuario1, data, motivo, conselho1, status);
-		conselhoDao.inserirConselho(conselhoParaInserir);
-
-		response.sendRedirect("tela-conselhos");
-	}
+//	private void inserirDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException {
+//
+//		Usuario usuario1 = new Usuario(0l, "Joao", "Silva", "joao.silva");
+//		usuarioDao.inserirUsuario(usuario1);
+//
+//		Conselho conselho1 = new Conselho(0l, "Sinto muito por isso", 05, 02, LocalDate.of(1992, 6, 7));
+//		conselhoDao.inserirConselho(conselho1);
+//
+//		long id = Long.parseLong(request.getParameter("id"));
+//		Usuario usuarioDenunciante = usuarioDao
+//				.recuperarUsuarioPeloId((Long.parseLong(request.getParameter("usuario"))));
+//		LocalDate data = LocalDate.parse(request.getParameter("data"));
+//		String motivo = request.getParameter("motivo");
+//		Conselho conselhoDenunciado = conselhoDao
+//				.recuperarConselhoPeloId((Long.parseLong(request.getParameter("conselho"))));
+//		Status status = Status.valueOf(request.getParameter("status"));
+//
+//		Conselho conselhoParaInserir = new Conselho(0, usuario1,  LocalDate.of(1992, 6, 7), motivo, conselho1, status);
+//		conselhoDao.inserirConselho(conselhoParaInserir);
+//
+//		response.sendRedirect("tela-conselhos");
+//	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -631,7 +627,7 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login-usuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -680,13 +676,14 @@ public class Servlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
 		dispatcher.forward(request, response);
 	}
+
 	private void mostrarTelaCadastroCategoria(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

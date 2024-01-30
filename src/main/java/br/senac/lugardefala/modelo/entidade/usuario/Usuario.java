@@ -48,13 +48,13 @@ public class Usuario implements Serializable {
     @Column(name = "data_nascimento_usuario", nullable = false, unique = false)
     private LocalDate dataNascimento;
 
-    @Column(name = "apelido_usuario", length = 35, nullable = false, unique = true)
+    @Column(name = "apelido_usuario", length = 35, nullable = true, unique = true)
     private String apelido;
 
-    @Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
+    @Column(name = "senha_usuario", length = 20, nullable = true, unique = false)
     private String senha;
     
-    @Column(name = "descricao_usuario", length = 500, nullable = false, unique = false)
+    @Column(name = "descricao_usuario", length = 500, nullable = true, unique = false)
 	private String descricao;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -87,6 +87,31 @@ public class Usuario implements Serializable {
 //        conselhos = new ArrayList<>();
 //        comunidades = new ArrayList<>();
 //    }
+    
+    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
+     	this.nome = nome;
+         this.sobrenome = sobrenome;
+         this.dataNascimento = dataNascimento;
+         this.apelido = apelido;
+         this.senha = senha;
+         denunciasDeUsuario = new ArrayList<>();
+         relatos = new ArrayList<>();
+         conselhos = new ArrayList<>();
+         comunidades = new ArrayList<>();
+     }
+    
+    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+     	this.nome = nome;
+         this.sobrenome = sobrenome;
+         this.dataNascimento = dataNascimento;
+         this.apelido = apelido;
+         this.senha = senha;
+         this.descricao = descricao;
+         denunciasDeUsuario = new ArrayList<>();
+         relatos = new ArrayList<>();
+         conselhos = new ArrayList<>();
+         comunidades = new ArrayList<>();
+     }
 
     public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
        this.id = id;
