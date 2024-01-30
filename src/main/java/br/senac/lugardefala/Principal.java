@@ -353,34 +353,36 @@ public class Principal {
 		}
 		// --------------------------------------------------------------------
 
-//
-//		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
-//
-//		for (Usuario usuario1 : usuarios) {
-//			System.out.println("Usuario por comunidade:" + usuario1.getNome());
-//		}
+
+		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
+
+		for (Usuario usuario1 : usuarios) {
+			System.out.println("Usuario por comunidade:" + usuario1.getNome());
+		}
 
 		// ----------------------------------------------------------------------
 
-//		Usuario usuarioPorConselho = usuarioDAO.recuperarUsuarioPorConselho(conselho1);
-//			System.out.println("Usuario por conselho:" + usuarioPorConselho.getApelido());
-//
+		List<Usuario> usuariosPorConselho = usuarioDAO.recuperarUsuariosPorConselho(conselho1);
+		for (Usuario usuarios2 : usuariosPorConselho) {
+			System.out.println("Usuario por conselho:" + usuarios2.getNome());
+		}
+
 
 		// ----------------------------------------------------------------------
 
-//		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
-//
-//		for (Usuario usuario : usuarios2) {
-//			System.out.println("Usuario por denuncia" + usuario.getNome());
-//		}
+		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
+
+		for (Usuario usuario : usuarios2) {
+			System.out.println("Usuario por denuncia" + usuario.getNome());
+		}
 
 		// ----------------------------------------------------------------------
 
-//		List<Usuario> usuarios3 = usuarioDAO.recuperarUsuariosPorRelato(relato2);
-//
-//		for (Usuario usuario : usuarios3) {
-//			System.out.println(usuario.getNome());
-//		}
+		List<Usuario> usuarios3 = usuarioDAO.recuperarUsuariosPorRelato(relato2);
+
+		for (Usuario usuario : usuarios3) {
+			System.out.println(usuario.getNome());
+		}
 
 		// ----------------------------------------------------------------------
 
@@ -425,11 +427,10 @@ public class Principal {
 
 		// ----------------------------------------------------------------------
 
-//		List<Relato> categorias = relatoDAO.consultarRelatosPelaCategoria(categoria2);
-//        	
-//        	for (Relato relato : categorias) {
-//	        	System.out.println("Relato pela categoria:" +relato.getConteudo());
-//        	}
+		List<Relato> categorias = relatoDAO.consultarRelatosPelaCategoria(categoria2);        	
+        for (Relato relato : categorias) {
+	        System.out.println("Relato pela categoria:" + relato.getConteudo());
+        }
 
 		// ----------------------------------------------------------------------
 

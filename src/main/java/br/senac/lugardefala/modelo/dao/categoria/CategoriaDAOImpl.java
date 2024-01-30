@@ -116,45 +116,59 @@ public class CategoriaDAOImpl implements CategoriaDAO {
    
 
 	public Categoria recuperarCategoriaPeloId(Long id) {
-		try (Session session = getSessionFactory().openSession()) {
+	    Categoria categoria = null;
+	    Session session = null;
+
+	    try {
+	        session = getSessionFactory().openSession();
 	        session.beginTransaction();
-            
+
 	        CriteriaBuilder builder = session.getCriteriaBuilder();
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
 	        criteria.select(root).where(builder.equal(root.get(Categoria_.id), id));
 
-	        Categoria categoria = session.createQuery(criteria).uniqueResult();
+	        categoria = session.createQuery(criteria).uniqueResult();
 
 	        session.getTransaction().commit();
 
-	        return categoria;
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return null;
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
 	    }
+	    return categoria;
 	}
 
 	public Categoria recuperarCategoriaRelato(Relato relato) {
-		 try (Session session = getSessionFactory().openSession()) {
-		        session.beginTransaction();
-            
-		        CriteriaBuilder builder = session.getCriteriaBuilder();
-		        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
-		        Root<Categoria> root = criteria.from(Categoria.class);
+	    Categoria categoria = null;
+	    Session session = null;
 
-		        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.relatos)));
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
 
-		        Categoria categoria = session.createQuery(criteria).uniqueResult();
+	        CriteriaBuilder builder = session.getCriteriaBuilder();
+	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
+	        Root<Categoria> root = criteria.from(Categoria.class);
 
-		        session.getTransaction().commit();
+	        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.relatos)));
 
-		        return categoria;
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return null;
-		    }
-		}
+	        categoria = session.createQuery(criteria).uniqueResult();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return categoria;
+	}
 
 }

@@ -81,24 +81,31 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	}
 
 	public List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade) {
-		 try (Session session = getSessionFactory().openSession()) {
-		        session.beginTransaction();
-		        
-		        CriteriaBuilder construtor = session.getCriteriaBuilder();
-		        CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
-		        Root<Moderador> raizModerador = criteria.from(Moderador.class);
-		        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
-		        
-		        List<Moderador> moderadores = session.createQuery(criteria).getResultList();
+	    List<Moderador> moderadores = null;
+	    Session session = null;
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
 
-		        session.getTransaction().commit();
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+	        Root<Moderador> raizModerador = criteria.from(Moderador.class);
+	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
 
-		        return moderadores;
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return null;
-		    }
+	        moderadores = session.createQuery(criteria).getResultList();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return moderadores;
 	}
+
 	public List<Moderador> consultarModeradoresPeloId(Long id) {
 		Session session = null;
 		List<Moderador> moderador = new ArrayList<>();

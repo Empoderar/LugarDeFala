@@ -60,12 +60,21 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
     }
 
     public DenunciaUsuario recuperarDenunciaUsuarioPorId(long id) {
-        try (Session session = getSessionFactory().openSession()) {
+        DenunciaUsuario denunciaUsuario = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
             session.beginTransaction();
-            return session.get(DenunciaUsuario.class, id);
+            denunciaUsuario = session.get(DenunciaUsuario.class, id);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.getTransaction().commit();
+                session.close();
+            }
         }
+        return denunciaUsuario;
     }
+
 }

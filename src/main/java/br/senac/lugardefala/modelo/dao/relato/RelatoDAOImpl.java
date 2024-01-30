@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -83,20 +84,31 @@ public class RelatoDAOImpl implements RelatoDAO {
     }
 
     public List<Relato> recuperarRelato() {
-        try (Session session = getSessionFactory().openSession()) {
+        List<Relato> relatos = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
             session.beginTransaction();
+
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             criteria.select(raizRelato);
-            List<Relato> relatos = session.createQuery(criteria).getResultList();
+
+            relatos = session.createQuery(criteria).getResultList();
+
             session.getTransaction().commit();
-            return relatos;
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return relatos;
     }
+
 
     public List <Relato> consultarRelatosPeloUsuario(Usuario usuario) {
     	List<Relato> relatosUsuario = null;
@@ -202,40 +214,38 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-    public List <Relato> consultarRelatosPelaCategoria(Categoria categoria) {
-    	
-    	List<Relato> relatosCategoria = null;
-    	Session session = null;
-    	  
-    	try {
-        	session = getSessionFactory().openSession();
+    public List<Relato> consultarRelatosPelaCategoria(Categoria categoria) {
+        List<Relato> relatosCategoria = null;
+        Session session = null;
+
+        try {
+            session = getSessionFactory().openSession();
             session.beginTransaction();
-            
+
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
-            
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), categoria));
-            
+
             ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.categoriaRelato), relatoCategoria));
-            
+            criteria.select(raizRelato).where(construtor.isMember(relatoCategoria, raizRelato.get(Relato_.categoriaRelato)));
+
             relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
-            
+
             session.getTransaction().commit();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
 
-    	}
         return relatosCategoria;
     }
+
+
     
     public Relato consultarRelatoPorId(Long id) {
 
