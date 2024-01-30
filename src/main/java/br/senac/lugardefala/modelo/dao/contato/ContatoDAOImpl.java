@@ -75,19 +75,31 @@ public class ContatoDAOImpl implements ContatoDAO {
 		}
 	}
 
-    public Contato recuperarContatoDoUsuarioPeloId(Long id) {
-        try (Session session = getSessionFactory().openSession()) {
-            session.beginTransaction();
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
-            Root<Contato> raizContato = criteria.from(Contato.class);
-            criteria.select(raizContato).where(construtor.equal(raizContato.get(Contato_.id), id));
-            Contato contato = session.createQuery(criteria).getSingleResult();
-            session.getTransaction().commit();
-            return contato;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+	public Contato recuperarContatoDoUsuarioPeloId(Long id) {
+	    Contato contato = null;
+	    Session session = null;
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
+
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+	        Root<Contato> raizContato = criteria.from(Contato.class);
+
+	        criteria.select(raizContato).where(construtor.equal(raizContato.get(Contato_.id), id));
+	        contato = session.createQuery(criteria).getSingleResult();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return contato;
+	}
+
+
 }

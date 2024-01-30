@@ -65,35 +65,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
             e.printStackTrace();
         }
     }
-
-    public DenunciaRelato recuperarDenunciaDeRelatoStatus(Relato relato, Status status) {
-        try (Session session = getSessionFactory().openSession()) {
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
-            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
-            criteria.select(raizDenuncia).where(
-                    construtor.equal(raizDenuncia.get("relato"), relato),
-                    construtor.equal(raizDenuncia.get("status"), status));
-            return session.createQuery(criteria).uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public DenunciaRelato recuperarDenunciaDeRelatoRelato(Relato relato) {
-        try (Session session = getSessionFactory().openSession()) {
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
-            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
-            criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("relato"), relato));
-            return session.createQuery(criteria).uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
+    
     public void atualizarDenunciaRelato(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -103,4 +75,48 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
             e.printStackTrace();
         }
     }
+
+    public DenunciaRelato recuperarDenunciaDeRelatoStatus(Relato relato, Status status) {
+        DenunciaRelato denunciaRelato = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
+            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
+            criteria.select(raizDenuncia).where(
+                    construtor.equal(raizDenuncia.get("relato"), relato),
+                    construtor.equal(raizDenuncia.get("status"), status));
+            denunciaRelato = session.createQuery(criteria).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return denunciaRelato;
+    }
+
+    public DenunciaRelato recuperarDenunciaDeRelatoRelato(Relato relato) {
+        DenunciaRelato denunciaRelato = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
+            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
+            criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("relato"), relato));
+            denunciaRelato = session.createQuery(criteria).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return denunciaRelato;
+    }
+
+
 }

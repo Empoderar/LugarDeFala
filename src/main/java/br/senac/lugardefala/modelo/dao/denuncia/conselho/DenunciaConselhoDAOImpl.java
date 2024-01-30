@@ -68,32 +68,47 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
     }
 
     public Denuncia recuperarDenunciaDeConselhoStatus(Conselho conselho, Status status) {
-        try (Session session = getSessionFactory().openSession()) {
+        Denuncia denuncia = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
             Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
             criteria.select(raizDenuncia).where(
                     construtor.equal(raizDenuncia.get("conselho"), conselho),
                     construtor.equal(raizDenuncia.get("status"), status));
-            return session.createQuery(criteria).uniqueResult();
+            denuncia = session.createQuery(criteria).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return denuncia;
     }
 
     public Denuncia recuperarDenunciaDeConselhoRelato(Conselho conselho, Relato relato) {
-        try (Session session = getSessionFactory().openSession()) {
+        Denuncia denuncia = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
             Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
             criteria.select(raizDenuncia).where(
                     construtor.equal(raizDenuncia.get("conselho"), conselho),
                     construtor.equal(raizDenuncia.get("relato"), relato));
-            return session.createQuery(criteria).uniqueResult();
+            denuncia = session.createQuery(criteria).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return denuncia;
     }
+
 }

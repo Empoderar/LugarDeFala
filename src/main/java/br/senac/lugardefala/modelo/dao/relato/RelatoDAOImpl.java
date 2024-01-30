@@ -83,20 +83,31 @@ public class RelatoDAOImpl implements RelatoDAO {
     }
 
     public List<Relato> recuperarRelato() {
-        try (Session session = getSessionFactory().openSession()) {
+        List<Relato> relatos = null;
+        Session session = null;
+        try {
+            session = getSessionFactory().openSession();
             session.beginTransaction();
+
             CriteriaBuilder construtor = session.getCriteriaBuilder();
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             criteria.select(raizRelato);
-            List<Relato> relatos = session.createQuery(criteria).getResultList();
+
+            relatos = session.createQuery(criteria).getResultList();
+
             session.getTransaction().commit();
-            return relatos;
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return relatos;
     }
+
 
     public List <Relato> consultarRelatosPeloUsuario(Usuario usuario) {
     	List<Relato> relatosUsuario = null;
