@@ -17,4 +17,5 @@ public interface ConselhoDAO {
 
 	List<Conselho> recuperarConselhoRelato(Relato relato);
 
+	List<Conselho> recuperarConselhoPeloUsuario(Usuario usuario);
 }

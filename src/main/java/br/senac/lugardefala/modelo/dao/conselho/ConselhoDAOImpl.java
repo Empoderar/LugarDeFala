@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -17,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho_;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ConselhoDAOImpl implements ConselhoDAO {
 
@@ -131,5 +133,32 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 		return conselhosPeloId;
 	}
+	
+	public List<Conselho> recuperarConselhoPeloUsuario(Usuario usuario) {
+		Session session = null;
+		List<Conselho> conselhos = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
 
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<Conselho> criteriaConsulta = criteriaConstrutor.createQuery(Conselho.class);
+			Root<Conselho> raizUsuario = criteriaConsulta.from(Conselho.class);
+
+			Predicate predicateConselhoUsuario
+			= criteriaConstrutor.equal(raizUsuario.get(Conselho_.usuario), usuario);
+
+			criteriaConsulta.where(predicateConselhoUsuario);
+			conselhos = session.createQuery(criteriaConsulta).getResultList();
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return conselhos;
+	}
 }

@@ -1,5 +1,12 @@
 package br.senac.lugardefala.modelo.dao.denuncia.usuario;
 
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -7,6 +14,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario_;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
 
@@ -58,23 +68,62 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
             e.printStackTrace();
         }
     }
+    public List<DenunciaUsuario> recuperarDenunciaUsuarioStatus(Status status) {
+		Session session = null;
+		List<DenunciaUsuario> denunciasUsuarios = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
 
-    public DenunciaUsuario recuperarDenunciaUsuarioPorId(long id) {
-        DenunciaUsuario denunciaUsuario = null;
-        Session session = null;
-        try {
-            session = getSessionFactory().openSession();
-            session.beginTransaction();
-            denunciaUsuario = session.get(DenunciaUsuario.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.getTransaction().commit();
-                session.close();
-            }
-        }
-        return denunciaUsuario;
-    }
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<DenunciaUsuario> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaUsuario.class);
+			Root<DenunciaUsuario> raizDenunciaUsuario = criteriaConsulta.from(DenunciaUsuario.class);
+
+
+			Predicate predicateDenunciaUsuarioStatus
+			= criteriaConstrutor.equal(raizDenunciaUsuario.get(DenunciaUsuario_.status), status);
+
+			criteriaConsulta.where(predicateDenunciaUsuarioStatus);
+			denunciasUsuarios = session.createQuery(criteriaConsulta).getResultList();
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return denunciasUsuarios;
+	}
+
+    public List<DenunciaUsuario> recuperarDenunciaUsuarioPeloUsuario(Usuario usuario) {
+		Session session = null;
+		List<DenunciaUsuario> denunciasUsuarios = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<DenunciaUsuario> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaUsuario.class);
+			Root<DenunciaUsuario> raizDenunciaUsuario = criteriaConsulta.from(DenunciaUsuario.class);
+
+
+			Predicate predicateDenunciaUsuarioPeloUsuario
+			= criteriaConstrutor.equal(raizDenunciaUsuario.get(DenunciaUsuario_.usuario), usuario);
+
+			criteriaConsulta.where(predicateDenunciaUsuarioPeloUsuario);
+			denunciasUsuarios = session.createQuery(criteriaConsulta).getResultList();
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return denunciasUsuarios;
+	}
 
 }
