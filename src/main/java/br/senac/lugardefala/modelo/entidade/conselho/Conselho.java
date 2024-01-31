@@ -53,6 +53,13 @@ public class Conselho implements Serializable {
     private Comunidade comunidade;
     
     public Conselho(){}
+    
+
+	public Conselho(String conteudo) {
+		this.conteudo = conteudo;
+		
+	
+	}
 
 	public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
 		this.id = id;

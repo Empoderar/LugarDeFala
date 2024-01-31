@@ -57,8 +57,8 @@ public class Moderador extends Usuario {
         denunciaDeModerador = new ArrayList<>();
     }
     
-    public Moderador(Long id,String nome, String sobrenome, String apelido) {
-		super(id,nome, sobrenome, apelido);
+    public Moderador(String nome, String sobrenome, String apelido) {
+		super(nome, sobrenome, apelido);
 	}
 
     public List<DenunciaModerador> getDenunciaDeModerador() {
