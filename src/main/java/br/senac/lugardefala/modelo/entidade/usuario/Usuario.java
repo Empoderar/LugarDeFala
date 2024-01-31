@@ -88,6 +88,10 @@ public class Usuario implements Serializable {
 //        comunidades = new ArrayList<>();
 //    }
     
+    public Usuario(String senha) {
+         this.senha = senha;
+     }
+    
     public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
      	this.nome = nome;
          this.sobrenome = sobrenome;
@@ -127,8 +131,7 @@ public class Usuario implements Serializable {
         comunidades = new ArrayList<>();
     }
 
-    public Usuario(Long id,String nome, String sobrenome, String apelido) {
-    	this.id = id;
+    public Usuario(String nome, String sobrenome, String apelido) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.apelido = apelido;

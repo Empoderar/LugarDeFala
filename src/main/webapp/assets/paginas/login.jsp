@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 
@@ -13,55 +14,41 @@
 <title>Login</title>
 
 <body>
-
-  <form action="#">
-
-	<div>
-
-	  <div>
-
-		<h1>Bem Vindo!</h1>
-
-		<h2>Login</h2>
-
-	  </div>
-
-	  <div>	
-
-		<label>Email</label>
-
-		<input type="email" name="email" placeholder="Digite seu email" required> 
-
-	  </div>	
-
-	  <div>
-
-		<label>Senha</label>
-
-		<input type="password" name="senha" placeholder="Digite sua senha" required>
-
-	  </div>	
-
-	  <div>
-
-		<label><input type="checkbox">Lembre-me</label>
-
-	  </div>
-
-	  <div>	
-
-		<button type="submit">enviar</button>
-
-	  </div>	
-
-		<h3>Não tem uma conta?</h3>
-
-		<a href="cadastro-usuario.jsp" target="_self">Cadastre-se</a>
-
-	</div>
-
-  </form>
-
+<div>
+	<p>Bem Vindo!</p>
+	<h1>Login</h1>
+	<form action="#">
+		<label for="lemail">Email</label> <input type="text" id="lemail"
+			name="email" required maxlength="40"> <label for="lsenha">senha</label>
+		<a href="#">Esqueceu a senha?</a> <input type="password" name="senha"
+			id="lsenha" required maxlength="20">
+		<button>Confirmar</button>
+	</form>
+	<p>Não tem uma conta?</p>
+	<a href="#">Cadastre-se</a>
+</div>
+<div>
+	<footer>
+		<div>
+			<p>Lugar de Fala</p>
+			<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+		</div>
+		<div>
+			<p>Atendimento</p>
+			<a href="#">Contato</a> <a href="#">Termos de uso</a>
+		</div>
+		<div>
+			<p>Redes Sociais</p>
+			<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+		</div>
+		<div>
+			<p>Lugar de Fala</p>
+		</div>
+		<div>
+			<p>2023 Todos os direitos reservados</p>
+		</div>
+	</footer>
+</div>
 </body>
 
 </html>

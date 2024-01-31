@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home</title>
@@ -13,35 +13,36 @@
 	<header>
 		<table>
 			<tr>
+				<td><a href="#">Perfil</a></td>
 				<td><a href="#">Relatos</a></td>
-				<td><a href="#">Entrar</a></td>
-				<td><a href="#">Cadastro</a></td>
+				<td><a href="#">Fale conosco</a></td>
+				<td><a href="#">Cadastre-se</a></td>
 			</tr>
 		</table>
 	</header>
 	<div>
 		<h1>Lugar de fala</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-			sint facilis aperiam eligendi? Repudiandae enim atque fugiat, quam
-			quasi mollitia.</p>
+		<p>Somos uma iniciativa dedicada a oferecer apoio abrangente para
+			mulheres vítimas de violência. Nosso objetivo é criar um espaço
+			seguro, proporcionando orientação e suporte contínuo para ajudar as
+			mulheres a reconstruir suas vidas. Juntas, estamos construindo uma
+			comunidade de solidariedade, empoderamento e resiliência.</p>
 	</div>
 	<div>
-		<h2>O projeto</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-			Praesentium laudantium nesciunt repellat animi qui eveniet facere ad
-			eaque, amet veniam incidunt reiciendis asperiores cupiditate, quos
-			nemo quibusdam itaque corrupti reprehenderit sequi eos numquam
-			distinctio in. Dicta qui assumenda similique corporis alias veniam.</p>
+		<h2>Como foi desenvolvido?</h2>
+		<p>O projeto foi desenvolvido por um grupo de estudantes de
+			programação, com a finalidade de nos ajudar no aprendizado, enquanto
+			ajudamos mulheres em situações de vulnerabilidade, que precisam de
+			apoio que muitas vezes podem não encontrar realidade.</p>
 	</div>
 	<div>
 		<h3>Seja voluntário!</h3>
-		<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-			Deserunt ea perferendis rem officiis molestias debitis minus eum
-			nihil eveniet ab?</p>
-		<button type="button">Cadastre-se!</button>
+		<p>Junte-se a nós na luta contra a violência às mulheres. Seja
+			voluntário, sua solidariedade faz a diferença.</p>
+		<button>Cadastre-se!</button>
 	</div>
 	<div>
-		<h4>Entenda cada tipo de violência</h4>
+		<h4>Comunidades</h4>
 		<div>
 			<p>Violência física</p>
 			<p>Qualquer conduta que ofenda a integridade ou saúde corporal da
@@ -74,21 +75,21 @@
 		<h5>Perguntas frequentes</h5>
 		<div>
 			<p>Como me tornar um voluntário?</p>
-			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-				Magni, cumque eius harum placeat, fuga beatae voluptatibus eos in
-				iste, esse aspernatur asperiores doloremque non sit.</p>
+			<p>Para se tornar um voluntário é necessário fazer o cadastro de
+				voluntário, que apresenta um PDF com as informações que um
+				voluntário deve saber e um breve teste sobre os conhecimentos
+				adquiridos.</p>
 		</div>
 		<div>
 			<p>Como fazer um relato?</p>
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-				Officia expedita a illo sequi vitae est! Explicabo suscipit
-				molestiae repudiandae impedit.</p>
+			<p>Para fazer seu relato é necessário criar uma conta, fazer
+				login no site e escolher uma comunidade, então clicar no botão
+				reletar e se abrir com pessoas que passam ou já passaram pelo mesmo.</p>
 		</div>
 		<div>
 			<p>O que são as comunidades?</p>
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-				Consectetur, explicabo sit quam minus cumque molestias incidunt quae
-				eveniet.</p>
+			<p>As comunidades são grandes grupos, cada comunidade representa
+				um tipo de violência onde você pode buscar acolhimento.</p>
 		</div>
 		<div>
 			<p>O que é um moderador?</p>
