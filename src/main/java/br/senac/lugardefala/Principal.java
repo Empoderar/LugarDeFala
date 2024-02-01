@@ -367,17 +367,6 @@ public class Principal {
 				System.out.println("Não ha usuario para esse conselho");
 			}
 		}
-
-		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
-
-		for (Usuario usuario : usuarios2) {
-			if (usuario != null) {
-				System.out.println("Buscar usuário por Denuncia: " + usuario.getNome());
-			} else {
-				System.out.println("Não ha usuario para essa denuncia");
-			}
-		}
-
 		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
 		if (recuperarUsuarioId != null) {
 			System.out.println("Buscar usuário por id: " + recuperarUsuarioId.getNome());

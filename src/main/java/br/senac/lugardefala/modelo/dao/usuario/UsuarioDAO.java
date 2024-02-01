@@ -29,7 +29,7 @@ public interface UsuarioDAO {
 
 	List <Usuario> recuperarUsuariosPorConselho(Conselho conselho);
 
-	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
+	Usuario recuperarUsuariosPorIdDenuncia(Long id);
 
 	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
 	
