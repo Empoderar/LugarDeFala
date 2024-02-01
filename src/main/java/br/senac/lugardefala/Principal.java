@@ -369,15 +369,12 @@ public class Principal {
 		}
 		
  
-		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
- 
-		for (Usuario usuario : usuarios2) {
-			if (usuario != null)	{
-				System.out.println("Buscar usuário por Denuncia: " + usuario.getNome());
+		Usuario usuarios2 = usuarioDAO.recuperarUsuariosPorIdDenuncia(4L);
+			if (usuarios2 != null)	{
+				System.out.println("Buscar usuário por Denuncia: " + usuarios2.getNome());
 				}else {
 					System.out.println("Não ha usuario para essa denuncia");
 				}
-		}
 		
 		
 		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
