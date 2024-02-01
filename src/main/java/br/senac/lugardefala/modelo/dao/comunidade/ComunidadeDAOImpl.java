@@ -1,5 +1,7 @@
 package br.senac.lugardefala.modelo.dao.comunidade;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -11,8 +13,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
-import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
@@ -77,8 +77,8 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	}
 
 
-	public Comunidade recuperarComunidadeModerador(Moderador moderador) {
-	    Comunidade comunidade = null;
+	public List <Comunidade> recuperarComunidadesPeloIdModerador(Long id){
+	    List <Comunidade> comunidade = null;
 	    Session session = null;
 	    try {
 	        session = getSessionFactory().openSession();
@@ -88,8 +88,8 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	        CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 	        Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("moderador"), moderador));
-	        comunidade = session.createQuery(criteria).uniqueResult();
+	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
+	        comunidade = session.createQuery(criteria).getResultList();
 
 	        session.getTransaction().commit();
 
@@ -103,8 +103,8 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	    return comunidade;
 	}
 
-	public Comunidade recuperarComunidadeUsuario(Usuario usuario) {
-	    Comunidade comunidade = null;
+	public List <Comunidade> recuperarComunidadesPeloIdUsuario(Long id) {
+		List <Comunidade> comunidade = null;
 	    Session session = null;
 	    try {
 	        session = getSessionFactory().openSession();
@@ -114,8 +114,8 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	        CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 	        Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("usuario"), usuario));
-	        comunidade = session.createQuery(criteria).uniqueResult();
+	        criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
+	        comunidade = session.createQuery(criteria).getResultList();
 
 	        session.getTransaction().commit();
 

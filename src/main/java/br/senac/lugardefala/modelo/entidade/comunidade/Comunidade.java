@@ -53,7 +53,7 @@ public class Comunidade implements Serializable {
     private List<Usuario> usuarios;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "comunidade_moderador",
             joinColumns = @JoinColumn(name = "id_comunidade"),
