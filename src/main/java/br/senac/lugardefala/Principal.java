@@ -330,137 +330,163 @@
 //
 //		// Criação de consultas
 //
+//		// Teste Usuario
+//		
 //		Usuario usuarioPeloNome = usuarioDAO.buscarUsuarioPeloNome("Alice");
 //		System.out.println("Buscar usuário pelo nome: " + usuarioPeloNome.getNome());
+//		
+//		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
 //
-//		// --------------------------------------------------------------------
+//		for (Usuario usuario1 : usuarios) {
+//		System.out.println("Usuario por comunidade: " + usuario1.getNome());
+//		}
+//
+//		List<Usuario> usuariosPorConselho = usuarioDAO.recuperarUsuariosPorConselho(conselho1);
+//		for (Usuario usuarios2 : usuariosPorConselho) {
+//			System.out.println("Usuario por conselho: " + usuarios2.getNome());
+//		}
+//
+//		List<Usuario> usuarios3 = usuarioDAO.recuperarUsuariosPorRelato(relato2);
+//
+//		for (Usuario usuario : usuarios3) {
+//			System.out.println("Usuario por relato: " + usuario.getNome());
+//		}
+//		
+//
+//		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
+//
+//		for (Usuario usuario : usuarios2) {
+//			System.out.println("Usuario por denuncia: " + usuario.getNome());
+//		}
+//		
+//		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
+//		System.out.println("Buscar usuário pelo id: " + recuperarUsuarioId.getNome());
+//
+//
+//		// Teste Moderador
 //
 //		Moderador moderadorPeloNome = moderadorDAO.consultarModeradorPeloNome("Bruna");
 //		System.out.println("Consultar moderador pelo nome: " + moderadorPeloNome.getNome());
 //
-//		// --------------------------------------------------------------------
-//
 //		List<Moderador> moderador = moderadorDAO.consultarModeradoresPeloId(36L);
-//
 //		for (Moderador moderadorRecuperado : moderador) {
 //			System.out.print("Nome do moderador: " + moderadorRecuperado.getNome());
 //		}
-//
-//		// ----------------------------------------------------------------------
 //
 //		List<Moderador> parametroComunidade = moderadorDAO.consultarModeradoresPelaComunidade(comunidade1);
 //		for (Moderador moderadores : parametroComunidade) {
 //			System.out.println("Moderador pela comunidade: " + moderadores.getNome());
 //		}
-//		// --------------------------------------------------------------------
 //
-////
-////		List<Usuario> usuarios = usuarioDAO.recuperarUsuariosPorComunidade(comunidade3);
-////
-////		for (Usuario usuario1 : usuarios) {
-////			System.out.println("Usuario por comunidade:" + usuario1.getNome());
-////		}
-//
-//		// ----------------------------------------------------------------------
-//
-////		Usuario usuarioPorConselho = usuarioDAO.recuperarUsuarioPorConselho(conselho1);
-////			System.out.println("Usuario por conselho:" + usuarioPorConselho.getApelido());
-////
-//
-//		// ----------------------------------------------------------------------
-//
-////		List<Usuario> usuarios2 = usuarioDAO.recuperarUsuariosPorDenuncia(denunciaUsuario);
-////
-////		for (Usuario usuario : usuarios2) {
-////			System.out.println("Usuario por denuncia" + usuario.getNome());
-////		}
-//
-//		// ----------------------------------------------------------------------
-//
-////		List<Usuario> usuarios3 = usuarioDAO.recuperarUsuariosPorRelato(relato2);
-////
-////		for (Usuario usuario : usuarios3) {
-////			System.out.println(usuario.getNome());
-////		}
-//
-//		// ----------------------------------------------------------------------
-//
-//		List<Moderador> moderadores = moderadorDAO.consultarModeradoresPelaComunidade(comunidade1);
-//
-//		for (Moderador moderador2 : moderadores) {
-//			System.out.println("Moderador pela comunidade:" + moderador2.getNome());
+//		// Teste Conselho
+//		
+//		List<Conselho> recuperarConselhoPeloUsuario = conselhoDAO.recuperarConselhoPeloUsuario(usuario2);
+//		
+//		for (Conselho conselho : recuperarConselhoPeloUsuario) {
+//			System.out.println("Conselho por Usuario: " + conselho.getConteudo());
 //		}
-//
-//		// ----------------------------------------------------------------------
 //
 //		List<Conselho> conselhos = conselhoDAO.recuperarConselhoRelato(relato1);
 //
 //		for (Conselho conselho : conselhos) {
-//			System.out.println("Conselho por relato:" + conselho.getConteudo());
+//			System.out.println("Conselho por relato: " + conselho.getConteudo());
 //		}
+//		
+//		Conselho recuperarPeloId = conselhoDAO.recuperarConselhoPeloId(1L);
+//		System.out.println("Buscar conselho pelo id: " + recuperarPeloId.getConteudo());
 //
-//		// ----------------------------------------------------------------------
-////		
+//		//	Teste Relato	
 //
+//		List <Relato> consultarRelatosPeloUsuario = relatoDAO.consultarRelatosPeloUsuario(usuario2);
+//		
+//		for (Relato relato  : consultarRelatosPeloUsuario) {
+//			System.out.println("Relato por Usuario: " + relato.getConteudo());
+//		}
+//		
+//		List <Relato> consultaRelatosPelaCategoria = relatoDAO.consultarRelatosPelaCategoria(categoria);
+//		
+//		for (Relato relato : consultaRelatosPelaCategoria) {
+//			System.out.println("Relato por Categoria: " + relato.getConteudo());
+//		}
+//		
 //		List<Relato> relatos = relatoDAO.consultarRelatosPeloStatus(Status.APROVADO);
 //
 //		for (Relato relato : relatos) {
-//			System.out.println("Relato por status:" + relato.getConteudo());
+//			System.out.println("Relato por status: " + relato.getConteudo());
 //		}
-//
-//		// ----------------------------------------------------------------------
-//
+//		
 //		List<Relato> usuario = relatoDAO.consultarRelatosPeloUsuario(usuario2);
 //
 //		for (Relato relato : usuario) {
-//			System.out.println("Relato por usuário:" + relato.getConteudo());
+//			System.out.println("Relato por usuário: " + relato.getConteudo());
 //		}
-//
-//		// ----------------------------------------------------------------------
 //
 //		List<Relato> comunidade = relatoDAO.consultarRelatosPelaComunidade(comunidade1);
 //
 //		for (Relato relato : comunidade) {
-//			System.out.println("Relato por comunidade:" + relato.getConteudo());
+//			System.out.println("Relato por comunidade: " + relato.getConteudo());
 //		}
 //
-//		// ----------------------------------------------------------------------
-//
-////		List<Relato> categorias = relatoDAO.consultarRelatosPelaCategoria(categoria2);
-////        	
-////        	for (Relato relato : categorias) {
-////	        	System.out.println("Relato pela categoria:" +relato.getConteudo());
-////        	}
-//
-//		// ----------------------------------------------------------------------
+//		List<Relato> categorias = relatoDAO.consultarRelatosPelaCategoria(categoria2);        	
+//        for (Relato relato : categorias) {
+//	        System.out.println("Relato pela categoria: " + relato.getConteudo());
+//        }
 //
 //		Relato relatoPorId = relatoDAO.consultarRelatoPorId(2L);
-//		System.out.println("Relato por ID:" + relatoPorId.getConteudo());
+//		System.out.println("Relato por ID: " + relatoPorId.getConteudo());
 //
-//		// ----------------------------------------------------------------------
+//		// Teste Contato
 //
 //		Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
-//		System.out.println("Usuario pelo ID:" + contatoRecuperado.getTelefone());
+//		System.out.println("Usuario pelo ID: " + contatoRecuperado.getTelefone());
 //
-//		// ----------------------------------------------------------------------
+//		// Teste Categoria
 //
 //		Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloId(1L);
-//		System.out.println("Recuperar categoria pelo nome :" + recuperarCategoriaNome);
-//
-//		// ----------------------------------------------------------------------
+//		System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
 //
 //		Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
-//		System.out.println("Recuperar categoria pelo relato :" + recuperarCategoriaRelato);
-//
-//		// ----------------------------------------------------------------------
-//
-//		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
-//		System.out.println("Buscar usuário pelo id: " + recuperarUsuarioId.getNome());
+//		System.out.println("Recuperar categoria pelo relato: " + recuperarCategoriaRelato.getNome());
 //		
-//		// ----------------------------------------------------------------------
-//
-//		Conselho recuperarPeloId = conselhoDAO.recuperarConselhoPeloId(1L);
-//		System.out.println("Buscar conselho pelo id " + recuperarPeloId.getConteudo());
+//		// Teste Denuncia
+//// 				Nenhum funciona
+////		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario5);
+////		for (DenunciaUsuario denunciaUsuario2 : DenunciasUsuarios) {
+////			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
+////		}
+////		
+////		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioStatus(Status.PENDENTE);
+////		for (DenunciaUsuario denunciaUsuario2 : DenunciasUsuarios) {
+////			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
+////		}
+////		
+////		List<DenunciaConselho> denunciasConselhos = denunciaConselhoDAO.recuperarDenunciaDeConselhoRelato(relato1);
+////		
+////		for (DenunciaConselho denunciaConselho1 : denunciasConselhos) {
+////			System.out.println("Denuncia de conselho pelo status: " + denunciasConselhos.get());
+////		}			
+////		List<DenunciaConselho> denunciasConselhos = denunciaConselhoDAO.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
+////		
+////		for (DenunciaConselho denunciaConselho1 : denunciasConselhos) {
+////			System.out.println("Denuncia de conselho pelo status: " + denunciasConselhos.get());
+////		}	
+////		List<DenunciaRelato> denunciaRelatoPorStatus = denunciaRelatoDAO.recuperarDenunciaDeRelatoStatus(Status.PENDENTE);
+////		System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelatoPorStatus.get());
+////		
+////		DenunciaRelato denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
+////		System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelatoPorRelato.getMotivo());
+////		
+//		
+//		
+//		// Teste Comunidade
+//		
+//		Comunidade recuperarComunidadeNome = comunidadeDAO.recuperarComunidadePeloId(1L);	
+//		System.out.println("Recuperar comunidade pelo nome: " + recuperarComunidadeNome.getNome());
+//		
+//		Comunidade recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadeModerador(moderadorAlice);
+//		System.out.println("Recuperar comunidade pelo moderador: " + recuperarComunidadeModerador.getNome());
+//		
+//		Comunidade recuperarComunidadeUsuario = comunidadeDAO.recuperarComunidadeUsuario(usuario2);
+//		System.out.println("Recuperar comunidade pelo usuario: " + recuperarComunidadeUsuario.getNome());
 //	}
-//
-//}
+//}	

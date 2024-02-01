@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -28,6 +30,10 @@ public class DenunciaUsuario extends Denuncia {
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario_denunciado")
     protected Usuario usuarioDenunciado;
+	
+
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
     public DenunciaUsuario(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, Status status, Usuario usuarioDenunciado) {
         super(id, data, motivo, status, usuarioDenunciante);

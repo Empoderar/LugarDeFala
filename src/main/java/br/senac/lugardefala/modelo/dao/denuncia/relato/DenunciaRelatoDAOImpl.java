@@ -1,7 +1,10 @@
 package br.senac.lugardefala.modelo.dao.denuncia.relato;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -12,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato_;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
@@ -76,47 +80,63 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         }
     }
 
-    public DenunciaRelato recuperarDenunciaDeRelatoStatus(Relato relato, Status status) {
-        DenunciaRelato denunciaRelato = null;
-        Session session = null;
-        try {
-            session = getSessionFactory().openSession();
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
-            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
-            criteria.select(raizDenuncia).where(
-                    construtor.equal(raizDenuncia.get("relato"), relato),
-                    construtor.equal(raizDenuncia.get("status"), status));
-            denunciaRelato = session.createQuery(criteria).uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return denunciaRelato;
-    }
+    public List<DenunciaRelato> recuperarDenunciaRelatoStatus(Status status) {
+		Session session = null;
+		List<DenunciaRelato> denunciasRelatos= null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
 
-    public DenunciaRelato recuperarDenunciaDeRelatoRelato(Relato relato) {
-        DenunciaRelato denunciaRelato = null;
-        Session session = null;
-        try {
-            session = getSessionFactory().openSession();
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<DenunciaRelato> criteria = construtor.createQuery(DenunciaRelato.class);
-            Root<DenunciaRelato> raizDenuncia = criteria.from(DenunciaRelato.class);
-            criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("relato"), relato));
-            denunciaRelato = session.createQuery(criteria).uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return denunciaRelato;
-    }
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<DenunciaRelato> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaRelato.class);
+			Root<DenunciaRelato> raizDenunciaRelato = criteriaConsulta.from(DenunciaRelato.class);
+
+
+			Predicate predicateDenunciaRelatoStatus
+			= criteriaConstrutor.equal(raizDenunciaRelato.get(DenunciaRelato_.status), status);
+
+			criteriaConsulta.where(predicateDenunciaRelatoStatus);
+			denunciasRelatos = session.createQuery(criteriaConsulta).getResultList();
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return denunciasRelatos;
+	}
+
+    public DenunciaRelato recuperarDenunciaRelatoPeloRelato(Relato relato) {
+		Session session = null;
+		DenunciaRelato denunciaRelato = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<DenunciaRelato> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaRelato.class);
+			Root<DenunciaRelato> raizDenunciaRelato = criteriaConsulta.from(DenunciaRelato.class);
+
+
+			Predicate predicateDenunciaRelato
+			= criteriaConstrutor.equal(raizDenunciaRelato.get(DenunciaRelato_.relato), relato);
+
+			criteriaConsulta.where(predicateDenunciaRelato);
+			denunciaRelato = session.createQuery(criteriaConsulta).getSingleResult();
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return denunciaRelato;
+	}
 
 
 }
