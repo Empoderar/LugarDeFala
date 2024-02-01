@@ -15,6 +15,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria_;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
@@ -206,35 +208,33 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    return usuarios;
 	}
 
-	public List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia) {
-	    Session session = null;
-	    List<Usuario> usuarios = null;
+	public Usuario recuperarUsuariosPorIdDenuncia(Long id) {
+		 Usuario usuario = null;
+		 Session session = null;
 
-	    try {
-	        session = getSessionFactory().openSession();
-	        session.beginTransaction();
+		    try {
+		        session = getSessionFactory().openSession();
+		        session.beginTransaction();
 
-	        CriteriaBuilder construtor = session.getCriteriaBuilder();
-	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+		        CriteriaBuilder builder = session.getCriteriaBuilder();
+		        CriteriaQuery<Usuario> criteria = builder.createQuery(Usuario.class);
+		        Root<Usuario> root = criteria.from(Usuario.class);
 
-	        Join<Usuario, Denuncia> joinDenuncia = raizUsuario.join("denunciasDeUsuario");
+		        criteria.select(root).where(builder.equal(root.get("id"), id));
 
-	        criteria.where(construtor.equal(joinDenuncia.get("id"), denuncia.getId()));
-	        usuarios = session.createQuery(criteria).getResultList();
+		        usuario = session.createQuery(criteria).uniqueResult();
 
-	        session.getTransaction().commit();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return null;
-	    } finally {
-	        if (session != null) {
-	            session.close();
-	        }
-	    }
+		        session.getTransaction().commit();
 
-	    return usuarios;
-	}
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        if (session != null) {
+		            session.close();
+		        }
+		    }
+		    return usuario;
+		}
 
 
 	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
