@@ -103,32 +103,36 @@ public class Usuario implements Serializable {
          conselhos = new ArrayList<>();
          comunidades = new ArrayList<>();
      }
-    
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+
+    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Comunidade comunidade) {
      	this.nome = nome;
          this.sobrenome = sobrenome;
          this.dataNascimento = dataNascimento;
          this.apelido = apelido;
          this.senha = senha;
-         this.descricao = descricao;
          denunciasDeUsuario = new ArrayList<>();
          relatos = new ArrayList<>();
          conselhos = new ArrayList<>();
          comunidades = new ArrayList<>();
      }
-
-    public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
-       this.id = id;
+    
+    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao, Comunidade comunidade) {
     	this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.apelido = apelido;
         this.senha = senha;
         this.descricao = descricao;
-        denunciasDeUsuario = new ArrayList<>();
-        relatos = new ArrayList<>();
-        conselhos = new ArrayList<>();
         comunidades = new ArrayList<>();
+    }
+    
+    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+    	this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
+        this.apelido = apelido;
+        this.senha = senha;
+        this.descricao = descricao;
     }
 
     public Usuario(String nome, String sobrenome, String apelido) {
@@ -148,6 +152,22 @@ public class Usuario implements Serializable {
 
 	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
             Conselho conselho, Contato contato, Comunidade comunidade) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
+        this.apelido = apelido;
+        this.senha = senha;
+        this.descricao = descricao;
+        this.id = id;
+        this.contato = contato;
+        denunciasDeUsuario = new ArrayList<>();
+        relatos = new ArrayList<>();
+        conselhos = new ArrayList<>();
+        this.comunidades = new ArrayList<>();
+        this.comunidades.add(comunidade);
+    }
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
+            Comunidade comunidade) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
