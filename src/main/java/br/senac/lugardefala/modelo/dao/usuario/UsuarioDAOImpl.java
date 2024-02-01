@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -20,7 +21,6 @@ import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
@@ -277,6 +277,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
+			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuariosPeloId;
+	}
+	
+
+	public Usuario recuperarUsuarioPeloIdFetch(Long id) {
+		Session session = null;
+		Usuario usuariosPeloId = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			raizUsuario.fetch("comunidades", JoinType.LEFT);
 			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
 			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
 			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
