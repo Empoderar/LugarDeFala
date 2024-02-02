@@ -16,11 +16,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
-import br.senac.lugardefala.modelo.entidade.categoria.Categoria_;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
@@ -85,7 +82,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public Usuario buscarUsuarioPeloNome(String nome) {
+	public Usuario recuperarUsuarioPeloNome(String nome) {
 		Session session = null;
 		Usuario usuariosPeloNome = null;
 		try {
@@ -106,6 +103,29 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 		return usuariosPeloNome;
+	}
+	
+	public Usuario recuperarUsuarioPeloApelido(String apelido) {
+		Session session = null;
+		Usuario usuariosPeloApelido = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			ParameterExpression<String> usuarioPeloApelido = construtor.parameter(String.class, "apelido");
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("apelido"), usuarioPeloApelido));
+			usuariosPeloApelido= session.createQuery(criteria).setParameter(usuarioPeloApelido, apelido).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuariosPeloApelido;
 	}
 
 	public List<Usuario> recuperarUsuarios() {

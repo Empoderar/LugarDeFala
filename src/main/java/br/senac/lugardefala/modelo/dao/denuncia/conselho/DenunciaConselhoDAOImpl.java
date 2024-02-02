@@ -14,11 +14,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho_;
-import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {

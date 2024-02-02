@@ -38,6 +38,11 @@ public class DenunciaRelato extends Denuncia {
 		this.relato = relato;
 		this.relatoDenunciado = relatoDenunciado;
 	}
+	
+	public DenunciaRelato(String motivo, Usuario usuarioDenunciante,Relato relatoDenunciado) {
+		super(motivo, usuarioDenunciante);
+		this.relatoDenunciado = relatoDenunciado;
+	}
 
 	public Relato getDenunciaDeRelato() {
 		return relato;

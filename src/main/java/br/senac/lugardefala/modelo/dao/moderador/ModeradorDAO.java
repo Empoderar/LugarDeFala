@@ -13,9 +13,9 @@ public interface ModeradorDAO {
 
 	void atualizarModerador(Moderador moderador);
 
-	List<Moderador> consultarModeradoresPelaComunidade(Comunidade comunidade);
+	List<Moderador> recuperarModeradoresPelaComunidade(Comunidade comunidade);
 	
-	List<Moderador> consultarModeradoresPeloId(Long id);
+	List<Moderador> recuperarModeradoresPeloId(Long id);
 	
-	Moderador consultarModeradorPeloNome(String nome);
+	Moderador recuperarModeradorPeloNome(String nome);
 }
