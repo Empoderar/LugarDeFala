@@ -92,10 +92,9 @@
 				um tipo de violência onde você pode buscar acolhimento.</p>
 		</div>
 		<div>
-			<p>O que é um moderador?</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-				recusandae nobis commodi maiores cumque nemo debitis odit qui
-				inventore!</p>
+			<p>O que é um voluntário?</p>
+			<p>Voluntários são usuários comuns que moderam as comunidades e
+				gerenciam possiveis problemas.</p>
 		</div>
 	</div>
 	<div>
