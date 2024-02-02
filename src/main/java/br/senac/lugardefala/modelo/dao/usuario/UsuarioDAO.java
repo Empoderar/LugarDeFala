@@ -23,11 +23,16 @@ public interface UsuarioDAO {
 	
 	Usuario recuperarUsuarioPeloId(Long id);
 	
+	Usuario recuperarUsuarioPeloIdFetch(Long id);
+	
 	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
 
 	List <Usuario> recuperarUsuariosPorConselho(Conselho conselho);
 
-	List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia);
+	Usuario recuperarUsuariosPorIdDenuncia(Long id);
 
 	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
+	
+
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,6 +14,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade_;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
@@ -153,6 +156,33 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	        }
 	    }
 	    return comunidade;
+	}
+	
+	public List<Comunidade> recuperarComunidadesPeloUsuario(Usuario usuario) {
+		Session session = null;
+		List<Comunidade> comunidades = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+			raizComunidade.fetch("usuarios", JoinType.LEFT);
+
+			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.usuarios), usuario));
+			comunidades = session.createQuery(criteria).getResultList();
+
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return comunidades;
 	}
 
 

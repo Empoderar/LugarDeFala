@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -15,12 +16,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
+import br.senac.lugardefala.modelo.entidade.categoria.Categoria_;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
@@ -206,35 +208,33 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	    return usuarios;
 	}
 
-	public List<Usuario> recuperarUsuariosPorDenuncia(Denuncia denuncia) {
-	    Session session = null;
-	    List<Usuario> usuarios = null;
+	public Usuario recuperarUsuariosPorIdDenuncia(Long id) {
+		 Usuario usuario = null;
+		 Session session = null;
 
-	    try {
-	        session = getSessionFactory().openSession();
-	        session.beginTransaction();
+		    try {
+		        session = getSessionFactory().openSession();
+		        session.beginTransaction();
 
-	        CriteriaBuilder construtor = session.getCriteriaBuilder();
-	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+		        CriteriaBuilder builder = session.getCriteriaBuilder();
+		        CriteriaQuery<Usuario> criteria = builder.createQuery(Usuario.class);
+		        Root<Usuario> root = criteria.from(Usuario.class);
 
-	        Join<Usuario, Denuncia> joinDenuncia = raizUsuario.join("denunciasDeUsuario");
+		        criteria.select(root).where(builder.equal(root.get("id"), id));
 
-	        criteria.where(construtor.equal(joinDenuncia.get("id"), denuncia.getId()));
-	        usuarios = session.createQuery(criteria).getResultList();
+		        usuario = session.createQuery(criteria).uniqueResult();
 
-	        session.getTransaction().commit();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return null;
-	    } finally {
-	        if (session != null) {
-	            session.close();
-	        }
-	    }
+		        session.getTransaction().commit();
 
-	    return usuarios;
-	}
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        if (session != null) {
+		            session.close();
+		        }
+		    }
+		    return usuario;
+		}
 
 
 	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
@@ -277,6 +277,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
+			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return usuariosPeloId;
+	}
+	
+
+	public Usuario recuperarUsuarioPeloIdFetch(Long id) {
+		Session session = null;
+		Usuario usuariosPeloId = null;
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			raizUsuario.fetch("comunidades", JoinType.LEFT);
 			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
 			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
 			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
