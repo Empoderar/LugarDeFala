@@ -37,7 +37,7 @@ public class Conselho implements Serializable {
     @Column(name = "avaliacaoRuim_conselho", nullable = false)
     private Integer avaliacaoRuim;  
     
-    @Column(name = "data_conselho", nullable = false)
+    @Column(name = "data_conselho", nullable = true)
     private LocalDate data;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -69,6 +69,7 @@ public class Conselho implements Serializable {
 		this.data = data;
 	
 	}
+
 
 	public Conselho(long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data, Usuario usuario, Relato relato, Comunidade comunidade) {
 		this.id = id;

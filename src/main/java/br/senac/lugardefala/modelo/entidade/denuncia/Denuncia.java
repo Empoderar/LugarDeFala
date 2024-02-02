@@ -31,7 +31,7 @@ public class Denuncia implements Serializable {
 	@Column(name = "id_denuncia")
 	private Long id;
 
-	@Column(name = "data_denuncia", nullable = false, unique = false)
+	@Column(name = "data_denuncia", nullable = true, unique = false)
 	private LocalDate data;
 
 	@Column(name = "motivo_denuncia", length = 200, nullable = true, unique = false)
@@ -53,6 +53,18 @@ public class Denuncia implements Serializable {
 		this.data = data;
 		this.motivo = motivo;
 		this.status = status;
+		this.usuarioDenunciante = usuarioDenunciante;
+	}
+	
+	public Denuncia(LocalDate data, String motivo, Status status, Usuario usuarioDenunciante) {
+		this.data = data;
+		this.motivo = motivo;
+		this.status = status;
+		this.usuarioDenunciante = usuarioDenunciante;
+	}
+	
+	public Denuncia(String motivo, Usuario usuarioDenunciante) {
+		this.motivo = motivo;
 		this.usuarioDenunciante = usuarioDenunciante;
 	}
 

@@ -13,7 +13,6 @@
 <body>
 	<hl>Cadastro</hl>
 		<div>
-			<div>
         <form action="inserir-usuario" method="post">
             <label for="fnome">Nome</label>
             <input type="text" id="fnome" name="nome" required maxlength="50">

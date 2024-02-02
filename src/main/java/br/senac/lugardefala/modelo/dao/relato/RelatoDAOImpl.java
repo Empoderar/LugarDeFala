@@ -2,7 +2,6 @@ package br.senac.lugardefala.modelo.dao.relato;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -110,7 +109,7 @@ public class RelatoDAOImpl implements RelatoDAO {
     }
 
 
-    public List <Relato> consultarRelatosPeloUsuario(Usuario usuario) {
+    public List <Relato> recuperarRelatosPeloUsuario(Usuario usuario) {
     	List<Relato> relatosUsuario = null;
     	Session session = null;
   	  
@@ -144,7 +143,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosUsuario;
     }
 
-    public List<Relato> consultarRelatosPeloStatus(Status status) {
+    public List<Relato> recuperarRelatosPeloStatus(Status status) {
     	
     	List<Relato> relatosStatus = null;
     	Session session = null;
@@ -179,7 +178,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosStatus;
     }
 
-    public List <Relato> consultarRelatosPelaComunidade(Comunidade comunidade) {
+    public List <Relato> recuperarRelatosPelaComunidade(Comunidade comunidade) {
     	
     	List<Relato> relatosComunidade = null;
     	Session session = null;
@@ -214,7 +213,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-    public List<Relato> consultarRelatosPelaCategoria(Categoria categoria) {
+    public List<Relato> recuperarRelatosPelaCategoria(Categoria categoria) {
         List<Relato> relatosCategoria = null;
         Session session = null;
 
@@ -247,7 +246,7 @@ public class RelatoDAOImpl implements RelatoDAO {
 
 
     
-    public Relato consultarRelatoPorId(Long id) {
+    public Relato recuperarRelatoPorId(Long id) {
 
     	Relato relatosPorId = null;
     	Session session = null;

@@ -34,8 +34,8 @@ public class Moderador extends Usuario {
     public Moderador() {
     }
     
-    public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
-        super(nome, sobrenome, dataNascimento, apelido, senha);
+    public Moderador(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
+        super(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
 
     }
     
@@ -43,12 +43,11 @@ public class Moderador extends Usuario {
         super(nome, sobrenome, dataNascimento, apelido, senha, descricao);
 
     }
+    
+    
+    public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
+        super(nome, sobrenome, dataNascimento, apelido, senha);
 
-    public Moderador(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao, Comunidade comunidade) {
-        super(id,nome, sobrenome, dataNascimento, apelido, senha, descricao, comunidade);
-        relatosModerados = new ArrayList<>();
-        denunciaDeModerador = new ArrayList<>();
-//        comunidades = new ArrayList<>();
     }
 
     public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,

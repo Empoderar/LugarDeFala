@@ -43,7 +43,7 @@ public class Relato implements Serializable {
 	@Column(name = "conteudo_relato", length = 500, nullable = true, unique = false)
 	private String conteudo;
 
-	@Column(name = "data_relato", nullable = false, unique = false)
+	@Column(name = "data_relato", nullable = true, unique = false)
 	private LocalDate data;
 
 	@Column(name = "avaliacao_relato", length = 200, nullable = true, unique = false)
@@ -88,7 +88,8 @@ public class Relato implements Serializable {
 	}
 	
 	
-	public Relato(String conteudo, LocalDate data, Integer avaliacao, Status status) {
+	public Relato(Long id, String conteudo, LocalDate data, Integer avaliacao, Status status) {
+		this.id = id;
 		this.conteudo = conteudo;
 		this.data = data;
 		this.avaliacao = avaliacao;
@@ -97,6 +98,17 @@ public class Relato implements Serializable {
 		categoriaRelato = new ArrayList<>();
 		denunciaRelato = new ArrayList<>();
 	}
+
+	public Relato( String conteudo, LocalDate data, Integer avaliacao, Status status) {
+		this.conteudo = conteudo;
+		this.data = data;
+		this.avaliacao = avaliacao;
+		this.status = status;
+		conselhoRelato = new ArrayList<>();
+		categoriaRelato = new ArrayList<>();
+		denunciaRelato = new ArrayList<>();
+	}
+
 
 
 	public Relato(Long id, String conteudo, LocalDate data, Usuario usuario, Integer avaliacao, Moderador moderador, Status status, Comunidade comunidade) {
