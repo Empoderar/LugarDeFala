@@ -554,28 +554,29 @@
 //		List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadesPeloIdModerador(10L);
 //		for (Comunidade comunidades : recuperarComunidadeModerador) {
 //			if (comunidades != null) {
-//				System.out.println("Recuperar comunidade pelo id moderador : " + comunidades.getNome());
+//				System.out.println("Recuperar comunidades pelo id do moderador : " + comunidades.getNome());
 //			} else {
-//				System.out.println("Não existe comunidade com esse moderador");
+//				System.out.println("Não existem comunidades com esse moderador");
 //			}
 //		}
 //
 //		List<Comunidade> recuperarComunidadeUsuario = comunidadeDAO.recuperarComunidadesPeloIdUsuario(1L);
 //		for (Comunidade comunidades : recuperarComunidadeUsuario) {
 //			if (comunidades != null) {
-//				System.out.println("Recuperar comunidade pelo id usuario : " + comunidades.getNome());
+//				System.out.println("Recuperar comunidades pelo id do usuario : " + comunidades.getNome());
 //			} else {
-//				System.out.println("Não existe comunidade com esse usuario");
+//				System.out.println("Não existem comunidades com esse usuario");
 //			}
 //		}
 //
 //		List<Comunidade> recuperarComunidadePeloUsuario = comunidadeDAO.recuperarComunidadesPeloUsuario(usuario2);
 //
-//		for (Comunidade comunidades : recuperarComunidadePeloUsuario) {
-//
-//			System.out.println("Recuperar comunidade pelo id usuario : " + comunidades.getNome());
-//
-//			System.out.println("Não existe comunidade com esse usuario");
+//		if (!recuperarComunidadePeloUsuario.isEmpty()) {
+//			for (Comunidade c : recuperarComunidadePeloUsuario) {
+//				System.out.println("Recuperar comunidades pelo nome do usuário: " + c.getNome());
+//			}
+//		} else {
+//			System.out.println("Não existem comunidades com esse usuário");
 //		}
 //
 //	}

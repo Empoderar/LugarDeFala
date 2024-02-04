@@ -11,9 +11,9 @@
 	<form action="/inserir-relato" method="post">
 		<input type="text" value="<c:out value='${relato.conteudo}' />"
 			id="conteudo" name="conteudo" placeholder="Digite aqui seu relato...">
+		<p>Data atual do relato: ${dataAtual}</p>
 
 		<fieldset>
-
 			<legend>Categorias:</legend>
 
 			<div>
@@ -40,24 +40,24 @@
 
 			<div>
 
-				<input type="checkbox" id="aconselhamento_juridico"
-					name="aconselhamento_juridico" /> <label
-					for="aconselhamento_juridico">Aconselhamento Jurídico</label>
+				<input type="checkbox" id="aconselhamento-juridico"
+					name="aconselhamento-juridico" /> <label
+					for="aconselhamento-juridico">Aconselhamento Jurídico</label>
 
 			</div>
 
 			<div>
 
-				<input type="checkbox" id="acolhimento_temporario"
-					name="acolhimento_temporario" /> <label
-					for="acolhimento_temporario">Acolhimento Temporário</label>
+				<input type="checkbox" id="acolhimento-temporario"
+					name="acolhimento-temporario" /> <label
+					for="acolhimento-temporario">Acolhimento Temporário</label>
 
 			</div>
 
 			<div>
 
-				<input type="checkbox" id="assistencia_social"
-					name="assistencia_social" /> <label for="assistencia_social">Assistência
+				<input type="checkbox" id="assistencia-social"
+					name="assistencia-social" /> <label for="assistencia-social">Assistência
 					Social</label>
 
 			</div>
