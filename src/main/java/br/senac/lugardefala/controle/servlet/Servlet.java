@@ -105,8 +105,8 @@ public class Servlet extends HttpServlet {
 				mostrarTelaCadastroComunidade(request, response);
 				break;
 
-			case "/cadastro-relato":
-				mostrarTelaCadastroRelato(request, response);
+			case "/tela-relatos":
+				mostrarTelaRelatos(request, response);
 				break;
 
 			case "/formulario-moderador":
@@ -172,15 +172,15 @@ public class Servlet extends HttpServlet {
 			case "/inserir-denuncia-de-conselho":
 				inserirDenunciaConselho(request, response);
 				break;
-				
+
 			case "/inserir-denuncia-de-moderador":
 				inserirDenunciaModerador(request, response);
 				break;
-				
+
 			case "/cadastro-denuncia-usuario":
 				inserirDenunciaRelato(request, response);
 				break;
-				
+
 			case "/inserir-denuncia-de-usuario":
 				inserirDenunciaUsuario(request, response);
 				break;
@@ -231,8 +231,8 @@ public class Servlet extends HttpServlet {
 			}
 		} catch (SQLException ex) {
 			request.setAttribute("erro", ex.getMessage());
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
-	        dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -483,10 +483,11 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void inserirRelato(HttpServletRequest request, HttpServletResponse response) 
+	private void inserirRelato(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		String conteudo = request.getParameter("conteudo");
-		Relato relatoParaInserir = new Relato(conteudo);
+		LocalDate dataAtual = LocalDate.now();
+		Relato relatoParaInserir = new Relato(conteudo,dataAtual);
 		relatoDao.inserirRelato(relatoParaInserir);
 
 		List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
@@ -513,13 +514,13 @@ public class Servlet extends HttpServlet {
 			categoriasParaInserir.add(categoria);
 		}
 
-		if (request.getParameter("acolhimento_temporarioe") != null) {
+		if (request.getParameter("acolhimento-temporario") != null) {
 			Categoria categoria = new Categoria("Acolhimento Temporário");
 			categoriaDao.inserirCategoria(categoria);
 			categoriasParaInserir.add(categoria);
 		}
 
-		if (request.getParameter("assistencia_social") != null) {
+		if (request.getParameter("assistencia-social") != null) {
 			Categoria categoria = new Categoria("Assistência Social");
 			categoriaDao.inserirCategoria(categoria);
 			categoriasParaInserir.add(categoria);
@@ -527,6 +528,8 @@ public class Servlet extends HttpServlet {
 
 		relatoParaInserir.setCategoriaRelato(categoriasParaInserir);
 		
+		request.setAttribute("dataAtual", dataAtual);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -573,51 +576,50 @@ public class Servlet extends HttpServlet {
 		Conselho conselhoDenunciado = conselhoDao
 				.recuperarConselhoPeloId((Long.parseLong(request.getParameter("conselho-denunciado"))));
 
-		DenunciaConselho denunciaConselhoParaInserir = new DenunciaConselho(usuarioDenunciante, motivo, conselhoDenunciado);
+		DenunciaConselho denunciaConselhoParaInserir = new DenunciaConselho(usuarioDenunciante, motivo,
+				conselhoDenunciado);
 		denunciaConselhoDao.inserirDenunciaConselho(denunciaConselhoParaInserir);
 
 		response.sendRedirect("perfil-comunidade");
 	}
-	
+
 	private void inserirDenunciaModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		Usuario usuarioDenunciante = usuarioDao
-				.recuperarUsuarioPeloNome(request.getParameter("usuario-denunciante"));
+		Usuario usuarioDenunciante = usuarioDao.recuperarUsuarioPeloNome(request.getParameter("usuario-denunciante"));
 		String motivo = request.getParameter("motivo");
 		Moderador moderadorDenunciado = moderadorDao
 				.recuperarModeradorPeloNome(request.getParameter("moderador-denunciado"));
 
-		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(motivo, usuarioDenunciante, moderadorDenunciado);
+		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(motivo, usuarioDenunciante,
+				moderadorDenunciado);
 		denunciaModeradorDao.inserirDenunciaModerador(denunciaModeradorParaInserir);
 
 		response.sendRedirect("perfil-comunidade");
 	}
-	
+
 	private void inserirDenunciaRelato(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		Usuario usuarioDenunciante = usuarioDao
-				.recuperarUsuarioPeloNome(request.getParameter("usuario-denunciante"));
+		Usuario usuarioDenunciante = usuarioDao.recuperarUsuarioPeloNome(request.getParameter("usuario-denunciante"));
 		String motivo = request.getParameter("motivo");
 		Relato relatoDenunciado = relatoDao
 				.recuperarRelatoPorId((Long.parseLong(request.getParameter("relato-denunciado"))));
 
-		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(motivo,usuarioDenunciante, relatoDenunciado);
+		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(motivo, usuarioDenunciante, relatoDenunciado);
 		denunciaRelatoDao.inserirDenunciaRelato(denunciaRelatoParaInserir);
 
 		response.sendRedirect("perfil-comunidade");
 	}
-	
+
 	private void inserirDenunciaUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
 		Usuario usuarioDenunciante = usuarioDao
 				.recuperarUsuarioPeloApelido(request.getParameter("usuario-denunciante"));
-		Usuario usuarioDenunciado = usuarioDao
-				.recuperarUsuarioPeloApelido(request.getParameter("usuario-denunciado"));
+		Usuario usuarioDenunciado = usuarioDao.recuperarUsuarioPeloApelido(request.getParameter("usuario-denunciado"));
 		String motivo = request.getParameter("motivo");
-		
+
 		DenunciaUsuario denunciaUsuarioParaInserir = new DenunciaUsuario(usuarioDenunciante, motivo, usuarioDenunciado);
 		denunciaUsuarioDao.inserirDenunciaUsuario(denunciaUsuarioParaInserir);
 
@@ -678,26 +680,34 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
-		Comunidade comunidade = new Comunidade("nomebolado", "descricaobolada");
-		Comunidade comunidade1 = new Comunidade("ffsdfsolado", "desfsdda");
+		Comunidade comunidade1 = new Comunidade("nomebolado", "descricaobolada");
+		Comunidade comunidade2 = new Comunidade("ffsdfsolado", "desfsdda");
 		comunidadeDao.inserirComunidade(comunidade1);
-		comunidadeDao.inserirComunidade(comunidade);
-		Usuario usuario2 = new Usuario("joao", "fbgagkhfds", LocalDate.of(2022, 10, 10), "jdvh", "89237", comunidade);
+		comunidadeDao.inserirComunidade(comunidade2);
 
+		Usuario usuario2 = new Usuario("joao", "fbgagkhfds", LocalDate.of(2022, 10, 10), "jdvh", "89237");
+
+		usuario2.adicionarComunidade(comunidade1);
+		usuario2.adicionarComunidade(comunidade2);
 		usuarioDao.inserirUsuario(usuario2);
 
 		Usuario usuarioRecuperado = usuarioDao.recuperarUsuarioPeloIdFetch(usuario2.getId());
-		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPeloUsuario(usuario2);
 
-		request.setAttribute("usuario", usuario2);
+		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPeloUsuario(usuarioRecuperado);
+		comunidades.add(comunidade1);
+		comunidades.add(comunidade2);
+
+		request.setAttribute("usuario", usuarioRecuperado);
 		request.setAttribute("comunidades", comunidades);
+
+		for (Comunidade c : comunidades) {
+			System.out.println("Nome da comunidade: " + c.getNome());
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -743,7 +753,7 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarTelaCadastroRelato(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaRelatos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");

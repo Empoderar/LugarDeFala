@@ -73,8 +73,6 @@ public class Comunidade implements Serializable {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        relatos = new ArrayList<>();
-        moderadores = new ArrayList<>();
         usuarios = new ArrayList<>();
     }
  
