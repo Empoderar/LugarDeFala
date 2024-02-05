@@ -1,19 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head> 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastrar Usuário</title>
-<style>
-</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Moderador</title>
+    <style>
+    </style>
 </head>
-<meta charset="UTF-8">
+
 <body>
-	<h1>Cadastro</h1>
-		<div>
-        <form action="inserir-usuario" method="post">
+    <h1>Cadastro de moderador</h1>
+    <div>
+        <form action="inserir-moderador" method="post">
             <label for="fnome">Nome</label>
             <input type="text" id="fnome" name="nome" required maxlength="50">
             <label for="sobrenome">Sobrenome</label>
@@ -25,7 +25,7 @@
             <label for="email">E-mail</label>
             <input type="email" id="email" name="email" required maxlength="40">
             <label for="nascimento">Data de Nascimento</label>
-            <input type="date" id="nascimento" name="data-nascimento" required>
+            <input type="date" id="nascimento" name="data-nascimento">
             <label for="senha">Senha</label>
             <input type="password" id="senha" name="senha" required maxlength="20">
             <label for="csenha">Confirmar senha</label>
@@ -67,6 +67,6 @@
             </div>
         </footer>
     </div>
-
 </body>
+
 </html>
