@@ -71,16 +71,32 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			System.out.println("Erro ao deletar usuário: " + e.getMessage());
 		}
 	}
-
+	
 	public void atualizarUsuario(Usuario usuario) {
-		try (Session session = getSessionFactory().openSession()) {
-			session.beginTransaction();
-			session.update(usuario);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
-		}
+	    try (Session session = getSessionFactory().openSession()) {
+	        session.beginTransaction();
+
+	        if (usuario.getId() != null && session.get(Usuario.class, usuario.getId()) != null) {
+	            session.update(usuario);
+	        } else {
+	            System.out.println("Erro: Tentativa de atualizar uma entidade não gerenciada ou com ID nulo.");
+	        }
+
+	        session.getTransaction().commit();
+	    } catch (Exception e) {
+	        System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+	    }
 	}
+
+//	public void atualizarUsuario(Usuario usuario) {
+//		try (Session session = getSessionFactory().openSession()) {
+//			session.beginTransaction();
+//			session.update(usuario);
+//			session.getTransaction().commit();
+//		} catch (Exception e) {
+//			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+//		}
+//	}
 
 	public Usuario recuperarUsuarioPeloNome(String nome) {
 		Session session = null;

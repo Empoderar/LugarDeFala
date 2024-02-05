@@ -40,10 +40,10 @@ public class Relato implements Serializable {
 	@Column(name = "id_relato")
 	private Long id;
 
-	@Column(name = "conteudo_relato", length = 500, nullable = true, unique = false)
+	@Column(name = "conteudo_relato", length = 500, nullable = false, unique = false)
 	private String conteudo;
 
-	@Column(name = "data_relato", nullable = true, unique = false)
+	@Column(name = "data_relato", nullable = false, unique = false)
 	private LocalDate data;
 
 	@Column(name = "avaliacao_relato", length = 200, nullable = true, unique = false)

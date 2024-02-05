@@ -11,7 +11,7 @@
 </head>
 <meta charset="UTF-8">
 <body>
-	<hl>Cadastro</hl>
+	<h1>Cadastro</h1>
 		<div>
         <form action="inserir-usuario" method="post">
             <label for="fnome">Nome</label>

@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<hl>Cadastro de Moderador</hl>
+		<h1>Cadastro de Moderador</h1>
 		<div>
 			<p>Leia as informações no pdf para responder ao formulário</p>
 			<a href="#" target="_self">Link para o PDF</a>

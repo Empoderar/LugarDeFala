@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,6 +53,7 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getLogger(Servlet.class.getName());
 	private UsuarioDAO usuarioDao;
 	private ModeradorDAO moderadorDao;
 	private ComunidadeDAO comunidadeDao;
@@ -127,10 +129,6 @@ public class Servlet extends HttpServlet {
 
 			case "/perfil-comunidade":
 				mostrarTelaPerfilDaComunidade(request, response);
-				break;
-
-			case "/atualizar-senha":
-				mostrarTelaAtualizarSenha(request, response);
 				break;
 
 			case "/tela-conselhos":
@@ -209,6 +207,10 @@ public class Servlet extends HttpServlet {
 				atualizarUsuario(request, response);
 				break;
 
+			case "/atualizar-senha":
+				atualizarSenha(request, response);
+				break;
+
 			case "/atualizar-moderador":
 				atualizarModerador(request, response);
 				break;
@@ -256,6 +258,17 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("perfil-usuario.jsp");
 
 		usuarioParaAtualizar.setContato(contatoParaAtualizar);
+	}
+
+	private void atualizarSenha(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		String senha = request.getParameter("senha");
+		Usuario usuarioParaAtualizar = new Usuario(senha);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		response.sendRedirect("atualizar-senha.jsp");
+
 	}
 
 	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
@@ -485,53 +498,63 @@ public class Servlet extends HttpServlet {
 
 	private void inserirRelato(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		String conteudo = request.getParameter("conteudo");
-		LocalDate dataAtual = LocalDate.now();
-		Relato relatoParaInserir = new Relato(conteudo,dataAtual);
-		relatoDao.inserirRelato(relatoParaInserir);
+		try {
+			String conteudo = request.getParameter("conteudo");
+			LocalDate dataAtual = LocalDate.now();
+			Relato relatoParaInserir = new Relato(conteudo, dataAtual);
+			relatoDao.inserirRelato(relatoParaInserir);
 
-		List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
-		if (request.getParameter("sororidade") != null) {
-			Categoria categoria = new Categoria("Sororidade");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
+			List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
+			if (request.getParameter("sororidade") != null) {
+				Categoria categoria = new Categoria("Sororidade");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+			if (request.getParameter("ajude-me") != null) {
+				Categoria categoria = new Categoria("Ajude-me");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+
+			if (request.getParameter("desabafo") != null) {
+				Categoria categoria = new Categoria("Desabafo");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+
+			if (request.getParameter("aconselhamento-juridico") != null) {
+				Categoria categoria = new Categoria("Aconselhamento Jurídico");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+
+			if (request.getParameter("acolhimento-temporario") != null) {
+				Categoria categoria = new Categoria("Acolhimento Temporário");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+
+			if (request.getParameter("assistencia-social") != null) {
+				Categoria categoria = new Categoria("Assistência Social");
+				categoriaDao.inserirCategoria(categoria);
+				categoriasParaInserir.add(categoria);
+			}
+
+			relatoParaInserir.setCategoriaRelato(categoriasParaInserir);
+
+			request.setAttribute("dataAtual", dataAtual);
+			request.setAttribute("relato", relatoParaInserir);
+			request.setAttribute("conteudo", conteudo);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
+			dispatcher.forward(request, response);
+
+			LOGGER.info("Relato inserido com sucesso.");
+
+		} catch (Exception e) {
+			LOGGER.severe("Erro ao inserir relato: " + e.getMessage());
+			e.printStackTrace();
 		}
-		if (request.getParameter("ajude-me") != null) {
-			Categoria categoria = new Categoria("Ajude-me");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
-		}
-
-		if (request.getParameter("desabafo") != null) {
-			Categoria categoria = new Categoria("Desabafo");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
-		}
-
-		if (request.getParameter("aconselhamento-juridico") != null) {
-			Categoria categoria = new Categoria("Aconselhamento Jurídico");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
-		}
-
-		if (request.getParameter("acolhimento-temporario") != null) {
-			Categoria categoria = new Categoria("Acolhimento Temporário");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
-		}
-
-		if (request.getParameter("assistencia-social") != null) {
-			Categoria categoria = new Categoria("Assistência Social");
-			categoriaDao.inserirCategoria(categoria);
-			categoriasParaInserir.add(categoria);
-		}
-
-		relatoParaInserir.setCategoriaRelato(categoriasParaInserir);
-		
-		request.setAttribute("dataAtual", dataAtual);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	private void inserirCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -542,7 +565,7 @@ public class Servlet extends HttpServlet {
 		Categoria categoria = new Categoria(nome);
 		categoriaDao.inserirCategoria(categoria);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("\"assets/paginas/cadastro-relato.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/inserir-categoria.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -715,13 +738,6 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarTelaAtualizarSenha(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/.jsp");
 		dispatcher.forward(request, response);
 	}
 
