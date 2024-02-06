@@ -83,6 +83,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	public List<Moderador> recuperarModeradoresPelaComunidade(Comunidade comunidade) {
 	    List<Moderador> moderadores = null;
 	    Session session = null;
+
 	    try {
 	        session = getSessionFactory().openSession();
 	        session.beginTransaction();
@@ -92,7 +93,10 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	        Root<Moderador> raizModerador = criteria.from(Moderador.class);
 	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
 
-	        moderadores = session.createQuery(criteria).getResultList();
+	        ParameterExpression<Comunidade> comunidadeParam = construtor.parameter(Comunidade.class);
+	        criteria.select(raizModerador).where(construtor.equal(joinComunidades, comunidadeParam));
+
+	        moderadores = session.createQuery(criteria).setParameter(comunidadeParam, comunidade).getResultList();
 
 	        session.getTransaction().commit();
 

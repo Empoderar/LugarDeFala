@@ -35,6 +35,10 @@ public class DenunciaUsuario extends Denuncia {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
+	public DenunciaUsuario() {
+		
+	}
+	
     public DenunciaUsuario(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, Status status, Usuario usuarioDenunciado) {
         super(id, data, motivo, status, usuarioDenunciante);
         this.usuarioDenunciado = usuarioDenunciado;

@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.dao.denuncia.moderador;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -60,12 +61,29 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
     }
 
     public DenunciaModerador recuperarDenunciaModeradorPorId(long id) {
-        try (Session session = getSessionFactory().openSession()) {
-            session.beginTransaction();
-            return session.get(DenunciaModerador.class, id);
+        Session session = null;
+        Transaction transaction = null;
+        DenunciaModerador denunciaModerador = null;
+
+        try {
+            session = getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            denunciaModerador = session.get(DenunciaModerador.class, id);
+
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
-            return null;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+
+        return denunciaModerador;
     }
+
 }

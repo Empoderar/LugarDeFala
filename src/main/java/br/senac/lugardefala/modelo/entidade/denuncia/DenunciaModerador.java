@@ -30,6 +30,10 @@ public class DenunciaModerador extends Denuncia {
 	@JoinColumn(name = "id_usuario_denunciado")
 	private Moderador moderador;
 	
+	public DenunciaModerador() {
+		
+	}
+	
 	public DenunciaModerador(long id, LocalDate data, String motivo, Status status,
 			Usuario usuarioDenunciante, Moderador moderadorDenunciado) {
 		super(id, data, motivo, status, usuarioDenunciante);

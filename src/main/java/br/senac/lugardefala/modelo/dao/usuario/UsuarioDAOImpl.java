@@ -7,7 +7,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -184,36 +183,35 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
+	    List<Usuario> usuariosComunidade = null;
 	    Session session = null;
-	    List<Usuario> usuarios = null;
 
 	    try {
 	        session = getSessionFactory().openSession();
 	        session.beginTransaction();
 
-	        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-	        CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
-	        Root<Usuario> root = criteriaQuery.from(Usuario.class);
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+	        Join<Usuario, Comunidade> joinComunidades = raizUsuario.join("comunidades");
 
-	        Predicate predicate = criteriaBuilder.isMember(comunidade, root.get("comunidades"));
+	        ParameterExpression<Comunidade> comunidadeParam = construtor.parameter(Comunidade.class);
+	        criteria.select(raizUsuario).where(construtor.equal(joinComunidades, comunidadeParam));
 
-	        criteriaQuery.select(root).where(predicate);
-
-	        usuarios = session.createQuery(criteriaQuery).getResultList();
+	        usuariosComunidade = session.createQuery(criteria).setParameter(comunidadeParam, comunidade).getResultList();
 
 	        session.getTransaction().commit();
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
+	        return null;
 	    } finally {
 	        if (session != null) {
 	            session.close();
 	        }
 	    }
-
-	    return usuarios;
+	    return usuariosComunidade;
 	}
-
 
 	public List<Usuario> recuperarUsuariosPorConselho(Conselho conselho) {
 	    Session session = null;
