@@ -1,9 +1,9 @@
 package br.senac.lugardefala.modelo.entidade.comunidade;
- 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +16,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
- 
+
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
- 
+
 @Entity
 @Table(name = "comunidade")
 public class Comunidade implements Serializable {
@@ -120,6 +120,7 @@ public class Comunidade implements Serializable {
         return false;
     }
  
+
 //    public boolean inserirListaModeradores(Moderador moderador) {
 //        return moderadores.add(moderador);
 //    }
@@ -133,24 +134,34 @@ public class Comunidade implements Serializable {
 //        }
 //        return false;
 //    }
- 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
- 
-    public String getDescricao() {
-        return descricao;
-    }
- 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
- 
-    public Moderador getModerador() {
-        return moderador;
-    }
- 
-    public void setModerador(Moderador moderador) {
-        this.moderador = moderador;
-    }
-}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Moderador getModerador() {
+		return moderador;
+	}
+
+	public void setModerador(Moderador moderador) {
+		this.moderador = moderador;
+	}
+
+	public boolean adicionarRelato(Relato relato) {
+		return relatos.add(relato);
+	}
+
+	public boolean removerRelato(Relato relato) {
+		return relatos.remove(relato);
+	}
+
+		
+	}

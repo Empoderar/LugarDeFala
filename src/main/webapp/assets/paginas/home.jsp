@@ -13,10 +13,9 @@
 	<header>
 		<table>
 			<tr>
-				<td><a href="#">Perfil</a></td>
-				<td><a href="#">Relatos</a></td>
 				<td><a href="#">Fale conosco</a></td>
-				<td><a href="#">Cadastre-se</a></td>
+				<td><a href="cadastro-usuario" target="_self">Cadastre-se</a></td>
+				<td><a href="login" target="_self">Entrar</a></td>
 			</tr>
 		</table>
 	</header>
@@ -39,7 +38,7 @@
 		<h3>Seja voluntário!</h3>
 		<p>Junte-se a nós na luta contra a violência às mulheres. Seja
 			voluntário, sua solidariedade faz a diferença.</p>
-		<button>Cadastre-se!</button>
+		<a href="cadastro-usuario" target="_self">Cadaste-se</a>
 	</div>
 	<div>
 		<h4>Comunidades</h4>
