@@ -31,13 +31,13 @@ public class Conselho implements Serializable {
     @Column(name = "conteudo_conselho", length = 200, nullable = false)
     private String conteudo;
 
-    @Column(name = "avaliacaoBoa_conselho", nullable = false)
+    @Column(name = "avaliacaoBoa_conselho", nullable = true)
     private Integer avaliacaoBoa;  
 
-    @Column(name = "avaliacaoRuim_conselho", nullable = false)
+    @Column(name = "avaliacaoRuim_conselho", nullable = true)
     private Integer avaliacaoRuim;  
     
-    @Column(name = "data_conselho", nullable = true)
+    @Column(name = "data_conselho", nullable = false)
     private LocalDate data;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -60,16 +60,26 @@ public class Conselho implements Serializable {
 		
 	
 	}
+	
+	public Conselho(String conteudo, LocalDate data) {
+		this.conteudo = conteudo;
+		this.data = data;
+	}
 
-	public Conselho(long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
+	public Conselho(String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
+		this.conteudo = conteudo;
+		this.avaliacaoBoa = avaliacaoBoa;
+		this.avaliacaoRuim = avaliacaoRuim;
+		this.data = data;
+	}
+	
+	public Conselho(Long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
 		this.id = id;
 		this.conteudo = conteudo;
 		this.avaliacaoBoa = avaliacaoBoa;
 		this.avaliacaoRuim = avaliacaoRuim;
 		this.data = data;
-	
 	}
-
 
 	public Conselho(long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data, Usuario usuario, Relato relato, Comunidade comunidade) {
 		this.id = id;
