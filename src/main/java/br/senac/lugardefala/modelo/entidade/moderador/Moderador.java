@@ -8,6 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,24 +33,27 @@ public class Moderador extends Usuario {
 
     @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DenunciaModerador> denunciaDeModerador;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "comunidade_moderador",joinColumns = @JoinColumn(name = "id_moderador"),
+            inverseJoinColumns = @JoinColumn(name = "id_comunidade")
+    )
+    private List<Comunidade> comunidades;
 
     public Moderador() {
     }
     
     public Moderador(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
         super(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
-
     }
     
     public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
         super(nome, sobrenome, dataNascimento, apelido, senha, descricao);
-
     }
     
     
     public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
         super(nome, sobrenome, dataNascimento, apelido, senha);
-
     }
 
     public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
@@ -55,6 +61,7 @@ public class Moderador extends Usuario {
         super(id, nome, sobrenome, dataNascimento, apelido, senha,descricao, conselho, contato, comunidade);
         relatosModerados = new ArrayList<>();
         denunciaDeModerador = new ArrayList<>();
+        comunidades = new ArrayList<>();
     }
     
     public Moderador(String nome, String sobrenome, String apelido) {
@@ -95,5 +102,12 @@ public class Moderador extends Usuario {
             }
         }
         return false;
+    }
+    
+    public List <Comunidade> getModeradores(){
+    	return comunidades;
+    }
+    public void setModeradores(List <Comunidade> comunidades) {
+    	this.comunidades = comunidades;
     }
 }

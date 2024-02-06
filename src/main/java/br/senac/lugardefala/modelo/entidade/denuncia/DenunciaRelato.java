@@ -21,31 +21,24 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 public class DenunciaRelato extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_relato")
-	private Relato relato;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario")
-	private Relato relatoDenunciado;
 	
-	@JoinColumn(name = "id_usuario_denunciante")
-	protected Usuario usuario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_relato_denunciado")
+	private Relato relato;
 	
 	public DenunciaRelato() {
 		
 	}
 	
-	public DenunciaRelato(Relato relato, long id, LocalDate data, String motivo, Status status,
-			Usuario usuarioDenunciante,Relato relatoDenunciado) {
+	public DenunciaRelato(long id, LocalDate data, String motivo, Status status,
+			Usuario usuarioDenunciante,Relato relato) {
 		super(id, data, motivo, status, usuarioDenunciante);
 		this.relato = relato;
-		this.relatoDenunciado = relatoDenunciado;
 	}
 	
-	public DenunciaRelato(String motivo, Usuario usuarioDenunciante,Relato relatoDenunciado) {
+	public DenunciaRelato(String motivo, Usuario usuarioDenunciante,Relato relato) {
 		super(motivo, usuarioDenunciante);
-		this.relatoDenunciado = relatoDenunciado;
+		this.relato = relato;
 	}
 
 	public Relato getDenunciaDeRelato() {

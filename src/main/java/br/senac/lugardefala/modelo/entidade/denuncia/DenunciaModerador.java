@@ -22,36 +22,31 @@ public class DenunciaModerador extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name = "id_moderador")
-	private Moderador moderadorDenunciado;
-
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario_denunciado")
+	@JoinColumn(name = "id_moderador_denunciado")
 	private Moderador moderador;
-	
+
 	public DenunciaModerador() {
 		
 	}
 	
 	public DenunciaModerador(long id, LocalDate data, String motivo, Status status,
-			Usuario usuarioDenunciante, Moderador moderadorDenunciado) {
+			Usuario usuarioDenunciante,Moderador moderador) {
 		super(id, data, motivo, status, usuarioDenunciante);
-		this.moderadorDenunciado = moderadorDenunciado;
+		this.moderador = moderador;
 	}
 	
 	public DenunciaModerador(String motivo,
-			Usuario usuarioDenunciante, Moderador moderadorDenunciado) {
+			Usuario usuarioDenunciante) {
 		super(motivo, usuarioDenunciante);
-		this.moderadorDenunciado = moderadorDenunciado;
 	}
 
-	public Moderador getDenunciaDeModerador() {
-		return moderadorDenunciado;
+	public Moderador getModerador() {
+		return moderador;
 	}
-
-	public void setDenunciaDeModerador(Moderador moderadorDenunciado) {
-		this.moderadorDenunciado = moderadorDenunciado;
+	
+	public void setModeradro(Moderador moderador) {
+		this.moderador = moderador;
 	}
 
 }

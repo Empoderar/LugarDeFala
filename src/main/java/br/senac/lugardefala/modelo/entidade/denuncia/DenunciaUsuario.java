@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -23,37 +21,29 @@ public class DenunciaUsuario extends Denuncia {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario_denunciado")
-    protected Usuario usuarioDenunciado;
-	
-
-	@Enumerated(EnumType.STRING)
-	private Status status;
+	@JoinColumn(name = "id_usuario_denunciado")
+	private Usuario usuario;
 
 	public DenunciaUsuario() {
 		
 	}
 	
-    public DenunciaUsuario(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, Status status, Usuario usuarioDenunciado) {
+    public DenunciaUsuario(Usuario usuarioDenunciante, long id, LocalDate data, String motivo, Status status, Usuario usuario) {
         super(id, data, motivo, status, usuarioDenunciante);
-        this.usuarioDenunciado = usuarioDenunciado;
+        this.usuario = usuario;
     }
     
-    public DenunciaUsuario(Usuario usuarioDenunciante, String motivo, Usuario usuarioDenunciado) {
+    public DenunciaUsuario(Usuario usuarioDenunciante, String motivo, Usuario usuarioDenunciado,Usuario usuario) {
         super(motivo, usuarioDenunciante);
-        this.usuarioDenunciado = usuarioDenunciado;
+        this.usuario = usuario;
     }
 
-    public Usuario getUsuarioDenunciado() {
-        return usuarioDenunciado;
+    
+    public Usuario getUsuario() {
+    	return usuario;
     }
-
-    public void setUsuarioDenunciado(Usuario usuarioDenunciado) {
-        this.usuarioDenunciado = usuarioDenunciado;
+    public void setUsuario(Usuario usuario) {
+    	this.usuario = usuario;
     }
 }
