@@ -110,9 +110,9 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 		return denunciasRelatos;
 	}
 
-    public DenunciaRelato recuperarDenunciaRelatoPeloRelato(Relato relato) {
+    public List <DenunciaRelato> recuperarDenunciaRelatoPeloRelato(Relato relato) {
         Session session = null;
-        DenunciaRelato denunciaRelato = null;
+        List <DenunciaRelato> denunciaRelato = null;
 
         try {
             session = getSessionFactory().openSession();
@@ -125,7 +125,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
             Predicate predicateDenunciaRelato = criteriaConstrutor.equal(raizDenunciaRelato.get(DenunciaRelato_.relato), relato);
 
             criteriaConsulta.where(predicateDenunciaRelato);
-            denunciaRelato = session.createQuery(criteriaConsulta).getSingleResult();
+            denunciaRelato = session.createQuery(criteriaConsulta).getResultList();
 
             session.getTransaction().commit();
 
@@ -141,7 +141,5 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 
         return denunciaRelato;
     }
-
-
 
 }

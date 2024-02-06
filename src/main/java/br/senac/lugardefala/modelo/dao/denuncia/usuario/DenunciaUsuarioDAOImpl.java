@@ -2,10 +2,10 @@ package br.senac.lugardefala.modelo.dao.denuncia.usuario;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -15,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
@@ -70,22 +71,20 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
     }
     
     public List<DenunciaUsuario> recuperarDenunciaUsuarioStatus(Status status) {
-        List<DenunciaUsuario> denunciaUsuario = null;
-        Session session = null;
-
+    	Session session = null;
+        List<DenunciaUsuario> denunciasUsuarios = null;
         try {
             session = getSessionFactory().openSession();
             session.beginTransaction();
 
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<DenunciaUsuario> criteria = construtor.createQuery(DenunciaUsuario.class);
-            Root<DenunciaUsuario> raizDenuncia = criteria.from(DenunciaUsuario.class);
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaUsuario> criteriaQuery = criteriaBuilder.createQuery(DenunciaUsuario.class);
+            Root<DenunciaUsuario> rootDenunciaUsuario = criteriaQuery.from(DenunciaUsuario.class);
 
-            ParameterExpression<Status> statusParam = construtor.parameter(Status.class);
-            criteria.select(raizDenuncia).where(construtor.equal(raizDenuncia.get("status"), statusParam));
+            Predicate predicateDenunciaUsuarioStatus = criteriaBuilder.equal(rootDenunciaUsuario.get("status"), status);
 
-            denunciaUsuario = session.createQuery(criteria).setParameter(statusParam, status).getResultList();
-
+            criteriaQuery.where(predicateDenunciaUsuarioStatus);
+            denunciasUsuarios = session.createQuery(criteriaQuery).getResultList();
             session.getTransaction().commit();
 
         } catch (Exception e) {
@@ -95,39 +94,39 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
                 session.close();
             }
         }
-        return denunciaUsuario;
+        return denunciasUsuarios;
     }
 
-
-
     public List<DenunciaUsuario> recuperarDenunciaUsuarioPeloUsuario(Usuario usuario) {
-    	    List<DenunciaUsuario> denunciaUsuario = null;
-    	    Session session = null;
+    	Session session = null;
+        List <DenunciaUsuario> denunciaUsuario = null;
 
-    	    try {
-    	        session = getSessionFactory().openSession();
-    	        session.beginTransaction();
+        try {
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
 
-    	        CriteriaBuilder construtor = session.getCriteriaBuilder();
-    	        CriteriaQuery<DenunciaUsuario> criteria = construtor.createQuery(DenunciaUsuario.class);
-    	        Root<DenunciaUsuario> raizDenuncia = criteria.from(DenunciaUsuario.class);
-    	        Join<DenunciaUsuario, Usuario> joinUsuario = raizDenuncia.join("usuario");
+            CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaUsuario> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaUsuario.class);
+            Root<DenunciaUsuario> raizDenunciaUsuario = criteriaConsulta.from(DenunciaUsuario.class);
 
-    	        ParameterExpression<Usuario> usuarioParam = construtor.parameter(Usuario.class);
-    	        criteria.select(raizDenuncia).where(construtor.equal(joinUsuario, usuarioParam));
+            Predicate predicateDenunciaUsuario = criteriaConstrutor.equal(raizDenunciaUsuario.get(DenunciaUsuario_.usuario), usuario);
 
-    	        denunciaUsuario = session.createQuery(criteria).setParameter(usuarioParam, usuario).getResultList();
+            criteriaConsulta.where(predicateDenunciaUsuario);
+            denunciaUsuario = session.createQuery(criteriaConsulta).getResultList();
 
-    	        session.getTransaction().commit();
+            session.getTransaction().commit();
 
-    	    } catch (Exception e) {
-    	        e.printStackTrace();
-    	    } finally {
-    	        if (session != null) {
-    	            session.close();
-    	        }
-    	    }
-    	    return denunciaUsuario;
-    	}
+        } catch (NoResultException e) 
+        {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return denunciaUsuario;
+    }
 
 }

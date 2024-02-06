@@ -299,7 +299,7 @@ public class Principal {
 				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
-		DenunciaRelato denunciaRelato = new DenunciaRelato(relato1, 0, LocalDate.now(), "Conteúdo falso",
+		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
 				Status.PENDENTE, usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
@@ -362,9 +362,9 @@ public class Principal {
 
 		for (Usuario usuario : usuarios3) {
 			if (usuario != null) {
-				System.out.println("Buscar usuário por conselho: " + usuario.getNome());
+				System.out.println("Buscar usuário por relato: " + usuario.getNome());
 			} else {
-				System.out.println("Não ha usuario para esse conselho");
+				System.out.println("Não ha usuario para esse relato");
 			}
 		}
 		Usuario recuperarUsuarioId = usuarioDAO.recuperarUsuarioPeloId(1L);
@@ -383,7 +383,7 @@ public class Principal {
 			System.out.println("Não ha Moderador com esse nome");
 		}
 
-		List<Moderador> moderador = moderadorDAO.recuperarModeradoresPeloId(36L);
+		List<Moderador> moderador = moderadorDAO.recuperarModeradoresPeloId(12L);
 		for (Moderador moderadorRecuperado : moderador) {
 			if (moderadorRecuperado != null) {
 				System.out.println("Buscar Moderador por id: " + moderadorRecuperado.getNome());
@@ -403,7 +403,7 @@ public class Principal {
 
 		// Teste Conselho
 
-		List<Conselho> recuperarConselhoPeloUsuario = conselhoDAO.recuperarConselhoPeloUsuario(usuario2);
+		List<Conselho> recuperarConselhoPeloUsuario = conselhoDAO.recuperarConselhoPeloUsuario(usuario5);
 
 		for (Conselho conselho : recuperarConselhoPeloUsuario) {
 			if (conselho != null) {
@@ -472,14 +472,6 @@ public class Principal {
 			}
 		}
 
-		List<Relato> categorias = relatoDAO.recuperarRelatosPelaCategoria(categoria2);
-		for (Relato relato : categorias) {
-			if (relato != null) {
-				System.out.println("Relato pela categoria: " + relato.getConteudo());
-			} else {
-				System.out.println("Relato inexistente");
-			}
-
 			Relato relatoPorId = relatoDAO.recuperarRelatoPorId(2L);
 			if (relatoPorId != null) {
 				System.out.println("Relato pelo ID: " + relatoPorId.getConteudo());
@@ -497,10 +489,10 @@ public class Principal {
 			}
 
 			// Teste Categoria
-
-			Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloId(1L);
-			if (recuperarCategoriaNome != null) {
-				System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
+			
+			Categoria recuperarCategoriaId = categoriaDAO.recuperarCategoriaPeloId(1L);
+			if (recuperarCategoriaId != null) {
+				System.out.println("Recuperar categoria pelo id: " + recuperarCategoriaId.getNome());
 			} else {
 				System.out.println("Sem categoria");
 			}
@@ -511,12 +503,18 @@ public class Principal {
 			} else {
 				System.out.println("Relato não existe");
 			}
-		}
+		
+			Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloNome("Sororidade");
+			if (recuperarCategoriaNome != null) {
+				System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
+			} else {
+				System.out.println("Sem categoria");
+			}
 
 		// Teste Denuncia
-		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario2);
+		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario5);
 		for (DenunciaUsuario denunciaUsuario2 : DenunciasUsuarios) {
-			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
+			System.out.println("Denuncias de usuarios por usuario: " + denunciaUsuario2.getMotivo());
 		}
 		
 		List<DenunciaUsuario> DenunciasUsuarios2 = denunciaUsuarioDAO.recuperarDenunciaUsuarioStatus(Status.PENDENTE);
@@ -539,11 +537,9 @@ public class Principal {
 		    System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelato1.getMotivo());
 		}
 
-		DenunciaRelato denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
-		if (denunciaRelatoPorRelato != null) {
-		    System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelatoPorRelato.getMotivo());
-		} else {
-		    System.out.println("Nenhuma denúncia encontrada para o relato.");
+		List <DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
+		for (DenunciaRelato denunciaRelato2 : denunciaRelatoPorRelato) {
+		    System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
 		}
 
 		DenunciaModerador denunciaModerador1 = denunciaModeradorDAO.recuperarDenunciaModeradorPorId(2L);
@@ -563,7 +559,7 @@ public class Principal {
 			System.out.println("Não existe comunidade com esse nome");
 		}
 
-		List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadesPeloIdModerador(10L);
+		List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadesPeloIdModerador(12L);
 		for (Comunidade comunidades : recuperarComunidadeModerador) {
 			if (comunidades != null) {
 				System.out.println("Recuperar comunidades pelo id do moderador : " + comunidades.getNome());

@@ -170,5 +170,33 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    }
 	    return categoria;
 	}
+	
+	public 	Categoria recuperarCategoriaPeloNome(String nome){
+	    Categoria categoria = null;
+	    Session session = null;
+
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
+
+	        CriteriaBuilder builder = session.getCriteriaBuilder();
+	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
+	        Root<Categoria> root = criteria.from(Categoria.class);
+
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.nome), nome));
+
+	        categoria = session.createQuery(criteria).uniqueResult();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return categoria;
+	}
 
 }

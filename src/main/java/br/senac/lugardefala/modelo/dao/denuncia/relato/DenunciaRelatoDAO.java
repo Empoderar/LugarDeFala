@@ -14,5 +14,5 @@ public interface DenunciaRelatoDAO {
 
     List<DenunciaRelato> recuperarDenunciaRelatoStatus(Status status);
 
-    DenunciaRelato recuperarDenunciaRelatoPeloRelato(Relato relato);
+    List <DenunciaRelato> recuperarDenunciaRelatoPeloRelato(Relato relato);
 }
