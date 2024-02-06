@@ -32,6 +32,10 @@ public class DenunciaRelato extends Denuncia {
 	@JoinColumn(name = "id_usuario_denunciante")
 	protected Usuario usuario;
 	
+	public DenunciaRelato() {
+		
+	}
+	
 	public DenunciaRelato(Relato relato, long id, LocalDate data, String motivo, Status status,
 			Usuario usuarioDenunciante,Relato relatoDenunciado) {
 		super(id, data, motivo, status, usuarioDenunciante);

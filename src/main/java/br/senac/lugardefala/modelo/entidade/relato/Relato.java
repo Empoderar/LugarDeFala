@@ -251,18 +251,3 @@ public class Relato implements Serializable {
 	    this.categoriaRelato = categoriaRelato;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
