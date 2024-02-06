@@ -25,22 +25,26 @@ public class DenunciaConselho extends Denuncia {
 	  @JoinColumn(name = "id_conselho_denunciado")
 	  private Conselho conselhoDenunciado;
 	  
-	    public DenunciaConselho(long id,Usuario usuarioDenunciante, LocalDate data, String motivo, 
+	  public DenunciaConselho() {
+		  
+	  }
+	  
+	  public DenunciaConselho(long id,Usuario usuarioDenunciante, LocalDate data, String motivo, 
 	    		Status status, Conselho conselhoDenunciado) {
 	        super(id, data, motivo, status, usuarioDenunciante);
 	        this.conselhoDenunciado = conselhoDenunciado;
 	    }
 	
-	    public DenunciaConselho(Usuario usuarioDenunciante, String motivo,  Conselho conselhoDenunciado) {
+	  public DenunciaConselho(Usuario usuarioDenunciante, String motivo,  Conselho conselhoDenunciado) {
 	        super(motivo,usuarioDenunciante);
 	        this.conselhoDenunciado = conselhoDenunciado;
 	    }
 
-	    public Conselho getConselhoDenunciado() {
+	  public Conselho getConselhoDenunciado() {
 	        return conselhoDenunciado;
 	    }
 
-	    public void setConselhoDenunciado(Conselho conselhoDenunciado) {
+	  public void setConselhoDenunciado(Conselho conselhoDenunciado) {
 	        this.conselhoDenunciado = conselhoDenunciado;
 	    }
 	}

@@ -1,41 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Cadastro</title>
-    <style>
-    </style>
+    <title>Cadastrar Categoria</title>
 </head>
-
 <body>
-    <h1>Cadastro de Moderador</h1>
-    <div>
-        <p>Leia as informações no PDF para responder ao formulário</p>
-        <a href="#" target="_self">Link para o PDF</a>
-        <button type="button">Próximo</button>
-    </div>
-    <div>
-        <p>Responda o formulário com base nas informações fornecidas no PDF</p>
-        <a href="#" target="_self">Link para o formulário</a>
-    </div>
+    <h1>Cadastrar categoria</h1>
+    <form action="inserir-categoria" method="post">
+        <label for="nomeCategoria">Nome</label> 
+        <input type="text" id="nomeCategoria" name="nome" required>
+        <button type="submit">Salvar</button>
+    </form>
     <div>
         <footer>
             <div>
                 <p>Lugar de Fala</p>
-                <a href="#">Sobre nós</a>
+                <a href="#">Sobre nós</a> 
                 <a href="#">Página inicial</a>
             </div>
             <div>
                 <p>Atendimento</p>
-                <a href="#">Contato</a>
+                <a href="#">Contato</a> 
                 <a href="#">Termos de uso</a>
             </div>
             <div>
                 <p>Redes Sociais</p>
-                <a href="#">Whatsapp</a>
+                <a href="#">Whatsapp</a> 
                 <a href="#">Instagram</a>
             </div>
             <div>
@@ -47,5 +38,4 @@
         </footer>
     </div>
 </body>
-
 </html>

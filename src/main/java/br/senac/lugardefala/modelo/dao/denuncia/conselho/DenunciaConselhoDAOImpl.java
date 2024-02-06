@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -14,9 +15,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
-import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho_;
+import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
@@ -71,62 +73,62 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
     }
 
     public List<DenunciaConselho> recuperarDenunciaDeConselhoStatus(Status status) {
-	Session session = null;
-	List<DenunciaConselho> denunciasConselhos = null;
-	try {
-		session = getSessionFactory().openSession();
-		session.beginTransaction();
+        Session session = null;
+        List<DenunciaConselho> denunciasConselhos = null;
+        try {
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
 
-		CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
-		CriteriaQuery<DenunciaConselho> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaConselho.class);
-		Root<DenunciaConselho> raizDenunciaConselho = criteriaConsulta.from(DenunciaConselho.class);
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaConselho> criteriaQuery = criteriaBuilder.createQuery(DenunciaConselho.class);
+            Root<DenunciaConselho> rootDenunciaConselho = criteriaQuery.from(DenunciaConselho.class);
+
+            Predicate predicateDenunciaConselhoStatus = criteriaBuilder.equal(rootDenunciaConselho.get("status"), status);
+
+            criteriaQuery.where(predicateDenunciaConselhoStatus);
+            denunciasConselhos = session.createQuery(criteriaQuery).getResultList();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return denunciasConselhos;
+    }
+
+    public List<DenunciaConselho> recuperarDenunciaDeConselhoRelato(Relato relato) {
+        Session session = null;
+        List<DenunciaConselho> denunciasConselhos = null;
+        try {
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
+
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaConselho> criteriaQuery = criteriaBuilder.createQuery(DenunciaConselho.class);
+            Root<DenunciaConselho> rootDenunciaConselho = criteriaQuery.from(DenunciaConselho.class);
+            Join<DenunciaConselho, Conselho> joinConselho = rootDenunciaConselho.join("conselhoDenunciado");
+            Join<Conselho, Relato> joinRelato = joinConselho.join("relato");
+
+            Predicate predicateDenunciaConselhoRelato = criteriaBuilder.equal(joinRelato.get("id"), relato.getId());
+
+            criteriaQuery.where(predicateDenunciaConselhoRelato);
+            denunciasConselhos = session.createQuery(criteriaQuery).getResultList();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return denunciasConselhos;
+    }
 
 
-		Predicate predicateDenunciaRelatoStatus
-		= criteriaConstrutor.equal(raizDenunciaConselho.get(DenunciaConselho_.status), status);
 
-		criteriaConsulta.where(predicateDenunciaRelatoStatus);
-		denunciasConselhos = session.createQuery(criteriaConsulta).getResultList();
-		session.getTransaction().commit();
-
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		if (session != null) {
-			session.close();
-		}
-	}
-	return denunciasConselhos;
-}
-
-//	Nao funciona 
-//public List<DenunciaConselho> recuperarDenunciaDeConselhoRelato(Relato relato) {
-//	Session session = null;
-//	List<DenunciaConselho> denunciasConselhos = null;
-//	try {
-//		session = getSessionFactory().openSession();
-//		session.beginTransaction();
-//		
-//		CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
-//		CriteriaQuery<DenunciaConselho> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaConselho.class);
-//		Root<DenunciaConselho> raizDenunciaConselho = criteriaConsulta.from(DenunciaConselho.class);
-//		
-//		
-//		Predicate predicateDenunciaConselhoRelato
-//		= criteriaConstrutor.equal(raizDenunciaConselho.get(DenunciaConselho_.relato), relato);
-//		
-//		criteriaConsulta.where(predicateDenunciaConselhoRelato);
-//		denunciasConselhos = session.createQuery(criteriaConsulta).getResultList();
-//		session.getTransaction().commit();
-//		
-//	} catch (Exception e) {
-//		e.printStackTrace();
-//	} finally {
-//		if (session != null) {
-//			session.close();
-//		}
-//	}
-//	return denunciasConselhos;
-//}
 
 }

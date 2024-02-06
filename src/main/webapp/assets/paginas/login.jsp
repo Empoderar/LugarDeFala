@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,14 +14,14 @@
 			<a href="recuperar-senha.html" target="_self">Esqueceu a senha?</a><br>
 			<button type="button">Confirmar</button>
 		</form>
-		<p>Não tem uma conta?</p>
+		<p>Nï¿½o tem uma conta?</p>
 		<a href="cadastro-usuario" target="_self">Cadaste-se</a>
 	</div>
 	<div>
 		<footer>
 			<div>
 				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				<a href="#">Sobre nï¿½s</a> <a href="#">Pï¿½gina inicial</a>
 			</div>
 			<div>
 				<p>Atendimento</p>

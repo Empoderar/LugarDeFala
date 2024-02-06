@@ -238,220 +238,133 @@ public class Servlet extends HttpServlet {
 		}
 	}
 
-	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		String apelido = request.getParameter("apelido");
-		String senha = request.getParameter("senha");
-		String telefone = request.getParameter("telefone");
-		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
-
-		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, dataNascimento, apelido, senha, descricao);
-		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
-
-		Contato contatoParaAtualizar = new Contato(telefone, email);
-		contatoDao.atualizarContato(contatoParaAtualizar);
-		response.sendRedirect("perfil-usuario.jsp");
-
-		usuarioParaAtualizar.setContato(contatoParaAtualizar);
+	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
-	private void atualizarSenha(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		String senha = request.getParameter("senha");
-		Usuario usuarioParaAtualizar = new Usuario(senha);
-		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
-
-		response.sendRedirect("atualizar-senha.jsp");
-
+	
+	private void mostrarTelaCadastroModerador(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
-	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		String apelido = request.getParameter("apelido");
-		String senha = request.getParameter("senha");
-		String telefone = request.getParameter("telefone");
-		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
-
-		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, dataNascimento, apelido, senha, descricao);
-		moderadorDao.atualizarModerador(moderadorParaAtualizar);
-
-		Contato contatoParaAtualizar = new Contato(telefone, email);
-		contatoDao.atualizarContato(contatoParaAtualizar);
-
-		response.sendRedirect("perfil-moderador.jsp");
-
-		moderadorParaAtualizar.setContato(contatoParaAtualizar);
+	
+	private void mostrarTelaCadastroComunidade(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
-	private void atualizarComunidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		long id = Long.parseLong(request.getParameter("id"));
-		String nome = request.getParameter("nome");
-		String descricao = request.getParameter("descricao");
-
-		Comunidade comunidadeParaAtualizar = new Comunidade(id, nome, descricao);
-		comunidadeDao.atualizarComunidade(comunidadeParaAtualizar);
-		response.sendRedirect("perfil-comunidade.jsp");
+	
+	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
-	private void atualizarRelato(HttpServletRequest request, HttpServletResponse response) {
-		long id = Long.parseLong(request.getParameter("id"));
-		String conteudo = request.getParameter("conteudo");
-		LocalDate data = LocalDate.parse(request.getParameter("data"));
-		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
-		Status status = Status.valueOf(request.getParameter("status"));
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		String apelido = request.getParameter("apelido");
-
-		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
-		relatoDao.atualizarRelato(relatoParaAtualizar);
-
-		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, apelido);
-		moderadorDao.atualizarModerador(moderadorParaAtualizar);
-
-		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
-		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
-
-		relatoParaAtualizar.setUsuario(usuarioParaAtualizar);
-		relatoParaAtualizar.setModerador(moderadorParaAtualizar);
+	
+	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
+		dispatcher.forward(request, response);
+		
 	}
-
-	private void atualizarConselho(HttpServletRequest request, HttpServletResponse response) {
-
-		long id = Long.parseLong(request.getParameter("id"));
-		String conteudo = request.getParameter("conteudo");
-		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
-		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
-		LocalDate data = LocalDate.parse(request.getParameter("data"));
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		String apelido = request.getParameter("apelido");
-		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
-		Status status = Status.valueOf(request.getParameter("status"));
-
-		Conselho conselhoParaAtualizar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
-		conselhoDao.atualizarConselho(conselhoParaAtualizar);
-
-		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
-		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
-
-		Relato relatoParaAtualizar = new Relato(conteudo, data, avaliacao, status);
-		relatoDao.atualizarRelato(relatoParaAtualizar);
-
-		conselhoParaAtualizar.setUsuario(usuarioParaAtualizar);
-		conselhoParaAtualizar.setRelato(relatoParaAtualizar);
-
+	
+	private void mostrarHome(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+		dispatcher.forward(request, response);
 	}
-
-	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		String senha = request.getParameter("senha");
-
-		Usuario usuarioParaDeletar = new Usuario(senha);
-		usuarioDao.deletarUsuario(usuarioParaDeletar);
-
-		response.sendRedirect("/home.jsp");
+	
+	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Comunidade comunidade1 = new Comunidade("nomebolado", "descricaobolada");
+		Comunidade comunidade2 = new Comunidade("ffsdfsolado", "desfsdda");
+		comunidadeDao.inserirComunidade(comunidade1);
+		comunidadeDao.inserirComunidade(comunidade2);
+		
+		Usuario usuario2 = new Usuario("joao", "fbgagkhfds", LocalDate.of(2022, 10, 10), "jdvh", "89237");
+		
+		usuario2.adicionarComunidade(comunidade1);
+		usuario2.adicionarComunidade(comunidade2);
+		usuarioDao.inserirUsuario(usuario2);
+		
+		Usuario usuarioRecuperado = usuarioDao.recuperarUsuarioPeloIdFetch(usuario2.getId());
+		
+		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPeloUsuario(usuarioRecuperado);
+		comunidades.add(comunidade1);
+		comunidades.add(comunidade2);
+		
+		request.setAttribute("usuario", usuarioRecuperado);
+		request.setAttribute("comunidades", comunidades);
+		
+		for (Comunidade c : comunidades) {
+			System.out.println("Nome da comunidade: " + c.getNome());
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
+		dispatcher.forward(request, response);
 	}
-
-	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-
-		long id = Long.parseLong(request.getParameter("id"));
-
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		String apelido = request.getParameter("apelido");
-		String senha = request.getParameter("senha");
-		String telefone = request.getParameter("telefone");
-		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
-
-		Moderador moderadorParaDeletar = new Moderador(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
-		moderadorDao.deletarModerador(moderadorParaDeletar);
-
-		Contato contatoParaDeletar = new Contato(telefone, email);
-		contatoDao.inserirContato(contatoParaDeletar);
-
-		moderadorParaDeletar.setContato(contatoParaDeletar);
-
-		response.sendRedirect("/home.jsp");
+	
+	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
+	
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
+		dispatcher.forward(request, response);
 	}
-
-	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		long id = Long.parseLong(request.getParameter("id"));
-		String nome = request.getParameter("nome");
-		String descricao = request.getParameter("descricao");
-
-		Comunidade comunidadeParaDeletar = new Comunidade(id, nome, descricao);
-		comunidadeDao.deletarComunidade(comunidadeParaDeletar);
-		response.sendRedirect("/home.jsp");
+	
+	private void mostrarTelaDeErro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
+		dispatcher.forward(request, response);
 	}
-
-	private void deletarRelato(HttpServletRequest request, HttpServletResponse response) {
-		long id = Long.parseLong(request.getParameter("id"));
-		String conteudo = request.getParameter("conteudo");
-		LocalDate data = LocalDate.parse(request.getParameter("data"));
-		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
-		Status status = Status.valueOf(request.getParameter("status"));
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		String apelido = request.getParameter("apelido");
-
-		Relato relatoParaDeletar = new Relato(id, conteudo, data, avaliacao, status);
-		relatoDao.deletarRelato(relatoParaDeletar);
-
-		Moderador moderadorParaDeletar = new Moderador(nome, sobrenome, apelido);
-		moderadorDao.deletarModerador(moderadorParaDeletar);
-
-		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, apelido);
-		usuarioDao.deletarUsuario(usuarioParaDeletar);
-
-		relatoParaDeletar.setUsuario(usuarioParaDeletar);
-		relatoParaDeletar.setModerador(moderadorParaDeletar);
+	
+	private void mostrarTelaConselhos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
+		dispatcher.forward(request, response);
 	}
-
-	private void deletarConselho(HttpServletRequest request, HttpServletResponse response) {
-
-		long id = Long.parseLong(request.getParameter("id"));
-		String conteudo = request.getParameter("conteudo");
-		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
-		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
-		LocalDate data = LocalDate.parse(request.getParameter("data"));
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		String apelido = request.getParameter("apelido");
-		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
-		Status status = Status.valueOf(request.getParameter("status"));
-
-		Conselho conselhoParaDeletar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
-		conselhoDao.deletarConselho(conselhoParaDeletar);
-
-		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, apelido);
-		usuarioDao.deletarUsuario(usuarioParaDeletar);
-
-		Relato relatoParaDeletar = new Relato(conteudo, data, avaliacao, status);
-		relatoDao.deletarRelato(relatoParaDeletar);
-
-		conselhoParaDeletar.setUsuario(usuarioParaDeletar);
-		conselhoParaDeletar.setRelato(relatoParaDeletar);
-
+	
+	private void mostrarTelaCadastroCategoria(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
+		dispatcher.forward(request, response);
 	}
-
+	
+	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarTelaRelatos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
+		dispatcher.forward(request, response);
+	}
+	
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
@@ -648,92 +561,137 @@ public class Servlet extends HttpServlet {
 
 		response.sendRedirect("cadastro-denuncia-usuario");
 	}
+	
+	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
 
-	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		String apelido = request.getParameter("apelido");
+		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
+		String descricao = request.getParameter("descricao");
 
-			throws ServletException, IOException {
+		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, dataNascimento, apelido, senha, descricao);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
-		dispatcher.forward(request, response);
+		Contato contatoParaAtualizar = new Contato(telefone, email);
+		contatoDao.atualizarContato(contatoParaAtualizar);
+		response.sendRedirect("perfil-usuario.jsp");
+
+		usuarioParaAtualizar.setContato(contatoParaAtualizar);
+	}
+
+	private void atualizarSenha(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		String senha = request.getParameter("senha");
+		Usuario usuarioParaAtualizar = new Usuario(senha);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		response.sendRedirect("atualizar-senha.jsp");
 
 	}
 
-	private void mostrarTelaCadastroModerador(HttpServletRequest request, HttpServletResponse response)
+	private void atualizarModerador(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
 
-			throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+		String apelido = request.getParameter("apelido");
+		String senha = request.getParameter("senha");
+		String telefone = request.getParameter("telefone");
+		String email = request.getParameter("email");
+		String descricao = request.getParameter("descricao");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-		dispatcher.forward(request, response);
+		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, dataNascimento, apelido, senha, descricao);
+		moderadorDao.atualizarModerador(moderadorParaAtualizar);
+
+		Contato contatoParaAtualizar = new Contato(telefone, email);
+		contatoDao.atualizarContato(contatoParaAtualizar);
+
+		response.sendRedirect("perfil-moderador.jsp");
+
+		moderadorParaAtualizar.setContato(contatoParaAtualizar);
+	}
+
+	private void atualizarComunidade(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		long id = Long.parseLong(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String descricao = request.getParameter("descricao");
+
+		Comunidade comunidadeParaAtualizar = new Comunidade(id, nome, descricao);
+		comunidadeDao.atualizarComunidade(comunidadeParaAtualizar);
+		response.sendRedirect("perfil-comunidade.jsp");
+	}
+
+	private void atualizarRelato(HttpServletRequest request, HttpServletResponse response) {
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+
+		Relato relatoParaAtualizar = new Relato(id, conteudo, data, avaliacao, status);
+		relatoDao.atualizarRelato(relatoParaAtualizar);
+
+		Moderador moderadorParaAtualizar = new Moderador(nome, sobrenome, apelido);
+		moderadorDao.atualizarModerador(moderadorParaAtualizar);
+
+		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		relatoParaAtualizar.setUsuario(usuarioParaAtualizar);
+		relatoParaAtualizar.setModerador(moderadorParaAtualizar);
+	}
+
+	private void atualizarConselho(HttpServletRequest request, HttpServletResponse response) {
+
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
+		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaAtualizar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
+		conselhoDao.atualizarConselho(conselhoParaAtualizar);
+
+		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
+		usuarioDao.atualizarUsuario(usuarioParaAtualizar);
+
+		Relato relatoParaAtualizar = new Relato(conteudo, data, avaliacao, status);
+		relatoDao.atualizarRelato(relatoParaAtualizar);
+
+		conselhoParaAtualizar.setUsuario(usuarioParaAtualizar);
+		conselhoParaAtualizar.setRelato(relatoParaAtualizar);
 
 	}
 
-	private void mostrarTelaCadastroComunidade(HttpServletRequest request, HttpServletResponse response)
+	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
 
-			throws ServletException, IOException {
+		String senha = request.getParameter("senha");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
-		dispatcher.forward(request, response);
+		Usuario usuarioParaDeletar = new Usuario(senha);
+		usuarioDao.deletarUsuario(usuarioParaDeletar);
 
+		response.sendRedirect("/home.jsp");
 	}
 
-	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
-
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
-
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void mostrarHome(HttpServletRequest request, HttpServletResponse response)
-
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		Comunidade comunidade1 = new Comunidade("nomebolado", "descricaobolada");
-		Comunidade comunidade2 = new Comunidade("ffsdfsolado", "desfsdda");
-		comunidadeDao.inserirComunidade(comunidade1);
-		comunidadeDao.inserirComunidade(comunidade2);
-
-		Usuario usuario2 = new Usuario("joao", "fbgagkhfds", LocalDate.of(2022, 10, 10), "jdvh", "89237");
-
-		usuario2.adicionarComunidade(comunidade1);
-		usuario2.adicionarComunidade(comunidade2);
-		usuarioDao.inserirUsuario(usuario2);
-
-		Usuario usuarioRecuperado = usuarioDao.recuperarUsuarioPeloIdFetch(usuario2.getId());
-
-		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPeloUsuario(usuarioRecuperado);
-		comunidades.add(comunidade1);
-		comunidades.add(comunidade2);
-
-		request.setAttribute("usuario", usuarioRecuperado);
-		request.setAttribute("comunidades", comunidades);
-
-		for (Comunidade c : comunidades) {
-			System.out.println("Nome da comunidade: " + c.getNome());
-		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
+	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
 
 			throws ServletException, IOException {
 		
@@ -777,42 +735,66 @@ public class Servlet extends HttpServlet {
 			System.out.println(c.getNome());
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
-		dispatcher.forward(request, response);
+	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		long id = Long.parseLong(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String descricao = request.getParameter("descricao");
+
+		Comunidade comunidadeParaDeletar = new Comunidade(id, nome, descricao);
+		comunidadeDao.deletarComunidade(comunidadeParaDeletar);
+		response.sendRedirect("/home.jsp");
 	}
 
-	private void mostrarTelaDeErro(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void deletarRelato(HttpServletRequest request, HttpServletResponse response) {
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
-		dispatcher.forward(request, response);
+		Relato relatoParaDeletar = new Relato(id, conteudo, data, avaliacao, status);
+		relatoDao.deletarRelato(relatoParaDeletar);
+
+		Moderador moderadorParaDeletar = new Moderador(nome, sobrenome, apelido);
+		moderadorDao.deletarModerador(moderadorParaDeletar);
+
+		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, apelido);
+		usuarioDao.deletarUsuario(usuarioParaDeletar);
+
+		relatoParaDeletar.setUsuario(usuarioParaDeletar);
+		relatoParaDeletar.setModerador(moderadorParaDeletar);
 	}
 
-	private void mostrarTelaConselhos(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void deletarConselho(HttpServletRequest request, HttpServletResponse response) {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
-		dispatcher.forward(request, response);
+		long id = Long.parseLong(request.getParameter("id"));
+		String conteudo = request.getParameter("conteudo");
+		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
+		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
+		LocalDate data = LocalDate.parse(request.getParameter("data"));
+		String nome = request.getParameter("nome");
+		String sobrenome = request.getParameter("sobrenome");
+		String apelido = request.getParameter("apelido");
+		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
+		Status status = Status.valueOf(request.getParameter("status"));
+
+		Conselho conselhoParaDeletar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
+		conselhoDao.deletarConselho(conselhoParaDeletar);
+
+		Usuario usuarioParaDeletar = new Usuario(nome, sobrenome, apelido);
+		usuarioDao.deletarUsuario(usuarioParaDeletar);
+
+		Relato relatoParaDeletar = new Relato(conteudo, data, avaliacao, status);
+		relatoDao.deletarRelato(relatoParaDeletar);
+
+		conselhoParaDeletar.setUsuario(usuarioParaDeletar);
+		conselhoParaDeletar.setRelato(relatoParaDeletar);
+
 	}
 
-	private void mostrarTelaCadastroCategoria(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarTelaRelatos(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
-		dispatcher.forward(request, response);
-	}
+	
 }

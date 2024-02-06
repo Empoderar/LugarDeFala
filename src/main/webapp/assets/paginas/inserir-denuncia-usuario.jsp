@@ -9,7 +9,7 @@
 
     <h2>Cadastro Denúncia de Usuário</h2>
 
-    <form action="cadastro-denuncia-usuario" method="post">
+    <form action="inserir-denuncia-usuario" method="post">
         <label for="usuario-denunciante">Usuário Denunciante:</label>
         <input type="text" name="usuario-denunciante" required>
         <br>

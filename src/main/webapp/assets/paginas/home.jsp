@@ -58,7 +58,7 @@
 				parcial ou total de objetos pertencentes à mulher.</p>
 		</div>
 		<div>
-			<p>Violência piscológica</p>
+			<p>Violência psicológica</p>
 			<p>Qualquer conduta que cause dano emocional e diminuição da
 				autoestima da mulher, nesse tipo de violência é comum a mulher ser
 				privada de trabalhar, estudar, sair de casa, ou falar com amigos e
@@ -70,7 +70,6 @@
 				ou participar de uma relação sexual não desejada.</p>
 		</div>
 	</div>
-	<div>
 		<h5>Perguntas frequentes</h5>
 		<div>
 			<p>Como me tornar um voluntário?</p>
@@ -83,7 +82,7 @@
 			<p>Como fazer um relato?</p>
 			<p>Para fazer seu relato é necessário criar uma conta, fazer
 				login no site e escolher uma comunidade, então clicar no botão
-				reletar e se abrir com pessoas que passam ou já passaram pelo mesmo.</p>
+				relatar e se abrir com pessoas que passam ou já passaram pelo mesmo.</p>
 		</div>
 		<div>
 			<p>O que são as comunidades?</p>
@@ -93,30 +92,22 @@
 		<div>
 			<p>O que é um voluntário?</p>
 			<p>Voluntários são usuários comuns que moderam as comunidades e
-				gerenciam possiveis problemas.</p>
+				gerenciam possíveis problemas.</p>
 		</div>
-	</div>
 	<div>
 		<footer>
-			<div>
 				<p>Lugar de Fala</p>
 				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-			</div>
-			<div>
+			
 				<p>Atendimento</p>
 				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
+			
 				<p>Redes Sociais</p>
 				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
+			
 				<p>Lugar de Fala</p>
-			</div>
-			<div>
+			
 				<p>2023 Todos os direitos reservados</p>
+			</footer>
 			</div>
-		</footer>
-	</div>
-</body>
-</html>
+			

@@ -2,6 +2,7 @@ package br.senac.lugardefala.modelo.dao.denuncia.relato;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -110,33 +111,37 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 	}
 
     public DenunciaRelato recuperarDenunciaRelatoPeloRelato(Relato relato) {
-		Session session = null;
-		DenunciaRelato denunciaRelato = null;
-		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
+        Session session = null;
+        DenunciaRelato denunciaRelato = null;
 
-			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
-			CriteriaQuery<DenunciaRelato> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaRelato.class);
-			Root<DenunciaRelato> raizDenunciaRelato = criteriaConsulta.from(DenunciaRelato.class);
+        try {
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
 
+            CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+            CriteriaQuery<DenunciaRelato> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaRelato.class);
+            Root<DenunciaRelato> raizDenunciaRelato = criteriaConsulta.from(DenunciaRelato.class);
 
-			Predicate predicateDenunciaRelato
-			= criteriaConstrutor.equal(raizDenunciaRelato.get(DenunciaRelato_.relato), relato);
+            Predicate predicateDenunciaRelato = criteriaConstrutor.equal(raizDenunciaRelato.get(DenunciaRelato_.relato), relato);
 
-			criteriaConsulta.where(predicateDenunciaRelato);
-			denunciaRelato = session.createQuery(criteriaConsulta).getSingleResult();
-			session.getTransaction().commit();
+            criteriaConsulta.where(predicateDenunciaRelato);
+            denunciaRelato = session.createQuery(criteriaConsulta).getSingleResult();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return denunciaRelato;
-	}
+            session.getTransaction().commit();
+
+        } catch (NoResultException e) 
+        {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return denunciaRelato;
+    }
+
 
 
 }
