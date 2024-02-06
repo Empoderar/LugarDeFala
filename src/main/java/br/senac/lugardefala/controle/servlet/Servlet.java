@@ -693,27 +693,47 @@ public class Servlet extends HttpServlet {
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		long id = Long.parseLong(request.getParameter("id"));
+			throws ServletException, IOException {
+		
+		Moderador moderador1 = new Moderador ("Brenda", "Monteiro", "brenda.monteiro");
+		Moderador moderador2 = new Moderador ("Marcella", "Barboza", "marcella.barboza");
+		moderadorDao.inserirModerador(moderador1);
+		moderadorDao.inserirModerador(moderador2);
+		
+		Relato relato1 = new Relato ("Um relato sobre sororidade", LocalDate.now(), 5, Status.APROVADO);
+		Relato relato2 = new Relato ("Relato sobre desabafo", LocalDate.now(), 3, Status.APROVADO);
+		relatoDao.inserirRelato(relato1);
+		relatoDao.inserirRelato(relato2);
+		
+		Comunidade comunidade1 = new Comunidade("Violência Física", "Comunidade de relatos sobre agressões físicas, como bater, empurrar, chutar, entre outras formas de violência que causem dano ao corpo.");
+		
+		comunidade1.setModerador(moderador1);
+		comunidade1.setModerador(moderador2);
+		comunidadeDao.inserirComunidade(comunidade1);
+		
+		comunidade1.adicionarRelato(relato1);
+		comunidade1.adicionarRelato(relato2);
+		comunidadeDao.inserirComunidade(comunidade1);
+		
+		Comunidade comunidadeRecuperada = comunidadeDao.recuperarComunidadePeloId(comunidade1.getId());
+		
+		List<Moderador> moderadores = moderadorDao.recuperarModeradoresPelaComunidade(comunidadeRecuperada);
+		moderadores.add(moderador1);
+		moderadores.add(moderador2);
+		
+		List<Relato> relatos = relatoDao.recuperarRelatosPelaComunidade(comunidadeRecuperada);
+		relatos.add(relato1);
+		relatos.add(relato2);
+		
 
-		String nome = request.getParameter("nome");
-		String sobrenome = request.getParameter("sobrenome");
-		LocalDate dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
-		String apelido = request.getParameter("apelido");
-		String senha = request.getParameter("senha");
-		String telefone = request.getParameter("telefone");
-		String email = request.getParameter("email");
-		String descricao = request.getParameter("descricao");
-
-		Moderador moderadorParaDeletar = new Moderador(id, nome, sobrenome, dataNascimento, apelido, senha, descricao);
-		moderadorDao.deletarModerador(moderadorParaDeletar);
-
-		Contato contatoParaDeletar = new Contato(telefone, email);
-		contatoDao.inserirContato(contatoParaDeletar);
-
-		moderadorParaDeletar.setContato(contatoParaDeletar);
-
-		response.sendRedirect("/home.jsp");
-	}
+		request.setAttribute("comunidade", comunidade1);
+		request.setAttribute("moderadores", moderadores);
+		request.setAttribute("relatos", relatos);
+		
+		System.out.println("Moderadores: ");
+		for (Moderador c : moderadores) {
+			System.out.println(c.getNome());
+		}
 
 	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
