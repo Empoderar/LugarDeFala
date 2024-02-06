@@ -16,7 +16,7 @@
 			<button type="button">Confirmar</button>
 		</form>
 		<p>Não tem uma conta?</p>
-		<a href="cadastro-usuario.html" target="_self">Cadaste-se</a>
+		<a href="cadastro-usuario" target="_self">Cadaste-se</a>
 	</div>
 	<div>
 		<footer>

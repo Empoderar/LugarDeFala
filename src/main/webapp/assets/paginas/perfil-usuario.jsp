@@ -10,6 +10,14 @@
 </head>
 <body>
 	<div>
+		<form action="inserir-usuario" method="post">
+			<p>
+				<strong>nome:</strong>
+				<c:out value="${usuario.nome}" />
+			</p>
+		</form>
+	</div>
+	<div>
 		<form action="perfil-usuario" method="post">
 			<c:forEach var="comunidades" items="${comunidades}">
 				<p>
@@ -30,14 +38,6 @@
 
 	<div>
 		<footer>
-			<div>
-				<form action="inserir-usuario" method="post">
-					<p>
-						<strong>nome:</strong>
-						<c:out value="${usuario.nome}" />
-					</p>
-				</form>
-			</div>
 			<div>
 				<p>Lugar de Fala</p>
 				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>

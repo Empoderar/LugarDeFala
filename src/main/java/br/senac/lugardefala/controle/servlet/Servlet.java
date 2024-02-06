@@ -736,6 +736,46 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		
+		Moderador moderador1 = new Moderador ("Brenda", "Monteiro", "brenda.monteiro");
+		Moderador moderador2 = new Moderador ("Marcella", "Barboza", "marcella.barboza");
+		moderadorDao.inserirModerador(moderador1);
+		moderadorDao.inserirModerador(moderador2);
+		
+		Relato relato1 = new Relato ("Um relato sobre sororidade", LocalDate.now(), 5, Status.APROVADO);
+		Relato relato2 = new Relato ("Relato sobre desabafo", LocalDate.now(), 3, Status.APROVADO);
+		relatoDao.inserirRelato(relato1);
+		relatoDao.inserirRelato(relato2);
+		
+		Comunidade comunidade1 = new Comunidade("Violência Física", "Comunidade de relatos sobre agressões físicas, como bater, empurrar, chutar, entre outras formas de violência que causem dano ao corpo.");
+		
+		comunidade1.setModerador(moderador1);
+		comunidade1.setModerador(moderador2);
+		comunidadeDao.inserirComunidade(comunidade1);
+		
+		comunidade1.adicionarRelato(relato1);
+		comunidade1.adicionarRelato(relato2);
+		comunidadeDao.inserirComunidade(comunidade1);
+		
+		Comunidade comunidadeRecuperada = comunidadeDao.recuperarComunidadePeloId(comunidade1.getId());
+		
+		List<Moderador> moderadores = moderadorDao.recuperarModeradoresPelaComunidade(comunidadeRecuperada);
+		moderadores.add(moderador1);
+		moderadores.add(moderador2);
+		
+		List<Relato> relatos = relatoDao.recuperarRelatosPelaComunidade(comunidadeRecuperada);
+		relatos.add(relato1);
+		relatos.add(relato2);
+		
+
+		request.setAttribute("comunidade", comunidade1);
+		request.setAttribute("moderadores", moderadores);
+		request.setAttribute("relatos", relatos);
+		
+		System.out.println("Moderadores: ");
+		for (Moderador c : moderadores) {
+			System.out.println(c.getNome());
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
 		dispatcher.forward(request, response);
