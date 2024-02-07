@@ -34,6 +34,6 @@ public interface UsuarioDAO {
 
 	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
 	
-
+	boolean verificarUsuario(String apelido, String senha);
 
 }

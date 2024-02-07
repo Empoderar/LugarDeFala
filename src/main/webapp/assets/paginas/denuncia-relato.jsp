@@ -6,12 +6,9 @@
         <title>Denunciar relato</title>
     </head>
     <body>
-        <!--
-            cada div é uma tela
-        -->
         <div>
             <h1>Denunciar relato</h1>
-            <form action="Fazer-denuncia" method="post">
+            <form action="inserir-denuncia-de-relato" method="post">
   	<input type="submit" value="Spam" name="É spam"><br>
   	<input type="submit" value="Violação das diretrizes" name="Violando as diretrizes"><br>
   	<input type="submit" value="Discurso de ódio" name="Discurso de ódio"><br>
@@ -20,8 +17,8 @@
          <hr>
         <div>
             <h2>Denunciar</h2> 
-            <form action="inserir-denuncia-relato" method="post">
-            <label for="Justifique sua denuncia">Justifique sua denuncia</label> <input type="text" id="justificar" name="justificativa-denuncia" required
+            <form action="inserir-denuncia-de-relato" method="post">
+            <label for="motivo">Justifique sua denuncia</label> <input type="text" id="motivo" name="motivo" required
 					maxlength="500">
 				 <input type="submit" value="Salvar">
 				</form>

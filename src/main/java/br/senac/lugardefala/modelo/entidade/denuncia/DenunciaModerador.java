@@ -37,6 +37,12 @@ public class DenunciaModerador extends Denuncia {
 	}
 	
 	public DenunciaModerador(String motivo,
+			Usuario usuarioDenunciante,Moderador moderadorDenunciado) {
+		super(motivo, usuarioDenunciante);
+		this.moderador = moderadorDenunciado;
+	}
+	
+	public DenunciaModerador(String motivo,
 			Usuario usuarioDenunciante) {
 		super(motivo, usuarioDenunciante);
 	}
