@@ -34,9 +34,10 @@ public class DenunciaUsuario extends Denuncia {
         this.usuario = usuario;
     }
     
-    public DenunciaUsuario(Usuario usuarioDenunciante, String motivo, Usuario usuarioDenunciado,Usuario usuario) {
+    public DenunciaUsuario(Usuario usuarioDenunciante, String motivo, Usuario usuarioDenunciado) {
         super(motivo, usuarioDenunciante);
-        this.usuario = usuario;
+        this.usuario = usuarioDenunciado;
+
     }
 
     

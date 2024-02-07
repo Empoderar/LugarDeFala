@@ -107,16 +107,28 @@ public class Servlet extends HttpServlet {
 				mostrarTelaCadastroComunidade(request, response);
 				break;
 
-			case "/tela-relatos":
-				mostrarTelaRelatos(request, response);
+			case "/cadastro-categoria":
+				mostrarTelaCadastroCategoria(request, response);
 				break;
 
-			case "/formulario-moderador":
+			case "/cadastro-conselho":
+				mostrarTelaCadastroConselho(request, response);
+				break;
+
+			case "/cadastro-relato":
+				mostrarTelaCadastroRelato(request, response);
+				break;
+
+			case "/form-moderador":
 				mostrarTelaFormularioModerador(request, response);
 				break;
 
 			case "/login":
 				mostrarTelaLoginUsuario(request, response);
+				break;
+
+			case "/logout-perfil":
+				mostrarTelaLogoutUsuario(request, response);
 				break;
 
 			case "/":
@@ -131,12 +143,12 @@ public class Servlet extends HttpServlet {
 				mostrarTelaPerfilDaComunidade(request, response);
 				break;
 
-			case "/tela-conselhos":
-				mostrarTelaConselhos(request, response);
+			case "/tela-relatos":
+				mostrarTelaRelatos(request, response);
 				break;
 
-			case "/cadastro-categoria":
-				mostrarTelaCadastroCategoria(request, response);
+			case "/tela-conselhos":
+				mostrarTelaConselhos(request, response);
 				break;
 
 			case "/tela-denuncias":
@@ -157,6 +169,10 @@ public class Servlet extends HttpServlet {
 
 			case "/denuncia-usuario":
 				mostrarTelaDenunciaUsuario(request, response);
+				break;
+				
+			case "/desativar-conta":
+				mostrarDesativarConta(request, response);
 				break;
 
 			case "/inserir-usuario":
@@ -191,7 +207,7 @@ public class Servlet extends HttpServlet {
 				inserirDenunciaModerador(request, response);
 				break;
 
-			case "/cadastro-denuncia-usuario":
+			case "/inserir-denuncia-de-relato":
 				inserirDenunciaRelato(request, response);
 				break;
 
@@ -243,6 +259,14 @@ public class Servlet extends HttpServlet {
 				atualizarConselho(request, response);
 				break;
 
+			case "/logout":
+				logout(request, response);
+				break;
+				
+			case "/metodo-desativar-conta":
+				desativarConta(request, response);
+				break;
+
 			default:
 				mostrarTelaDeErro(request, response);
 				break;
@@ -255,7 +279,6 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
@@ -264,7 +287,6 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaCadastroModerador(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
@@ -273,7 +295,6 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaCadastroComunidade(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
@@ -281,8 +302,15 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaCadastroRelato(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
@@ -291,10 +319,17 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
+	private void mostrarTelaLogoutUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/logout.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -310,12 +345,12 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Comunidade comunidade1 = new Comunidade("nomebolado", "descricaobolada");
-		Comunidade comunidade2 = new Comunidade("ffsdfsolado", "desfsdda");
+		Comunidade comunidade1 = new Comunidade("Violência Patrimonial", "Somos uma comunidade para te guiar em situações envolvendo violência patrimonial");
+		Comunidade comunidade2 = new Comunidade("Violência Verbal", "Muitas vezes não reconhecida como violência, te ajudamos a entender a hora do BASTA!");
 		comunidadeDao.inserirComunidade(comunidade1);
 		comunidadeDao.inserirComunidade(comunidade2);
 
-		Usuario usuario2 = new Usuario("joao", "fbgagkhfds", LocalDate.of(2022, 10, 10), "jdvh", "89237");
+		Usuario usuario2 = new Usuario("joao", "antonio", LocalDate.of(2022, 10, 10), "joao.antonio", "89237");
 
 		usuario2.adicionarComunidade(comunidade1);
 		usuario2.adicionarComunidade(comunidade2);
@@ -367,6 +402,13 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -378,10 +420,15 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Usuario usuario = new Usuario("Anna", "Silva", "anna.silva");
-		Conselho conselho = new Conselho("A vida sempre pode melhorar", LocalDate.now());
+		Conselho conselho = new Conselho(
+				"Minha amiga querida, é uma pena que isso tenha acontecido com você, mas vai passar!", LocalDate.now());
+		LocalDate dataAtual = LocalDate.now();
+		Status status = Status.APROVADO;
 
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("conselho", conselho);
+		request.setAttribute("dataAtual", dataAtual);
+		request.setAttribute("status", status);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-conselho.jsp");
 		dispatcher.forward(request, response);
@@ -423,6 +470,13 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("usuario", usuarioDenunciado);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-usuario.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarDesativarConta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/desativar-conta.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -472,7 +526,7 @@ public class Servlet extends HttpServlet {
 		moderadorDao.inserirModerador(moderadorParaInserir);
 		moderadorParaInserir.setContato(contatoParaInserir);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -546,56 +600,60 @@ public class Servlet extends HttpServlet {
 		Categoria categoria = new Categoria(nome);
 		categoriaDao.inserirCategoria(categoria);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/inserir-categoria.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/cadastro-relato.jsp");
 		dispatcher.forward(request, response);
 
 	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
 
 		Comunidade comunidadeParaInserir = new Comunidade(nome, descricao);
 		comunidadeDao.inserirComunidade(comunidadeParaInserir);
-		response.sendRedirect("perfil-comunidade.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-comunidade.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void inserirConselho(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 
 		String conteudo = request.getParameter("conteudo");
 
 		Conselho conselhoParaInserir = new Conselho(conteudo);
 		conselhoDao.inserirConselho(conselhoParaInserir);
-		response.sendRedirect("tela-conselhos");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-conselhos.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void inserirDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 
 		Usuario usuario1 = new Usuario("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.luiza", "123");
 		String motivo = request.getParameter("motivo");
 		Conselho conselho1 = new Conselho("lalalalla", 5, 3, LocalDate.now());
 		usuarioDao.inserirUsuario(usuario1);
 		conselhoDao.inserirConselho(conselho1);
-		DenunciaConselho denunciaConselhoParaInserir = new DenunciaConselho(usuario1, motivo, conselho1);
+		DenunciaConselho denunciaConselhoParaInserir = new DenunciaConselho(LocalDate.now(), motivo, Status.APROVADO,
+				usuario1, conselho1);
 		denunciaConselhoDao.inserirDenunciaConselho(denunciaConselhoParaInserir);
 
 		request.setAttribute("usuario", usuario1);
 		request.setAttribute("conselho", conselho1);
 
-		response.sendRedirect("inserir-denuncia-de-conselho");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-denuncias.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void inserirDenunciaModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		Usuario usuario1 = new Usuario("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.luiza", "123");
+		Usuario usuario1 = new Usuario("ana", "santos", LocalDate.of(1997, 1, 9), "ana.santos", "123");
 		String motivo = request.getParameter("motivo");
-		Moderador moderador1 = new Moderador("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.luiza", "123");
+		Moderador moderador1 = new Moderador("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.santos", "123");
 		moderadorDao.inserirModerador(moderador1);
-		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador( motivo,usuario1, moderador1);
+		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(motivo, usuario1, moderador1);
 		denunciaModeradorDao.inserirDenunciaModerador(denunciaModeradorParaInserir);
 
 		request.setAttribute("usuario", usuario1);
@@ -607,27 +665,32 @@ public class Servlet extends HttpServlet {
 	private void inserirDenunciaRelato(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		Usuario usuarioDenunciante = usuarioDao.recuperarUsuarioPeloNome(request.getParameter("usuario-denunciante"));
+		Usuario usuario1 = new Usuario("ana", "albuquerque", LocalDate.of(1997, 1, 9), "ana.albuquerque", "123");
 		String motivo = request.getParameter("motivo");
-		Relato relatoDenunciado = relatoDao
-				.recuperarRelatoPorId((Long.parseLong(request.getParameter("relato-denunciado"))));
-
-		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(motivo, usuarioDenunciante, relatoDenunciado);
+		Relato relato1 = new Relato("lalalalla", LocalDate.now());
+		usuarioDao.inserirUsuario(usuario1);
+		relatoDao.inserirRelato(relato1);
+		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(motivo, usuario1, relato1);
 		denunciaRelatoDao.inserirDenunciaRelato(denunciaRelatoParaInserir);
 
-		response.sendRedirect("inderir-denuncia-de-relato");
+		request.setAttribute("usuario", usuario1);
+		request.setAttribute("Relato", relato1);
+
+		response.sendRedirect("inserir-denuncia-de-relato");
 	}
 
 	private void inserirDenunciaUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		Usuario usuarioDenunciante = usuarioDao
-				.recuperarUsuarioPeloApelido(request.getParameter("usuario-denunciante"));
-		Usuario usuarioDenunciado = usuarioDao.recuperarUsuarioPeloApelido(request.getParameter("usuario-denunciado"));
+		Usuario usuarioDenunciante = new Usuario("ana", "carolina", LocalDate.of(1997, 1, 9), "ana.carolina", "123");
 		String motivo = request.getParameter("motivo");
-
+		Usuario usuarioDenunciado = new Usuario("ester", "ferreira", LocalDate.of(1997, 1, 9), "ester.ferreira", "123");
+		usuarioDao.inserirUsuario(usuarioDenunciado);
 		DenunciaUsuario denunciaUsuarioParaInserir = new DenunciaUsuario(usuarioDenunciante, motivo, usuarioDenunciado);
 		denunciaUsuarioDao.inserirDenunciaUsuario(denunciaUsuarioParaInserir);
+
+		request.setAttribute("usuarioDenunciante", usuarioDenunciante);
+		request.setAttribute("usuarioDenunciado", usuarioDenunciado);
 
 		response.sendRedirect("inserir-denuncia-de-usuario");
 	}
@@ -649,6 +712,7 @@ public class Servlet extends HttpServlet {
 
 		Contato contatoParaAtualizar = new Contato(telefone, email);
 		contatoDao.atualizarContato(contatoParaAtualizar);
+		
 		response.sendRedirect("perfil-usuario.jsp");
 
 		usuarioParaAtualizar.setContato(contatoParaAtualizar);
@@ -862,6 +926,34 @@ public class Servlet extends HttpServlet {
 
 		conselhoParaDeletar.setUsuario(usuarioParaDeletar);
 		conselhoParaDeletar.setRelato(relatoParaDeletar);
+
+	}
+
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.getSession().invalidate();
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
+		dispatcher.forward(request, response);
+
+	}
+	
+	private void desativarConta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String apelido = request.getParameter("apelido");
+		String senha = request.getParameter("senha");
+
+		boolean existe = usuarioDao.verificarUsuario(apelido, senha);
+
+		if (existe) {
+			Usuario usuario = usuarioDao.recuperarUsuarioPeloApelido(apelido);
+			usuarioDao.deletarUsuario(usuario);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("resources/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			response.sendRedirect("confirmar-exclusao");
+		}
 
 	}
 

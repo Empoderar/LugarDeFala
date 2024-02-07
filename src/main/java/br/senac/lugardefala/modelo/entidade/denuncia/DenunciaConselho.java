@@ -35,8 +35,8 @@ public class DenunciaConselho extends Denuncia {
 	        this.conselhoDenunciado = conselhoDenunciado;
 	    }
 	
-	  public DenunciaConselho(Usuario usuarioDenunciante, String motivo,  Conselho conselhoDenunciado) {
-	        super(motivo,usuarioDenunciante);
+	  public DenunciaConselho(LocalDate data, String motivo, Status status, Usuario usuarioDenunciante,  Conselho conselhoDenunciado) {
+	        super(data, motivo, status, usuarioDenunciante);
 	        this.conselhoDenunciado = conselhoDenunciado;
 	    }
 

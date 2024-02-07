@@ -19,6 +19,7 @@ import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
@@ -349,5 +350,40 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return usuariosPeloId;
 	}
+	
+	public boolean verificarUsuario(String apelido, String senha) {
+	    Session session = null;
+	    Usuario usuario = null;
 
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
+
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+	        criteria.select(raizUsuario);
+
+	        criteria.where(
+	            construtor.equal(raizUsuario.get(Usuario_.apelido), apelido),
+	            construtor.equal(raizUsuario.get(Usuario_.senha), senha)
+	        );
+
+	        usuario = session.createQuery(criteria).uniqueResult();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception sqException) {
+	        if (session.getTransaction() != null) {
+	            session.getTransaction().rollback();
+	        }
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+
+	    return usuario != null;
+	}
 }
