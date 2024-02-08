@@ -1,13 +1,18 @@
 package br.senac.lugardefala.modelo.entidade.contato;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "contato")
@@ -26,6 +31,9 @@ public class Contato implements Serializable {
     @Column(name = "email_contato", length = 40, nullable = true, unique = true)
     private String email;
 
+    @ManyToMany(mappedBy = "contatos")
+    private List<Usuario> usuarios;
+    
     public Contato() {
     }
 
@@ -38,6 +46,7 @@ public class Contato implements Serializable {
         this.id = id;
         this.telefone = telefone;
         this.email = email;
+        usuarios = new ArrayList<>();
     }
 
     public Long getId() {
@@ -62,6 +71,14 @@ public class Contato implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
 }
