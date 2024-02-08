@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
@@ -31,6 +34,10 @@ public class Contato implements Serializable {
     @Column(name = "email_contato", length = 40, nullable = true, unique = true)
     private String email;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contato_id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
+    
     @ManyToMany(mappedBy = "contatos")
     private List<Usuario> usuarios;
     
@@ -42,11 +49,17 @@ public class Contato implements Serializable {
         this.email = email;
     }
 
-    public Contato(long id, String telefone, String email) {
+    public Contato(long id, String telefone, String email,Usuario usuario) {
         this.id = id;
         this.telefone = telefone;
         this.email = email;
+        this.usuario = usuario;
         usuarios = new ArrayList<>();
+    }
+    
+    public Contato(String telefone, String email, Usuario usuario) {
+        this.telefone = telefone;
+        this.email = email;
     }
 
     public Long getId() {
@@ -81,4 +94,12 @@ public class Contato implements Serializable {
         this.usuarios = usuarios;
     }
 
+    public Usuario getUsuario() {
+	    return usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+	    this.usuario = usuario;
+    }
+    
 }

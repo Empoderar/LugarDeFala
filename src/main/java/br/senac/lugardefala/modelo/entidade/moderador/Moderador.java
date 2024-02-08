@@ -62,6 +62,7 @@ public class Moderador extends Usuario {
         relatosModerados = new ArrayList<>();
         denunciaDeModerador = new ArrayList<>();
         comunidades = new ArrayList<>();
+        this.comunidades.add(comunidade);
     }
     
     public Moderador(String nome, String sobrenome, String apelido) {

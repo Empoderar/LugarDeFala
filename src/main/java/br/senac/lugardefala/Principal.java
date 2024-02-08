@@ -86,7 +86,6 @@ public class Principal {
 		contato7.setEmail("ana.abreu@gmail.com");
 		contatoDAO.inserirContato(contato7);
 
-
 		// Criação de comunidades
 		Comunidade comunidade1 = new Comunidade(1, "Violência Física",
 				"Comunidade de relatos sobre agressões físicas, como bater, empurrar, chutar, entre outras formas de violência que causem dano ao corpo.");
@@ -205,7 +204,6 @@ public class Principal {
 				comunidade1);
 		usuarioDAO.inserirUsuario(usuario7);
 
-		// -----------------------------------------------------------------------------------------------------------//
 		Usuario usuario8 = new Usuario(null, "Teste", "de Teste", LocalDate.of(1995, 6, 7), "teste.teste", "senha123",
 				"testetesteteste", conselho1, null, comunidade1);
 		usuarioDAO.inserirUsuario(usuario8);
@@ -217,9 +215,6 @@ public class Principal {
 //		contatoDAO.inserirContato(contato8);
 //		
 //		usuario8.setContato(contato8);
-
-
-
 
 		// Criação de moderadores
 		Contato contatoModeradorAmanda = new Contato();
@@ -316,8 +311,9 @@ public class Principal {
 				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
-		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso", Status.PENDENTE,
-				usuario5, relato2);
+
+		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
+				Status.PENDENTE, usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
@@ -489,44 +485,45 @@ public class Principal {
 			}
 		}
 
-		Relato relatoPorId = relatoDAO.recuperarRelatoPorId(2L);
-		if (relatoPorId != null) {
-			System.out.println("Relato pelo ID: " + relatoPorId.getConteudo());
-		} else {
-			System.out.println("Relato inexistente");
-		}
+			Relato relatoPorId = relatoDAO.recuperarRelatoPorId(2L);
+			if (relatoPorId != null) {
+				System.out.println("Relato pelo ID: " + relatoPorId.getConteudo());
+			} else {
+				System.out.println("Relato inexistente");
+			}
 
-		// Teste Contato
+			// Teste Contato
 
-		Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
-		if (contatoRecuperado != null) {
-			System.out.println("Contato usuario pelo ID: " + contatoRecuperado.getTelefone());
-		} else {
-			System.out.println("Usuario invalido ou sem contato");
-		}
+			Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
+			if (contatoRecuperado != null) {
+				System.out.println("Contato usuario pelo ID: " + contatoRecuperado.getTelefone());
+			} else {
+				System.out.println("Usuario invalido ou sem contato");
+			}
 
-		// Teste Categoria
+			// Teste Categoria
+			
+			Categoria recuperarCategoriaId = categoriaDAO.recuperarCategoriaPeloId(1L);
+			if (recuperarCategoriaId != null) {
+				System.out.println("Recuperar categoria pelo id: " + recuperarCategoriaId.getNome());
+			} else {
+				System.out.println("Sem categoria");
+			}
 
-		Categoria recuperarCategoriaId = categoriaDAO.recuperarCategoriaPeloId(1L);
-		if (recuperarCategoriaId != null) {
-			System.out.println("Recuperar categoria pelo id: " + recuperarCategoriaId.getNome());
-		} else {
-			System.out.println("Sem categoria");
-		}
+			Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
+			if (recuperarCategoriaRelato != null) {
+				System.out.println("Recuperar categoria pelo relato: " + recuperarCategoriaRelato.getNome());
+			} else {
+				System.out.println("Relato não existe");
+			}
+		
+			Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloNome("Sororidade");
+			if (recuperarCategoriaNome != null) {
+				System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
+			} else {
+				System.out.println("Sem categoria");
+			}
 
-		Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
-		if (recuperarCategoriaRelato != null) {
-			System.out.println("Recuperar categoria pelo relato: " + recuperarCategoriaRelato.getNome());
-		} else {
-			System.out.println("Relato não existe");
-		}
-
-		Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloNome("Sororidade");
-		if (recuperarCategoriaNome != null) {
-			System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
-		} else {
-			System.out.println("Sem categoria");
-		}
 
 		// Teste Denuncia
 		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario5);
@@ -539,32 +536,32 @@ public class Principal {
 			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
 		}
 
+		
 		List<DenunciaConselho> denunciasConselhos = denunciaConselhoDAO.recuperarDenunciaDeConselhoRelato(relato1);
 		for (DenunciaConselho denunciaConselho1 : denunciasConselhos) {
-			System.out.println("Denuncia de conselho pelo relato: " + denunciaConselho1.getMotivo());
+		    System.out.println("Denuncia de conselho pelo relato: " + denunciaConselho1.getMotivo());
 		}
 
-		List<DenunciaConselho> denunciasConselhos3 = denunciaConselhoDAO
-				.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
+		List<DenunciaConselho> denunciasConselhos3 = denunciaConselhoDAO.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
 		for (DenunciaConselho denunciaConselho3 : denunciasConselhos3) {
-			System.out.println("Denuncia de conselho pelo status: " + denunciaConselho3.getMotivo());
-		}
+		    System.out.println("Denuncia de conselho pelo status: " + denunciaConselho3.getMotivo());
+
 
 		List<DenunciaRelato> denunciaRelatoPorStatus = denunciaRelatoDAO.recuperarDenunciaRelatoStatus(Status.PENDENTE);
 		for (DenunciaRelato denunciaRelato1 : denunciaRelatoPorStatus) {
-			System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelato1.getMotivo());
+		    System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelato1.getMotivo());
 		}
 
-		List<DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
+		List <DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
 		for (DenunciaRelato denunciaRelato2 : denunciaRelatoPorRelato) {
-			System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
-		}
+		    System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
+
 
 		DenunciaModerador denunciaModerador1 = denunciaModeradorDAO.recuperarDenunciaModeradorPorId(2L);
 		if (denunciaModerador1 != null) {
-			System.out.println("DenunciaModerador por ID: " + denunciaModerador1.getMotivo());
+		    System.out.println("DenunciaModerador por ID: " + denunciaModerador1.getMotivo());
 		} else {
-			System.out.println("DenunciaModerador por ID não encontrada");
+		    System.out.println("DenunciaModerador por ID não encontrada");
 		}
 
 		// Teste Comunidade
@@ -615,5 +612,4 @@ public class Principal {
 			System.out.println("Usuário não encontrado. Credenciais inválidas.");
 		}
 	}
-
-}
+}}}
