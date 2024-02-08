@@ -5,18 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Perfil Usuário</title>
+<title>Perfil Moderador</title>
 </head>
 <body>
 	<div>
-		<form action="inserir-usuario" method="post">
+		<form action="inserir-moderador" method="post">
 			<p>
 				<strong>nome:</strong>
-				<c:out value="${usuario.nome}" />
+				<c:out value="${moderador.nome}" />
 				<strong>nome de usuário:</strong>
-				<c:out value="${usuario.apelido}" />
+				<c:out value="${moderador.apelido}" />
 				<strong>descrição:</strong>
-				<c:out value="${usuario.descricao}" />
+				<c:out value="${moderador.descricao}" />
+				<c:forEach var="comunidade" items="${comunidades}">
+				<p>
+					COMUNIDADES:
+					<c:out value="${comunidade.nome}" />
+				</p>
+				</c:forEach>
+				<c:out value="${moderador.descricao}" />
 				<c:forEach var="relato" items="${relatos}">
 				<p>
 					RELATOS :
@@ -27,7 +34,7 @@
 		</form>
 	</div>
 	<div>
-		<form action="perfil-usuario" method="post">
+		<form action="perfil-moderador" method="post">
 			<c:forEach var="comunidade" items="${comunidades}">
 				<p>
 					COMUNIDADES:
