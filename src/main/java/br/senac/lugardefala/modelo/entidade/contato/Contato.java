@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
@@ -33,7 +34,6 @@ public class Contato implements Serializable {
     private String email;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
     
 

@@ -207,13 +207,13 @@ public class Principal {
 		Usuario usuario8 = new Usuario(null, "Teste", "de Teste", LocalDate.of(1995, 6, 7), "teste.teste", "senha123",
 				"testetesteteste", conselho1, null, comunidade1);
 		usuarioDAO.inserirUsuario(usuario8);
-		
+
 		Contato contato8 = new Contato();
 		contato8.setTelefone("(00)00000-0000");
 		contato8.setEmail("teste@teste.com");
 		contato8.setUsuario(usuario8);
 		contatoDAO.inserirContato(contato8);
-		
+
 		usuario8.setContato(contato8);
 
 		// Criação de moderadores
@@ -311,10 +311,6 @@ public class Principal {
 				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
-
-		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
-				Status.PENDENTE, usuario5, relato2);
-    
 		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso", Status.PENDENTE,
 				usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
@@ -488,45 +484,44 @@ public class Principal {
 			}
 		}
 
-			Relato relatoPorId = relatoDAO.recuperarRelatoPorId(2L);
-			if (relatoPorId != null) {
-				System.out.println("Relato pelo ID: " + relatoPorId.getConteudo());
-			} else {
-				System.out.println("Relato inexistente");
-			}
+		Relato relatoPorId = relatoDAO.recuperarRelatoPorId(2L);
+		if (relatoPorId != null) {
+			System.out.println("Relato pelo ID: " + relatoPorId.getConteudo());
+		} else {
+			System.out.println("Relato inexistente");
+		}
 
-			// Teste Contato
+		// Teste Contato
 
-			Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
-			if (contatoRecuperado != null) {
-				System.out.println("Contato usuario pelo ID: " + contatoRecuperado.getTelefone());
-			} else {
-				System.out.println("Usuario invalido ou sem contato");
-			}
+		Contato contatoRecuperado = contatoDAO.recuperarContatoDoUsuarioPeloId(1L);
+		if (contatoRecuperado != null) {
+			System.out.println("Contato usuario pelo ID: " + contatoRecuperado.getTelefone());
+		} else {
+			System.out.println("Usuario invalido ou sem contato");
+		}
 
-			// Teste Categoria
-			
-			Categoria recuperarCategoriaId = categoriaDAO.recuperarCategoriaPeloId(1L);
-			if (recuperarCategoriaId != null) {
-				System.out.println("Recuperar categoria pelo id: " + recuperarCategoriaId.getNome());
-			} else {
-				System.out.println("Sem categoria");
-			}
+		// Teste Categoria
 
-			Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
-			if (recuperarCategoriaRelato != null) {
-				System.out.println("Recuperar categoria pelo relato: " + recuperarCategoriaRelato.getNome());
-			} else {
-				System.out.println("Relato não existe");
-			}
-		
-			Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloNome("Sororidade");
-			if (recuperarCategoriaNome != null) {
-				System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
-			} else {
-				System.out.println("Sem categoria");
-			}
+		Categoria recuperarCategoriaId = categoriaDAO.recuperarCategoriaPeloId(1L);
+		if (recuperarCategoriaId != null) {
+			System.out.println("Recuperar categoria pelo id: " + recuperarCategoriaId.getNome());
+		} else {
+			System.out.println("Sem categoria");
+		}
 
+		Categoria recuperarCategoriaRelato = categoriaDAO.recuperarCategoriaRelato(relato4);
+		if (recuperarCategoriaRelato != null) {
+			System.out.println("Recuperar categoria pelo relato: " + recuperarCategoriaRelato.getNome());
+		} else {
+			System.out.println("Relato não existe");
+		}
+
+		Categoria recuperarCategoriaNome = categoriaDAO.recuperarCategoriaPeloNome("Sororidade");
+		if (recuperarCategoriaNome != null) {
+			System.out.println("Recuperar categoria pelo nome: " + recuperarCategoriaNome.getNome());
+		} else {
+			System.out.println("Sem categoria");
+		}
 
 		// Teste Denuncia
 		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario5);
@@ -539,80 +534,82 @@ public class Principal {
 			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
 		}
 
-		
 		List<DenunciaConselho> denunciasConselhos = denunciaConselhoDAO.recuperarDenunciaDeConselhoRelato(relato1);
 		for (DenunciaConselho denunciaConselho1 : denunciasConselhos) {
-		    System.out.println("Denuncia de conselho pelo relato: " + denunciaConselho1.getMotivo());
+			System.out.println("Denuncia de conselho pelo relato: " + denunciaConselho1.getMotivo());
 		}
 
-		List<DenunciaConselho> denunciasConselhos3 = denunciaConselhoDAO.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
+		List<DenunciaConselho> denunciasConselhos3 = denunciaConselhoDAO
+				.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
 		for (DenunciaConselho denunciaConselho3 : denunciasConselhos3) {
-		    System.out.println("Denuncia de conselho pelo status: " + denunciaConselho3.getMotivo());
+			System.out.println("Denuncia de conselho pelo status: " + denunciaConselho3.getMotivo());
 
-
-		List<DenunciaRelato> denunciaRelatoPorStatus = denunciaRelatoDAO.recuperarDenunciaRelatoStatus(Status.PENDENTE);
-		for (DenunciaRelato denunciaRelato1 : denunciaRelatoPorStatus) {
-		    System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelato1.getMotivo());
-		}
-
-		List <DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
-		for (DenunciaRelato denunciaRelato2 : denunciaRelatoPorRelato) {
-		    System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
-
-
-		DenunciaModerador denunciaModerador1 = denunciaModeradorDAO.recuperarDenunciaModeradorPorId(2L);
-		if (denunciaModerador1 != null) {
-		    System.out.println("DenunciaModerador por ID: " + denunciaModerador1.getMotivo());
-		} else {
-		    System.out.println("DenunciaModerador por ID não encontrada");
-		}
-
-		// Teste Comunidade
-
-		Comunidade recuperarComunidadeNome = comunidadeDAO.recuperarComunidadePeloId(1L);
-		if (recuperarComunidadeNome != null) {
-			System.out.println("Recuperar comunidade pelo nome: " + recuperarComunidadeNome.getNome());
-		} else {
-			System.out.println("Não existe comunidade com esse nome");
-		}
-
-		List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadesPeloIdModerador(12L);
-		for (Comunidade comunidades : recuperarComunidadeModerador) {
-			if (comunidades != null) {
-				System.out.println("Recuperar comunidades pelo id do moderador : " + comunidades.getNome());
-			} else {
-				System.out.println("Não existem comunidades com esse moderador");
+			List<DenunciaRelato> denunciaRelatoPorStatus = denunciaRelatoDAO
+					.recuperarDenunciaRelatoStatus(Status.PENDENTE);
+			for (DenunciaRelato denunciaRelato1 : denunciaRelatoPorStatus) {
+				System.out.println("Buscar denuncia de relato pelo status: " + denunciaRelato1.getMotivo());
 			}
-		}
 
-		List<Comunidade> recuperarComunidadeUsuario = comunidadeDAO.recuperarComunidadesPeloIdUsuario(1L);
-		for (Comunidade comunidades : recuperarComunidadeUsuario) {
-			if (comunidades != null) {
-				System.out.println("Recuperar comunidades pelo id do usuario : " + comunidades.getNome());
-			} else {
-				System.out.println("Não existem comunidades com esse usuario");
-			}
-		}
+			List<DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
+			for (DenunciaRelato denunciaRelato2 : denunciaRelatoPorRelato) {
+				System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
 
-		List<Comunidade> recuperarComunidadePeloUsuario = comunidadeDAO.recuperarComunidadesPeloUsuario(usuario2);
+				DenunciaModerador denunciaModerador1 = denunciaModeradorDAO.recuperarDenunciaModeradorPorId(2L);
+				if (denunciaModerador1 != null) {
+					System.out.println("DenunciaModerador por ID: " + denunciaModerador1.getMotivo());
+				} else {
+					System.out.println("DenunciaModerador por ID não encontrada");
+				}
 
-		if (!recuperarComunidadePeloUsuario.isEmpty()) {
-			for (Comunidade c : recuperarComunidadePeloUsuario) {
-				System.out.println("Recuperar comunidades pelo nome do usuário: " + c.getNome());
-			}
-		} else {
-			System.out.println("Não existem comunidades com esse usuário");
-		}
+				// Teste Comunidade
+
+				Comunidade recuperarComunidadeNome = comunidadeDAO.recuperarComunidadePeloId(1L);
+				if (recuperarComunidadeNome != null) {
+					System.out.println("Recuperar comunidade pelo nome: " + recuperarComunidadeNome.getNome());
+				} else {
+					System.out.println("Não existe comunidade com esse nome");
+				}
+
+				List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarComunidadesPeloIdModerador(12L);
+				for (Comunidade comunidades : recuperarComunidadeModerador) {
+					if (comunidades != null) {
+						System.out.println("Recuperar comunidades pelo id do moderador : " + comunidades.getNome());
+					} else {
+						System.out.println("Não existem comunidades com esse moderador");
+					}
+				}
+
+				List<Comunidade> recuperarComunidadeUsuario = comunidadeDAO.recuperarComunidadesPeloIdUsuario(1L);
+				for (Comunidade comunidades : recuperarComunidadeUsuario) {
+					if (comunidades != null) {
+						System.out.println("Recuperar comunidades pelo id do usuario : " + comunidades.getNome());
+					} else {
+						System.out.println("Não existem comunidades com esse usuario");
+					}
+				}
+
+				List<Comunidade> recuperarComunidadePeloUsuario = comunidadeDAO
+						.recuperarComunidadesPeloUsuario(usuario2);
+
+				if (!recuperarComunidadePeloUsuario.isEmpty()) {
+					for (Comunidade c : recuperarComunidadePeloUsuario) {
+						System.out.println("Recuperar comunidades pelo nome do usuário: " + c.getNome());
+					}
+				} else {
+					System.out.println("Não existem comunidades com esse usuário");
+				}
 
 // -----------------------------------------------------------------------------------------//
-		String email = "teste@teste.com";
-		String senha = "senha123";
-		Usuario usuario = usuarioDAO.obterUsuarioPorCredenciais(email, senha);
+				String email = "teste@teste.com";
+				String senha = "senha123";
+				Usuario usuario = usuarioDAO.obterUsuarioPorCredenciais(email, senha);
 
-		if (usuario != null) {
-			System.out.println("Usuário encontrado: " + usuario.getNome());
-		} else {
-			System.out.println("Usuário não encontrado. Credenciais inválidas.");
+				if (usuario != null) {
+					System.out.println("Usuário encontrado: " + usuario.getNome());
+				} else {
+					System.out.println("Usuário não encontrado. Credenciais inválidas.");
+				}
+			}
 		}
 	}
 }
