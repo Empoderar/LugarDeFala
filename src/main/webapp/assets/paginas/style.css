@@ -1,0 +1,202 @@
+.item1-login { grid-area: header; }
+
+.item2-login { grid-area: main; }
+
+.item3-login { grid-area: right; }
+
+.item4-login { grid-area: footer; }
+
+.grid-container-login {
+
+  display: grid;
+
+  grid:
+
+  'header header header header header header'
+
+  'main main main right right right'
+
+  'footer footer footer footer footer footer';
+
+  grid-gap: 0px;
+
+  padding: 0px;
+
+}
+
+.header-login{
+
+   background-color: rgba(253, 232, 226, 100%);
+
+   display: flex; 
+
+   justify-content: space-between;
+
+   color: rgba(249, 134, 111, 100%);
+
+}
+
+.main-login{
+
+   background-color: rgba(253, 232, 226, 100%);
+
+   display: flex; 
+
+   justify-content: space-between;
+
+}
+ 
+.right-login{
+
+   background-color: rgba(253, 232, 226, 100%);
+
+   display: flex; 
+
+   flex-direction: column;
+
+   align-items: flex-center; 
+
+   justify-content: center; 
+
+   padding: 20px;
+
+   color: rgba(77, 77, 77, 100%);
+
+}
+
+.right-form-login {
+
+   display: flex;
+
+   flex-direction: column;
+
+   align-items: flex-center; 
+
+}
+
+.right-login .register-login{
+
+   display: flex;
+
+   justify-content: flex-center; 
+
+   align-items: center;
+
+   width: 100%;
+
+}
+
+.right-a1-login {
+
+   text-decoration: none;
+
+   color: rgba(94, 163, 165, 100%);
+
+   font-size: 14px;
+
+   margin-top: 5px;
+
+}
+
+.right-a2-login {
+
+   text-decoration: none;
+
+   color: rgba(249, 134, 111, 100%);
+
+   font-size: 14px;
+
+   margin-top: 5px;
+
+}
+
+.footer {
+
+   background-color: rgba(94, 163, 165, 100%);
+
+   display: flex;
+
+   justify-content: space-between;
+
+   font-size: 14px;
+
+   padding-bottom: 20px;
+
+   padding-left: 20px; 
+
+   padding-right: 20px; 
+
+}
+
+.footer-column {
+
+   flex: 1;
+
+   display: flex;
+
+   flex-direction: column;
+
+   align-items: flex-center;
+
+   justify-content: center;
+
+}
+
+.footer-column h3 {
+
+   color: rgba(253, 232, 226, 100%);
+
+}
+
+.footer-column a {
+
+   text-decoration: none;
+
+   color: rgba(253, 232, 226, 100%);
+
+   margin: 5px;
+
+}
+ 
+.text-login{
+
+   color: rgba(249, 134, 111, 100%);
+
+   text-align: center;
+
+}
+ 
+.button {
+
+   color: rgba(253, 232, 226, 100%);
+
+   background-color:  rgba(94, 163, 165, 100%);
+
+   border: 4px;
+   
+   width: 424px;
+   
+   height: 52px;
+
+}
+ 
+.input {
+
+   background-color: rgba(252, 217, 209, 100%);
+
+   border: 4px;
+   
+   width: 711px;
+   
+   height: 52.34px;
+   
+
+}
+ 
+.main-button-login {
+
+   background-color: rgba(253, 232, 226, 100%);
+
+      border: 4px;
+
+}
