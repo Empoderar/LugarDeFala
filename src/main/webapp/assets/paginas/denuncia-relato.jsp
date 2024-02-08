@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -20,6 +21,19 @@
             <form action="inserir-denuncia-de-relato" method="post">
             <label for="motivo">Justifique sua denuncia</label> <input type="text" id="motivo" name="motivo" required
 					maxlength="500">
+					<br>
+						<strong>Usuário Denunciante:</strong>
+				<c:out value="${usuario.nome}" />
+			<p>
+				<strong>Relato Denunciado:</strong>
+				<c:out value="${relato.conteudo}" />
+			</p>
+			
+			<p>Data atual da Denúncia: ${dataAtual}</p>
+			<p>
+				<strong>Status da Denúncia:</strong>
+				<c:out value="${status}" />
+			</p>
 				 <input type="submit" value="Salvar">
 				</form>
         </div>

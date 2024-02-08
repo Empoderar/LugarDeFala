@@ -36,8 +36,8 @@ public class DenunciaRelato extends Denuncia {
 		this.relato = relato;
 	}
 	
-	public DenunciaRelato(String motivo, Usuario usuarioDenunciante,Relato relato) {
-		super(motivo, usuarioDenunciante);
+	public DenunciaRelato(LocalDate data, String motivo, Status status, Usuario usuarioDenunciante,Relato relato) {
+		super(data, motivo, status, usuarioDenunciante);
 		this.relato = relato;
 	}
 

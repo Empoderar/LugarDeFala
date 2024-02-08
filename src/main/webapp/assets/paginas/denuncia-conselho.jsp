@@ -29,12 +29,12 @@
 				<c:out value="${status}" />
 			</p>
 			<p>
-				<strong>Usuário:</strong>
+				<strong>Usuário Denunciante:</strong>
 				<c:out value="${usuario.nome}" />
 			</p>
 
 			<p>
-				<strong>Conselho:</strong>
+				<strong>Conselho Denunciado:</strong>
 				<c:out value="${conselho.conteudo}" />
 			</p>
 

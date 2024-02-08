@@ -2,17 +2,20 @@
 
 <!DOCTYPE html>
 <html>
-<head></head>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
 	<div>
 		<p>Bem-vindo!</p>
 		<h1>Login</h1>
-		<form>
-			<label for="lemail">Email</label> <input type="text" id="lemail"
-				name="login" required> <label for="lsenha">Senha</label> <input
-				type="password" name="senha" id="lsenha" required maxlength="20">
+		<form action="fazer-login" method="post">
+			<label for="email">Email</label> <input type="text" id=email"
+				name="email" required> 
+				<label for="senha">Senha</label> <input
+				type="password" name="senha" id="senha" required maxlength="20">
 			<a href="recuperar-senha.html" target="_self">Esqueceu a senha?</a><br>
-			<button type="button">Confirmar</button>
+			<button type="submit">Confirmar</button>
 		</form>
 		<p>N�o tem uma conta?</p>
 		<a href="cadastro-usuario" target="_self">Cadaste-se</a>

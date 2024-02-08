@@ -204,6 +204,18 @@ public class Principal {
 				comunidade1);
 		usuarioDAO.inserirUsuario(usuario7);
 
+		Usuario usuario8 = new Usuario(null, "Teste", "de Teste", LocalDate.of(1995, 6, 7), "teste.teste", "senha123",
+				"testetesteteste", conselho1, null, comunidade1);
+		usuarioDAO.inserirUsuario(usuario8);
+		
+		Contato contato8 = new Contato();
+		contato8.setTelefone("(00)00000-0000");
+		contato8.setEmail("teste@teste.com");
+		contato8.setUsuario(usuario8);
+		contatoDAO.inserirContato(contato8);
+		
+		usuario8.setContato(contato8);
+
 		// Criação de moderadores
 		Contato contatoModeradorAmanda = new Contato();
 		contatoModeradorAmanda.setTelefone("(47)98525-4121");
@@ -299,8 +311,12 @@ public class Principal {
 				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
+
 		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
 				Status.PENDENTE, usuario5, relato2);
+    
+		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso", Status.PENDENTE,
+				usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
@@ -511,16 +527,18 @@ public class Principal {
 				System.out.println("Sem categoria");
 			}
 
+
 		// Teste Denuncia
 		List<DenunciaUsuario> DenunciasUsuarios = denunciaUsuarioDAO.recuperarDenunciaUsuarioPeloUsuario(usuario5);
 		for (DenunciaUsuario denunciaUsuario2 : DenunciasUsuarios) {
 			System.out.println("Denuncias de usuarios por usuario: " + denunciaUsuario2.getMotivo());
 		}
-		
+
 		List<DenunciaUsuario> DenunciasUsuarios2 = denunciaUsuarioDAO.recuperarDenunciaUsuarioStatus(Status.PENDENTE);
 		for (DenunciaUsuario denunciaUsuario2 : DenunciasUsuarios2) {
 			System.out.println("Denuncias de usuarios por status: " + denunciaUsuario2.getMotivo());
 		}
+
 		
 		List<DenunciaConselho> denunciasConselhos = denunciaConselhoDAO.recuperarDenunciaDeConselhoRelato(relato1);
 		for (DenunciaConselho denunciaConselho1 : denunciasConselhos) {
@@ -530,7 +548,7 @@ public class Principal {
 		List<DenunciaConselho> denunciasConselhos3 = denunciaConselhoDAO.recuperarDenunciaDeConselhoStatus(Status.PENDENTE);
 		for (DenunciaConselho denunciaConselho3 : denunciasConselhos3) {
 		    System.out.println("Denuncia de conselho pelo status: " + denunciaConselho3.getMotivo());
-		}
+
 
 		List<DenunciaRelato> denunciaRelatoPorStatus = denunciaRelatoDAO.recuperarDenunciaRelatoStatus(Status.PENDENTE);
 		for (DenunciaRelato denunciaRelato1 : denunciaRelatoPorStatus) {
@@ -540,7 +558,7 @@ public class Principal {
 		List <DenunciaRelato> denunciaRelatoPorRelato = denunciaRelatoDAO.recuperarDenunciaRelatoPeloRelato(relato1);
 		for (DenunciaRelato denunciaRelato2 : denunciaRelatoPorRelato) {
 		    System.out.println("Buscar denuncia de relato pelo relato: " + denunciaRelato2.getMotivo());
-		}
+
 
 		DenunciaModerador denunciaModerador1 = denunciaModeradorDAO.recuperarDenunciaModeradorPorId(2L);
 		if (denunciaModerador1 != null) {
@@ -548,7 +566,6 @@ public class Principal {
 		} else {
 		    System.out.println("DenunciaModerador por ID não encontrada");
 		}
-		
 
 		// Teste Comunidade
 
@@ -587,5 +604,15 @@ public class Principal {
 			System.out.println("Não existem comunidades com esse usuário");
 		}
 
+// -----------------------------------------------------------------------------------------//
+		String email = "teste@teste.com";
+		String senha = "senha123";
+		Usuario usuario = usuarioDAO.obterUsuarioPorCredenciais(email, senha);
+
+		if (usuario != null) {
+			System.out.println("Usuário encontrado: " + usuario.getNome());
+		} else {
+			System.out.println("Usuário não encontrado. Credenciais inválidas.");
+		}
 	}
 }
