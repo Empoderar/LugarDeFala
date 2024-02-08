@@ -59,10 +59,18 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conselho> conselhos;
-
+    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
     private Contato contato;
+
+    @ManyToMany
+    @JoinTable(
+            name = "contato_usuario",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_contato")
+    )
+    private List<Contato> contatos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DenunciaUsuario> denunciasDeUsuario;
@@ -94,7 +102,10 @@ public class Usuario implements Serializable {
          relatos = new ArrayList<>();
          conselhos = new ArrayList<>();
          comunidades = new ArrayList<>();
+         contatos = new ArrayList<>();
      }
+    
+    
     
     public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
     	this.id = id;
@@ -164,6 +175,8 @@ public class Usuario implements Serializable {
         conselhos = new ArrayList<>();
         this.comunidades = new ArrayList<>();
         this.comunidades.add(comunidade);
+        contatos = new ArrayList<>();
+        this.contatos.add(contato);
     }
 	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
             Comunidade comunidade) {
@@ -179,6 +192,8 @@ public class Usuario implements Serializable {
         conselhos = new ArrayList<>();
         this.comunidades = new ArrayList<>();
         this.comunidades.add(comunidade);
+        contatos = new ArrayList<>();
+        this.contatos.add(contato);
     }
 
     public List<Comunidade> getComunidades() {
@@ -269,6 +284,14 @@ public class Usuario implements Serializable {
         this.contato = contato;
     }
 
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
+    
     public List<Relato> getRelatos() {
         return relatos;
     }
