@@ -18,13 +18,13 @@
     <div>
         <nav>
             <div>
-                <a href="#">PÃ¡gina inicial</a> <a href="#">Popular</a>
+                <a href="#">Página inicial</a> <a href="#">Popular</a>
                 <hr>
             </div>
             <div>
-                <a href="#">Comunidades</a> <a href="#">ViolÃªncia fÃ­sica</a> <a
-                    href="#">ViolÃªncia psicolÃ³gica</a> <a href="#">ViolÃªncia moral</a>
-                <a href="#">ViolÃªncia sexual</a> <a href="#">ViolÃªncia
+                <a href="#">Comunidades</a> <a href="#">Violência física</a> <a
+                    href="#">Violência psicolÃ³gica</a> <a href="#">Violência moral</a>
+                <a href="#">Violência sexual</a> <a href="#">Violência
                     patrimonial</a>
                 <hr>
             </div>
