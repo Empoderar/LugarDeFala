@@ -314,9 +314,6 @@ public class Principal {
 
 		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
 				Status.PENDENTE, usuario5, relato2);
-    
-		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso", Status.PENDENTE,
-				usuario5, relato2);
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
@@ -615,4 +612,4 @@ public class Principal {
 			System.out.println("Usuário não encontrado. Credenciais inválidas.");
 		}
 	}
-}
+}}}
