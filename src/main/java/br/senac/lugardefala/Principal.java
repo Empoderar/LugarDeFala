@@ -210,13 +210,13 @@ public class Principal {
 				"testetesteteste", conselho1, null, comunidade1);
 		usuarioDAO.inserirUsuario(usuario8);
 		
-		Contato contato8 = new Contato();
-		contato8.setTelefone("(00)00000-0000");
-		contato8.setEmail("teste@teste.com");
-		contato8.setUsuario(usuario8);
-		contatoDAO.inserirContato(contato8);
-		
-		usuario8.setContato(contato8);
+//		Contato contato8 = new Contato();
+//		contato8.setTelefone("(00)00000-0000");
+//		contato8.setEmail("teste@teste.com");
+//		contato8.setUsuario(usuario8);
+//		contatoDAO.inserirContato(contato8);
+//		
+//		usuario8.setContato(contato8);
 
 
 
