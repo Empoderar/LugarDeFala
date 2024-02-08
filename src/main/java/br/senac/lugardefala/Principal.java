@@ -311,14 +311,9 @@ public class Principal {
 				Status.PENDENTE, usuario2);
 		denunciaUsuarioDAO.inserirDenunciaUsuario(denunciaUsuario);
 
-<<<<<<< HEAD
+
 		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso", Status.PENDENTE,
 				usuario5, relato2);
-=======
-
-		DenunciaRelato denunciaRelato = new DenunciaRelato(0, LocalDate.now(), "Conteúdo falso",
-				Status.PENDENTE, usuario5, relato2);
->>>>>>> 41cbaf71accd9632c86c37bad75bcc39becd9d61
 		denunciaRelatoDAO.inserirDenunciaRelato(denunciaRelato);
 
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
@@ -618,4 +613,4 @@ public class Principal {
 			}
 		}
 	}
-}}}
+}
