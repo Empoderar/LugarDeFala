@@ -136,12 +136,21 @@ public class Usuario implements Serializable {
         comunidades = new ArrayList<>();
     }
     
+       
     public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
     	this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.apelido = apelido;
         this.senha = senha;
+        this.descricao = descricao;
+    }
+    
+    public Usuario(String nome, String sobrenome, String descricao, LocalDate dataNascimento, String apelido) {
+    	this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
+        this.apelido = apelido;
         this.descricao = descricao;
     }
 
@@ -210,6 +219,15 @@ public class Usuario implements Serializable {
 
     public boolean removerComunidade(Comunidade comunidade) {
         return comunidades.remove(comunidade);
+    }
+    
+
+    public boolean adicionarRelato(Relato relato) {
+        return relatos.add(relato);
+    }
+
+    public boolean removerRelato(Relato relato) {
+        return relatos.remove(relato);
     }
 
     public List<Conselho> getConselhos() {

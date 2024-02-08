@@ -96,183 +96,183 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
-			case "/cadastro-usuario": //funcionando
+			case "/cadastro-usuario": // funcionando
 				mostrarTelaCadastroUsuario(request, response);
 				break;
 
-			case "/cadastro-moderador": //funcionando
+			case "/cadastro-moderador": // funcionando
 				mostrarTelaCadastroModerador(request, response);
 				break;
 
-			case "/cadastro-comunidade": //funcionando
+			case "/cadastro-comunidade": // funcionando
 				mostrarTelaCadastroComunidade(request, response);
 				break;
 
-			case "/cadastro-categoria": //funcionando
+			case "/cadastro-categoria": // funcionando
 				mostrarTelaCadastroCategoria(request, response);
 				break;
 
-			case "/cadastro-conselho": //funcionando
+			case "/cadastro-conselho": // funcionando
 				mostrarTelaCadastroConselho(request, response);
 				break;
 
-			case "/cadastro-relato": //funcionando
+			case "/cadastro-relato": // funcionando
 				mostrarTelaCadastroRelato(request, response);
 				break;
 
-			case "/form-moderador": //funcionando
+			case "/form-moderador": // funcionando
 				mostrarTelaFormularioModerador(request, response);
 				break;
 
-			case "/login":  //funcionando
+			case "/login": // funcionando
 				mostrarTelaLoginUsuario(request, response);
 				break;
 
-			case "/logout-perfil": //em ajuste
+			case "/logout-perfil": // em ajuste
 				mostrarTelaLogoutUsuario(request, response);
 				break;
 
-			case "/": //funcionando
+			case "/": // funcionando
 				mostrarHome(request, response);
 				break;
 
-			case "/perfil-usuario": //funcionando
+			case "/perfil-usuario": // funcionando
 				mostrarTelaPerfilDoUsuario(request, response);
 				break;
 
-			case "/perfil-comunidade": //funcionando
+			case "/perfil-comunidade": // funcionando
 				mostrarTelaPerfilDaComunidade(request, response);
 				break;
 
-			case "/tela-relatos": //funcionando
+			case "/tela-relatos": // funcionando
 				mostrarTelaRelatos(request, response);
 				break;
 
-			case "/tela-conselhos": //funcionando
+			case "/tela-conselhos": // funcionando
 				mostrarTelaConselhos(request, response);
 				break;
 
-			case "/tela-denuncias": //funcionando
+			case "/tela-denuncias": // funcionando
 				mostrarTelaDenuncias(request, response);
 				break;
 
-			case "/denuncia-conselho": //funcionando
+			case "/denuncia-conselho": // funcionando
 				mostrarTelaDenunciaConselho(request, response);
 				break;
 
-			case "/denuncia-moderador": //funcionando
+			case "/denuncia-moderador": // funcionando
 				mostrarTelaDenunciaModerador(request, response);
 				break;
 
-			case "/denuncia-relato": //funcionando
+			case "/denuncia-relato": // funcionando
 				mostrarTelaDenunciaRelato(request, response);
 				break;
 
-			case "/denuncia-usuario": //funcionando
+			case "/denuncia-usuario": // funcionando
 				mostrarTelaDenunciaUsuario(request, response);
 				break;
 
-			case "/desativar-conta": //funcionando
+			case "/desativar-conta": // funcionando
 				mostrarTelaDesativarConta(request, response);
 				break;
 
-			case "/deletar-usuario": //funcionando
+			case "/deletar-usuario": // funcionando
 				mostrarTelaDeletarUsuario(request, response);
 				break;
 
-			case "/inserir-usuario": //salvando
+			case "/inserir-usuario": // salvando
 				inserirUsuario(request, response);
 				break;
 
-			case "/fazer-login": //em ajuste
+			case "/fazer-login": // em ajuste
 				fazerLogin(request, response);
 				break;
 
-			case "/inserir-relato": //salvando
+			case "/inserir-relato": // salvando
 				inserirRelato(request, response);
 				break;
 
-			case "/inserir-conselho": //salvando
+			case "/inserir-conselho": // salvando
 				inserirConselho(request, response);
 				break;
 
-			case "/inserir-comunidade": //salvando
+			case "/inserir-comunidade": // salvando
 				inserirComunidade(request, response);
 				break;
 
-			case "/inserir-categoria": //salvando
+			case "/inserir-categoria": // salvando
 				inserirCategoria(request, response);
 				break;
 
-			case "/inserir-moderador": //salvando
+			case "/inserir-moderador": // salvando
 				inserirModerador(request, response);
 				break;
 
-			case "/inserir-denuncia-de-conselho": //salvando
+			case "/inserir-denuncia-de-conselho": // salvando
 				inserirDenunciaConselho(request, response);
 				break;
 
-			case "/inserir-denuncia-de-moderador": //salvando
+			case "/inserir-denuncia-de-moderador": // salvando
 				inserirDenunciaModerador(request, response);
 				break;
 
-			case "/inserir-denuncia-de-relato":  //salvando
+			case "/inserir-denuncia-de-relato": // salvando
 				inserirDenunciaRelato(request, response);
 				break;
 
-			case "/inserir-denuncia-de-usuario":  //salvando
+			case "/inserir-denuncia-de-usuario": // salvando
 				inserirDenunciaUsuario(request, response);
 				break;
 
-			case "/metodo-deletar-usuario": //precisa testar
+			case "/metodo-deletar-usuario": // precisa testar
 				deletarUsuario(request, response);
 				break;
 
-			case "/deletar-moderador": //precisa ser feito
+			case "/deletar-moderador": // precisa ser feito
 				deletarModerador(request, response);
 				break;
 
-			case "/deletar-comunidade": //precisa ser feito
+			case "/deletar-comunidade": // precisa ser feito
 				deletarComunidade(request, response);
 				break;
 
-			case "/deletar-relato": //precisa ser feito
+			case "/deletar-relato": // precisa ser feito
 				deletarRelato(request, response);
 				break;
 
-			case "/deletar-conselho": //precisa ser feito
+			case "/deletar-conselho": // precisa ser feito
 				deletarConselho(request, response);
 				break;
 
-			case "/atualizar-usuario": //precisa ser feito
+			case "/atualizar-usuario": // precisa ser feito
 				atualizarUsuario(request, response);
 				break;
 
-			case "/atualizar-senha": //precisa ser feito
+			case "/atualizar-senha": // precisa ser feito
 				atualizarSenha(request, response);
 				break;
 
-			case "/atualizar-moderador": //precisa ser feito
+			case "/atualizar-moderador": // precisa ser feito
 				atualizarModerador(request, response);
 				break;
 
-			case "/atualizar-comunidade": //precisa ser feito
+			case "/atualizar-comunidade": // precisa ser feito
 				atualizarComunidade(request, response);
 				break;
 
-			case "/atualizar-relato": //precisa ser feito
+			case "/atualizar-relato": // precisa ser feito
 				atualizarRelato(request, response);
 				break;
 
-			case "/atualizar-conselho": //precisa ser feito
+			case "/atualizar-conselho": // precisa ser feito
 				atualizarConselho(request, response);
 				break;
 
-			case "/logout": //em ajuste
+			case "/logout": // em ajuste
 				logout(request, response);
 				break;
 
-			case "/metodo-desativar-conta": //precisa testar
+			case "/metodo-desativar-conta": // precisa testar
 				desativarConta(request, response);
 				break;
 
@@ -329,7 +329,8 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 
@@ -361,10 +362,19 @@ public class Servlet extends HttpServlet {
 		comunidadeDao.inserirComunidade(comunidade1);
 		comunidadeDao.inserirComunidade(comunidade2);
 
-		Usuario usuario2 = new Usuario("joao", "antonio", LocalDate.of(2022, 10, 10), "joao.antonio", "89237");
+		Relato relato1 = new Relato();
+		Relato relato2 = new Relato();
+		relatoDao.inserirRelato(relato1);
+		relatoDao.inserirRelato(relato2);
+
+		Usuario usuario2 = new Usuario("joao", "antonio", "busco ajuda(descricao)", LocalDate.of(2022, 10, 10),
+				"joao.antonio");
 
 		usuario2.adicionarComunidade(comunidade1);
 		usuario2.adicionarComunidade(comunidade2);
+		usuario2.adicionarRelato(relato1);
+		usuario2.adicionarRelato(relato2);
+
 		usuarioDao.inserirUsuario(usuario2);
 
 		Usuario usuarioRecuperado = usuarioDao.recuperarUsuarioPeloIdFetch(usuario2.getId());
@@ -372,9 +382,13 @@ public class Servlet extends HttpServlet {
 		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPeloUsuario(usuarioRecuperado);
 		comunidades.add(comunidade1);
 		comunidades.add(comunidade2);
+		List<Relato> relatos = relatoDao.recuperarRelatosPeloUsuario(usuarioRecuperado);
+		relatos.add(relato1);
+		relatos.add(relato2);
 
 		request.setAttribute("usuario", usuarioRecuperado);
 		request.setAttribute("comunidades", comunidades);
+		request.setAttribute("relatos", relatos);
 
 		for (Comunidade c : comunidades) {
 			System.out.println("Nome da comunidade: " + c.getNome());
@@ -415,6 +429,8 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
 		dispatcher.forward(request, response);
@@ -523,7 +539,9 @@ public class Servlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 
+		HttpSession sessao = request.getSession();
 		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
+		sessao.setAttribute("usuario", usuario);
 
 		if (usuario != null) {
 			response.sendRedirect("/home.jsp");
@@ -699,7 +717,8 @@ public class Servlet extends HttpServlet {
 		String motivo = request.getParameter("motivo");
 		Moderador moderador1 = new Moderador("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.santos", "123");
 		moderadorDao.inserirModerador(moderador1);
-		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(LocalDate.now(), motivo,Status.APROVADO, usuario1, moderador1);
+		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(LocalDate.now(), motivo, Status.APROVADO,
+				usuario1, moderador1);
 		denunciaModeradorDao.inserirDenunciaModerador(denunciaModeradorParaInserir);
 
 		request.setAttribute("usuario", usuario1);
@@ -708,7 +727,6 @@ public class Servlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-denuncias.jsp");
 		dispatcher.forward(request, response);
 	}
-	
 
 	private void inserirDenunciaRelato(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
@@ -718,7 +736,8 @@ public class Servlet extends HttpServlet {
 		Relato relato1 = new Relato("lalalalla", LocalDate.now());
 		usuarioDao.inserirUsuario(usuario1);
 		relatoDao.inserirRelato(relato1);
-		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(LocalDate.now(), motivo,Status.APROVADO, usuario1, relato1);
+		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(LocalDate.now(), motivo, Status.APROVADO,
+				usuario1, relato1);
 		denunciaRelatoDao.inserirDenunciaRelato(denunciaRelatoParaInserir);
 
 		request.setAttribute("usuario", usuario1);
@@ -735,7 +754,8 @@ public class Servlet extends HttpServlet {
 		String motivo = request.getParameter("motivo");
 		Usuario usuarioDenunciado = new Usuario("ester", "ferreira", LocalDate.of(1997, 1, 9), "ester.ferreira", "123");
 		usuarioDao.inserirUsuario(usuarioDenunciado);
-		DenunciaUsuario denunciaUsuarioParaInserir = new DenunciaUsuario(LocalDate.now(), motivo, Status.APROVADO,usuarioDenunciante, usuarioDenunciado);
+		DenunciaUsuario denunciaUsuarioParaInserir = new DenunciaUsuario(LocalDate.now(), motivo, Status.APROVADO,
+				usuarioDenunciante, usuarioDenunciado);
 		denunciaUsuarioDao.inserirDenunciaUsuario(denunciaUsuarioParaInserir);
 
 		request.setAttribute("usuarioDenunciante", usuarioDenunciante);
@@ -995,10 +1015,9 @@ public class Servlet extends HttpServlet {
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getSession().invalidate();
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
-		dispatcher.forward(request, response);
+		HttpSession sessao = request.getSession();
+		sessao.invalidate();
+		response.sendRedirect("/home.jsp");
 
 	}
 
@@ -1013,7 +1032,8 @@ public class Servlet extends HttpServlet {
 		if (existe) {
 			Usuario usuario = usuarioDao.recuperarUsuarioPeloApelido(apelido);
 			usuarioDao.deletarUsuario(usuario);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("resources/paginas/home.jsp"); //colocar dps a home-logada
+			RequestDispatcher dispatcher = request.getRequestDispatcher("resources/paginas/home.jsp"); // colocar dps a
+																										// home-logada
 			dispatcher.forward(request, response);
 		} else {
 			response.sendRedirect("confirmar-exclusao");
