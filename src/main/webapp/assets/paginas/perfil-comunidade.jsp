@@ -26,10 +26,12 @@
 				<hr>
 			</div>
 			<div>
-				<a href="#">Comunidades</a> <a href="#">Violência física</a> <a
-					href="#">Violência psicológica</a> <a href="#">Violência moral</a>
-				<a href="#">Violência sexual</a> <a href="#">Violência
-					patrimonial</a>
+				<a href="#">Comunidades</a> 
+				<a href="#">Violência física</a> 
+				<a href="#">Violência psicológica</a> 
+				<a href="#">Violência moral</a>
+				<a href="#">Violência sexual</a> 
+				<a href="#">Violência patrimonial</a>
 				<hr>
 			</div>
 			<div>
@@ -49,9 +51,21 @@
 				</form>
 				<button type="button">Filtrar</button>
 			</div>
+			<c:forEach var="comunidade" items="${comunidades}">
+				<p>
+					COMUNIDADES:
+					<c:out value="${comunidade.nome}" />
+				</p>
+			</c:forEach>
 		</nav>
 	</div>
-
+			<c:forEach var="relato" items="${relatos}">
+				<p>
+					RELATOS:
+					<c:out value="${usuario.nome}"></c:out>
+					<c:out value="${relato.conteudo}"></c:out>
+				</p>
+			</c:forEach>
 	<div>
 		<p>
 			<strong>NOME:</strong>

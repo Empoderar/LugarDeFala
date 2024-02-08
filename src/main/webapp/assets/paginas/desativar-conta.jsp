@@ -9,8 +9,19 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<h1>Desativar a conta</h1>
+		<h3>Ao desativar sua conta ela poderá ser reativada a qualquer momento no futuro</h3>
+			<p> A desativação da conta desabilitará seu perfil e removerá seu nome e 
+				foto da maior parte do conteúdo compartilhado nas comunidades. 
+				Ao desativar a conta ela poderá ser reativada a qualquer momento a partir do login com seus dados.
+			</p>
+
+		<h3>Mais informações</h3>
+<p>Você  poderá reativar sua conta após 30 dias</p>
+<p>Para reativar sua conta basta realizar o Login com Email e Senha </p>
+
 	<div class="container">
-		<h1>Desativar Conta</h1>
+		<h2>Desativar a conta</h2>
 		<form action="metodo-desativar-conta" method="post">
 			<label for="apelido">Apelido:</label> <input type="text" id="apelido"
 				name="apelido" required><br>
@@ -21,7 +32,7 @@
 			<button type="submit">Desativar Conta</button>
 		</form>
 		<p>
-			Ainda não deseja desativar sua conta? <a href="home.jsp">Voltar
+			Não deseja desativar sua conta? <a href="home.jsp">Voltar
 				para a página inicial</a>
 		</p>
 	</div>
