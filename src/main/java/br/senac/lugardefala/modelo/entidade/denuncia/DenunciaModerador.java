@@ -36,9 +36,9 @@ public class DenunciaModerador extends Denuncia {
 		this.moderador = moderador;
 	}
 	
-	public DenunciaModerador(String motivo,
+	public DenunciaModerador(LocalDate data,String motivo, Status status,
 			Usuario usuarioDenunciante,Moderador moderadorDenunciado) {
-		super(motivo, usuarioDenunciante);
+		super(data, motivo,status,usuarioDenunciante);
 		this.moderador = moderadorDenunciado;
 	}
 	
