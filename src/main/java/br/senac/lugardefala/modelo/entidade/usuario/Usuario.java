@@ -104,6 +104,17 @@ public class Usuario implements Serializable {
          comunidades = new ArrayList<>();
          contatos = new ArrayList<>();
      }
+    public Usuario(String nome, String sobrenome, String apelido, String descricao) {
+     	this.nome = nome;
+         this.sobrenome = sobrenome;
+         this.apelido = apelido;
+         this.descricao = descricao;
+         denunciasDeUsuario = new ArrayList<>();
+         relatos = new ArrayList<>();
+         conselhos = new ArrayList<>();
+         comunidades = new ArrayList<>();
+         contatos = new ArrayList<>();
+     }
     
     
     

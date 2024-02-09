@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
@@ -11,40 +12,28 @@
 	<div>
 		<form action="inserir-usuario" method="post">
 			<p>
-				<strong>nome:</strong>
+				<strong>Nome:</strong>
 				<c:out value="${usuario.nome}" />
-				<strong>nome de usuário:</strong>
+				<br>
+				 <strong>Nome de Usuário:</strong>
 				<c:out value="${usuario.apelido}" />
-				<strong>descrição:</strong>
+				<br> 
+				<strong>Biografia:</strong>
 				<c:out value="${usuario.descricao}" />
+				<br> 
+				<strong>Relatos:</strong>
 				<c:forEach var="relato" items="${relatos}">
-				<p>
-					RELATOS :
-					<c:out value="${relato.conteudo}" />
-				</p>
-			</c:forEach>
+				<c:out value="${relato.conteudo}" />
+				<br>
+				</c:forEach>
+				<br> <strong>Comunidades:</strong>
+				<c:forEach var="comunidade" items="${comunidades}">
+					<c:out value="${comunidade.nome}" />
+					<br>
+				</c:forEach>
 			</p>
 		</form>
 	</div>
-	<div>
-		<form action="perfil-usuario" method="post">
-			<c:forEach var="comunidade" items="${comunidades}">
-				<p>
-					COMUNIDADES:
-					<c:out value="${comunidade.nome}" />
-				</p>
-			</c:forEach>
-		</form>
-	</div>
-
-	<div>
-		<a href="#">Relatos</a>
-	</div>
-	<div>
-		<a href="#">Comunidades</a>
-		<p>Ingressar em mais comunidades</p>
-	</div>
-
 	<div>
 		<footer>
 			<div>
@@ -53,7 +42,7 @@
 			</div>
 			<div>
 				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				S <a href="#">Contato</a> <a href="#">Termos de uso</a>
 			</div>
 			<div>
 				<p>Redes Sociais</p>

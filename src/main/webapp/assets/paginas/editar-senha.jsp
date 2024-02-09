@@ -13,9 +13,8 @@
     </div>
     <div>
         <h2>Criar nova senha</h2>
-        <form action="atualizar-senha" method="post">
+        <form action="metodo-editar-senha" method="post">
             <input type="password" id="novasenha" name="senha" required maxlength="20" placeholder="Nova senha">
-            <!-- <input type="password" id="cnovasenha" name="csenha" required maxlength="20" placeholder="Confirmar senha"> -->
             <button type="submit">Confirmar</button>
         </form>
     </div>
