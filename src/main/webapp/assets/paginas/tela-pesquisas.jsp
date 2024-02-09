@@ -6,10 +6,12 @@
     <title>tela-pesquisa</title>
 </head>
 <body>
-     <form action="Pesquisa.jsp" method="post">
-        <label for="termoPesquisado"></label>
-        <input type="text" name="termoPesquisado">
-        <input type="submit" value="Pesquisa">
-    </form>
+	<div>
+     	<form action="Pesquisa.jsp" method="post">
+        	<label for="termoPesquisado"></label>
+        	<input type="text" name="termoPesquisado">
+        	<input type="submit" value="Pesquisa">
+    	</form>
+    </div>
 </body>
 </html>

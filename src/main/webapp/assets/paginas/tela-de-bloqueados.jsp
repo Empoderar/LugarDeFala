@@ -1,15 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
   <title>tela-de-bloqueados</title>
 </head>
 <body>
-  <h1>Usuários Bloqueados</h1> 
-  <p>Você pode bloquear ou desbloquear um usuário a qualquer momento.</p>
-    <button>Desbloquear Usuario</button>
+  <h1>Contas Bloqueadas</h1> 
+  <p>Você pode bloquear ou desbloquear uma conta a qualquer momento.</p>
 <div>
+<div>
+	<c:forEach var="usario" items="${usuarios}">
+				<p>
+					USUARIOS:
+					<c:out value="${usuario.nome}"></c:out>
+					<c:out value="${usario.apelido}"></c:out>
+					<c:out value="${usario.descricao}"></c:out>
+					<form action="desbloquear-usuario" method="post">
+        				<button type="submit">Desbloquear</button>
+        	
+        			</form>
+				</p>
+			</c:forEach>
+</div>
+
   <footer>
       <div>
           <p>Lugar de Fala</p>

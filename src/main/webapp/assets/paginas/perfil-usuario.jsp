@@ -8,6 +8,7 @@
 <title>Perfil Usuário</title>
 </head>
 <body>
+<div><button onclick="#">Editar perfil</button></div>
 	<div>
 		<form action="inserir-usuario" method="post">
 			<p>
@@ -67,5 +68,6 @@
 			</div>
 		</footer>
 	</div>
+	
 </body>
 </html>
