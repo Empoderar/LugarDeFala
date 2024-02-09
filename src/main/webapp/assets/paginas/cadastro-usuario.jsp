@@ -30,9 +30,11 @@
         </form>
     </div>
     <div>
+    <form action="verificar-usuario" method="post">
         <p>Enviamos um código para o e-mail</p>
-        <p>Reenviar código em 60 segundos</p>
-        <button type="button">Próximo</button>
+        <button type="submit">Reenviar código em 60 segundos</button>
+        <button type="submit">Validar</button>
+         </form>
     </div>
     <div>
         <p>Cadastro concluído com sucesso!</p>

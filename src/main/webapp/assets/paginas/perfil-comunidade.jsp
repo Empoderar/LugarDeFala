@@ -34,29 +34,13 @@
 				<a href="#">Violência patrimonial</a>
 				<hr>
 			</div>
-			<div>
-				<a href="#">Filtros</a>
-				<form>
-					<input type="checkbox" id="filtroUsuario" name="filtro1"
-						value="usuarios"> <label for="filtroUsuario">Usuários</label>
-					<input type="checkbox" id="filtroRelato" name="filtro2"
-						value="relatos"> <label for="filtroRelato">Relatos</label>
-					<input type="checkbox" id="filtroConselho" name="filtro3"
-						value="conselho"> <label for="filtroConselho">Conselhos</label>
-					<input type="checkbox" id="filtroData" name="filtro4" value="data">
-					<label for="filtroData">Data</label> <label for="dataInicio">De</label>
-					<input type="date" id="dataInicio" name="DataInicial"> <label
-						for="dataFinal">Até</label> <input type="date" id="dataFinal"
-						name="DataFinal">
-				</form>
-				<button type="button">Filtrar</button>
-			</div>
 			<c:forEach var="comunidade" items="${comunidades}">
 				<p>
 					COMUNIDADES:
 					<c:out value="${comunidade.nome}" />
 				</p>
 			</c:forEach>
+			<button onclick="#">Relatar</button>
 		</nav>
 	</div>
 			<c:forEach var="relato" items="${relatos}">
