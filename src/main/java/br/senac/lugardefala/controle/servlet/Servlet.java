@@ -362,8 +362,8 @@ public class Servlet extends HttpServlet {
 		comunidadeDao.inserirComunidade(comunidade1);
 		comunidadeDao.inserirComunidade(comunidade2);
 
-		Relato relato1 = new Relato();
-		Relato relato2 = new Relato();
+		Relato relato1 = new Relato("nsei",LocalDate.now());
+		Relato relato2 = new Relato("nananaan",LocalDate.now());
 		relatoDao.inserirRelato(relato1);
 		relatoDao.inserirRelato(relato2);
 
@@ -430,8 +430,31 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		Relato relato1 = new Relato("Lalalalalallala",LocalDate.now());
+		Relato relato2 = new Relato("lelelele",LocalDate.now());
+		request.setAttribute("relato", relato1);
+		request.setAttribute("relato", relato2);
+		relatoDao.inserirRelato(relato1);
+		relatoDao.inserirRelato(relato2);
 		
-
+		Usuario usuario2 = new Usuario("joao", "antonio", "busco ajuda", LocalDate.of(2022, 10, 10),
+				"joao.antonio");
+		usuarioDao.inserirUsuario(usuario2);
+		
+		usuario2.adicionarRelato(relato1);
+		usuario2.adicionarRelato(relato2);
+		Usuario usuarioRecuperado = usuarioDao.recuperarUsuarioPeloIdFetch(usuario2.getId());
+		
+		List<Relato> relatos = relatoDao.recuperarRelatosPeloUsuario(usuarioRecuperado);
+		relatos.add(relato1);
+		relatos.add(relato2);
+		
+		request.setAttribute("relatos", relatos);
+		
+		for (Relato r : relatos) {
+			System.out.println("Conteúdo dos relatos: " + r.getConteudo());
+		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
 		dispatcher.forward(request, response);
 	}
