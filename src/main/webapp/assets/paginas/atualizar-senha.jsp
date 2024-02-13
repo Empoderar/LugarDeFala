@@ -11,8 +11,7 @@
 		<a href="#"> <img src="#" alt="casinha"
 			style="width: 42px; height: 42px;">
 		</a>
-		<h1>Atualizar senha</h1>
-		<p>Enviamos um link para o e-mail</p>
+		<h1>Alterar senha</h1>
 		<form action="atualizar-senha" method="post">
 			<input type="password" id="senhaatual" name="senha" required
 				maxlength="20" placeholder="Senha atual"> <input

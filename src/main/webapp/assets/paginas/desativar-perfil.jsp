@@ -58,7 +58,6 @@
 		</div>
 	</footer>
 	<div>
-
 		<a href="#"> <img src="#" alt="setinha"
 			style="width: 42px; height: 42px;">
 		</a>
