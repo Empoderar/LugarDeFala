@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deletar Conta</title>
+    <title>Excluir Conta</title>
     <style>
     </style>
 </head>
@@ -18,7 +18,7 @@
             possível ver relatos e conselhos, acessar comunidades ou postar
             relatos. Se ainda deseja excluir sua conta clique no botão “excluir”
             no canto inferior direito da página.</p>
-        <h3>Mais informações</h3>
+        <h3>Ao prosseguir você excluirá permanentemente sua conta</h3>
         <p>Você pode arquivar sua conta Lugar de Fala ao invés de
             excluí-la permanentemente, para arquivar sua conta vá em “Arquivar
             Conta”.</p>
@@ -35,7 +35,7 @@
     </div>
     <div>
         <p>Sua conta foi excluída com sucesso!</p>
-        <button type="button">Ok</button>
+        <button type="submit">Ok</button>
     </div>
 </body>
 </html>

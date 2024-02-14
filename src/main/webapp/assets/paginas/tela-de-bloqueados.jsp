@@ -12,16 +12,13 @@
 <div>
 <div>
 	<c:forEach var="usario" items="${usuarios}">
-				<p>
 					USUARIOS:
 					<c:out value="${usuario.nome}"></c:out>
 					<c:out value="${usario.apelido}"></c:out>
 					<c:out value="${usario.descricao}"></c:out>
 					<form action="desbloquear-usuario" method="post">
         				<button type="submit">Desbloquear</button>
-        	
         			</form>
-				</p>
 			</c:forEach>
 </div>
 
