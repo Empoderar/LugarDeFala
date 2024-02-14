@@ -19,6 +19,7 @@ import org.hibernate.service.ServiceRegistry;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.contato.Contato_;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
@@ -96,11 +97,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			ParameterExpression<String> usuarioPeloNome = construtor.parameter(String.class, "nome");
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("nome"), usuarioPeloNome));
+			ParameterExpression<String> usuarioPeloNome = construtor.parameter(String.class, Usuario_.NOME);
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.NOME), usuarioPeloNome));
 			usuariosPeloNome = session.createQuery(criteria).setParameter(usuarioPeloNome, nome).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -119,11 +122,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			ParameterExpression<String> usuarioPeloApelido = construtor.parameter(String.class, "apelido");
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("apelido"), usuarioPeloApelido));
+			ParameterExpression<String> usuarioPeloApelido = construtor.parameter(String.class, Usuario_.APELIDO);
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.APELIDO), usuarioPeloApelido));
 			usuariosPeloApelido = session.createQuery(criteria).setParameter(usuarioPeloApelido, apelido)
 					.getSingleResult();
 			session.getTransaction().commit();
@@ -187,7 +192,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			Join<Usuario, Comunidade> joinComunidades = raizUsuario.join("comunidades");
+			Join<Usuario, Comunidade> joinComunidades = raizUsuario.join(Usuario_.COMUNIDADES);
 
 			ParameterExpression<Comunidade> comunidadeParam = construtor.parameter(Comunidade.class);
 			criteria.select(raizUsuario).where(construtor.equal(joinComunidades, comunidadeParam));
@@ -220,9 +225,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-			Join<Usuario, Conselho> joinConselho = raizUsuario.join("conselhos");
+			Join<Usuario, Conselho> joinConselho = raizUsuario.join(Usuario_.CONSELHOS);
 
-			criteria.where(construtor.equal(joinConselho.get("id"), conselho.getId()));
+			criteria.where(construtor.equal(joinConselho.get(Usuario_.ID), conselho.getId()));
 			usuarios = session.createQuery(criteria).getResultList();
 			session.getTransaction().commit();
 			return usuarios;
@@ -249,7 +254,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaQuery<Usuario> criteria = builder.createQuery(Usuario.class);
 			Root<Usuario> root = criteria.from(Usuario.class);
 
-			criteria.select(root).where(builder.equal(root.get("id"), id));
+			criteria.select(root).where(builder.equal(root.get(Usuario_.ID), id));
 
 			usuario = session.createQuery(criteria).uniqueResult();
 
@@ -277,7 +282,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-			Join<Usuario, Relato> joinRelato = raizUsuario.join("relatos");
+			Join<Usuario, Relato> joinRelato = raizUsuario.join(Usuario_.RELATOS);
 
 			criteria.select(raizUsuario).where(construtor.equal(joinRelato, relato));
 			usuarios = session.createQuery(criteria).getResultList();
@@ -301,11 +306,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
+			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, Usuario_.ID);
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.ID), usuarioPeloId));
 			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -324,12 +331,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			raizUsuario.fetch("comunidades", JoinType.LEFT);
-			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, "id");
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), usuarioPeloId));
+			
+			raizUsuario.fetch(Usuario_.COMUNIDADES, JoinType.LEFT);
+			ParameterExpression<Long> usuarioPeloId = construtor.parameter(Long.class, Usuario_.ID);
+			
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.ID), usuarioPeloId));
 			usuariosPeloId = session.createQuery(criteria).setParameter(usuarioPeloId, id).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -389,11 +399,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 			Join<Usuario, Contato> raizContato = raizUsuario.join(Usuario_.CONTATO);
 
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("senha"), senha),
-					construtor.equal(raizContato.get("email"), email));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.SENHA), senha),
+					construtor.equal(raizContato.get(Contato_.EMAIL), email));
 
-			Predicate predicateUsuarioSenha = construtor.equal(raizUsuario.get("senha"), senha);
-			Predicate predicateContatoEmail = construtor.equal(raizContato.get("email"), email);
+			Predicate predicateUsuarioSenha = construtor.equal(raizUsuario.get(Usuario_.SENHA), senha);
+			Predicate predicateContatoEmail = construtor.equal(raizContato.get(Contato_.EMAIL), email);
 			Predicate predicateUsuarioLogin = construtor.and(predicateUsuarioSenha, predicateContatoEmail);
 
 			criteria.where(predicateUsuarioLogin);

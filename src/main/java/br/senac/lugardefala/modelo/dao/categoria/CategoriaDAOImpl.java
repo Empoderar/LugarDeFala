@@ -93,10 +93,10 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
             Root<Categoria> raizRelato = criteria.from(Categoria.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Categoria_.nome), nome));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Categoria_.NOME), nome));
             
             ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizRelato.get(Categoria_.nome), relatoCategoria));
+			criteria.where(construtor.equal(raizRelato.get(Categoria_.NOME), relatoCategoria));
             
 			categoriaRecuperada = session.createQuery(criteria).getResultList();
             
@@ -128,7 +128,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.equal(root.get(Categoria_.id), id));
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.ID), id));
 
 	        categoria = session.createQuery(criteria).uniqueResult();
 
@@ -144,8 +144,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 
-	public Categoria recuperarPorRelato(Relato relato) {
-	    Categoria categoria = null;
+	public List <Categoria> recuperarPorRelato(Relato relato) {
+	    List <Categoria> categoria = null;
 	    Session session = null;
 
 	    try {
@@ -156,9 +156,9 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.relatos)));
+	        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.RELATOS)));
 
-	        categoria = session.createQuery(criteria).uniqueResult();
+	        categoria = session.createQuery(criteria).getResultList();
 
 	        session.getTransaction().commit();
 
@@ -184,7 +184,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.equal(root.get(Categoria_.nome), nome));
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.NOME), nome));
 
 	        categoria = session.createQuery(criteria).uniqueResult();
 
