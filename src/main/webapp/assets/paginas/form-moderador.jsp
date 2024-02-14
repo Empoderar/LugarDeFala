@@ -13,9 +13,11 @@
 <body>
     <h1>Cadastro de Moderador</h1>
     <div>
+    	<form action="form-moderador" method="post">
         <p>Leia as informações no PDF para responder ao formulário</p>
         <a href="#" target="_self">Link para o PDF</a>
-        <button type="button">Próximo</button>
+        <button type="submit">Próximo</button>
+        </form>
     </div>
     <div>
         <p>Responda o formulário com base nas informações fornecidas no PDF</p>

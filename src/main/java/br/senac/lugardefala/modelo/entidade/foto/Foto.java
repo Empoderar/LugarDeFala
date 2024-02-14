@@ -4,12 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
-public class Foto {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "foto")
+public class Foto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

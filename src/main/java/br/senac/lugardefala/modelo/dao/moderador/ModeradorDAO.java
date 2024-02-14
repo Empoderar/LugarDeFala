@@ -13,7 +13,7 @@ public interface ModeradorDAO {
 
     void atualizar(Moderador moderador);
 
-    List<Moderador> recuperarPelaComunidade(Comunidade comunidade);
+    List<Moderador> recuperarPorComunidade(Comunidade comunidade);
 
     List<Moderador> recuperarPorId(Long id);
 
