@@ -81,7 +81,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 
-	public List<Moderador> recuperarPelaComunidade(Comunidade comunidade) {
+	public List<Moderador> recuperarPorComunidade(Comunidade comunidade) {
 	    List<Moderador> moderadores = null;
 	    Session session = null;
 
