@@ -88,6 +88,11 @@ public class Relato implements Serializable {
 		categoriaRelato = new ArrayList<>();
 	}
 	
+	public Relato(String conteudo) {
+		this.conteudo = conteudo;
+		categoriaRelato = new ArrayList<>();
+	}
+	
 	
 	public Relato(Long id, String conteudo, LocalDate data, Integer avaliacao, Status status) {
 		this.id = id;

@@ -109,6 +109,17 @@ public class Usuario implements Serializable {
          comunidades = new ArrayList<>();
          contatos = new ArrayList<>();
      }
+    public Usuario(String nome, String sobrenome, String apelido, String descricao) {
+     	this.nome = nome;
+         this.sobrenome = sobrenome;
+         this.apelido = apelido;
+         this.descricao = descricao;
+         denunciasDeUsuario = new ArrayList<>();
+         relatos = new ArrayList<>();
+         conselhos = new ArrayList<>();
+         comunidades = new ArrayList<>();
+         contatos = new ArrayList<>();
+     }
     
     
     
@@ -120,6 +131,7 @@ public class Usuario implements Serializable {
          this.apelido = apelido;
          this.senha = senha;
          this.descricao = descricao;
+         relatos = new ArrayList<>();
      }
 
     public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Comunidade comunidade) {
@@ -129,6 +141,7 @@ public class Usuario implements Serializable {
          this.apelido = apelido;
          this.senha = senha;
          comunidades = new ArrayList<>();
+         relatos = new ArrayList<>();
      }
     
     public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao, Comunidade comunidade) {
@@ -139,8 +152,10 @@ public class Usuario implements Serializable {
         this.senha = senha;
         this.descricao = descricao;
         comunidades = new ArrayList<>();
+        relatos = new ArrayList<>();
     }
     
+       
     public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
     	this.nome = nome;
         this.sobrenome = sobrenome;
@@ -148,12 +163,26 @@ public class Usuario implements Serializable {
         this.apelido = apelido;
         this.senha = senha;
         this.descricao = descricao;
+        comunidades = new ArrayList<>();
+        relatos = new ArrayList<>();
+    }
+    
+    public Usuario(String nome, String sobrenome, String descricao, LocalDate dataNascimento, String apelido) {
+    	this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
+        this.apelido = apelido;
+        this.descricao = descricao;
+        comunidades = new ArrayList<>();
+        relatos = new ArrayList<>();
     }
 
     public Usuario(String nome, String sobrenome, String apelido) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.apelido = apelido;
+		comunidades = new ArrayList<>();
+		 relatos = new ArrayList<>();
 	}
     
     
@@ -215,6 +244,15 @@ public class Usuario implements Serializable {
 
     public boolean removerComunidade(Comunidade comunidade) {
         return comunidades.remove(comunidade);
+    }
+    
+
+    public boolean adicionarRelato(Relato relato) {
+        return relatos.add(relato);
+    }
+
+    public boolean removerRelato(Relato relato) {
+        return relatos.remove(relato);
     }
 
     public List<Conselho> getConselhos() {

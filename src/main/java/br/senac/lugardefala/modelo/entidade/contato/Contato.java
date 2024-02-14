@@ -36,6 +36,7 @@ public class Contato implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contato_id_usuario", referencedColumnName = "id_usuario")
+
     private Usuario usuario;
     
     @ManyToMany(mappedBy = "contatos")

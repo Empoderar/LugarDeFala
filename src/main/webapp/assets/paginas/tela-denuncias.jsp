@@ -9,27 +9,35 @@
     <div>
         <h1>Denúncias de relatos</h1>
         <a href="#">Filtrar denúncias</a>
-        <button>Aprovar</button>
-        <button>Rejeitar</button>
-        <button>Arquivar</button>
+       		<form action="julgar-denuncia-relato" method="post">
+        		<button type="submit">Aprovar</button>
+        		<button type="submit">Rejeitar</button>
+        		<button type="submit">Arquivar</button>
+        	</form>
     </div>
     <div>
-        <h2>Denúncias de conselhos</h2>
-        <button>Aprovar</button>
-        <button>Rejeitar</button>
-        <button>Arquivar</button>
+    	<h1>Denúncias de usuarios</h1>
+        	<form action="julgar-denuncia-usuario" method="post">
+        		<button type="submit">Aprovar</button>
+        		<button type="submit">Rejeitar</button>
+       		 	<button type="submit">Arquivar</button>
+        	</form>
     </div>
     <div>
-        <h3>Denúncias de usuários</h3>
-        <button>Aprovar</button>
-        <button>Rejeitar</button>
-        <button>Arquivar</button>
+    	<h1>Denúncias de moderadores</h1>
+        	<form action="julgar-denuncia-moderador" method="post">
+        		<button type="submit">Aprovar</button>
+        		<button type="submit">Rejeitar</button>
+        		<button type="submit">Arquivar</button>
+        	</form>
     </div>
     <div>
-        <h4>Denúncias de moderador</h4>
-        <button>Aprovar</button>
-        <button>Rejeitar</button>
-        <button>Arquivar</button>
+    	<h1>Denúncias de conselhos</h1>
+        	<form action="julgar-denuncia-conselho" method="post">
+        		<button type="submit">Aprovar</button>
+        		<button type="submit">Rejeitar</button>
+        		<button type="submit">Arquivar</button>
+        	</form>
     </div>
     <div>
         <footer>

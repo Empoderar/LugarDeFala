@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -386,23 +387,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			raizUsuario.fetch("contato", JoinType.LEFT);
+			Join<Usuario, Contato> raizContato = raizUsuario.join(Usuario_.CONTATO);
 
-			Join<Usuario, Contato> joinContato = raizUsuario.join("contato_id_contato");
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("senha"), senha),
+					construtor.equal(raizContato.get("email"), email));
 
-			criteria.select(raizUsuario);
+			Predicate predicateUsuarioSenha = construtor.equal(raizUsuario.get("senha"), senha);
+			Predicate predicateContatoEmail = construtor.equal(raizContato.get("email"), email);
+			Predicate predicateUsuarioLogin = construtor.and(predicateUsuarioSenha, predicateContatoEmail);
 
-			criteria.where(construtor.equal(joinContato.get("email"), email),
-					construtor.equal(raizUsuario.get("senha"), senha));
+			criteria.where(predicateUsuarioLogin);
 
-			usuario = session.createQuery(criteria).uniqueResult();
+			usuario = session.createQuery(criteria).getSingleResult();
 
-			session.getTransaction().commit();
+			return usuario;
 
-		} catch (Exception sqException) {
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
 			if (session.getTransaction() != null) {
 				session.getTransaction().rollback();
 			}
+
 		} finally {
 			if (session != null) {
 				session.close();

@@ -39,6 +39,12 @@ public class Moderador extends Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_comunidade")
     )
     private List<Comunidade> comunidades;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "moderador_usuario",joinColumns = @JoinColumn(name = "id_moderador"),
+            inverseJoinColumns = @JoinColumn(name = "id_usuario")
+    )
+    private List<Usuario> usuarios;
 
     public Moderador() {
     }
@@ -75,6 +81,14 @@ public class Moderador extends Usuario {
 
     public List<Relato> getRelatosModerados() {
         return relatosModerados;
+    }
+    
+    public List<Usuario> getUsuarios(){
+    	return usuarios;
+    }
+    
+    public void setUsuarios(List<Usuario> usuarios) {
+    	this.usuarios = usuarios;
     }
 
     public boolean inserirRelatosModerados(Relato relato) {

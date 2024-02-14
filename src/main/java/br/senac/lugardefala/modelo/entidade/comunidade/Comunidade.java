@@ -75,6 +75,7 @@ public class Comunidade implements Serializable {
         this.descricao = descricao;
         usuarios = new ArrayList<>();
         moderadores = new ArrayList<>();
+        this.moderadores.add(moderador);
     }
  
     public Comunidade(String nome, String descricao, Moderador moderador) {
@@ -123,19 +124,19 @@ public class Comunidade implements Serializable {
     }
  
 
-//    public boolean inserirListaModeradores(Moderador moderador) {
-//        return moderadores.add(moderador);
-//    }
-//
-//    public boolean removerListaModeradoresPorId(long id) {
-//        for (Moderador moderador : moderadores) {
-//            if (moderador.getId().equals(id)) {
-//                moderadores.remove(moderador);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean inserirListaModeradores(Moderador moderador) {
+        return moderadores.add(moderador);
+    }
+
+    public boolean removerListaModeradoresPorId(long id) {
+        for (Moderador moderador : moderadores) {
+            if (moderador.getId().equals(id)) {
+                moderadores.remove(moderador);
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public void setNome(String nome) {
 		this.nome = nome;

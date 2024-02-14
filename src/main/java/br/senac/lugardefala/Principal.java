@@ -307,6 +307,7 @@ public class Principal {
 				usuario5, relato2);
 		denunciaRelatoDAO.inserir(denunciaRelato);
 
+
 		// Adicionando os Usuários e Moderadores ao Relato, Conselho
 
 		relato1.setUsuario(usuario2);
@@ -476,6 +477,7 @@ public class Principal {
 			}
 		}
 
+
 		Relato relatoPorId = relatoDAO.recuperarPorId(2L);
 		if (relatoPorId != null) {
 			System.out.println("Relato Por ID: " + relatoPorId.getConteudo());
@@ -493,6 +495,7 @@ public class Principal {
 		}
 
 		// Teste Categoria
+
 
 		Categoria recuperarCategoriaId = categoriaDAO.recuperarPorId(1L);
 		if (recuperarCategoriaId != null) {
@@ -598,6 +601,6 @@ public class Principal {
 					System.out.println("Usuário não encontrado. Credenciais inválidas.");
 				}
 			}
-		}
 	}
+
 }

@@ -10,21 +10,21 @@
 		<p>Bem-vindo!</p>
 		<h1>Login</h1>
 		<form action="fazer-login" method="post">
-			<label for="email">Email</label> <input type="text" id=email"
-				name="email" required> 
-				<label for="senha">Senha</label> <input
-				type="password" name="senha" id="senha" required maxlength="20">
+			<label for="email">Email</label> 
+			<input type="text" id="email" name="email" required> 
+				<label for="senha">Senha</label> 
+				<input type="password" name="senha" id="senha" required maxlength="20">
 			<a href="recuperar-senha.html" target="_self">Esqueceu a senha?</a><br>
 			<button type="submit">Confirmar</button>
 		</form>
-		<p>Nï¿½o tem uma conta?</p>
-		<a href="cadastro-usuario" target="_self">Cadaste-se</a>
+		<p>Não tem uma conta?</p>
+		<a href="cadastro-usuario" target="_self">Cadastre-se</a>
 	</div>
 	<div>
 		<footer>
 			<div>
 				<p>Lugar de Fala</p>
-				<a href="#">Sobre nï¿½s</a> <a href="#">Pï¿½gina inicial</a>
+				<a href="#">Sobre nós</a> <a href="#">Pagina inicial</a>
 			</div>
 			<div>
 				<p>Atendimento</p>
