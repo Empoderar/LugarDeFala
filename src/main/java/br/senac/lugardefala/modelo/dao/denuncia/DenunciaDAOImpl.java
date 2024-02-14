@@ -38,6 +38,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -52,7 +53,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
     }
 
     
-    public void inserirDenuncia(Denuncia denuncia) {
+    public void inserir(Denuncia denuncia) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denuncia);
@@ -61,9 +62,8 @@ public class DenunciaDAOImpl implements DenunciaDAO {
             e.printStackTrace();
         }
     }
-
-    
-    public void inserirDenunciaModerador(DenunciaModerador denunciaModerador) {
+  
+    public void inserir(DenunciaModerador denunciaModerador) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaModerador);
@@ -74,7 +74,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
     }
 
     
-    public void inserirDenunciaRelato(DenunciaRelato denunciaRelato) {
+    public void inserir(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaRelato);
@@ -84,7 +84,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
         }
     }
 
-    public void inserirDenunciaConselho(DenunciaConselho denunciaConselho) {
+    public void inserir(DenunciaConselho denunciaConselho) {
     	try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaConselho);
@@ -94,7 +94,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
         }
     }
     
-    public void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario) {
+    public void inserir(DenunciaUsuario denunciaUsuario) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaUsuario);
@@ -105,7 +105,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
     }
 
     
-    public void deletarDenuncia(Denuncia denuncia) {
+    public void deletar(Denuncia denuncia) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(denuncia);
@@ -116,7 +116,7 @@ public class DenunciaDAOImpl implements DenunciaDAO {
     }
 
     
-    public void atualizarDenuncia(Denuncia denuncia) {
+    public void atualizar(Denuncia denuncia) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.update(denuncia);

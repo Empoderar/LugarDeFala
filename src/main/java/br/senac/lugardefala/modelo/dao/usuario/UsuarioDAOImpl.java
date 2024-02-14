@@ -40,6 +40,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
 		configuration.configure("hibernate.cfg.xml");
 
@@ -53,7 +54,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return sessionFactory;
 	}
 
-	public void inserirUsuario(Usuario usuario) {
+	public void inserir(Usuario usuario) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.save(usuario);
@@ -63,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public void deletarUsuario(Usuario usuario) {
+	public void deletar(Usuario usuario) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(usuario);
@@ -73,7 +74,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public void atualizarUsuario(Usuario usuario) {
+	public void atualizar(Usuario usuario) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 
@@ -89,17 +90,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-//	public void atualizarUsuario(Usuario usuario) {
-//		try (Session session = getSessionFactory().openSession()) {
-//			session.beginTransaction();
-//			session.update(usuario);
-//			session.getTransaction().commit();
-//		} catch (Exception e) {
-//			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
-//		}
-//	}
-
-	public Usuario recuperarUsuarioPeloNome(String nome) {
+	public Usuario recuperarPorNome(String nome) {
 		Session session = null;
 		Usuario usuariosPeloNome = null;
 		try {
@@ -122,7 +113,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloNome;
 	}
 
-	public Usuario recuperarUsuarioPeloApelido(String apelido) {
+	public Usuario recuperarPorApelido(String apelido) {
 		Session session = null;
 		Usuario usuariosPeloApelido = null;
 		try {
@@ -146,7 +137,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloApelido;
 	}
 
-	public List<Usuario> recuperarUsuarios() {
+	public List<Usuario> recuperarTodos() {
 
 		Session sessao = null;
 		List<Usuario> usuarios = null;
@@ -185,7 +176,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
+	public List<Usuario> recuperarPorComunidade(Comunidade comunidade) {
 		List<Usuario> usuariosComunidade = null;
 		Session session = null;
 
@@ -217,7 +208,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosComunidade;
 	}
 
-	public List<Usuario> recuperarUsuariosPorConselho(Conselho conselho) {
+	public List<Usuario> recuperarPorConselho(Conselho conselho) {
 		Session session = null;
 		List<Usuario> usuarios = null;
 
@@ -246,7 +237,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public Usuario recuperarUsuariosPorIdDenuncia(Long id) {
+	public Usuario recuperarPorIdDenuncia(Long id) {
 		Usuario usuario = null;
 		Session session = null;
 
@@ -274,7 +265,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuario;
 	}
 
-	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
+	public List<Usuario> recuperarPorRelato(Relato relato) {
 		Session session = null;
 		List<Usuario> usuarios = null;
 
@@ -304,7 +295,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public Usuario recuperarUsuarioPeloId(Long id) {
+	public Usuario recuperarPorId(Long id) {
 		Session session = null;
 		Usuario usuariosPeloId = null;
 		try {
@@ -327,7 +318,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloId;
 	}
 
-	public Usuario recuperarUsuarioPeloIdFetch(Long id) {
+	public Usuario recuperarPorIdFetch(Long id) {
 		Session session = null;
 		Usuario usuariosPeloId = null;
 		try {
@@ -351,7 +342,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloId;
 	}
 
-	public boolean verificarUsuario(String apelido, String senha) {
+	public boolean verificarCredenciais(String apelido, String senha) {
 		Session session = null;
 		Usuario usuario = null;
 
@@ -385,7 +376,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuario != null;
 	}
 
-	public Usuario obterUsuarioPorCredenciais(String email, String senha) {
+	public Usuario obterPorCredenciais(String email, String senha) {
 		Session session = null;
 		Usuario usuario = null;
 

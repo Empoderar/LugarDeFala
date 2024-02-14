@@ -37,6 +37,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -50,7 +51,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
         return sessionFactory;
     }
 
-    public void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario) {
+    public void inserir(DenunciaUsuario denunciaUsuario) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaUsuario);
@@ -60,7 +61,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
         }
     }
 
-    public void deletarDenunciaUsuario(DenunciaUsuario denunciaUsuario) {
+    public void deletar(DenunciaUsuario denunciaUsuario) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(denunciaUsuario);
@@ -70,7 +71,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
         }
     }
     
-    public List<DenunciaUsuario> recuperarDenunciaUsuarioStatus(Status status) {
+    public List<DenunciaUsuario> recuperarPorStatus(Status status) {
     	Session session = null;
         List<DenunciaUsuario> denunciasUsuarios = null;
         try {
@@ -97,7 +98,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
         return denunciasUsuarios;
     }
 
-    public List<DenunciaUsuario> recuperarDenunciaUsuarioPeloUsuario(Usuario usuario) {
+    public List<DenunciaUsuario> recuperarPorUsuario(Usuario usuario) {
     	Session session = null;
         List <DenunciaUsuario> denunciaUsuario = null;
 

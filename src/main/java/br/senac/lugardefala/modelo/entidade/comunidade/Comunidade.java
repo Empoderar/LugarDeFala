@@ -81,6 +81,8 @@ public class Comunidade implements Serializable {
     public Comunidade(String nome, String descricao, Moderador moderador) {
         this(nome, descricao);
         this.moderador = moderador;
+        moderadores = new ArrayList<>();
+        this.moderadores.add(moderador);
     }
  
     public Long getId() {

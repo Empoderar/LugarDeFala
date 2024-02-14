@@ -39,6 +39,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
 		configuration.configure("hibernate.cfg.xml");
 
@@ -52,7 +53,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		return sessionFactory;
 	}
 
-	public void inserirConselho(Conselho conselho) {
+	public void inserir(Conselho conselho) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.save(conselho);
@@ -62,7 +63,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public void deletarConselho(Conselho conselho) {
+	public void deletar(Conselho conselho) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(conselho);
@@ -72,7 +73,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public void atualizarConselho(Conselho conselho) {
+	public void atualizar(Conselho conselho) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.update(conselho);
@@ -82,7 +83,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public List<Conselho> recuperarConselhoRelato(Relato relato) {
+	public List<Conselho> recuperarPorRelato(Relato relato) {
 		Session session = null;
 		List<Conselho> conselho = null;
 		try {
@@ -109,7 +110,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		
 	}
 
-	public Conselho recuperarConselhoPeloId(Long id) {
+	public Conselho recuperarPorId(Long id) {
 		Session session = null;
 		Conselho conselhosPeloId = null;
 		try {
@@ -121,7 +122,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			Root<Conselho> raizUsuario = criteria.from(Conselho.class);
 			ParameterExpression<Long> conselhoPeloId = construtor.parameter(Long.class, "id");
 			
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), conselhoPeloId));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Conselho_.ID), conselhoPeloId));
 			conselhosPeloId = session.createQuery(criteria).setParameter(conselhoPeloId, id).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -134,7 +135,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		return conselhosPeloId;
 	}
 	
-	public List<Conselho> recuperarConselhoPeloUsuario(Usuario usuario) {
+	public List<Conselho> recuperarPorUsuario(Usuario usuario) {
 		Session session = null;
 		List<Conselho> conselhos = null;
 		try {

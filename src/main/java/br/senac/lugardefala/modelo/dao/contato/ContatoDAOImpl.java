@@ -31,6 +31,7 @@ public class ContatoDAOImpl implements ContatoDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -44,7 +45,7 @@ public class ContatoDAOImpl implements ContatoDAO {
         return sessionFactory;
     }
 
-    public void inserirContato(Contato contato) {
+    public void inserir(Contato contato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(contato);
@@ -54,7 +55,7 @@ public class ContatoDAOImpl implements ContatoDAO {
         }
     }
 
-    public void atualizarContato(Contato contato) {
+    public void atualizar(Contato contato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.update(contato);
@@ -65,7 +66,7 @@ public class ContatoDAOImpl implements ContatoDAO {
     }
     
 
-	public void deletarContato(Contato contato) {
+	public void deletar(Contato contato) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(contato);
@@ -75,7 +76,7 @@ public class ContatoDAOImpl implements ContatoDAO {
 		}
 	}
 
-	public Contato recuperarContatoDoUsuarioPeloId(Long id) {
+	public Contato recuperarPorId(Long id) {
 	    Contato contato = null;
 	    Session session = null;
 	    try {
