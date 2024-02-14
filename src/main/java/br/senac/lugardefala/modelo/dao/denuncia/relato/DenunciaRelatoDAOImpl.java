@@ -38,6 +38,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -51,7 +52,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         return sessionFactory;
     }
 
-    public void inserirDenunciaRelato(DenunciaRelato denunciaRelato) {
+    public void inserir(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(denunciaRelato);
@@ -61,7 +62,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         }
     }
 
-    public void deletarDenunciaRelato(DenunciaRelato denunciaRelato) {
+    public void deletar(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.delete(denunciaRelato);
@@ -71,7 +72,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         }
     }
     
-    public void atualizarDenunciaRelato(DenunciaRelato denunciaRelato) {
+    public void atualizar(DenunciaRelato denunciaRelato) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.update(denunciaRelato);
@@ -81,7 +82,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         }
     }
 
-    public List<DenunciaRelato> recuperarDenunciaRelatoStatus(Status status) {
+    public List<DenunciaRelato> recuperarPorStatus(Status status) {
 		Session session = null;
 		List<DenunciaRelato> denunciasRelatos= null;
 		try {
@@ -110,7 +111,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 		return denunciasRelatos;
 	}
 
-    public List <DenunciaRelato> recuperarDenunciaRelatoPeloRelato(Relato relato) {
+    public List <DenunciaRelato> recuperarPorRelato(Relato relato) {
         Session session = null;
         List <DenunciaRelato> denunciaRelato = null;
 

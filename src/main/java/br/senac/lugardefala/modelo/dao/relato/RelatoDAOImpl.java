@@ -39,6 +39,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -52,7 +53,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return sessionFactory;
     }
 
-    public void inserirRelato(Relato relato) {
+    public void inserir(Relato relato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(relato);
@@ -62,7 +63,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         }
     }
 
-    public void deletarRelato(Relato relato) {
+    public void deletar(Relato relato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(relato);
@@ -72,7 +73,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         }
     }
 
-    public void atualizarRelato(Relato relato) {
+    public void atualizar(Relato relato) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.update(relato);
@@ -109,7 +110,7 @@ public class RelatoDAOImpl implements RelatoDAO {
     }
 
 
-    public List <Relato> recuperarRelatosPeloUsuario(Usuario usuario) {
+    public List <Relato> recuperarPorUsuario(Usuario usuario) {
     	List<Relato> relatosUsuario = null;
     	Session session = null;
   	  
@@ -143,7 +144,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosUsuario;
     }
 
-    public List<Relato> recuperarRelatosPeloStatus(Status status) {
+    public List<Relato> recuperarPorStatus(Status status) {
     	
     	List<Relato> relatosStatus = null;
     	Session session = null;
@@ -178,7 +179,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosStatus;
     }
 
-    public List <Relato> recuperarRelatosPelaComunidade(Comunidade comunidade) {
+    public List <Relato> recuperarPorComunidade(Comunidade comunidade) {
     	
     	List<Relato> relatosComunidade = null;
     	Session session = null;
@@ -213,7 +214,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-    public List<Relato> recuperarRelatosPelaCategoria(Categoria categoria) {
+    public List<Relato> recuperarPorCategoria(Categoria categoria) {
         List<Relato> relatosCategoria = null;
         Session session = null;
 
@@ -246,7 +247,7 @@ public class RelatoDAOImpl implements RelatoDAO {
 
 
     
-    public Relato recuperarRelatoPorId(Long id) {
+    public Relato recuperarPorId(Long id) {
 
     	Relato relatosPorId = null;
     	Session session = null;

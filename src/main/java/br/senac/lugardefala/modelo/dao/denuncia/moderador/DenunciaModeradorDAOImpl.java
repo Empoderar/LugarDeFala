@@ -27,6 +27,7 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -40,7 +41,7 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
         return sessionFactory;
     }
 
-    public void inserirDenunciaModerador(DenunciaModerador denunciaModerador) {
+    public void inserir(DenunciaModerador denunciaModerador) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(denunciaModerador);
@@ -50,7 +51,7 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
         }
     }
 
-    public void deletarDenunciaModerador(DenunciaModerador denunciaModerador) {
+    public void deletar(DenunciaModerador denunciaModerador) {
         try (Session session = getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(denunciaModerador);
@@ -60,7 +61,7 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
         }
     }
 
-    public DenunciaModerador recuperarDenunciaModeradorPorId(long id) {
+    public DenunciaModerador recuperarPorId(long id) {
         Session session = null;
         Transaction transaction = null;
         DenunciaModerador denunciaModerador = null;

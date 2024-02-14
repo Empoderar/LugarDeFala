@@ -7,18 +7,17 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface ComunidadeDAO {
 
-	void inserirComunidade(Comunidade comunidade);
-	
-	void deletarComunidade(Comunidade comunidade);
-	
-	void atualizarComunidade(Comunidade comunidade);
+    void inserir(Comunidade comunidade);
 
-	List <Comunidade> recuperarComunidadesPeloIdModerador(Long id);
+    void deletar(Comunidade comunidade);
 
-	List <Comunidade> recuperarComunidadesPeloIdUsuario(Long id);
-	
-	List <Comunidade> recuperarComunidadesPeloUsuario(Usuario usuario);
-	
-	Comunidade recuperarComunidadePeloId(Long id);
-	
+    void atualizar(Comunidade comunidade);
+
+    List<Comunidade> recuperarPorIdModerador(Long id);
+
+    List<Comunidade> recuperarPorIdUsuario(Long id);
+
+    List<Comunidade> recuperarPorUsuario(Usuario usuario);
+
+    Comunidade recuperarPorId(Long id);
 }

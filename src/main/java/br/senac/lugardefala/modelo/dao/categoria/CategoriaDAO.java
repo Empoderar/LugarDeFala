@@ -7,18 +7,18 @@ import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 public interface CategoriaDAO {
 
-	void inserirCategoria(Categoria categoria);
+	void inserir(Categoria categoria);
 
-	void deletarCategoria(Categoria categoria);
+	void deletar(Categoria categoria);
 
-	void atualizarCategoria(Categoria categoria);
+	void atualizar(Categoria categoria);
 
-	List<Categoria> recuperarCategoria(String nome);
+	List<Categoria> recuperar(String nome);
 	
-	Categoria recuperarCategoriaPeloId(Long id);
+	Categoria recuperarPorId(Long id);
 
-	Categoria recuperarCategoriaRelato(Relato relato);
+	Categoria recuperarPorRelato(Relato relato);
 	
-	Categoria recuperarCategoriaPeloNome(String nome);
+	Categoria recuperarPorNome(String nome);
 
 }

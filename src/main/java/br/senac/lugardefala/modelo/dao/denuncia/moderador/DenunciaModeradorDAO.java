@@ -4,9 +4,9 @@ import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
 
 public interface DenunciaModeradorDAO {
 
-    void inserirDenunciaModerador(DenunciaModerador denunciaModerador);
+    void inserir(DenunciaModerador denunciaModerador);
 
-    void deletarDenunciaModerador(DenunciaModerador denunciaModerador);
+    void deletar(DenunciaModerador denunciaModerador);
 
-    DenunciaModerador recuperarDenunciaModeradorPorId(long id);
+    DenunciaModerador recuperarPorId(long id);
 }

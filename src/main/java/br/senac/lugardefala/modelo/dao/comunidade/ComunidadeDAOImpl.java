@@ -14,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
@@ -35,6 +36,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
 		configuration.configure("hibernate.cfg.xml");
 
@@ -48,7 +50,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return sessionFactory;
 	}
 
-	public void inserirComunidade(Comunidade comunidade) {
+	public void inserir(Comunidade comunidade) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.save(comunidade);
@@ -58,7 +60,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 	}
 
-	public void deletarComunidade(Comunidade comunidade) {
+	public void deletar(Comunidade comunidade) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(comunidade);
@@ -68,7 +70,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 	}
 
-	public void atualizarComunidade(Comunidade comunidade) {
+	public void atualizar(Comunidade comunidade) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.update(comunidade);
@@ -78,7 +80,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 	}
 
-	public List<Comunidade> recuperarComunidadesPeloIdModerador(Long id) {
+	public List<Comunidade> recuperarPorIdModerador(Long id) {
 		List<Comunidade> comunidade = null;
 		Session session = null;
 		try {
@@ -89,7 +91,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
+			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
 			comunidade = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();
@@ -104,7 +106,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarComunidadesPeloIdUsuario(Long id) {
+	public List<Comunidade> recuperarPorIdUsuario(Long id) {
 		List<Comunidade> comunidade = null;
 		Session session = null;
 		try {
@@ -115,7 +117,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
+			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
 			comunidade = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();
@@ -130,7 +132,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public Comunidade recuperarComunidadePeloId(Long id) {
+	public Comunidade recuperarPorId(Long id) {
 		Comunidade comunidade = null;
 		Session session = null;
 		try {
@@ -141,7 +143,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), id));
+			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
 			comunidade = session.createQuery(criteria).uniqueResult();
 
 			session.getTransaction().commit();
@@ -156,14 +158,14 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarComunidadesPeloUsuario(Usuario usuario) {
+	public List<Comunidade> recuperarPorUsuario(Usuario usuario) {
 		Session session = null;
 		List<Comunidade> comunidades = null;
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
 
-			String jpql = "SELECT c FROM Comunidade c JOIN c.usuarios u WHERE u.id = :usuarioId";
+			String jpql = "SELECT c FROM Comunidade c JOIN c.usuarios u WHERE u.id = :usuarioId";//???
 			TypedQuery<Comunidade> query = session.createQuery(jpql, Comunidade.class);
 			query.setParameter("usuarioId", usuario.getId());
 

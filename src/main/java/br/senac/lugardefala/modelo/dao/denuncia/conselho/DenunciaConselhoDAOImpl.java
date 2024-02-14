@@ -39,6 +39,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
         configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+        configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
         configuration.configure("hibernate.cfg.xml");
 
@@ -52,7 +53,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
         return sessionFactory;
     }
 
-    public void inserirDenunciaConselho(Denuncia denuncia) {
+    public void inserir(Denuncia denuncia) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(denuncia);
@@ -62,7 +63,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
         }
     }
 
-    public void deletarDenunciaConselho(Denuncia denuncia) {
+    public void deletar(Denuncia denuncia) {
         try (Session session = getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.delete(denuncia);
@@ -72,7 +73,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
         }
     }
 
-    public List<DenunciaConselho> recuperarDenunciaDeConselhoStatus(Status status) {
+    public List<DenunciaConselho> recuperarPorStatus(Status status) {
         Session session = null;
         List<DenunciaConselho> denunciasConselhos = null;
         try {
@@ -99,7 +100,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
         return denunciasConselhos;
     }
 
-    public List<DenunciaConselho> recuperarDenunciaDeConselhoRelato(Relato relato) {
+    public List<DenunciaConselho> recuperarPorRelato(Relato relato) {
         Session session = null;
         List<DenunciaConselho> denunciasConselhos = null;
         try {
