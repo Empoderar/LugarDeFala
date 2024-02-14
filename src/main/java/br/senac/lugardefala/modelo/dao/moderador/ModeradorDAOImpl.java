@@ -94,7 +94,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	        CriteriaBuilder construtor = session.getCriteriaBuilder();
 	        CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 	        Root<Moderador> raizModerador = criteria.from(Moderador.class);
-	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
+	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join(Moderador_.COMUNIDADES);
 
 	        ParameterExpression<Comunidade> comunidadeParam = construtor.parameter(Comunidade.class);
 	        criteria.select(raizModerador).where(construtor.equal(joinComunidades, comunidadeParam));
@@ -125,7 +125,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
 
-			criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
+			criteria.where(construtor.equal(raizModerador.get(Moderador_.ID), id));
 
 			moderador = session.createQuery(criteria).getResultList();
 
@@ -152,11 +152,13 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			ParameterExpression<String> moderadorPeloNome = construtor.parameter(String.class, "nome");
-			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("nome"), moderadorPeloNome));
+			ParameterExpression<String> moderadorPeloNome = construtor.parameter(String.class, Moderador_.NOME);
+			
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.NOME), moderadorPeloNome));
 			moderadoresPeloNome = session.createQuery(criteria).setParameter(moderadorPeloNome, nome).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {

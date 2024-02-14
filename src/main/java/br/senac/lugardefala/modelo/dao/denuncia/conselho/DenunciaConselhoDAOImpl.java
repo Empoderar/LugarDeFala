@@ -18,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
+import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho_;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
@@ -84,7 +85,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
             CriteriaQuery<DenunciaConselho> criteriaQuery = criteriaBuilder.createQuery(DenunciaConselho.class);
             Root<DenunciaConselho> rootDenunciaConselho = criteriaQuery.from(DenunciaConselho.class);
 
-            Predicate predicateDenunciaConselhoStatus = criteriaBuilder.equal(rootDenunciaConselho.get("status"), status);
+            Predicate predicateDenunciaConselhoStatus = criteriaBuilder.equal(rootDenunciaConselho.get(DenunciaConselho_.STATUS), status);
 
             criteriaQuery.where(predicateDenunciaConselhoStatus);
             denunciasConselhos = session.createQuery(criteriaQuery).getResultList();
@@ -110,7 +111,7 @@ public class DenunciaConselhoDAOImpl implements DenunciaConselhoDAO {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<DenunciaConselho> criteriaQuery = criteriaBuilder.createQuery(DenunciaConselho.class);
             Root<DenunciaConselho> rootDenunciaConselho = criteriaQuery.from(DenunciaConselho.class);
-            Join<DenunciaConselho, Conselho> joinConselho = rootDenunciaConselho.join("conselhoDenunciado");
+            Join<DenunciaConselho, Conselho> joinConselho = rootDenunciaConselho.join(DenunciaConselho_.CONSELHO_DENUNCIADO);
             Join<Conselho, Relato> joinRelato = joinConselho.join("relato");
 
             Predicate predicateDenunciaConselhoRelato = criteriaBuilder.equal(joinRelato.get("id"), relato.getId());

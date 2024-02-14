@@ -122,10 +122,10 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.usuario), usuario));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.USUARIO), usuario));
             
             ParameterExpression<Usuario> relatoUsuario = construtor.parameter(Usuario.class);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.usuario), relatoUsuario));
+			criteria.where(construtor.equal(raizRelato.get(Relato_.USUARIO), relatoUsuario));
             
             relatosUsuario = session.createQuery(criteria).setParameter(relatoUsuario, usuario).getResultList();
             
@@ -157,10 +157,10 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.status), status));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.STATUS), status));
             
             ParameterExpression<Status> relatoStatus = construtor.parameter(Status.class);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.status), relatoStatus));
+			criteria.where(construtor.equal(raizRelato.get(Relato_.STATUS), relatoStatus));
             
             relatosStatus= session.createQuery(criteria).setParameter(relatoStatus, status).getResultList();
             
@@ -192,10 +192,10 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.comunidade), comunidade));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.COMUNIDADE), comunidade));
             
             ParameterExpression<Comunidade> relatoComunidade = construtor.parameter(Comunidade.class);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.comunidade), relatoComunidade));
+			criteria.where(construtor.equal(raizRelato.get(Relato_.COMUNIDADE), relatoComunidade));
             
             relatosComunidade = session.createQuery(criteria).setParameter(relatoComunidade, comunidade).getResultList();
             
@@ -244,8 +244,6 @@ public class RelatoDAOImpl implements RelatoDAO {
 
         return relatosCategoria;
     }
-
-
     
     public Relato recuperarPorId(Long id) {
 
@@ -260,10 +258,10 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
             
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.id), id));
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.ID), id));
             
             ParameterExpression<Long> relatoPorId = construtor.parameter(Long.TYPE);
-			criteria.where(construtor.equal(raizRelato.get(Relato_.id), relatoPorId));
+			criteria.where(construtor.equal(raizRelato.get(Relato_.ID), relatoPorId));
             
             relatosPorId = session.createQuery(criteria).setParameter(relatoPorId, id).getSingleResult();
             

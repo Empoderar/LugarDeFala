@@ -17,7 +17,7 @@ public interface CategoriaDAO {
 	
 	Categoria recuperarPorId(Long id);
 
-	Categoria recuperarPorRelato(Relato relato);
+	List <Categoria> recuperarPorRelato(Relato relato);
 	
 	Categoria recuperarPorNome(String nome);
 

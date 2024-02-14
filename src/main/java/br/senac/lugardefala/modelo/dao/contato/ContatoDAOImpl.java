@@ -87,7 +87,7 @@ public class ContatoDAOImpl implements ContatoDAO {
 	        CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
 	        Root<Contato> raizContato = criteria.from(Contato.class);
 
-	        criteria.select(raizContato).where(construtor.equal(raizContato.get(Contato_.id), id));
+	        criteria.select(raizContato).where(construtor.equal(raizContato.get(Contato_.ID), id));
 	        contato = session.createQuery(criteria).getSingleResult();
 
 	        session.getTransaction().commit();

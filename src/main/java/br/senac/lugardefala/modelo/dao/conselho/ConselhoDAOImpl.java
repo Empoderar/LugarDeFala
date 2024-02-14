@@ -93,7 +93,8 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
-			criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.relato), relato));
+			
+			criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.RELATO), relato));
 			conselho = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();
@@ -120,7 +121,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizUsuario = criteria.from(Conselho.class);
-			ParameterExpression<Long> conselhoPeloId = construtor.parameter(Long.class, "id");
+			ParameterExpression<Long> conselhoPeloId = construtor.parameter(Long.class, Conselho_.ID);
 			
 			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Conselho_.ID), conselhoPeloId));
 			conselhosPeloId = session.createQuery(criteria).setParameter(conselhoPeloId, id).getSingleResult();
@@ -147,7 +148,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			Root<Conselho> raizUsuario = criteriaConsulta.from(Conselho.class);
 
 			Predicate predicateConselhoUsuario
-			= criteriaConstrutor.equal(raizUsuario.get(Conselho_.usuario), usuario);
+			= criteriaConstrutor.equal(raizUsuario.get(Conselho_.USUARIO), usuario);
 
 			criteriaConsulta.where(predicateConselhoUsuario);
 			conselhos = session.createQuery(criteriaConsulta).getResultList();

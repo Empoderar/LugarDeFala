@@ -165,7 +165,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
 
-			String jpql = "SELECT c FROM Comunidade c JOIN c.usuarios u WHERE u.id = :usuarioId";//???
+			String jpql = "SELECT c FROM Comunidade c JOIN c.usuarios u WHERE u.id = :usuarioId";
 			TypedQuery<Comunidade> query = session.createQuery(jpql, Comunidade.class);
 			query.setParameter("usuarioId", usuario.getId());
 
