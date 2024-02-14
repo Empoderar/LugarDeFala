@@ -7,6 +7,7 @@
 <title>Atualizar Senha</title>
 </head>
 <body>
+<div>
     <div>
         <h1>Recuperar senha</h1>
         <p>Enviamos um link para o e-mail</p>
@@ -19,5 +20,6 @@
             <button type="submit">Confirmar</button>
         </form>
     </div>
+</div>
 </body>
 </html>

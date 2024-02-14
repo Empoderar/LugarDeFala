@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div>
 	<h1>Desativar a conta</h1>
 	<h3>Ao desativar sua conta ela poderá ser reativada a qualquer
 		momento no futuro</h3>
@@ -25,11 +26,10 @@
 	<div class="container">
 		<h2>Desativar a conta</h2>
 		<form action="metodo-desativar-conta" method="post">
-			<label for="apelido">Apelido:</label> <input type="text" id="apelido"
-				name="apelido" required><br> <br> <label
-				for="senha">Senha:</label> <input type="password" id="senha"
-				name="senha" required><br> <br>
-
+			<label for="apelido">Apelido:</label> 
+			<input type="text" id="apelido" name="apelido" required>
+			<label for="senha">Senha:</label> 
+			<input type="password" id="senha" name="senha" required>
 			<button type="submit">Desativar Conta</button>
 		</form>
 		<p>
@@ -64,11 +64,10 @@
 	</div>
 	<div>
 		<h1>Desativar a conta</h1>
-
 		<p>Confirme sua senha para desativar a conta</p>
 		<form action="confirma-senha" method="post">
-			<label for="senha">Senha</label> <input type="password" id="senha"
-				name="senha" required maxlength="20">
+			<label for="senha">Senha</label> 
+			<input type="password" id="senha" name="senha" required maxlength="20">
 			<button onclick="#">Esqueceu sua senha?</button>
 			<button type="submit">Desativar Conta</button>
 		</form>
@@ -95,5 +94,6 @@
 			</div>
 		</footer>
 	</div>
+</div>
 </body>
 </html>

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<div>
     <h1>Cadastro de Moderador</h1>
     <div>
         <p>Leia as informações no PDF para responder ao formulário</p>
@@ -46,6 +47,6 @@
             </div>
         </footer>
     </div>
+</div>
 </body>
-
 </html>

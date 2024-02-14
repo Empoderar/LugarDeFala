@@ -12,21 +12,22 @@
 		<h1>Cadastro</h1>
 		<div>
 			<form action="inserir-usuario" method="post">
-				<label for="fnome">Nome</label> <input type="text" id="fnome"
-					name="nome" required maxlength="50"> <label for="sobrenome">Sobrenome</label>
-				<input type="text" id="sobrenome" name="sobrenome" required
-					maxlength="50"> <label for="telefone">Telefone</label> <input
-					type="tel" id="telefone" name="telefone"
-					pattern="[0-9]{2}[0-9]{5}[0-9]{4}" required> <label
-					for="user">Nome de usuário</label> <input type="text" id="user"
-					name="apelido" required maxlength="35"> <label for="email">E-mail</label>
+				<label for="fnome">Nome</label> 
+				<input type="text" id="fnome" name="nome" required maxlength="50"> 
+				<label for="sobrenome">Sobrenome</label>
+				<input type="text" id="sobrenome" name="sobrenome" required maxlength="50"> 
+				<label for="telefone">Telefone</label> 
+				<input type="tel" id="telefone" name="telefone" pattern="[0-9]{2}[0-9]{5}[0-9]{4}" required> 
+				<label for="user">Nome de usuário</label> 
+				<input type="text" id="user" name="apelido" required maxlength="35"> 
+				<label for="email">E-mail</label>
 				<input type="email" id="email" name="email" required maxlength="40">
-				<label for="nascimento">Data de Nascimento</label> <input
-					type="date" id="nascimento" name="data-nascimento" required>
-				<label for="senha">Senha</label> <input type="password" id="senha"
-					name="senha" required maxlength="20"> <label for="csenha">Confirmar
-					senha</label> <input type="password" id="csenha" name="outra-senha"
-					required maxlength="20">
+				<label for="nascimento">Data de Nascimento</label> 
+				<input type="date" id="nascimento" name="data-nascimento" required>
+				<label for="senha">Senha</label> 
+				<input type="password" id="senha" name="senha" required maxlength="20"> 
+				<label for="csenha">Confirmarsenha</label> 
+				<input type="password" id="csenha" name="outra-senha" required maxlength="20">
 				<button type="submit">Próximo</button>
 			</form>
 		</div>

@@ -9,8 +9,8 @@
     <style>
     </style>
 </head>
-
 <body>
+<div>
     <div>
         <p>relato</p>
     </div>
@@ -21,6 +21,6 @@
             <button type="submit">Publicar Conselho</button>
         </form>
     </div>
+</div>
 </body>
-
 </html>

@@ -10,18 +10,16 @@
 <body>
 	<div>
 		<form action="inserir-moderador" method="post">
-			<p>
-				<strong>nome:</strong>
+				<p>nome:</p>
 				<c:out value="${moderador.nome}" />
-				<strong>nome de usuário:</strong>
+				<p>nome de usuário:</p>
 				<c:out value="${moderador.apelido}" />
-				<strong>descrição:</strong>
+				<p>descrição:</p>
 				<c:out value="${moderador.descricao}" />
 				<c:forEach var="comunidade" items="${comunidades}">
-				<p>
 					COMUNIDADES:
 					<c:out value="${comunidade.nome}" />
-				</p>
+
 				</c:forEach>
 				<c:out value="${moderador.descricao}" />
 				<c:forEach var="relato" items="${relatos}">
@@ -30,7 +28,6 @@
 					<c:out value="${relato.conteudo}" />
 				</p>
 			</c:forEach>
-			</p>
 		</form>
 	</div>
 	<div>

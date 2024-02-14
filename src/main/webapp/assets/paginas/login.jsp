@@ -6,15 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div>
 	<div>
 		<p>Bem-vindo!</p>
 		<h1>Login</h1>
 		<form action="fazer-login" method="post">
 			<label for="email">Email</label> 
 			<input type="text" id="email" name="email" required> 
-				<label for="senha">Senha</label> 
-				<input type="password" name="senha" id="senha" required maxlength="20">
-			<a href="recuperar-senha.html" target="_self">Esqueceu a senha?</a><br>
+			<label for="senha">Senha</label> 
+			<input type="password" name="senha" id="senha" required maxlength="20">
+			<a href="recuperar-senha.html" target="_self">Esqueceu a senha?</a>
 			<button type="submit">Confirmar</button>
 		</form>
 		<p>Não tem uma conta?</p>
@@ -42,5 +43,6 @@
 			</div>
 		</footer>
 	</div>
+</div>
 </body>
 </html>

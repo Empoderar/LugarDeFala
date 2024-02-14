@@ -7,12 +7,14 @@
 <title>Cadastrar Categoria</title>
 </head>
 <body>
+<div>
+	<div>
 	<h1>Cadastrar categoria</h1>
 	<form action="/inserir-categoria" method="post">
-		<label for="nomeCategoria">Nome</label> <input type="text"
-			id="nomeCategoria" name="nome" required>
+		<label for="nomeCategoria">Nome</label> <input type="text" id="nomeCategoria" name="nome" required>
 		<button type="submit">Salvar</button>
 	</form>
+	</div>
 	<div>
 		<footer>
 			<div>
@@ -35,5 +37,6 @@
 			</div>
 		</footer>
 	</div>
+</div>
 </body>
 </html>
