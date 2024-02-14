@@ -25,6 +25,7 @@ import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
+import br.senac.lugardefala.modelo.entidade.foto.Foto;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 
 @Entity
@@ -57,6 +58,10 @@ public class Usuario implements Serializable {
     @Column(name = "descricao_usuario", length = 500, nullable = true, unique = false)
 	private String descricao;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_foto")
+    private Foto foto;
+    
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conselho> conselhos;
     
@@ -98,6 +103,17 @@ public class Usuario implements Serializable {
          this.dataNascimento = dataNascimento;
          this.apelido = apelido;
          this.senha = senha;
+         denunciasDeUsuario = new ArrayList<>();
+         relatos = new ArrayList<>();
+         conselhos = new ArrayList<>();
+         comunidades = new ArrayList<>();
+         contatos = new ArrayList<>();
+     }
+    public Usuario(String nome, String sobrenome, String apelido, String descricao) {
+     	this.nome = nome;
+         this.sobrenome = sobrenome;
+         this.apelido = apelido;
+         this.descricao = descricao;
          denunciasDeUsuario = new ArrayList<>();
          relatos = new ArrayList<>();
          conselhos = new ArrayList<>();
@@ -325,5 +341,13 @@ public class Usuario implements Serializable {
 
     public void setRelatos(List<Relato> relatos) {
         this.relatos = relatos;
+    }
+    
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 }

@@ -36,6 +36,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
 		configuration.configure("hibernate.cfg.xml");
 
@@ -49,7 +50,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		return sessionFactory;
 	}
 
-	public void inserirCategoria(Categoria categoria) {
+	public void inserir(Categoria categoria) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.save(categoria);
@@ -59,7 +60,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public void deletarCategoria(Categoria categoria) {
+	public void deletar(Categoria categoria) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(categoria);
@@ -69,7 +70,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public void atualizarCategoria(Categoria categoria) {
+	public void atualizar(Categoria categoria) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.update(categoria);
@@ -79,7 +80,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public List<Categoria> recuperarCategoria(String nome) {
+	public List<Categoria> recuperar(String nome) {
     	
 		List<Categoria> categoriaRecuperada = null;
     	Session session = null;
@@ -115,7 +116,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     }
    
 
-	public Categoria recuperarCategoriaPeloId(Long id) {
+	public Categoria recuperarPorId(Long id) {
 	    Categoria categoria = null;
 	    Session session = null;
 
@@ -143,7 +144,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 
-	public Categoria recuperarCategoriaRelato(Relato relato) {
+	public Categoria recuperarPorRelato(Relato relato) {
 	    Categoria categoria = null;
 	    Session session = null;
 
@@ -171,7 +172,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 	
-	public 	Categoria recuperarCategoriaPeloNome(String nome){
+	public 	Categoria recuperarPorNome(String nome){
 	    Categoria categoria = null;
 	    Session session = null;
 

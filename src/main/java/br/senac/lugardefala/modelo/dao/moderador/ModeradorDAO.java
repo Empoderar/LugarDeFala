@@ -1,21 +1,21 @@
 package br.senac.lugardefala.modelo.dao.moderador;
 
-import java.util.List;
-
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 
+import java.util.List;
+
 public interface ModeradorDAO {
 
-	void inserirModerador(Moderador moderador);
-	
-	void deletarModerador(Moderador moderador);
+    void inserir(Moderador moderador);
 
-	void atualizarModerador(Moderador moderador);
+    void deletar(Moderador moderador);
 
-	List<Moderador> recuperarModeradoresPelaComunidade(Comunidade comunidade);
-	
-	List<Moderador> recuperarModeradoresPeloId(Long id);
-	
-	Moderador recuperarModeradorPeloNome(String nome);
+    void atualizar(Moderador moderador);
+
+    List<Moderador> recuperarPelaComunidade(Comunidade comunidade);
+
+    List<Moderador> recuperarPorId(Long id);
+
+    Moderador recuperarPorNome(String nome);
 }

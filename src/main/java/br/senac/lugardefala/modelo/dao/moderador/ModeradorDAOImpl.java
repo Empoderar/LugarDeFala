@@ -37,6 +37,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.moderador.Moderador.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.relato.Relato.class);
 		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.usuario.Usuario.class);
+		configuration.addAnnotatedClass(br.senac.lugardefala.modelo.entidade.foto.Foto.class);	
 
 		configuration.configure("hibernate.cfg.xml");
 
@@ -50,7 +51,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		return sessionFactory;
 	}
 
-	public void inserirModerador(Moderador moderador) {
+	public void inserir(Moderador moderador) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.save(moderador);
@@ -60,7 +61,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 	
-	public void deletarModerador(Moderador moderador) {
+	public void deletar(Moderador moderador) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.delete(moderador);
@@ -70,7 +71,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 
-	public void atualizarModerador(Moderador moderador) {
+	public void atualizar(Moderador moderador) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
 			session.update(moderador);
@@ -80,7 +81,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 
-	public List<Moderador> recuperarModeradoresPelaComunidade(Comunidade comunidade) {
+	public List<Moderador> recuperarPelaComunidade(Comunidade comunidade) {
 	    List<Moderador> moderadores = null;
 	    Session session = null;
 
@@ -110,7 +111,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	    return moderadores;
 	}
 
-	public List<Moderador> recuperarModeradoresPeloId(Long id) {
+	public List<Moderador> recuperarPorId(Long id) {
 		Session session = null;
 		List<Moderador> moderador = new ArrayList<>();
 
@@ -143,7 +144,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 
 	}
 
-	public Moderador recuperarModeradorPeloNome(String nome) {
+	public Moderador recuperarPorNome(String nome) {
 		Session session = null;
 		Moderador moderadoresPeloNome = null;
 		try {

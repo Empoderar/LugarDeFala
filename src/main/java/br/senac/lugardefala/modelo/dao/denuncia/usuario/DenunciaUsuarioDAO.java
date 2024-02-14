@@ -8,11 +8,11 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 
 public interface DenunciaUsuarioDAO {
 
-    void inserirDenunciaUsuario(DenunciaUsuario denunciaUsuario);
+    void inserir(DenunciaUsuario denunciaUsuario);
 
-    void deletarDenunciaUsuario(DenunciaUsuario denunciaUsuario);
+    void deletar(DenunciaUsuario denunciaUsuario);
 
-    List<DenunciaUsuario> recuperarDenunciaUsuarioStatus(Status status); 
+    List<DenunciaUsuario> recuperarPorStatus(Status status);
 
-    List<DenunciaUsuario> recuperarDenunciaUsuarioPeloUsuario(Usuario usuario);
+    List<DenunciaUsuario> recuperarPorUsuario(Usuario usuario);
 }

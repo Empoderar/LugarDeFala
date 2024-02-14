@@ -4,11 +4,11 @@ import br.senac.lugardefala.modelo.entidade.contato.Contato;
 
 public interface ContatoDAO {
 
-	void inserirContato(Contato contato);
+    void inserir(Contato contato);
 
-	void atualizarContato(Contato contato);
-	
-	void deletarContato (Contato contato);
+    void atualizar(Contato contato);
+    
+    void deletar(Contato contato);
 
-	Contato recuperarContatoDoUsuarioPeloId(Long id);
+    Contato recuperarPorId(Long id);
 }

@@ -9,32 +9,31 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public interface UsuarioDAO {
 
-	void inserirUsuario(Usuario usuario);
+    void inserir(Usuario usuario);
 
-	void deletarUsuario(Usuario usuario);
+    void deletar(Usuario usuario);
 
-	void atualizarUsuario(Usuario usuario);
+    void atualizar(Usuario usuario);
 
-	Usuario recuperarUsuarioPeloNome(String nome);
+    Usuario recuperarPorNome(String nome);
 
-	Usuario recuperarUsuarioPeloApelido(String apelido);
+    Usuario recuperarPorApelido(String apelido);
 
-	List<Usuario> recuperarUsuarios();
+    List<Usuario> recuperarTodos();
 
-	Usuario recuperarUsuarioPeloId(Long id);
+    Usuario recuperarPorId(Long id);
 
-	Usuario recuperarUsuarioPeloIdFetch(Long id);
+    Usuario recuperarPorIdFetch(Long id);
 
-	List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
+    List<Usuario> recuperarPorComunidade(Comunidade comunidade);
 
-	List<Usuario> recuperarUsuariosPorConselho(Conselho conselho);
+    List<Usuario> recuperarPorConselho(Conselho conselho);
 
-	Usuario recuperarUsuariosPorIdDenuncia(Long id);
+    Usuario recuperarPorIdDenuncia(Long id);
 
-	List<Usuario> recuperarUsuariosPorRelato(Relato relato);
+    List<Usuario> recuperarPorRelato(Relato relato);
 
-	boolean verificarUsuario(String apelido, String senha);
+    boolean verificarCredenciais(String apelido, String senha);
 
-	Usuario obterUsuarioPorCredenciais(String email, String senha);
-
+    Usuario obterPorCredenciais(String email, String senha);
 }

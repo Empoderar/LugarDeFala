@@ -1,19 +1,19 @@
 package br.senac.lugardefala.modelo.dao.denuncia.conselho;
 
-import java.util.List;
-
 import br.senac.lugardefala.modelo.entidade.denuncia.Denuncia;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
+import java.util.List;
+
 public interface DenunciaConselhoDAO {
 
-    void inserirDenunciaConselho(Denuncia denuncia);
+    void inserir(Denuncia denuncia);
 
-    void deletarDenunciaConselho(Denuncia denuncia);
+    void deletar(Denuncia denuncia);
 
-    List<DenunciaConselho> recuperarDenunciaDeConselhoStatus(Status status);
+    List<DenunciaConselho> recuperarPorStatus(Status status);
 
-    List<DenunciaConselho> recuperarDenunciaDeConselhoRelato(Relato relato);
+    List<DenunciaConselho> recuperarPorRelato(Relato relato);
 }
