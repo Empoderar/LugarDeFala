@@ -9,6 +9,7 @@
     </style>
 </head>
 <body>
+<div>
     <div>
         <h1>Cadastrar Comunidade</h1>
         <form action="inserir-comunidade" method="post">
@@ -46,5 +47,6 @@
             </div>
         </footer>
     </div>
+</div>
 </body>
 </html>

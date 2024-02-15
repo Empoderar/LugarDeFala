@@ -7,18 +7,16 @@
 <title>Atualizar Senha</title>
 </head>
 <body>
+<div>
 	<div>
 		<a href="#"> <img src="#" alt="casinha"
 			style="width: 42px; height: 42px;">
 		</a>
 		<h1>Alterar senha</h1>
 		<form action="atualizar-senha" method="post">
-			<input type="password" id="senhaatual" name="senha" required
-				maxlength="20" placeholder="Senha atual"> <input
-				type="password" id="novasenha" name="senhanova" required
-				maxlength="20" placeholder="Nova senha"> <input
-				type="password" id="confirmarsenha" name="senhaconfirmada" required
-				maxlength="20" placeholder="Confirmar senha">
+			<input type="password" id="senhaatual" name="senha" required maxlength="20" placeholder="Senha atual"> 
+			<input type="password" id="novasenha" name="senhanova" required maxlength="20" placeholder="Nova senha"> 
+			<input type="password" id="confirmarsenha" name="senhaconfirmada" required maxlength="20" placeholder="Confirmar senha">
 			<!-- <input type="password" id="novasenha" name="senha" required maxlength="20" placeholder="Confirmar senha"> -->
 			<button type="submit">Confirmar</button>
 		</form>
@@ -45,5 +43,6 @@
 			</div>
 		</footer>
 	</div>
+</div>
 </body>
 </html>

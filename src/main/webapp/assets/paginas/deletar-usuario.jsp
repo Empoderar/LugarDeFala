@@ -9,6 +9,7 @@
     </style>
 </head>
 <body>
+<div>
     <div>
         <h1>Excluir a conta</h1>
         <hr>
@@ -37,5 +38,6 @@
         <p>Sua conta foi excluída com sucesso!</p>
         <button type="submit">Ok</button>
     </div>
+</div>
 </body>
 </html>
