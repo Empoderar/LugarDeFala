@@ -385,46 +385,43 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		return usuario != null;
 	}
-
 	public Usuario obterPorCredenciais(String email, String senha) {
-		Session session = null;
-		Usuario usuario = null;
-
-		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
-
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
-			Join<Usuario, Contato> raizContato = raizUsuario.join(Usuario_.CONTATO);
-
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.SENHA), senha),
-					construtor.equal(raizContato.get(Contato_.EMAIL), email));
-
-			Predicate predicateUsuarioSenha = construtor.equal(raizUsuario.get(Usuario_.SENHA), senha);
-			Predicate predicateContatoEmail = construtor.equal(raizContato.get(Contato_.EMAIL), email);
-			Predicate predicateUsuarioLogin = construtor.and(predicateUsuarioSenha, predicateContatoEmail);
-
-			criteria.where(predicateUsuarioLogin);
-
-			usuario = session.createQuery(criteria).getSingleResult();
-
-			return usuario;
-
-		} catch (Exception sqlException) {
-			sqlException.printStackTrace();
-
-			if (session.getTransaction() != null) {
-				session.getTransaction().rollback();
-			}
-
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-
-		return usuario;
+	    Session session = null;
+	    Usuario usuario = null;
+	 
+	    try {
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
+	 
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+	        Join<Usuario, Contato> raizContato = raizUsuario.join(Usuario_.CONTATO);
+	 
+	        Predicate predicateUsuarioLogin = construtor.and(
+	                construtor.equal(raizUsuario.get(Usuario_.SENHA), senha),
+	                construtor.equal(raizContato.get(Contato_.EMAIL), email)
+	        );
+	 
+	        criteria.select(raizUsuario).where(predicateUsuarioLogin);
+	 
+	        usuario = session.createQuery(criteria).uniqueResult();
+	 
+	        return usuario;
+	 
+	    } catch (Exception sqlException) {
+	        sqlException.printStackTrace();
+	 
+	        if (session.getTransaction() != null) {
+	            session.getTransaction().rollback();
+	        }
+	 
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	 
+	    return usuario;
 	}
 }
