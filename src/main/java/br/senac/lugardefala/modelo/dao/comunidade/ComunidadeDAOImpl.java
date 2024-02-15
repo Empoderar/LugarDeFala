@@ -2,9 +2,10 @@ package br.senac.lugardefala.modelo.dao.comunidade;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -15,7 +16,9 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade_;
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
+import br.senac.lugardefala.modelo.entidade.usuario.Usuario_;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
@@ -81,19 +84,21 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	}
 
 	public List<Comunidade> recuperarPorIdModerador(Long id) {
-		List<Comunidade> comunidade = null;
 		Session session = null;
+		List<Comunidade> comunidade = null;
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
 
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+			CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+			CriteriaQuery<Comunidade> criteriaConsulta = criteriaConstrutor.createQuery(Comunidade.class);
+			Root<Comunidade> raizComunidade = criteriaConsulta.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
-			comunidade = session.createQuery(criteria).getResultList();
+			Predicate predicateComunidadeUsuario
+			= criteriaConstrutor.equal(raizComunidade.get(Moderador_.ID), id);
 
+			criteriaConsulta.where(predicateComunidadeUsuario);
+			comunidade = session.createQuery(criteriaConsulta).getResultList();
 			session.getTransaction().commit();
 
 		} catch (Exception e) {
@@ -107,81 +112,89 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	}
 
 	public List<Comunidade> recuperarPorIdUsuario(Long id) {
-		List<Comunidade> comunidade = null;
-		Session session = null;
-		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
+			Session session = null;
+			List<Comunidade> comunidade = null;
+			try {
+				session = getSessionFactory().openSession();
+				session.beginTransaction();
 
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+				CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+				CriteriaQuery<Comunidade> criteriaConsulta = criteriaConstrutor.createQuery(Comunidade.class);
+				Root<Comunidade> raizComunidade = criteriaConsulta.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
-			comunidade = session.createQuery(criteria).getResultList();
+				Predicate predicateComunidadeUsuario
+				= criteriaConstrutor.equal(raizComunidade.get(Usuario_.ID), id);
 
-			session.getTransaction().commit();
+				criteriaConsulta.where(predicateComunidadeUsuario);
+				comunidade = session.createQuery(criteriaConsulta).getResultList();
+				session.getTransaction().commit();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (session != null) {
+					session.close();
+				}
 			}
+			return comunidade;
 		}
-		return comunidade;
-	}
 
 	public Comunidade recuperarPorId(Long id) {
 		Comunidade comunidade = null;
 		Session session = null;
 		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
+	        session = getSessionFactory().openSession();
+	        session.beginTransaction();
 
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+	        CriteriaBuilder builder = session.getCriteriaBuilder();
+	        CriteriaQuery<Comunidade> criteria = builder.createQuery(Comunidade.class);
+	        Root<Comunidade> root = criteria.from(Comunidade.class);
 
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.ID), id));
-			comunidade = session.createQuery(criteria).uniqueResult();
+	        criteria.select(root).where(builder.equal(root.get(Comunidade_.ID), id));
 
-			session.getTransaction().commit();
+	        comunidade = session.createQuery(criteria).uniqueResult();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return comunidade;
+	        session.getTransaction().commit();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return comunidade;
 	}
 
 	public List<Comunidade> recuperarPorUsuario(Usuario usuario) {
 		Session session = null;
-		List<Comunidade> comunidades = null;
+		List<Comunidade> comunidade = null;
 		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
 
-			String jpql = "SELECT c FROM Comunidade c JOIN c.usuarios u WHERE u.id = :usuarioId";
-			TypedQuery<Comunidade> query = session.createQuery(jpql, Comunidade.class);
-			query.setParameter("usuarioId", usuario.getId());
+            CriteriaBuilder criteriaConstrutor = session.getCriteriaBuilder();
+            CriteriaQuery<Comunidade> criteriaConsulta = criteriaConstrutor.createQuery(Comunidade.class);
+            Root<Comunidade> raizComunidade = criteriaConsulta.from(Comunidade.class);
 
-			comunidades = query.getResultList();
+            Predicate predicateComunidade = criteriaConstrutor.equal(raizComunidade.get(Comunidade_.USUARIOS), usuario);
 
-			session.getTransaction().commit();
+            criteriaConsulta.where(predicateComunidade);
+            comunidade = session.createQuery(criteriaConsulta).getResultList();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return comunidades;
+            session.getTransaction().commit();
 
-	}
+        } catch (NoResultException e) 
+        {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return comunidade;
+    }
 	
 }

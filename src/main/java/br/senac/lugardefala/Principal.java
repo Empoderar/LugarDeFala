@@ -447,15 +447,15 @@ public class Principal {
 			}
 		}
 
-		List<Relato> recuperarRelatosPorCategoria = relatoDAO.recuperarPorCategoria(categoria2);
-
-		for (Relato relato : recuperarRelatosPorCategoria) {
-			if (relato != null) {
-				System.out.println("Relato Por categoria: " + relato.getConteudo());
-			} else {
-				System.out.println("Relato inexistente");
-			}
-		}
+//		List<Relato> recuperarRelatosPorCategoria = relatoDAO.recuperarPorCategoria(categoria2);
+//
+//		for (Relato relato : recuperarRelatosPorCategoria) {
+//			if (relato != null) {
+//				System.out.println("Relato Por categoria: " + relato.getConteudo());
+//			} else {
+//				System.out.println("Relato inexistente");
+//			}
+//		}
 
 		List<Relato> relatos = relatoDAO.recuperarPorStatus(Status.APROVADO);
 
@@ -557,9 +557,9 @@ public class Principal {
 
 		Comunidade recuperarComunidadeNome = comunidadeDAO.recuperarPorId(1L);
 		if (recuperarComunidadeNome != null) {
-			System.out.println("Recuperar comunidade Por nome: " + recuperarComunidadeNome.getNome());
+			System.out.println("Recuperar comunidade Por id: " + recuperarComunidadeNome.getNome());
 		} else {
-			System.out.println("Não existe comunidade com esse nome");
+			System.out.println("Não existe comunidade com esse id");
 		}
 
 		List<Comunidade> recuperarComunidadeModerador = comunidadeDAO.recuperarPorIdModerador(12L);
@@ -571,7 +571,7 @@ public class Principal {
 			}
 		}
 
-		List<Comunidade> recuperarComunidadeUsuario = comunidadeDAO.recuperarPorIdUsuario(1L);
+		List<Comunidade> recuperarComunidadeUsuario = comunidadeDAO.recuperarPorIdUsuario(14L);
 		for (Comunidade comunidades : recuperarComunidadeUsuario) {
 			if (comunidades != null) {
 				System.out.println("Recuperar comunidades Por id do usuario : " + comunidades.getNome());
@@ -580,14 +580,10 @@ public class Principal {
 			}
 		}
 
-		List<Comunidade> recuperarComunidadePorUsuario = comunidadeDAO.recuperarPorUsuario(usuario2);
-		if (!recuperarComunidadePorUsuario.isEmpty()) {
-			for (Comunidade c : recuperarComunidadePorUsuario) {
-				System.out.println("Recuperar comunidades Por nome do usuário: " + c.getNome());
-			}
-		} else {
-			System.out.println("Não existem comunidades com esse usuário");
-		}
+//		List<Comunidade> recuperarComunidadePorUsuario = comunidadeDAO.recuperarPorUsuario(usuario2);
+//			for (Comunidade c : recuperarComunidadePorUsuario) {
+//				System.out.println("Recuperar comunidades Por usuário: " + c.getNome());
+//			}
 		}
 	}
 }

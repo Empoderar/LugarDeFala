@@ -226,10 +226,10 @@ public class RelatoDAOImpl implements RelatoDAO {
             CriteriaQuery<Relato> criteria = construtor.createQuery(Relato.class);
             Root<Relato> raizRelato = criteria.from(Relato.class);
 
-            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-            criteria.select(raizRelato).where(construtor.isMember(relatoCategoria, raizRelato.get(Relato_.categoriaRelato)));
+            ParameterExpression<Categoria> parametroCategoria = construtor.parameter(Categoria.class);
+            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Relato_.CATEGORIA_RELATO), parametroCategoria));
 
-            relatosCategoria = session.createQuery(criteria).setParameter(relatoCategoria, categoria).getResultList();
+            relatosCategoria = session.createQuery(criteria).setParameter(parametroCategoria, categoria).getResultList();
 
             session.getTransaction().commit();
 

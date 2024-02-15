@@ -14,6 +14,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.foto.Foto;
+import br.senac.lugardefala.modelo.entidade.foto.Foto_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 public class FotoDAOImpl {
@@ -91,7 +92,7 @@ public class FotoDAOImpl {
             Root<Foto> raizFoto = criteria.from(Foto.class);
 
             ParameterExpression<Usuario> usuarioParam = construtor.parameter(Usuario.class);
-            criteria.select(raizFoto).where(construtor.equal(raizFoto.get("usuario"), usuarioParam));
+            criteria.select(raizFoto).where(construtor.equal(raizFoto.get(Foto_.USUARIO), usuarioParam));
 
             fotos = session.createQuery(criteria).setParameter(usuarioParam, usuario).getResultList();
 
@@ -119,7 +120,7 @@ public class FotoDAOImpl {
             CriteriaQuery<Foto> criteria = construtor.createQuery(Foto.class);
             Root<Foto> raizFoto = criteria.from(Foto.class);
 
-            criteria.where(construtor.equal(raizFoto.get("id"), id));
+            criteria.where(construtor.equal(raizFoto.get(Foto_.ID), id));
 
             foto = session.createQuery(criteria).getSingleResult();
 
