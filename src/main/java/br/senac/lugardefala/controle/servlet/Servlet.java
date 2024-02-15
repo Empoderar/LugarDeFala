@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,8 +54,6 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOGGER = Logger.getLogger(Servlet.class.getName());
 
 	private UsuarioDAO usuarioDao;
 
@@ -436,7 +433,7 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
 		}
-		if (moderador == null) {
+		if (moderador == null && usuario != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -456,7 +453,7 @@ public class Servlet extends HttpServlet {
 		if (usuario != null && moderador != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		} else if (usuario == null) {
+		} else if (usuario == null && moderador != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -474,7 +471,7 @@ public class Servlet extends HttpServlet {
 		if (usuario == null && moderador == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		} else if (usuario != null) {
+		} else if (usuario != null && moderador == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -489,11 +486,8 @@ public class Servlet extends HttpServlet {
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		if (moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
+		if (moderador == null && usuario == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
@@ -510,7 +504,7 @@ public class Servlet extends HttpServlet {
 		if (moderador != null && usuario != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		} else if (usuario == null) {
+		} else if (usuario == null && moderador != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -630,10 +624,10 @@ public class Servlet extends HttpServlet {
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		if (moderador != null && usuario != null) {
+		if (moderador == null && usuario == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuario == null && moderador != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -834,7 +828,6 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
 		} else {
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-relato.jsp");
 
 			dispatcher.forward(request, response);
@@ -846,8 +839,12 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null) {
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		if (usuario == null && moderador == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else if (usuario != null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
@@ -1055,11 +1052,11 @@ public class Servlet extends HttpServlet {
 
 			dispatcher.forward(request, response);
 
-			LOGGER.info("Relato inserido com sucesso.");
+			System.out.println("Relato inserido com sucesso.");
 
 		} catch (Exception e) {
 
-			LOGGER.severe("Erro ao inserir relato: " + e.getMessage());
+			System.out.println("Erro ao inserir relato: " + e.getMessage());
 
 			e.printStackTrace();
 
