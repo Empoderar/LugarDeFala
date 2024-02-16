@@ -46,7 +46,6 @@ public class Moderador extends Usuario {
     )
     private List<Usuario> usuarios;
 
-    private Moderador moderador;
     
     public Moderador() {
     }
@@ -136,12 +135,5 @@ public class Moderador extends Usuario {
         return comunidades.remove(comunidade);
     }
   
-    public Moderador getModerador() {
-    	return moderador;
-    }
-    
-    public void setModerador(Moderador moderador) {
-    	this.moderador = moderador;
-    }
     
 }
