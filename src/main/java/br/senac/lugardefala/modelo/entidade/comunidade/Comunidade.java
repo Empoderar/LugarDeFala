@@ -56,6 +56,8 @@ public class Comunidade implements Serializable {
     )
     private List<Moderador> moderadores;
  
+    private Moderador moderador;
+    
     public Comunidade() {
     }
  
@@ -143,6 +145,14 @@ public class Comunidade implements Serializable {
 
 	public boolean removerRelato(Relato relato) {
 		return relatos.remove(relato);
+	}
+
+	public Moderador getModerador() {
+		return moderador;
+	}
+	
+	public void setModerador(Moderador moderador) {
+		this.moderador = moderador;
 	}
 
 		

@@ -264,6 +264,11 @@ public class Servlet extends HttpServlet {
 				mostrarTelaEditarSenha(request, response);
 
 				break;
+				
+			case "pesquisar-usuario":
+				mostrarTelaPesquisarUsuario (request, response);
+				
+				break;
 
 			case "/inserir-usuario": // salvando
 
@@ -421,6 +426,18 @@ public class Servlet extends HttpServlet {
 
 		}
 
+	}
+
+	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		List<Comunidade> comunidades = comunidadeDao.recuperarPorNome("nome");
+		request.setAttribute("comunidades", comunidades);
+
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -581,11 +598,15 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
 
 		Comunidade comunidade = (Comunidade) request.getSession().getAttribute("comunidade");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+		List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+		request.setAttribute("relatos", relatos);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
-
 		dispatcher.forward(request, response);
 
 	}
