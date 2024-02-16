@@ -203,4 +203,29 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 	    return comunidade;
 	}
 	
+	public List<Comunidade> recuperarPorNome(String nome) {
+		Session session = null;
+		List<Comunidade> comunidade = null;
+		try {
+            session = getSessionFactory().openSession();
+            session.beginTransaction();
+
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+            Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+            ParameterExpression<String> comunidadePorNome = construtor.parameter(String.class, Comunidade_.NOME);
+
+            criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get(Comunidade_.NOME), comunidadePorNome));
+            comunidade = session.createQuery(criteria).setParameter(comunidadePorNome, nome).getResultList();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return comunidade;
+    }
+	
 }
