@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #4d4d4d;
+}
+
+body {
+  background-color: #fde8e2;
+}
+
+/* -------------------------------- header ----------------------------------------------------*/
+
+.cabecalho {
+  width: 100%;
+  height: 125px;
+  background-color: #5ea3a5;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
+  -moz-box-shadow: 0 4px 4px 0 #a69e9e;
+  box-shadow: 0 4px 4px 0 #a69e9e;
+}
+
+.logo-lugar {
+  padding-left: 78px;
+}
+
+.menu-escolhas {
+  padding-right: 148px;
+  font-size: xx-large;
+  display: flex;
+  gap: 80px;
+}
+
+/* -------------------------------- home principal da landing page ----------------------------------------------------*/
+
+.menu-inicio {
+  width: 100%;
+  height: 88vh;
+  display: flex;
+  background-color: #fde8e2;
+  justify-content: center;
+  gap: 20px;
+}
+
+.imagem-mulher {
+  width: 900px;
+  height: 699px;
+  padding-top: 50px;
+}
+
+.conteudo-home-principal {
+  padding-top: 90px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  padding-right: 40px;
+}
+
+.titulo-fala {
+  color: #00333e;
+  font-size: 100px;
+  font-weight: 400;
+  margin-left: 176px;
+}
+
+.subtitulo {
+  color: #f9866f;
+  text-transform: uppercase;
+  font-weight: 200;
+  margin-left: 90px;
+}
+
+.texto-home {
+  font-size: 25px;
+  color: #4d4d4d;
+  font-weight: 300;
+  padding-top: 20px;
+  width: 900px;
+}
+
+.conteudo-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 70px;
+  padding-top: 40px;
+}
+
+.botao-conteudo {
+  display: flex;
+  gap: 146px;
+}
+
+.botao-home {
+  width: 378px;
+  height: 70px;
+  font-size: xx-large;
+  background-color: #f9866f;
+  padding: 10px 0 10px 0;
+  border-radius: 5px;
+  color: #4d4d4d;
+  border: none;
+}
+
+/* -------------------------------- painel de escolhas ----------------------------------------------------*/
+
+.conteudos-cartoes {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.cartao-1 {
+  width: 321px;
+  height: 359px;
+  background-color: #fcd9d1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagem-cartao-1 {
+  border: 20px solid #f0bbc0;
+  border-radius: 50%;
+}
+
+.imagem-cartao-2 {
+  border: 20px solid #e37350;
+  border-radius: 50%;
+}
+
+.imagem-cartao-3 {
+  border: 20px solid #e3b65f;
+  border-radius: 50%;
+}
+
+.imagem-cartao-4 {
+  border: 20px solid #b2d8ce;
+  border-radius: 50%;
+}
+
+.imagem-cartao-5 {
+  border: 20px solid #abbbcd;
+  border-radius: 50%;
+}
+
+.texto-cartao-1 {
+  color: #4d4d4d;
+  font-size: 30px;
+}
