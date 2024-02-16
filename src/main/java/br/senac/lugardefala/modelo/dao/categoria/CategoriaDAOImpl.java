@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -80,41 +79,38 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public List<Categoria> recuperar(String nome) {
+	public List<Categoria> recuperarTodos() {
     	
 		List<Categoria> categoriaRecuperada = null;
-    	Session session = null;
-    	  
+    	Session sessao = null; 	  
     	try {
-        	session = getSessionFactory().openSession();
-            session.beginTransaction();
-            
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-            Root<Categoria> raizRelato = criteria.from(Categoria.class);
-            
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Categoria_.NOME), nome));
-            
-            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizRelato.get(Categoria_.NOME), relatoCategoria));
-            
-			categoriaRecuperada = session.createQuery(criteria).getResultList();
-            
-            session.getTransaction().commit();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
+            sessao = getSessionFactory().openSession();
+            sessao.beginTransaction();
 
-    	}
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
+            Root<Categoria> raizCategoria = criteria.from(Categoria.class);
+
+            criteria.select(raizCategoria);
+
+            categoriaRecuperada = sessao.createQuery(criteria).getResultList();
+
+            sessao.getTransaction().commit();
+
+        } catch (Exception sqlException) {
+
+            sqlException.printStackTrace();
+
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
         return categoriaRecuperada;
     }
-   
 
 	public Categoria recuperarPorId(Long id) {
 	    Categoria categoria = null;

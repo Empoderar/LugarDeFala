@@ -18,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.contato.Contato_;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador_;
 
@@ -185,11 +186,11 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
 			Join<Moderador, Contato> raizContato = raizModerador.join(Moderador_.CONTATO);
 
-			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("senha"), senha),
-					construtor.equal(raizContato.get("email"), email));
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.SENHA), senha),
+					construtor.equal(raizContato.get(Contato_.EMAIL), email));
 
-			Predicate predicateModeradorSenha = construtor.equal(raizModerador.get("senha"), senha);
-			Predicate predicateContatoEmail = construtor.equal(raizContato.get("email"), email);
+			Predicate predicateModeradorSenha = construtor.equal(raizModerador.get(Moderador_.SENHA), senha);
+			Predicate predicateContatoEmail = construtor.equal(raizContato.get(Contato_.EMAIL), email);
 			Predicate predicateModeradorLogin = construtor.and(predicateModeradorSenha, predicateContatoEmail);
 
 			criteria.where(predicateModeradorLogin);

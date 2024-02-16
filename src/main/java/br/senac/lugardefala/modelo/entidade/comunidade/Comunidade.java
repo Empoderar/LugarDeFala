@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,10 +39,6 @@ public class Comunidade implements Serializable {
  
     @OneToMany(mappedBy = "comunidade", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Relato> relatos;
- 
-    @ManyToOne
-    @JoinColumn(name = "id_moderador")
-    private Moderador moderador;
  
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "comunidade_usuario", 
@@ -75,14 +70,6 @@ public class Comunidade implements Serializable {
         this.descricao = descricao;
         usuarios = new ArrayList<>();
         moderadores = new ArrayList<>();
-        this.moderadores.add(moderador);
-    }
- 
-    public Comunidade(String nome, String descricao, Moderador moderador) {
-        this(nome, descricao);
-        this.moderador = moderador;
-        moderadores = new ArrayList<>();
-        this.moderadores.add(moderador);
     }
  
     public Long getId() {
@@ -148,14 +135,6 @@ public class Comunidade implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Moderador getModerador() {
-		return moderador;
-	}
-
-	public void setModerador(Moderador moderador) {
-		this.moderador = moderador;
 	}
 
 	public boolean adicionarRelato(Relato relato) {

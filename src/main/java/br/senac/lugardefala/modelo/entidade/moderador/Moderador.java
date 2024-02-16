@@ -125,4 +125,13 @@ public class Moderador extends Usuario {
     public void setModeradores(List <Comunidade> comunidades) {
     	this.comunidades = comunidades;
     }
+    
+    public boolean adicionarComunidade(Comunidade comunidade) {
+        return comunidades.add(comunidade);
+    }
+
+    public boolean removerComunidade(Comunidade comunidade) {
+        return comunidades.remove(comunidade);
+    }
+  
 }
