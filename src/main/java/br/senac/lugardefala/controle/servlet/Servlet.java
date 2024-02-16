@@ -1,97 +1,52 @@
 package br.senac.lugardefala.controle.servlet;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
-import java.util.logging.Logger;
-
 import javax.servlet.RequestDispatcher;
-
 import javax.servlet.ServletException;
-
 import javax.servlet.annotation.WebServlet;
-
 import javax.servlet.http.HttpServlet;
-
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
 
 import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAO;
-
 import br.senac.lugardefala.modelo.dao.categoria.CategoriaDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAO;
-
 import br.senac.lugardefala.modelo.dao.comunidade.ComunidadeDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAO;
-
 import br.senac.lugardefala.modelo.dao.conselho.ConselhoDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAO;
-
 import br.senac.lugardefala.modelo.dao.contato.ContatoDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.denuncia.conselho.DenunciaConselhoDAO;
-
 import br.senac.lugardefala.modelo.dao.denuncia.conselho.DenunciaConselhoDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.denuncia.moderador.DenunciaModeradorDAO;
-
 import br.senac.lugardefala.modelo.dao.denuncia.moderador.DenunciaModeradorDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAO;
-
 import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAO;
-
 import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAO;
-
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAO;
-
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAOImpl;
-
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAO;
-
 import br.senac.lugardefala.modelo.dao.usuario.UsuarioDAOImpl;
-
 import br.senac.lugardefala.modelo.entidade.categoria.Categoria;
-
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
-
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
-
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
-
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho;
-
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador;
-
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato;
-
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
-
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
-
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
-
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
-
 import br.senac.lugardefala.modelo.enumeracao.Status;
 
 @WebServlet("/")
@@ -99,8 +54,6 @@ import br.senac.lugardefala.modelo.enumeracao.Status;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOGGER = Logger.getLogger(Servlet.class.getName());
 
 	private UsuarioDAO usuarioDao;
 
@@ -168,37 +121,37 @@ public class Servlet extends HttpServlet {
 
 			switch (action) {
 
-			case "/cadastro-usuario": // funcionando
+			case "/cadastro-usuario": // funcionando-dinâmico
 
 				mostrarTelaCadastroUsuario(request, response);
 
 				break;
 
-			case "/cadastro-moderador": // funcionando
+			case "/cadastro-moderador": // funcionando-dinâmico
 
 				mostrarTelaCadastroModerador(request, response);
 
 				break;
 
-			case "/cadastro-comunidade": // funcionando
+			case "/cadastro-comunidade": // funcionando-dinâmico
 
 				mostrarTelaCadastroComunidade(request, response);
 
 				break;
 
-			case "/cadastro-categoria": // funcionando
+			case "/cadastro-categoria": // funcionando-dinâmico
 
 				mostrarTelaCadastroCategoria(request, response);
 
 				break;
 
-			case "/cadastro-conselho": // funcionando
+			case "/cadastro-conselho": // funcionando-dinâmico
 
 				mostrarTelaCadastroConselho(request, response);
 
 				break;
 
-			case "/cadastro-relato": // funcionando
+			case "/cadastro-relato": // funcionando-dinâmico
 
 				mostrarTelaCadastroRelato(request, response);
 
@@ -210,7 +163,7 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/login": // funcionando
+			case "/login": // funcionando-dinâmico
 
 				mostrarTelaLoginUsuario(request, response);
 
@@ -225,6 +178,12 @@ public class Servlet extends HttpServlet {
 			case "/perfil-usuario": // funcionando
 
 				mostrarTelaPerfilDoUsuario(request, response);
+
+				break;
+
+			case "/perfil-moderador": // em teste
+
+				mostrarTelaPerfilDoModerador(request, response);
 
 				break;
 
@@ -300,7 +259,7 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/editar-senha": // funcionando
+			case "/editar-senha": // em teste
 
 				mostrarTelaEditarSenha(request, response);
 
@@ -312,7 +271,7 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/fazer-login": // em ajuste
+			case "/fazer-login": // precisa arrumar com moderador
 
 				fazerLogin(request, response);
 
@@ -408,7 +367,7 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/metodo-editar-senha": // precisa ser feito
+			case "/metodo-editar-senha": // em teste
 
 				editarSenha(request, response);
 
@@ -467,39 +426,56 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario != null && moderador != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		}
+		if (moderador == null && usuario != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
-
-		dispatcher.forward(request, response);
+			dispatcher.forward(request, response);
+		}
 
 	}
 
 	private void mostrarTelaCadastroModerador(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-
-		dispatcher.forward(request, response);
-
+		if (usuario != null && moderador != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else if (usuario == null && moderador != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaCadastroComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
 		if (usuario == null && moderador == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		}
-		if (usuario != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+		} else if (usuario != null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -507,7 +483,6 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaCadastroRelato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
@@ -521,23 +496,29 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
-
-		dispatcher.forward(request, response);
-
+		if (moderador != null && usuario != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else if (usuario == null && moderador != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
-
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	private void mostrarHome(HttpServletRequest request, HttpServletResponse response)
@@ -552,30 +533,56 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		if (usuario != null) {
+			String descricao = request.getParameter("descricao");
+			usuario.setDescricao(descricao);
 
-		String descricao = request.getParameter("descricao");
+			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(usuario);
+			request.setAttribute("comunidades", comunidades);
 
-		usuario.setDescricao(descricao);
+			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			request.setAttribute("relatos", relatos);
 
-		List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(usuario);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 
-		request.setAttribute("comunidades", comunidades);
+	private void mostrarTelaPerfilDoModerador(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 
-		request.setAttribute("relatos", relatos);
+		if (moderador != null) {
+			String descricao = request.getParameter("descricao");
+			moderador.setDescricao(descricao);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
+			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(moderador);
+			request.setAttribute("comunidades", comunidades);
 
-		dispatcher.forward(request, response);
+			List<Relato> relatos = relatoDao.recuperarPorUsuario(moderador);
+			request.setAttribute("relatos", relatos);
 
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-moderador.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+
+		Comunidade comunidade = (Comunidade) request.getSession().getAttribute("comunidade");
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
 
@@ -596,242 +603,270 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaConselhos(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
-
-		dispatcher.forward(request, response);
-
+		if (moderador == null && usuario == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaCadastroCategoria(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		dispatcher.forward(request, response);
-
+		if (moderador == null && usuario == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else if (usuario == null && moderador != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
-		Relato relato1 = new Relato("Lalalalalallala", LocalDate.now());
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		Relato relato2 = new Relato("lelelele", LocalDate.now());
+		if (usuario != null) {
+			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
 
-		request.setAttribute("relato", relato1);
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("relatos", relatos);
 
-		request.setAttribute("relato", relato2);
-
-		relatoDao.inserir(relato1);
-
-		relatoDao.inserir(relato2);
-
-		Usuario usuario2 = new Usuario("joao", "antonio", "busco ajuda", LocalDate.of(2022, 10, 10), "joao.antonio");
-
-		usuarioDao.inserir(usuario2);
-
-		usuario2.adicionarRelato(relato1);
-
-		usuario2.adicionarRelato(relato2);
-
-		Usuario usuarioRecuperado = usuarioDao.recuperarPorIdFetch(usuario2.getId());
-
-		List<Relato> relatos = relatoDao.recuperarPorUsuario(usuarioRecuperado);
-
-		relatos.add(relato1);
-
-		relatos.add(relato2);
-
-		request.setAttribute("relatos", relatos);
-
-		for (Relato r : relatos) {
-
-			System.out.println("Conteúdo dos relatos: " + r.getConteudo());
-
+			for (Relato r : relatos) {
+				System.out.println("Conteúdo dos relatos: " + r.getConteudo());
+			}
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
-
 		dispatcher.forward(request, response);
-
 	}
 
 	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		if (moderador == null) {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
-
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		if (moderador == null && usuario == null) {
+			Conselho conselho = (Conselho) request.getSession().getAttribute("conselho");
+			LocalDate dataAtual = LocalDate.now();
 
-		Usuario usuario = new Usuario("Anna", "Silva", "anna.silva");
+			Status status = Status.PENDENTE;
 
-		Conselho conselho = new Conselho(
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("conselho", conselho);
+			request.setAttribute("dataAtual", dataAtual);
+			request.setAttribute("status", status);
 
-				"Minha amiga querida, é uma pena que isso tenha acontecido com você, mas vai passar!", LocalDate.now());
-
-		LocalDate dataAtual = LocalDate.now();
-
-		Status status = Status.APROVADO;
-
-		request.setAttribute("usuario", usuario);
-
-		request.setAttribute("conselho", conselho);
-
-		request.setAttribute("dataAtual", dataAtual);
-
-		request.setAttribute("status", status);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-conselho.jsp");
-
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-conselho.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDenunciaModerador(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 
-		Usuario usuario = new Usuario("Ana", "Santos", "ana.santos");
+		if (moderador == null && usuario == null) {
+			LocalDate dataAtual = LocalDate.now();
+			Status status = Status.PENDENTE;
 
-		Moderador moderador = new Moderador("Manuel", "Oliveira", "manoel.oliveira");
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("moderador", moderador);
+			request.setAttribute("dataAtual", dataAtual);
+			request.setAttribute("status", status);
 
-		LocalDate dataAtual = LocalDate.now();
-
-		Status status = Status.APROVADO;
-
-		request.setAttribute("usuario", usuario);
-
-		request.setAttribute("moderador", moderador);
-
-		request.setAttribute("dataAtual", dataAtual);
-
-		request.setAttribute("status", status);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-moderador.jsp");
-
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-moderador.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDenunciaRelato(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		Usuario usuario = new Usuario("Elena", "Rocha", "elena.rocha");
+		if (moderador == null && usuario == null) {
 
-		Relato relato = new Relato("Acho que sofri violência doméstica, e agora?", LocalDate.now());
+			Relato relato = (Relato) sessao.getAttribute("relato");
+			LocalDate dataAtual = LocalDate.now();
+			Status status = Status.APROVADO;
 
-		LocalDate dataAtual = LocalDate.now();
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("relato", relato);
+			request.setAttribute("dataAtual", dataAtual);
+			request.setAttribute("status", status);
 
-		Status status = Status.APROVADO;
-
-		request.setAttribute("usuario", usuario);
-
-		request.setAttribute("relato", relato);
-
-		request.setAttribute("dataAtual", dataAtual);
-
-		request.setAttribute("status", status);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-relato.jsp");
-
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-relato.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDenunciaUsuario(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuarioDenunciante = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuarioDenunciado = (Usuario) sessao.getAttribute("usuario");
 
-		Usuario usuarioDenunciante = new Usuario("ana", "carolina", LocalDate.of(1997, 1, 9), "ana.carolina", "123");
+		if (usuarioDenunciante == null && moderador == null) {
 
-		Usuario usuarioDenunciado = new Usuario("ester", "ferreira", LocalDate.of(1997, 1, 9), "ester.ferreira", "123");
+			LocalDate dataAtual = LocalDate.now();
+			Status status = Status.APROVADO;
 
-		LocalDate dataAtual = LocalDate.now();
+			request.setAttribute("usuarioDenunciante", usuarioDenunciante);
+			request.setAttribute("usuarioDenunciado", usuarioDenunciado);
+			request.setAttribute("dataAtual", dataAtual);
+			request.setAttribute("status", status);
 
-		Status status = Status.APROVADO;
-
-		request.setAttribute("usuarioDenunciante", usuarioDenunciante);
-
-		request.setAttribute("usuarioDenunciado", usuarioDenunciado);
-
-		request.setAttribute("dataAtual", dataAtual);
-
-		request.setAttribute("status", status);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-usuario.jsp");
-
-		dispatcher.forward(request, response);
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDesativarConta(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/desativar-conta.jsp");
-
-		dispatcher.forward(request, response);
-
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/desativar-conta.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaDeletarUsuario(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-usuario.jsp");
-
-		dispatcher.forward(request, response);
-
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaEditarPerfil(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
 
-		dispatcher.forward(request, response);
-
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaEditarRelato(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-relato.jsp");
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-relato.jsp");
-
-		dispatcher.forward(request, response);
+			dispatcher.forward(request, response);
+		}
 
 	}
 
 	private void mostrarTelaEditarSenha(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
-
-		dispatcher.forward(request, response);
-
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else if (usuario != null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaRelatos(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
 
-		dispatcher.forward(request, response);
+			dispatcher.forward(request, response);
+		}
 
 	}
 
@@ -843,11 +878,11 @@ public class Servlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 
 		HttpSession sessao = request.getSession();
-		
+
 		Usuario usuario = usuarioDao.obterPorCredenciais(email, senha);
 
 		sessao.setAttribute("usuario", usuario);
-		
+
 		if (usuario != null) {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
@@ -856,7 +891,7 @@ public class Servlet extends HttpServlet {
 
 		} else {
 
-			response.sendRedirect("./assets/paginas/login.jsp");
+			response.sendRedirect("./assets/paginas/home.jsp");
 		}
 
 	}
@@ -1017,11 +1052,11 @@ public class Servlet extends HttpServlet {
 
 			dispatcher.forward(request, response);
 
-			LOGGER.info("Relato inserido com sucesso.");
+			System.out.println("Relato inserido com sucesso.");
 
 		} catch (Exception e) {
 
-			LOGGER.severe("Erro ao inserir relato: " + e.getMessage());
+			System.out.println("Erro ao inserir relato: " + e.getMessage());
 
 			e.printStackTrace();
 
@@ -1109,23 +1144,21 @@ public class Servlet extends HttpServlet {
 
 			throws SQLException, IOException, ServletException {
 
-		Usuario usuario1 = new Usuario("ana", "santos", LocalDate.of(1997, 1, 9), "ana.santos", "123");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		String motivo = request.getParameter("motivo");
 
-		Moderador moderador1 = new Moderador("ana", "luiza", LocalDate.of(1997, 1, 9), "ana.santos", "123");
+		Moderador moderador = (Moderador) request.getSession().getAttribute("moderador");
 
-		moderadorDao.inserir(moderador1);
+		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(LocalDate.now(), motivo, Status.PENDENTE,
 
-		DenunciaModerador denunciaModeradorParaInserir = new DenunciaModerador(LocalDate.now(), motivo, Status.APROVADO,
-
-				usuario1, moderador1);
+				usuario, moderador);
 
 		denunciaModeradorDao.inserir(denunciaModeradorParaInserir);
 
-		request.setAttribute("usuario", usuario1);
+		request.setAttribute("usuario", usuario);
 
-		request.setAttribute("moderador", moderador1);
+		request.setAttribute("moderador", moderador);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-denuncias.jsp");
 
@@ -1137,25 +1170,20 @@ public class Servlet extends HttpServlet {
 
 			throws SQLException, IOException, ServletException {
 
-		Usuario usuario1 = new Usuario("ana", "albuquerque", LocalDate.of(1997, 1, 9), "ana.albuquerque", "123");
-
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		String motivo = request.getParameter("motivo");
 
-		Relato relato1 = new Relato("lalalalla", LocalDate.now());
-
-		usuarioDao.inserir(usuario1);
-
-		relatoDao.inserir(relato1);
+		Relato relato = (Relato) request.getSession().getAttribute("relato");
 
 		DenunciaRelato denunciaRelatoParaInserir = new DenunciaRelato(LocalDate.now(), motivo, Status.APROVADO,
 
-				usuario1, relato1);
+				usuario, relato);
 
 		denunciaRelatoDao.inserir(denunciaRelatoParaInserir);
 
-		request.setAttribute("usuario", usuario1);
+		request.setAttribute("usuario", usuario);
 
-		request.setAttribute("Relato", relato1);
+		request.setAttribute("Relato", relato);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-denuncias.jsp");
 
@@ -1167,16 +1195,13 @@ public class Servlet extends HttpServlet {
 
 			throws SQLException, IOException, ServletException {
 
-		Usuario usuarioDenunciante = new Usuario("ana", "carolina", LocalDate.of(1997, 1, 9), "ana.carolina", "123");
+		Usuario usuarioDenunciante = (Usuario) request.getSession().getAttribute("usuarioDenunciante");
 
 		String motivo = request.getParameter("motivo");
 
-		Usuario usuarioDenunciado = new Usuario("ester", "ferreira", LocalDate.of(1997, 1, 9), "ester.ferreira", "123");
-
-		usuarioDao.inserir(usuarioDenunciado);
+		Usuario usuarioDenunciado = (Usuario) request.getSession().getAttribute("usuarioDenunciado");
 
 		DenunciaUsuario denunciaUsuarioParaInserir = new DenunciaUsuario(LocalDate.now(), motivo, Status.APROVADO,
-
 				usuarioDenunciante, usuarioDenunciado);
 
 		denunciaUsuarioDao.inserir(denunciaUsuarioParaInserir);
@@ -1224,19 +1249,13 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void editarSenha(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, ServletException, IOException {
-
-		Usuario usuarioParaAtualizar = (Usuario) request.getSession().getAttribute("senha");
-
+		HttpSession sessao = request.getSession();
+		Usuario usuarioParaAtualizar = (Usuario) sessao.getAttribute("usuario");
 		String senha = request.getParameter("senha");
-
 		usuarioParaAtualizar.setSenha(senha);
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-usuario.jsp");
-
 		dispatcher.forward(request, response);
-
 	}
 
 	private void atualizarComunidade(HttpServletRequest request, HttpServletResponse response)
