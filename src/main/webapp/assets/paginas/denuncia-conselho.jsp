@@ -8,36 +8,28 @@
 <title>Denunciar Conselho</title>
 </head>
 <body>
+<div>
 	<div>
 		<h1>Denunciar Conselho</h1>
 		<form action="inserir-denuncia-de-conselho" method="post">
-			<input type="submit" value="Spam"><br> <input
-				type="submit" value="Violação das diretrizes"><br> <input
-				type="submit" value="Discurso de ódio"><br>
+			<input type="submit" value="Spam">
+			<input type="submit" value="Violação das diretrizes"> 
+			<input type="submit" value="Discurso de ódio">
 		</form>
 	</div>
 	<hr>
 	<div>
 		<h2>Denunciar</h2>
 		<form action="inserir-denuncia-de-conselho" method="post">
-			<label for="motivo">Justifique sua denuncia</label> <input
-				type="text" id="motivo" name="motivo" required maxlength="500">
-
+			<label for="motivo">Justifique sua denuncia</label> 
+			<input type="text" id="motivo" name="motivo" required maxlength="500">
 			<p>Data atual da Denuncia: ${dataAtual}</p>
-			<p>
-				<strong>Status:</strong>
+				<p>Status:</p>
 				<c:out value="${status}" />
-			</p>
-			<p>
-				<strong>Usuário Denunciante:</strong>
+				<p>Usuário Denunciante:</p>
 				<c:out value="${usuario.nome}" />
-			</p>
-
-			<p>
-				<strong>Conselho Denunciado:</strong>
+				<p>Conselho Denunciado:</p>
 				<c:out value="${conselho.conteudo}" />
-			</p>
-
 			<input type="submit" value="Salvar">
 		</form>
 	</div>
@@ -51,5 +43,6 @@
 				value="Não">
 		</form>
 	</div>
+</div>
 </body>
 </html>

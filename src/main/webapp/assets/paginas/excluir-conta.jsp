@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div>
 	<div>
 	<a href="#"> <img src="#" alt="setinha"
 			style="width: 42px; height: 42px;">
@@ -98,5 +99,6 @@
 		</div>
 	</footer>
 	</div>
+</div>
 </body>
 </html>

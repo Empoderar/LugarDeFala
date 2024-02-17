@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -80,41 +79,38 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public List<Categoria> recuperar(String nome) {
+	public List<Categoria> recuperarTodos() {
     	
 		List<Categoria> categoriaRecuperada = null;
-    	Session session = null;
-    	  
+    	Session sessao = null; 	  
     	try {
-        	session = getSessionFactory().openSession();
-            session.beginTransaction();
-            
-            CriteriaBuilder construtor = session.getCriteriaBuilder();
-            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
-            Root<Categoria> raizRelato = criteria.from(Categoria.class);
-            
-            criteria.select(raizRelato).where(construtor.equal(raizRelato.get(Categoria_.nome), nome));
-            
-            ParameterExpression<Categoria> relatoCategoria = construtor.parameter(Categoria.class);
-			criteria.where(construtor.equal(raizRelato.get(Categoria_.nome), relatoCategoria));
-            
-			categoriaRecuperada = session.createQuery(criteria).getResultList();
-            
-            session.getTransaction().commit();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    	finally {
-    		if (session != null) {
-    			session.close();
-    			}
+            sessao = getSessionFactory().openSession();
+            sessao.beginTransaction();
 
-    	}
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Categoria> criteria = construtor.createQuery(Categoria.class);
+            Root<Categoria> raizCategoria = criteria.from(Categoria.class);
+
+            criteria.select(raizCategoria);
+
+            categoriaRecuperada = sessao.createQuery(criteria).getResultList();
+
+            sessao.getTransaction().commit();
+
+        } catch (Exception sqlException) {
+
+            sqlException.printStackTrace();
+
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
         return categoriaRecuperada;
     }
-   
 
 	public Categoria recuperarPorId(Long id) {
 	    Categoria categoria = null;
@@ -128,7 +124,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.equal(root.get(Categoria_.id), id));
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.ID), id));
 
 	        categoria = session.createQuery(criteria).uniqueResult();
 
@@ -144,8 +140,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 
-	public Categoria recuperarPorRelato(Relato relato) {
-	    Categoria categoria = null;
+	public List <Categoria> recuperarPorRelato(Relato relato) {
+	    List <Categoria> categoria = null;
 	    Session session = null;
 
 	    try {
@@ -156,9 +152,9 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.relatos)));
+	        criteria.select(root).where(builder.isMember(relato, root.get(Categoria_.RELATOS)));
 
-	        categoria = session.createQuery(criteria).uniqueResult();
+	        categoria = session.createQuery(criteria).getResultList();
 
 	        session.getTransaction().commit();
 
@@ -184,7 +180,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	        CriteriaQuery<Categoria> criteria = builder.createQuery(Categoria.class);
 	        Root<Categoria> root = criteria.from(Categoria.class);
 
-	        criteria.select(root).where(builder.equal(root.get(Categoria_.nome), nome));
+	        criteria.select(root).where(builder.equal(root.get(Categoria_.NOME), nome));
 
 	        categoria = session.createQuery(criteria).uniqueResult();
 

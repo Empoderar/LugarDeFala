@@ -26,6 +26,7 @@
     </header></div>
         <div class="item2 main-cadastro">
         <div class="texto-cadastro">
+
         <h1>Cadastrar Comunidade</h1>
         </div>
         <form class="right-form-login" action="inserir-comunidade" method="post">
@@ -68,5 +69,6 @@
 
 		</div>
 		</div>
+
 </body>
 </html>

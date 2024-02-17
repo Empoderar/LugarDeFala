@@ -13,11 +13,11 @@ public interface CategoriaDAO {
 
 	void atualizar(Categoria categoria);
 
-	List<Categoria> recuperar(String nome);
+	List<Categoria> recuperarTodos();
 	
 	Categoria recuperarPorId(Long id);
 
-	Categoria recuperarPorRelato(Relato relato);
+	List <Categoria> recuperarPorRelato(Relato relato);
 	
 	Categoria recuperarPorNome(String nome);
 

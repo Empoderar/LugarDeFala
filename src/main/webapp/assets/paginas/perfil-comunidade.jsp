@@ -59,13 +59,10 @@
 	</c:forEach>
 	<div>
 		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">
@@ -164,14 +161,10 @@
 		</p>
 	</c:forEach>
 	<div>
-		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">
@@ -269,14 +262,10 @@
 		</p>
 	</c:forEach>
 	<div>
-		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">
@@ -374,14 +363,10 @@
 		</p>
 	</c:forEach>
 	<div>
-		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">
@@ -479,14 +464,10 @@
 		</p>
 	</c:forEach>
 	<div>
-		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">
@@ -584,14 +565,10 @@
 		</p>
 	</c:forEach>
 	<div>
-		<p>
-			<strong>NOME:</strong>
+			<p>NOME:</p>
 			<c:out value="${comunidade.nome}" />
-		</p>
-		<p>
-			<strong>DESCRIÇÃO:</strong>
+			<p>DESCRIÇÃO:</p>
 			<c:out value="${comunidade.descricao}" />
-		</p>
 	</div>
 	<div>
 		<form action="perfil-comunidade" method="post">

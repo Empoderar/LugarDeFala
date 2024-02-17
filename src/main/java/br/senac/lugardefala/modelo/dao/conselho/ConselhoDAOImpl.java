@@ -93,7 +93,8 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
 			Root<Conselho> raizConselho = criteria.from(Conselho.class);
-			criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.relato), relato));
+			
+			criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.RELATO), relato));
 			conselho = session.createQuery(criteria).getResultList();
 
 			session.getTransaction().commit();
@@ -114,26 +115,34 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		Session session = null;
 		Conselho conselhosPeloId = null;
 		try {
-			session = getSessionFactory().openSession();
-			session.beginTransaction();
-			
-			CriteriaBuilder construtor = session.getCriteriaBuilder();
-			CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
-			Root<Conselho> raizUsuario = criteria.from(Conselho.class);
-			ParameterExpression<Long> conselhoPeloId = construtor.parameter(Long.class, "id");
-			
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Conselho_.ID), conselhoPeloId));
-			conselhosPeloId = session.createQuery(criteria).setParameter(conselhoPeloId, id).getSingleResult();
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return conselhosPeloId;
-	}
+        	session = getSessionFactory().openSession();
+            session.beginTransaction();
+            
+            CriteriaBuilder construtor = session.getCriteriaBuilder();
+            CriteriaQuery<Conselho> criteria = construtor.createQuery(Conselho.class);
+            Root<Conselho> raizConselho = criteria.from(Conselho.class);
+            
+            criteria.select(raizConselho).where(construtor.equal(raizConselho.get(Conselho_.ID), id));
+            
+            ParameterExpression<Long> conselhoPorId = construtor.parameter(Long.TYPE);
+			criteria.where(construtor.equal(raizConselho.get(Conselho_.ID), conselhoPorId));
+            
+			conselhosPeloId = session.createQuery(criteria).setParameter(conselhoPorId, id).getSingleResult();
+            
+            session.getTransaction().commit();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    	finally {
+    		if (session != null) {
+    			session.close();
+    			}
+
+    	}
+        return conselhosPeloId;
+    }
 	
 	public List<Conselho> recuperarPorUsuario(Usuario usuario) {
 		Session session = null;
@@ -147,7 +156,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 			Root<Conselho> raizUsuario = criteriaConsulta.from(Conselho.class);
 
 			Predicate predicateConselhoUsuario
-			= criteriaConstrutor.equal(raizUsuario.get(Conselho_.usuario), usuario);
+			= criteriaConstrutor.equal(raizUsuario.get(Conselho_.USUARIO), usuario);
 
 			criteriaConsulta.where(predicateConselhoUsuario);
 			conselhos = session.createQuery(criteriaConsulta).getResultList();

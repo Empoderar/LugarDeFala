@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<div>
     <h1>Cadastro de Moderador</h1>
     <div>
     	<form action="form-moderador" method="post">
@@ -48,6 +49,6 @@
             </div>
         </footer>
     </div>
+</div>
 </body>
-
 </html>

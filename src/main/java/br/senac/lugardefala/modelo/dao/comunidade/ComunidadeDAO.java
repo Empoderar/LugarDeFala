@@ -18,6 +18,8 @@ public interface ComunidadeDAO {
     List<Comunidade> recuperarPorIdUsuario(Long id);
 
     List<Comunidade> recuperarPorUsuario(Usuario usuario);
+    
+    List<Comunidade> recuperarPorNome(String nome);
 
     Comunidade recuperarPorId(Long id);
 }

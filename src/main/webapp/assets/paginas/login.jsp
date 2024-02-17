@@ -64,7 +64,7 @@
 			</form>
 		</div>
 		<div class="cadastro-login">
-			<p>Não tem uma conta?</p>
+			<p>NÃ£o tem uma conta?</p>
 			<a class="right-a2-login" href="cadastro-usuario" target="_self">Cadastre-se</a>
 		</div>
 		
@@ -75,7 +75,7 @@
 
 				<h3>Lugar de Fala</h3>
 
-				<a href="#">Sobre nós</a> <a href="home.jsp">Página Inicial</a>
+				<a href="#">Sobre nÃ³s</a> <a href="home.jsp">PÃ¡gina Inicial</a>
 
 			</div>
 
@@ -97,5 +97,6 @@
 
 		</div>
 	</div>
+</div>
 </body>
 </html>

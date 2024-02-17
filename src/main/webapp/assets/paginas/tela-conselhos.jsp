@@ -28,10 +28,12 @@
 					<hr>
 				</div>
 				<div>
-					<a href="#">Comunidades</a> <a href="#">ViolÃªncia fÃ­sica</a> <a
-						href="#">Violência psicolÃ³gica</a> <a href="#">ViolÃªncia
-						moral</a> <a href="#">ViolÃªncia sexual</a> <a href="#">ViolÃªncia
-						patrimonial</a>
+					<a href="#">Comunidades</a> 
+					<a href="#">ViolÃªncia fÃ­sica</a> 
+					<a href="#">Violência psicolÃ³gica</a> 
+					<a href="#">ViolÃªncia moral</a> 
+					<a href="#">ViolÃªncia sexual</a> 
+					<a href="#">ViolÃªncia patrimonial</a>
 					<hr>
 				</div>
 			</div>

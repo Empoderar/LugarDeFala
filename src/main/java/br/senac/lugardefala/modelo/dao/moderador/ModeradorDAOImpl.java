@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -16,6 +17,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
+import br.senac.lugardefala.modelo.entidade.contato.Contato;
+import br.senac.lugardefala.modelo.entidade.contato.Contato_;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.moderador.Moderador_;
 
@@ -92,7 +95,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	        CriteriaBuilder construtor = session.getCriteriaBuilder();
 	        CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 	        Root<Moderador> raizModerador = criteria.from(Moderador.class);
-	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join("comunidades");
+	        Join<Moderador, Comunidade> joinComunidades = raizModerador.join(Moderador_.COMUNIDADES);
 
 	        ParameterExpression<Comunidade> comunidadeParam = construtor.parameter(Comunidade.class);
 	        criteria.select(raizModerador).where(construtor.equal(joinComunidades, comunidadeParam));
@@ -123,7 +126,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
 
-			criteria.where(construtor.equal(raizModerador.get(Moderador_.id), id));
+			criteria.where(construtor.equal(raizModerador.get(Moderador_.ID), id));
 
 			moderador = session.createQuery(criteria).getResultList();
 
@@ -150,11 +153,13 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		try {
 			session = getSessionFactory().openSession();
 			session.beginTransaction();
+			
 			CriteriaBuilder construtor = session.getCriteriaBuilder();
 			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
 			Root<Moderador> raizModerador = criteria.from(Moderador.class);
-			ParameterExpression<String> moderadorPeloNome = construtor.parameter(String.class, "nome");
-			criteria.select(raizModerador).where(construtor.equal(raizModerador.get("nome"), moderadorPeloNome));
+			ParameterExpression<String> moderadorPeloNome = construtor.parameter(String.class, Moderador_.NOME);
+			
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.NOME), moderadorPeloNome));
 			moderadoresPeloNome = session.createQuery(criteria).setParameter(moderadorPeloNome, nome).getSingleResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -166,6 +171,48 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 		return moderadoresPeloNome;
 
+	}
+	
+	public Moderador obterPorCredenciais(String email, String senha) {
+		Session session = null;
+		Moderador moderador = null;
+
+		try {
+			session = getSessionFactory().openSession();
+			session.beginTransaction();
+
+			CriteriaBuilder construtor = session.getCriteriaBuilder();
+			CriteriaQuery<Moderador> criteria = construtor.createQuery(Moderador.class);
+			Root<Moderador> raizModerador = criteria.from(Moderador.class);
+			Join<Moderador, Contato> raizContato = raizModerador.join(Moderador_.CONTATO);
+
+			criteria.select(raizModerador).where(construtor.equal(raizModerador.get(Moderador_.SENHA), senha),
+					construtor.equal(raizContato.get(Contato_.EMAIL), email));
+
+			Predicate predicateModeradorSenha = construtor.equal(raizModerador.get(Moderador_.SENHA), senha);
+			Predicate predicateContatoEmail = construtor.equal(raizContato.get(Contato_.EMAIL), email);
+			Predicate predicateModeradorLogin = construtor.and(predicateModeradorSenha, predicateContatoEmail);
+
+			criteria.where(predicateModeradorLogin);
+
+			moderador = session.createQuery(criteria).getSingleResult();
+
+			return moderador;
+
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+
+		return moderador;
 	}
 
 }

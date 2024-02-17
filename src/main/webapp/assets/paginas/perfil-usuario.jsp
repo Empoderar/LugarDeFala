@@ -11,27 +11,22 @@
 <div><button onclick="#">Editar perfil</button></div>
 	<div>
 		<form action="inserir-usuario" method="post">
-			<p>
-				<strong>Nome:</strong>
+				<p>Nome:</p>
 				<c:out value="${usuario.nome}" />
-				<br>
-				 <strong>Nome de Usuário:</strong>
-				<c:out value="${usuario.apelido}" />
-				<br> 
-				<strong>Biografia:</strong>
-				<c:out value="${usuario.descricao}" />
-				<br> 
-				<strong>Relatos:</strong>
-				<c:forEach var="relato" items="${relatos}">
-				<c:out value="${relato.conteudo}" />
-				<br>
-				</c:forEach>
-				<br> <strong>Comunidades:</strong>
+				<p>Nome de usuário</p>
+				<c:out value="${usuario.apelido}" /> 
+				<p>Biografia:</p>
+				<c:out value="${usuario.descricao}" /> 
+				<p>Comunidades:</p>
 				<c:forEach var="comunidade" items="${comunidades}">
-					<c:out value="${comunidade.nome}" />
-					<br>
+				<c:out value="${comunidade.nome}" />
 				</c:forEach>
-			</p>
+				<p>Relatos:</p>
+				<c:forEach var="relato" items="${relatos}">
+				<c:out value="${usuario.icone}"/>
+				<c:out value="${usuario.nome} "/>
+				<c:out value="${relato.conteudo}" />
+				</c:forEach>
 		</form>
 	</div>
 	<div>

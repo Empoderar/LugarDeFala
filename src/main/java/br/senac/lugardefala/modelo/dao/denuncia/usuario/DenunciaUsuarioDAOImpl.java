@@ -82,7 +82,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
             CriteriaQuery<DenunciaUsuario> criteriaQuery = criteriaBuilder.createQuery(DenunciaUsuario.class);
             Root<DenunciaUsuario> rootDenunciaUsuario = criteriaQuery.from(DenunciaUsuario.class);
 
-            Predicate predicateDenunciaUsuarioStatus = criteriaBuilder.equal(rootDenunciaUsuario.get("status"), status);
+            Predicate predicateDenunciaUsuarioStatus = criteriaBuilder.equal(rootDenunciaUsuario.get(DenunciaUsuario_.STATUS), status);
 
             criteriaQuery.where(predicateDenunciaUsuarioStatus);
             denunciasUsuarios = session.createQuery(criteriaQuery).getResultList();
@@ -110,7 +110,7 @@ public class DenunciaUsuarioDAOImpl implements DenunciaUsuarioDAO {
             CriteriaQuery<DenunciaUsuario> criteriaConsulta = criteriaConstrutor.createQuery(DenunciaUsuario.class);
             Root<DenunciaUsuario> raizDenunciaUsuario = criteriaConsulta.from(DenunciaUsuario.class);
 
-            Predicate predicateDenunciaUsuario = criteriaConstrutor.equal(raizDenunciaUsuario.get(DenunciaUsuario_.usuario), usuario);
+            Predicate predicateDenunciaUsuario = criteriaConstrutor.equal(raizDenunciaUsuario.get(DenunciaUsuario_.USUARIO), usuario);
 
             criteriaConsulta.where(predicateDenunciaUsuario);
             denunciaUsuario = session.createQuery(criteriaConsulta).getResultList();
