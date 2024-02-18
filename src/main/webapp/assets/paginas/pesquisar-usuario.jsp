@@ -1,19 +1,30 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tela-de-pesquisa</title>
+    <meta charset="UTF-8">
+    <title>Pesquisar Usuários</title>
 </head>
 <body>
-	<form action="/perfil-usuario" method="post">
-		<input type="text" placeholder="pesquisar">
-		<c:out value="${comunidades.nome} "/>
-		<button>ok</button>
-	</form>
+    <h1>Pesquisar Usuários</h1>
+    <form action="resultado-pesquisar-usuario" method="get">
+        <input type="text" placeholder="Pesquisar Usuário" oninput="this.className = ''" name="pesquisar" id="pesquisar">
+        <button type="submit">Pesquisar</button>
+    </form>
+    
+    <c:if test="${not empty usuarios}">
+        <ul>
+            <c:forEach var="usuario" items="${usuarios}">
+                <li>
+                    <a href="perfil-usuario?id=${usuario.id}">${usuario.nome}</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
+    
+    <c:if test="${empty usuarios}">
+        <p>Nenhum usuário encontrado.</p>
+    </c:if>
 </body>
 </html>
