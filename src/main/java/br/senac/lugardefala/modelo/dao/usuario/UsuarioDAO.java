@@ -18,6 +18,8 @@ public interface UsuarioDAO {
     boolean verificarCredenciais(String apelido, String senha);
 
     Usuario recuperarPorNome(String nome);
+    
+    List<Usuario> recuperarPorNomes(String nome);
 
     Usuario recuperarPorApelido(String apelido);
 
