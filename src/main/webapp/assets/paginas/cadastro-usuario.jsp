@@ -13,7 +13,7 @@
 
     <title>Cadastro</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css" />
+   <style type="text/css"><%@ include file = "/assets/css/style.css"%></style>
 
   </head>
  
@@ -24,11 +24,11 @@
 
         <div class="form"> 
 
-            <form action="#">
+            <form action="inserir-usuario" method="post">
 
                 <div class="form-header">
 
-                    <div class="titulo">
+                    <div class="titulo">F
 
                         <h1>Cadastre-se</h1>
 
@@ -64,7 +64,7 @@
 
                             <label for="usuario">Nome de Usuário</label>
 
-                            <input type="text" name="usuario" id="usuario" placeholder="Crie o seu nome de usuário" required>
+                            <input type="text" name="apelido" id="apelido" placeholder="Crie o seu nome de usuário" required>
 
                         </div>
 
@@ -80,7 +80,7 @@
 
                             <label for="data">Data de Nascimento</label>
 
-                            <input type="date" name="data" id="data" placeholder="Digite a sua data de nascimento" required>
+                            <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a sua data de nascimento" required>
 
                         </div>
 
@@ -96,7 +96,7 @@
 
                             <label for="senha-confirme">Confirme a sua senha</label>
 
-                            <input type="password" name="enha-confirme" id="enha-confirme" placeholder="Repita a sua senha" required>
+                            <input type="password" name="senha" id="senha" placeholder="Repita a sua senha" required>
 
                         </div>
 
@@ -106,7 +106,7 @@
 
                 <div class="continuar-button">
 
-                    <button><a href="#">Continuar</a></button>
+                    <button type="submit">Continuar</button>
 
                 </div>
 
