@@ -247,6 +247,18 @@ public class Servlet extends HttpServlet {
 
 				break;
 
+			case "/deletar-moderador": // precisa testar
+
+				mostrarTelaDeletarModerador(request, response);
+
+				break;
+          
+       case "/deletar-comunidade": // precisa testar
+
+				mostrarTelaDeletarComunidade(request, response);
+
+				break;
+
 			case "/editar-perfil": // funcionando
 
 				mostrarTelaEditarPerfil(request, response);
@@ -275,12 +287,12 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/pesquisar-comunidade": //precisa testar
+			case "/pesquisar-comunidade": // precisa testar
 				mostrarTelaPesquisarComunidade(request, response);
 
 				break;
 
-			case "/resultado-pesquisar-comunidade": //precisa testar
+			case "/resultado-pesquisar-comunidade": // precisa testar
 				resultadoPesquisarUsuario(request, response);
 
 				break;
@@ -357,13 +369,14 @@ public class Servlet extends HttpServlet {
 
 				break;
 
-			case "/deletar-moderador": // precisa ser feito
+			case "/metodo-deletar-moderador": // precisa ser feito
 
-				deletarModerador(request, response);
+				
+          (request, response);
 
 				break;
 
-			case "/deletar-comunidade": // precisa ser feito
+			case "/metodo-deletar-comunidade": // precisa ser feito
 
 				deletarComunidade(request, response);
 
@@ -862,6 +875,36 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
+	private void mostrarTelaDeletarModerador(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-moderador.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+  
+  	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-comunidade.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -1390,131 +1433,96 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 
 		if (usuarioLogado != null) {
+			Contato contatoUsuarioLogado = usuarioLogado.getContato();
 
-			usuarioDao.deletar(usuarioLogado);
+			String senhaDoUsuario = usuarioLogado.getSenha();
+			String senhaDigitada = request.getParameter("senha");
 
-			session.invalidate();
-
-			response.sendRedirect("/home.jsp");
-
+			if (senhaDigitada.equals(senhaDoUsuario)) {
+				usuarioDao.deletar(usuarioLogado);
+				contatoDao.deletar(contatoUsuarioLogado);
+				session.invalidate();
+				response.sendRedirect(request.getContextPath() + "/home.jsp");
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-de-erro.jsp");
+				dispatcher.forward(request, response);
+				System.out.println("Senhas incompatíveis");
+			}
 		} else {
-
-			System.out.println("Não foi possível realizar a exclusão");
-
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+			System.out.println("Não foi possível realizar a exclusão: usuário não está logado");
 		}
-
 	}
 
-//	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response)
-
-//			throws SQLException, ServletException, IOException {
-
-//
-
-//		String senha = request.getParameter("senha");
-
-//
-
-//		Usuario usuarioParaDeletar = new Usuario(senha);
-
-//		usuarioDao.deletar(usuarioParaDeletar);
-
-//
-
-//		response.sendRedirect("/home.jsp");
-
-//	}
-
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, ServletException, IOException {
+		HttpSession session = request.getSession();
+		Moderador moderadorLogado = (Moderador) session.getAttribute("moderador");
 
-		Moderador moderador1 = new Moderador("Brenda", "Monteiro", "brenda.monteiro");
+		if (moderadorLogado != null) {
+			Contato contatoModeradorLogado = moderadorLogado.getContato();
 
-		Moderador moderador2 = new Moderador("Marcella", "Barboza", "marcella.barboza");
+			String senhaDoModerador = moderadorLogado.getSenha();
+			String senhaDigitada = request.getParameter("senha");
 
-		moderadorDao.inserir(moderador1);
-
-		moderadorDao.inserir(moderador2);
-
-		Relato relato1 = new Relato("Um relato sobre sororidade", LocalDate.now(), 5, Status.APROVADO);
-
-		Relato relato2 = new Relato("Relato sobre desabafo", LocalDate.now(), 3, Status.APROVADO);
-
-		relatoDao.inserir(relato1);
-
-		relatoDao.inserir(relato2);
-
-		Comunidade comunidade1 = new Comunidade("Violência Física",
-
-				"Comunidade de relatos sobre agressões físicas, como bater, empurrar, chutar, entre outras formas de violência que causem dano ao corpo.");
-
-		comunidade1.setModerador(moderador1);
-
-		comunidade1.setModerador(moderador2);
-
-		comunidadeDao.inserir(comunidade1);
-
-		comunidade1.adicionarRelato(relato1);
-
-		comunidade1.adicionarRelato(relato2);
-
-		comunidadeDao.inserir(comunidade1);
-
-		Comunidade comunidadeRecuperada = comunidadeDao.recuperarComunidadePorId(comunidade1.getId());
-
-		List<Moderador> moderadores = moderadorDao.recuperarModeradoresPorComunidade(comunidadeRecuperada);
-
-		moderadores.add(moderador1);
-
-		moderadores.add(moderador2);
-
-		List<Relato> relatos = relatoDao.recuperarRelatosPorComunidade(comunidadeRecuperada);
-
-		relatos.add(relato1);
-
-		relatos.add(relato2);
-
-		request.setAttribute("comunidade", comunidade1);
-
-		request.setAttribute("moderadores", moderadores);
-
-		request.setAttribute("relatos", relatos);
-
-		System.out.println("Moderadores: ");
-
-		for (Moderador c : moderadores) {
-
-			System.out.println(c.getNome());
+			if (senhaDigitada.equals(senhaDoModerador)) {
+				moderadorDao.deletar(moderadorLogado);
+				contatoDao.deletar(contatoModeradorLogado);
+				session.invalidate();
+				response.sendRedirect(request.getContextPath() + "/home.jsp");
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-de-erro.jsp");
+				dispatcher.forward(request, response);
+				System.out.println("Senhas incompatíveis");
+			}
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+			System.out.println("Não foi possível realizar a exclusão: moderador não está logado");
 
 		}
-
 	}
 
 	private void deletarComunidade(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
 
-			throws SQLException, IOException {
+		HttpSession session = request.getSession();
+		Comunidade comunidadeExistente = (Comunidade) session.getAttribute("comunidade");
+		Moderador moderadorLogado = (Moderador) session.getAttribute("moderador");
 
-		long id = Long.parseLong(request.getParameter("id"));
+		if (comunidadeExistente != null && moderadorLogado != null) {
+			List<Relato> relatosComunidadeExistente = comunidadeExistente.getRelatos();
+			List<Conselho> conselhosComunidadeExistente = comunidadeExistente.getConselhos();
 
-		String nome = request.getParameter("nome");
+			String senhaDoModerador = moderadorLogado.getSenha();
+			String senhaDigitada = request.getParameter("senha");
 
-		String descricao = request.getParameter("descricao");
+			if (senhaDigitada != null && senhaDoModerador != null && senhaDigitada.equals(senhaDoModerador)) {
+				for (Relato relato : relatosComunidadeExistente) {
+					relatoDao.deletar(relato);
+				}
+				for (Conselho conselho : conselhosComunidadeExistente) {
+					conselhoDao.deletar(conselho);
+				}
+				comunidadeDao.deletar(comunidadeExistente);
 
-		Comunidade comunidadeParaDeletar = new Comunidade(id, nome, descricao);
-
-		comunidadeDao.deletar(comunidadeParaDeletar);
-
-		response.sendRedirect("/home.jsp");
-
+				session.invalidate();
+				response.sendRedirect(request.getContextPath() + "/home.jsp");
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-de-erro.jsp");
+				dispatcher.forward(request, response);
+			}
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void deletarRelato(HttpServletRequest request, HttpServletResponse response) {
