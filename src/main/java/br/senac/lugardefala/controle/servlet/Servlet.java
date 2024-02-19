@@ -446,7 +446,7 @@ public class Servlet extends HttpServlet {
 	private void resultadoPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String termoPesquisa = request.getParameter("pesquisar");
-		List<Usuario> usuarios = usuarioDao.recuperarPorNomes(termoPesquisa);
+		List<Usuario> usuarios = usuarioDao.recuperarUsuariosPorNomes(termoPesquisa);
 		request.setAttribute("usuarios", usuarios);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
@@ -455,7 +455,7 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Usuario> usuarios = usuarioDao.recuperarTodos();
+		List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
 		request.setAttribute("usuarios", usuarios);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
@@ -465,7 +465,7 @@ public class Servlet extends HttpServlet {
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String termoPesquisa = request.getParameter("pesquisar");
-		List<Comunidade> comunidades = comunidadeDao.recuperarPorNome(termoPesquisa);
+		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorNome(termoPesquisa);
 		request.setAttribute("comunidades", comunidades);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
@@ -474,7 +474,7 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Comunidade> comunidades = comunidadeDao.recuperarTodas();
+		List<Comunidade> comunidades = comunidadeDao.recuperarTodasComunidades();
 		request.setAttribute("comunidades", comunidades);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
@@ -598,10 +598,10 @@ public class Servlet extends HttpServlet {
 			String descricao = request.getParameter("descricao");
 			usuario.setDescricao(descricao);
 
-			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(usuario);
+			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(usuario);
 			request.setAttribute("comunidades", comunidades);
 
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
@@ -622,10 +622,10 @@ public class Servlet extends HttpServlet {
 			String descricao = request.getParameter("descricao");
 			moderador.setDescricao(descricao);
 
-			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(moderador);
+			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(moderador);
 			request.setAttribute("comunidades", comunidades);
 
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(moderador);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(moderador);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-moderador.jsp");
@@ -642,7 +642,7 @@ public class Servlet extends HttpServlet {
 		Comunidade comunidade = (Comunidade) request.getSession().getAttribute("comunidade");
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		if (comunidade != null && usuario != null) {
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
@@ -704,7 +704,7 @@ public class Servlet extends HttpServlet {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		if (usuario != null) {
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("relatos", relatos);
@@ -943,8 +943,8 @@ public class Servlet extends HttpServlet {
 
 		HttpSession sessao = request.getSession();
 
-		Usuario usuario = usuarioDao.obterPorCredenciais(email, senha);
-		Moderador moderador = moderadorDao.obterPorCredenciais(email, senha);
+		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
+		Moderador moderador = moderadorDao.obterModeradorPorCredenciais(email, senha);
 
 		if (usuario != null) {
 			sessao.setAttribute("usuario", usuario);
@@ -1469,15 +1469,15 @@ public class Servlet extends HttpServlet {
 
 		comunidadeDao.inserir(comunidade1);
 
-		Comunidade comunidadeRecuperada = comunidadeDao.recuperarPorId(comunidade1.getId());
+		Comunidade comunidadeRecuperada = comunidadeDao.recuperarComunidadePorId(comunidade1.getId());
 
-		List<Moderador> moderadores = moderadorDao.recuperarPorComunidade(comunidadeRecuperada);
+		List<Moderador> moderadores = moderadorDao.recuperarModeradoresPorComunidade(comunidadeRecuperada);
 
 		moderadores.add(moderador1);
 
 		moderadores.add(moderador2);
 
-		List<Relato> relatos = relatoDao.recuperarPorComunidade(comunidadeRecuperada);
+		List<Relato> relatos = relatoDao.recuperarRelatosPorComunidade(comunidadeRecuperada);
 
 		relatos.add(relato1);
 
@@ -1608,13 +1608,13 @@ public class Servlet extends HttpServlet {
 
 		String senha = request.getParameter("senha");
 
-		boolean existe = usuarioDao.verificarCredenciais(apelido, senha);
+		boolean existe = usuarioDao.verificarCredenciaisUsuario(apelido, senha);
 
 		if (!existe)
 
 			response.sendRedirect("confirmar-exclusao");
 
-		Usuario usuario = usuarioDao.recuperarPorApelido(apelido);
+		Usuario usuario = usuarioDao.recuperarUsuarioPorApelido(apelido);
 
 		usuarioDao.deletar(usuario);
 

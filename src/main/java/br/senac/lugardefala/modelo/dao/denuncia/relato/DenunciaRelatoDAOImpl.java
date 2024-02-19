@@ -82,7 +82,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
         }
     }
 
-    public List<DenunciaRelato> recuperarPorStatus(Status status) {
+    public List<DenunciaRelato> recuperarDenunciaRelatosPorStatus(Status status) {
 		Session session = null;
 		List<DenunciaRelato> denunciasRelatos= null;
 		try {
@@ -111,7 +111,7 @@ public class DenunciaRelatoDAOImpl implements DenunciaRelatoDAO {
 		return denunciasRelatos;
 	}
 
-    public List <DenunciaRelato> recuperarPorRelato(Relato relato) {
+    public List <DenunciaRelato> recuperarDenunciaRelatosPorRelato(Relato relato) {
         Session session = null;
         List <DenunciaRelato> denunciaRelato = null;
 

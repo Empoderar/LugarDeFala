@@ -61,7 +61,7 @@ public class DenunciaModeradorDAOImpl implements DenunciaModeradorDAO {
         }
     }
 
-    public DenunciaModerador recuperarPorId(long id) {
+    public DenunciaModerador recuperarDenunciaModeradorPorId(long id) {
         Session session = null;
         Transaction transaction = null;
         DenunciaModerador denunciaModerador = null;

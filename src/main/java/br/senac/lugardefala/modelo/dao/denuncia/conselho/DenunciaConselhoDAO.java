@@ -13,7 +13,7 @@ public interface DenunciaConselhoDAO {
 
     void deletar(Denuncia denuncia);
 
-    List<DenunciaConselho> recuperarPorStatus(Status status);
+    List<DenunciaConselho> recuperarDenunciasDeConselhosPorStatus(Status status);
 
-    List<DenunciaConselho> recuperarPorRelato(Relato relato);
+    List<DenunciaConselho> recuperarDenunciasDeConselhosPorRelato(Relato relato);
 }

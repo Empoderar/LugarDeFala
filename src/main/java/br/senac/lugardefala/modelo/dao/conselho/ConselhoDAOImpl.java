@@ -83,7 +83,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		}
 	}
 
-	public List<Conselho> recuperarPorRelato(Relato relato) {
+	public List<Conselho> recuperarConselhosPorRelato(Relato relato) {
 		Session session = null;
 		List<Conselho> conselho = null;
 		try {
@@ -111,7 +111,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
 		
 	}
 
-	public Conselho recuperarPorId(Long id) {
+	public Conselho recuperarConselhoPorId(Long id) {
 		Session session = null;
 		Conselho conselhosPeloId = null;
 		try {
@@ -144,7 +144,7 @@ public class ConselhoDAOImpl implements ConselhoDAO {
         return conselhosPeloId;
     }
 	
-	public List<Conselho> recuperarPorUsuario(Usuario usuario) {
+	public List<Conselho> recuperarConselhosPorUsuario(Usuario usuario) {
 		Session session = null;
 		List<Conselho> conselhos = null;
 		try {
