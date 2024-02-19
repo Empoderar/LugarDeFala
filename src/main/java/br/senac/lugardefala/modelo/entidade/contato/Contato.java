@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.senac.lugardefala.modelo.entidade.moderador.Moderador;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
@@ -36,11 +39,15 @@ public class Contato implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contato_id_usuario", referencedColumnName = "id_usuario")
-
     private Usuario usuario;
     
-    @ManyToMany(mappedBy = "contatos")
+    @ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_moderador"))
     private List<Usuario> usuarios;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario", joinColumns = @JoinColumn(name = "id_moderador"), inverseJoinColumns = @JoinColumn(name = "id_moderador"))
+    private List<Moderador> moderadores;
     
     public Contato() {
     }
@@ -56,6 +63,7 @@ public class Contato implements Serializable {
         this.email = email;
         this.usuario = usuario;
         usuarios = new ArrayList<>();
+        moderadores = new ArrayList<>();
     }
     
     public Contato(String telefone, String email, Usuario usuario) {
@@ -93,6 +101,14 @@ public class Contato implements Serializable {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+    
+    public List<Moderador> getModerador() {
+        return moderadores;
+    }
+
+    public void setModerador(List<Moderador> moderadores) {
+        this.moderadores = moderadores;
     }
 
     public Usuario getUsuario() {

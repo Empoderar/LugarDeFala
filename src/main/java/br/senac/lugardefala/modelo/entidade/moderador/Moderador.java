@@ -37,7 +37,7 @@ public class Moderador extends Usuario {
     private List<DenunciaModerador> denunciaDeModerador;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
+    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_moderador")
     private Contato contato;
     
     @ManyToMany(cascade = CascadeType.ALL)
@@ -52,15 +52,6 @@ public class Moderador extends Usuario {
     )
     private List<Usuario> usuarios;
 
-    @ManyToMany
-    @JoinTable(
-            name = "contato_moderador",
-            joinColumns = @JoinColumn(name = "id_moderador"),
-            inverseJoinColumns = @JoinColumn(name = "id_contato")
-    )
-    private List<Contato> contatos;
-
-    
     public Moderador() {
     }
     
@@ -75,8 +66,6 @@ public class Moderador extends Usuario {
     
     public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
         super(nome, sobrenome, dataNascimento, apelido, senha);
-        contatos = new ArrayList<>();
-        this.contatos.add(contato);
     }
 
     public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
