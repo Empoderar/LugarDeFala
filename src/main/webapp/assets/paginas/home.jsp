@@ -42,11 +42,11 @@
 				<a href="#">Sobre Nós</a>
 			</div>
 			<div>
-				<c:forEach var="comunidade" items="${comunidades}">
-					USUARIOS:
-				<c:out value="${comunidade.icone}"></c:out>
-				<c:out value="${comunidade.nome}"></c:out>
-				</c:forEach>
+<%-- 				<c:forEach var="comunidade" items="${comunidades}"> --%>
+<!-- 					USUARIOS: -->
+<!-- 			<!--  	<c:out value="${comunidade.icone}"></c:out>--> -->
+<%-- <%-- 				<c:out value="${comunidade.nome}"></c:out> --%> --%>
+<%-- 				</c:forEach> --%>
 			</div>
 			<div>
 				<h1>VENHA FAZER PARTE</h1>
