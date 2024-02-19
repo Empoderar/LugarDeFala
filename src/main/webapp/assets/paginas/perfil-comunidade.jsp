@@ -2,25 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comunidades</title>
-<style>
-</style>
-</head>
-<c:if test="${usuario == null}">
-	<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-</c:if>
+		<title>Comunidades</title>
+		<style>
+		</style>
+	</head>
+	<body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
 
-<c:if test="${usuario != null}">
-	<%@ include file="../barras-navegacao/home-logada.jsp"%>
-</c:if>
-<body>
-	<div>
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
+
 		<div>
 			<div>
 				<hr>
