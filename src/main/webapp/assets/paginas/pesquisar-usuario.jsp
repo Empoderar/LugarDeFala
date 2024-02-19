@@ -26,25 +26,26 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-    <h1>Pesquisar Comunidades</h1>
+
+    <h1>Pesquisar Usuarios</h1>
     
-    <form action="resultado-pesquisar-comunidade" method="get" onsubmit="return validarFormulario()">
-        <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
+    <form action="resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">
+        <input type="text" placeholder="Pesquisar Usuario" oninput="this.className = ''" name="pesquisar" id="pesquisar">
         <button type="submit">Pesquisar</button>
     </form>
     
-    <c:if test="${not empty comunidades}">
+    <c:if test="${not empty usuarios}">
         <ul>
-            <c:forEach var="comunidade" items="${comunidades}">
+            <c:forEach var="usuario" items="${usuarios}">
                 <li>
-                    <a href="perfil-comunidade?id=${comunidade.id}">${comunidade.nome}</a>
+                    <a href="perfil-usuario?id=${usuario.id}">${usuario.nome}</a>
                 </li>
             </c:forEach>
         </ul>
     </c:if>
     
-    <c:if test="${empty comunidades}">
-        <p>Nenhuma comunidade encontrada.</p>
+    <c:if test="${empty usuarios}">
+        <p>Nenhuma usuario encontrada.</p>
     </c:if>
        <c:if test="${usuario == null}">
 		<%@ include file="../rodape/rodape.jsp"%>

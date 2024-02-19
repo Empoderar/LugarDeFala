@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
@@ -34,6 +36,10 @@ public class Moderador extends Usuario {
     @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DenunciaModerador> denunciaDeModerador;
     
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
+    private Contato contato;
+    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "comunidade_moderador",joinColumns = @JoinColumn(name = "id_moderador"),
             inverseJoinColumns = @JoinColumn(name = "id_comunidade")
@@ -45,6 +51,14 @@ public class Moderador extends Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_usuario")
     )
     private List<Usuario> usuarios;
+
+    @ManyToMany
+    @JoinTable(
+            name = "contato_moderador",
+            joinColumns = @JoinColumn(name = "id_moderador"),
+            inverseJoinColumns = @JoinColumn(name = "id_contato")
+    )
+    private List<Contato> contatos;
 
     
     public Moderador() {
@@ -61,6 +75,8 @@ public class Moderador extends Usuario {
     
     public Moderador(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
         super(nome, sobrenome, dataNascimento, apelido, senha);
+        contatos = new ArrayList<>();
+        this.contatos.add(contato);
     }
 
     public Moderador(long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
@@ -134,6 +150,13 @@ public class Moderador extends Usuario {
     public boolean removerComunidade(Comunidade comunidade) {
         return comunidades.remove(comunidade);
     }
-  
+    
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
     
 }

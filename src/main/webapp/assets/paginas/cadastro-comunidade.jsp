@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastrar Comunidade</title>
-<style><%@include file="/assets/paginas/style.css"%></style>
+<style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
 <c:if test="${usuario == null}">
