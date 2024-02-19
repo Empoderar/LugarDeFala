@@ -371,8 +371,7 @@ public class Servlet extends HttpServlet {
 
 			case "/metodo-deletar-moderador": // precisa ser feito
 
-				
-          (request, response);
+				deletarModerador(request, response);
 
 				break;
 
