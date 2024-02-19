@@ -99,6 +99,7 @@
 			</div>
 		</div>
 	<div>
+
 		<div>
 			<h1>Comunidades em destaque</h1>
 		</div>

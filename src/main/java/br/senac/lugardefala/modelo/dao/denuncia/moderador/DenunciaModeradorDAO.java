@@ -8,5 +8,5 @@ public interface DenunciaModeradorDAO {
 
     void deletar(DenunciaModerador denunciaModerador);
 
-    DenunciaModerador recuperarPorId(long id);
+    DenunciaModerador recuperarDenunciaModeradorPorId(long id);
 }

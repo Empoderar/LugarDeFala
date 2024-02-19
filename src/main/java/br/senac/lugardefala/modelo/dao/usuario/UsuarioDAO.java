@@ -15,25 +15,27 @@ public interface UsuarioDAO {
 
     void atualizar(Usuario usuario);
 
-    boolean verificarCredenciais(String apelido, String senha);
+    boolean verificarCredenciaisUsuario(String apelido, String senha);
 
-    Usuario recuperarPorNome(String nome);
+    Usuario recuperarUsuarioPorNome(String nome);
+    
+    List<Usuario> recuperarUsuariosPorNomes(String nome);
 
-    Usuario recuperarPorApelido(String apelido);
+    Usuario recuperarUsuarioPorApelido(String apelido);
 
-    Usuario recuperarPorId(Long id);
+    Usuario recuperarUsuarioPorId(Long id);
 
-    Usuario recuperarPorIdFetch(Long id);
+    Usuario recuperarUsuarioPorIdFetch(Long id);
 
-    Usuario recuperarPorIdDenuncia(Long id);
+    Usuario recuperarUsuarioPorIdDenuncia(Long id);
 
-    Usuario obterPorCredenciais(String email, String senha);
+    Usuario obterUsuarioPorCredenciais(String email, String senha);
 
-    List<Usuario> recuperarTodos();
+    List<Usuario> recuperarTodosUsuarios();
 
-    List<Usuario> recuperarPorComunidade(Comunidade comunidade);
+    List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade);
 
-    List<Usuario> recuperarPorConselho(Conselho conselho);
+    List<Usuario> recuperarUsuariosPorConselho(Conselho conselho);
 
-    List<Usuario> recuperarPorRelato(Relato relato);
+    List<Usuario> recuperarUsuariosPorRelato(Relato relato);
 }

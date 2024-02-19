@@ -79,7 +79,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		}
 	}
 
-	public List<Categoria> recuperarTodos() {
+	public List<Categoria> recuperarTodasCategorias() {
     	
 		List<Categoria> categoriaRecuperada = null;
     	Session sessao = null; 	  
@@ -112,7 +112,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
         return categoriaRecuperada;
     }
 
-	public Categoria recuperarPorId(Long id) {
+	public Categoria recuperarCategoriaPorId(Long id) {
 	    Categoria categoria = null;
 	    Session session = null;
 
@@ -140,7 +140,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 
-	public List <Categoria> recuperarPorRelato(Relato relato) {
+	public List <Categoria> recuperarCategoriasPorRelato(Relato relato) {
 	    List <Categoria> categoria = null;
 	    Session session = null;
 
@@ -168,7 +168,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	    return categoria;
 	}
 	
-	public 	Categoria recuperarPorNome(String nome){
+	public 	Categoria recuperarCategoriaPorNome(String nome){
 	    Categoria categoria = null;
 	    Session session = null;
 
