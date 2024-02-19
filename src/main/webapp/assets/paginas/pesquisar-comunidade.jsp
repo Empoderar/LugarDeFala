@@ -7,6 +7,13 @@
     <title>Pesquisar Comunidades</title>
 </head>
 <body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
     <h1>Pesquisar Comunidades</h1>
     <form action="resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
@@ -26,5 +33,13 @@
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
     </c:if>
+     
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 </body>
 </html>

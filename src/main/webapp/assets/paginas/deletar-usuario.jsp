@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,13 @@
     </style>
 </head>
 <body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
 <div>
     <div>
         <h1>Excluir a conta</h1>
@@ -39,5 +47,12 @@
         <button type="submit">Ok</button>
     </div>
 </div>
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 </body>
 </html>

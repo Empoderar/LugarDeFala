@@ -54,28 +54,12 @@
 			</p>
 		</c:forEach>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nos</a> <a href="#">Pagina inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
-</body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+</body>
 </html>

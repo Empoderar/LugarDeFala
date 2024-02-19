@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +17,6 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-
 	<body>
 		<div>
 			<div>
@@ -43,9 +41,9 @@
 			</div>
 			<div>
 <%-- 				<c:forEach var="comunidade" items="${comunidades}"> --%>
-<!-- 					USUARIOS: -->
-<!-- 			<!--  	<c:out value="${comunidade.icone}"></c:out>--> -->
-<%-- <%-- 				<c:out value="${comunidade.nome}"></c:out> --%> --%>
+<!-- 					USUARIOS:  -->
+<%-- 			 	<c:out value="${comunidade.icone}"></c:out> --%>
+<%-- 				<c:out value="${comunidade.nome}"></c:out> --%> 
 <%-- 				</c:forEach> --%>
 			</div>
 			<div>
@@ -81,22 +79,6 @@
 						gerenciam possíveis problemas.</p>
 				</div>
 			</div>
-			<div>
-				<footer>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-					<p>Lugar de Fala</p>
-
-					<p>2023 Todos os direitos reservados</p>
-				</footer>
-			</div>
 		</div>
 	<div>
 
@@ -115,21 +97,15 @@
 				<c:out value="${usuario.nome}"></c:out>
 				<c:out value="${usuario.icone}"></c:out>
 				<c:out value="${relato.categoria}"></c:out>
-			</c:forEach></div>
-		<div>
-			<footer>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-				<p>Lugar de Fala</p>
-
-				<p>2023 Todos os direitos reservados</p>
-			</footer>
+			</c:forEach>
+			</div>
 		</div>
-	</div>
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+</body>	
+</html>

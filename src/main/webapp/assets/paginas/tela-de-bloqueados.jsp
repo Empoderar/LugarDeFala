@@ -7,6 +7,13 @@
  	 <title>tela-de-bloqueados</title>
 	</head>
 	<body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
 		<div>
   			<h1>Contas Bloqueadas</h1> 
   			<p>Você pode bloquear ou desbloquear uma conta a qualquer momento.</p>
@@ -21,29 +28,13 @@
        						</form>
 				</c:forEach>
 			</div>
-  		<footer>
-      		<div>
-          		<p>Lugar de Fala</p>
-          		<a href="#">Sobre nós</a>
-          		<a href="#">Página inicial</a>
-      		</div>
-      		<div>
-          		<p>Atendimento</p>
-         		<a href="#">Contato</a>
-          		<a href="#">Termos de uso</a>
-      		</div>
-     		<div>
-         		<p>Redes Sociais</p>
-          		<a href="#">Whatsapp</a>
-          		<a href="#">Instagram</a>
-     		</div>
-      		<div>
-          		<p>Lugar de Fala</p>
-      		</div>
-      		<div>
-          		<p>2023 Todos os direitos reservados</p>
-      		</div>
-  		</footer>
-		</div>
+			</div>
+  	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 	</body>
 </html>

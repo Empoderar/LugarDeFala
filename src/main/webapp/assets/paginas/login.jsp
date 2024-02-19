@@ -49,11 +49,12 @@
 		</div>
 		<div>
 			<div>
-				<form class="right-form-login" action="fazer-login" method="post">
+				<form classs="right-form-login" action="fazer-login" method="post">
 					<label for="email">Email</label> 
 					<input class="input" type="text" id="email" name="email" required> 
 					<label for="senha">Senha</label> 
 					<input class="input" type="password" name="senha" id="senha" required maxlength="20">
+				</form>
 			</div>
 			<div>
 				<a class="right-a1-login" href="atualizar-senha" target="_self">Esqueceu a senha?</a><br>
@@ -61,7 +62,6 @@
 			<div>
 				<button class="button" type="submit">Confirmar</button>
 			</div>
-			</form>
 		</div>
 		<div class="cadastro-login">
 			<p>NÃ£o tem uma conta?</p>
@@ -70,32 +70,13 @@
 		
 	</div>
 		<div class="item4 footer">
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 
-			<div class="footer-column">
-
-				<h3>Lugar de Fala</h3>
-
-				<a href="#">Sobre nÃ³s</a> <a href="home.jsp">PÃ¡gina Inicial</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Atendimento</h3>
-
-				<a href="#">Contato</a> <a href="#">Termos de Uso</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Redes Sociais</h3>
-
-				<a href="#">WhatsApp</a> <a href="#">Instagram</a>
-
-			</div>
-
-		</div>
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 	</div>
 </div>
 </body>

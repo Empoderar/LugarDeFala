@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 <html>
@@ -19,7 +18,7 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-
+	<div>
 		<div>
 			<div>
 				<hr>
@@ -73,28 +72,6 @@
 					</p>
 				</c:forEach>
 			</form>
-		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
 		</div>
 	</div>
 
@@ -163,28 +140,6 @@
 				</c:forEach>
 			</form>
 		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
-		</div>
 	</div>
 	<!-- Comunidade violência psicológica logada-->
 
@@ -249,28 +204,6 @@
 					</p>
 				</c:forEach>
 			</form>
-		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
 		</div>
 	</div>
 
@@ -338,28 +271,6 @@
 				</c:forEach>
 			</form>
 		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
-		</div>
 	</div>
 
 	<!-- Comunidade violência sexual logada -->
@@ -425,28 +336,6 @@
 					</p>
 				</c:forEach>
 			</form>
-		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
 		</div>
 	</div>
 
@@ -516,30 +405,8 @@
 				</c:forEach>
 			</form>
 		</div>
-		<div>
-			<footer>
-				<div>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-				</div>
-				<div>
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-				</div>
-				<div>
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-				</div>
-				<div>
-					<p>Lugar de Fala</p>
-				</div>
-				<div>
-					<p>2023 Todos os direitos reservados</p>
-				</div>
-			</footer>
-		</div>
 	</div>
-	=======
+	
 	<div>
 		<a href="#">Comunidades</a> <a href="#">Violência física</a> <a
 			href="#">Violência psicológica</a> <a href="#">Violência moral</a> <a
@@ -553,8 +420,6 @@
 		</p>
 	</c:forEach>
 	<button onclick="#">Relatar</button>
-	</nav>
-	</div>
 	<c:forEach var="relato" items="${relatos}">
 		<p>
 			RELATOS:
@@ -589,28 +454,12 @@
 			</c:forEach>
 		</form>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
-	</div>
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 </body>
 </html>

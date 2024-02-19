@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,6 +7,13 @@
 <title>Virar Moderador</title>
 </head>
 <body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
 <div>
 	<div>
 		<h1>Virar Moderador</h1>
@@ -15,5 +23,12 @@
 		 <button type="submit">Próximo</button>
 	</div>
 </div>
+	<c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 </body>
 </html>

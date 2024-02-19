@@ -19,6 +19,13 @@
     </script>
 </head>
 <body>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
     <h1>Pesquisar Comunidades</h1>
     
     <form action="resultado-pesquisar-comunidade" method="get" onsubmit="return validarFormulario()">
@@ -39,5 +46,12 @@
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
     </c:if>
+       <c:if test="${usuario == null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../rodape/rodape.jsp"%>
+	</c:if>
 </body>
 </html>
