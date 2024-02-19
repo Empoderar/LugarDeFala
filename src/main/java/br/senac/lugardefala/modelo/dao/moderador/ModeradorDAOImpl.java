@@ -84,7 +84,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 		}
 	}
 
-	public List<Moderador> recuperarPorComunidade(Comunidade comunidade) {
+	public List<Moderador> recuperarModeradoresPorComunidade(Comunidade comunidade) {
 	    List<Moderador> moderadores = null;
 	    Session session = null;
 
@@ -114,7 +114,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 	    return moderadores;
 	}
 
-	public List<Moderador> recuperarPorId(Long id) {
+	public List<Moderador> recuperarModeradoresPorId(Long id) {
 		Session session = null;
 		List<Moderador> moderador = new ArrayList<>();
 
@@ -147,7 +147,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 
 	}
 
-	public Moderador recuperarPorNome(String nome) {
+	public Moderador recuperarModeradorPorNome(String nome) {
 		Session session = null;
 		Moderador moderadoresPeloNome = null;
 		try {
@@ -173,7 +173,7 @@ public class ModeradorDAOImpl implements ModeradorDAO {
 
 	}
 	
-	public Moderador obterPorCredenciais(String email, String senha) {
+	public Moderador obterModeradorPorCredenciais(String email, String senha) {
 		Session session = null;
 		Moderador moderador = null;
 

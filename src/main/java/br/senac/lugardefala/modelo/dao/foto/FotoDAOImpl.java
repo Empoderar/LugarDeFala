@@ -79,7 +79,7 @@ public class FotoDAOImpl {
         }
     }
 
-    public List<Foto> recuperarPorUsuario(Usuario usuario) {
+    public List<Foto> recuperarFotosPorUsuario(Usuario usuario) {
         List<Foto> fotos = null;
         Session session = null;
 

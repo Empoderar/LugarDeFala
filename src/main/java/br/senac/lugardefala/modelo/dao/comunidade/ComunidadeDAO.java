@@ -13,15 +13,15 @@ public interface ComunidadeDAO {
 
     void atualizar(Comunidade comunidade);
 
-    List<Comunidade> recuperarPorIdModerador(Long id);
+    List<Comunidade> recuperarComunidadesPorIdModerador(Long id);
 
-    List<Comunidade> recuperarPorIdUsuario(Long id);
+    List<Comunidade> recuperarComunidadesPorIdUsuario(Long id);
 
-    List<Comunidade> recuperarPorUsuario(Usuario usuario);
+    List<Comunidade> recuperarComunidadesPorUsuario(Usuario usuario);
     
-    List<Comunidade> recuperarPorNome(String nome);
+    List<Comunidade> recuperarComunidadesPorNome(String nome);
     
-    List<Comunidade> recuperarTodas();
+    List<Comunidade> recuperarTodasComunidades();
 
-    Comunidade recuperarPorId(Long id);
+    Comunidade recuperarComunidadePorId(Long id);
 }

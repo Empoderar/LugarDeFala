@@ -10,5 +10,5 @@ public interface ContatoDAO {
     
     void deletar(Contato contato);
 
-    Contato recuperarPorId(Long id);
+    Contato recuperarContatoPorId(Long id);
 }

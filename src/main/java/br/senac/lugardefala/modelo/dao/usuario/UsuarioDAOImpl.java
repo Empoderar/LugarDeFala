@@ -91,7 +91,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public boolean verificarCredenciais(String apelido, String senha) {
+	public boolean verificarCredenciaisUsuario(String apelido, String senha) {
 		Session session = null;
 		Usuario usuario = null;
 
@@ -125,7 +125,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuario != null;
 	}
 
-	public Usuario recuperarPorNome(String nome) {
+	public Usuario recuperarUsuarioPorNome(String nome) {
 		Session session = null;
 		Usuario usuariosPeloNome = null;
 		try {
@@ -150,7 +150,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloNome;
 	}
 
-	public List<Usuario> recuperarPorNomes(String nome) {
+	public List<Usuario> recuperarUsuariosPorNomes(String nome) {
 		Session session = null;
 		List<Usuario> usuariosPelosNomes = null;
 		try {
@@ -175,7 +175,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPelosNomes;
 	}
 
-	public Usuario recuperarPorApelido(String apelido) {
+	public Usuario recuperarUsuarioPorApelido(String apelido) {
 		Session session = null;
 		Usuario usuariosPeloApelido = null;
 		try {
@@ -201,7 +201,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloApelido;
 	}
 
-	public List<Usuario> recuperarTodos() {
+	public List<Usuario> recuperarTodosUsuarios() {
 
 		Session sessao = null;
 		List<Usuario> usuarios = null;
@@ -240,7 +240,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public List<Usuario> recuperarPorComunidade(Comunidade comunidade) {
+	public List<Usuario> recuperarUsuariosPorComunidade(Comunidade comunidade) {
 		List<Usuario> usuariosComunidade = null;
 		Session session = null;
 
@@ -272,7 +272,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosComunidade;
 	}
 
-	public List<Usuario> recuperarPorConselho(Conselho conselho) {
+	public List<Usuario> recuperarUsuariosPorConselho(Conselho conselho) {
 		Session session = null;
 		List<Usuario> usuarios = null;
 
@@ -301,7 +301,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public Usuario recuperarPorIdDenuncia(Long id) {
+	public Usuario recuperarUsuarioPorIdDenuncia(Long id) {
 		Usuario usuario = null;
 		Session session = null;
 
@@ -329,7 +329,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuario;
 	}
 
-	public List<Usuario> recuperarPorRelato(Relato relato) {
+	public List<Usuario> recuperarUsuariosPorRelato(Relato relato) {
 		Session session = null;
 		List<Usuario> usuarios = null;
 
@@ -359,7 +359,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuarios;
 	}
 
-	public Usuario recuperarPorId(Long id) {
+	public Usuario recuperarUsuarioPorId(Long id) {
 		Session session = null;
 		Usuario usuariosPeloId = null;
 		try {
@@ -384,7 +384,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloId;
 	}
 
-	public Usuario recuperarPorIdFetch(Long id) {
+	public Usuario recuperarUsuarioPorIdFetch(Long id) {
 		Session session = null;
 		Usuario usuariosPeloId = null;
 		try {
@@ -411,7 +411,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuariosPeloId;
 	}
 
-	public Usuario obterPorCredenciais(String email, String senha) {
+	public Usuario obterUsuarioPorCredenciais(String email, String senha) {
 		Session session = null;
 		Usuario usuario = null;
 

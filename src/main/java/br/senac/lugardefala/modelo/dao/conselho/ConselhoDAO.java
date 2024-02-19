@@ -14,9 +14,9 @@ public interface ConselhoDAO {
 
     void atualizar(Conselho conselho);
     
-    Conselho recuperarPorId(Long id);
+    Conselho recuperarConselhoPorId(Long id);
 
-    List<Conselho> recuperarPorRelato(Relato relato);
+    List<Conselho> recuperarConselhosPorRelato(Relato relato);
 
-    List<Conselho> recuperarPorUsuario(Usuario usuario);
+    List<Conselho> recuperarConselhosPorUsuario(Usuario usuario);
 }

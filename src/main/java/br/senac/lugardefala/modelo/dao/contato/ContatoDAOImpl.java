@@ -76,7 +76,7 @@ public class ContatoDAOImpl implements ContatoDAO {
 		}
 	}
 
-	public Contato recuperarPorId(Long id) {
+	public Contato recuperarContatoPorId(Long id) {
 	    Contato contato = null;
 	    Session session = null;
 	    try {
