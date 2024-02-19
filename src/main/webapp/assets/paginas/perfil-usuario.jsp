@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Perfil Usuário</title>
 </head>
+<body>
 	<c:if test="${usuario == null}">
 		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
 	</c:if>
@@ -14,7 +15,6 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
 	</c:if>
-<body>
 <div><button onclick="#">Editar perfil</button></div>
 	<div>
 		<form action="inserir-usuario" method="post">

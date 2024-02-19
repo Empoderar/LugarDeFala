@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
@@ -10,17 +9,15 @@
 <title>Conselhos</title>
 <style>
 </style>
-</head>
-
-<c:if test="${usuario == null}">
+</head>	
+<body>
+	<c:if test="${usuario == null}">
 		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-	
-<body>
 	<div>
 		<nav>
 			<div>

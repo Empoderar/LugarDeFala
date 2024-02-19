@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -12,6 +11,7 @@
 		<style>
 		</style>
 	</head>
+	<body>
 	<c:if test="${usuario == null}">
 		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
 	</c:if>
@@ -19,7 +19,6 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-	<body>
 		<div>
 			<div>
 				<div>
