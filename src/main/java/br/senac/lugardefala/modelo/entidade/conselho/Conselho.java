@@ -21,59 +21,58 @@ import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 @Table(name = "conselho")
 public class Conselho implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_conselho")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_conselho")
+	private Long id;
 
-    @Column(name = "conteudo_conselho", length = 200, nullable = false)
-    private String conteudo;
+	@Column(name = "conteudo_conselho", length = 200, nullable = false)
+	private String conteudo;
 
-    @Column(name = "avaliacaoBoa_conselho", nullable = true)
-    private Integer avaliacaoBoa;  
+	@Column(name = "avaliacaoBoa_conselho", nullable = true)
+	private Integer avaliacaoBoa;
 
-    @Column(name = "avaliacaoRuim_conselho", nullable = true)
-    private Integer avaliacaoRuim;  
-    
-    @Column(name = "data_conselho", nullable = false)
-    private LocalDate data;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+	@Column(name = "avaliacaoRuim_conselho", nullable = true)
+	private Integer avaliacaoRuim;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_relato")
-    private Relato relato;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_comunidade")
-    private Comunidade comunidade;
-    
-    public Conselho(){}
-    
+	@Column(name = "data_conselho", nullable = false)
+	private LocalDate data;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_relato")
+	private Relato relato;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_comunidade")
+	private Comunidade comunidade;
+
+	public Conselho() {
+	}
 
 	public Conselho(String conteudo) {
 		this.conteudo = conteudo;
-		
-	
+
 	}
-	
+
 	public Conselho(String conteudo, LocalDate data) {
 		this.conteudo = conteudo;
 		this.data = data;
 	}
 
-	public Conselho(String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
+	public Conselho(String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data) {
 		this.conteudo = conteudo;
 		this.avaliacaoBoa = avaliacaoBoa;
 		this.avaliacaoRuim = avaliacaoRuim;
 		this.data = data;
 	}
-	
-	public Conselho(Long id, String conteudo, int avaliacaoBoa,int avaliacaoRuim, LocalDate data) {
+
+	public Conselho(Long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data) {
 		this.id = id;
 		this.conteudo = conteudo;
 		this.avaliacaoBoa = avaliacaoBoa;
@@ -81,7 +80,8 @@ public class Conselho implements Serializable {
 		this.data = data;
 	}
 
-	public Conselho(long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data, Usuario usuario, Relato relato, Comunidade comunidade) {
+	public Conselho(long id, String conteudo, int avaliacaoBoa, int avaliacaoRuim, LocalDate data, Usuario usuario,
+			Relato relato, Comunidade comunidade) {
 		this.id = id;
 		this.conteudo = conteudo;
 		this.avaliacaoBoa = avaliacaoBoa;
@@ -103,7 +103,7 @@ public class Conselho implements Serializable {
 	public int getAvaliacaoRuim() {
 		return avaliacaoRuim;
 	}
-	
+
 	public String getConteudo() {
 		return conteudo;
 	}
@@ -146,13 +146,13 @@ public class Conselho implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-		
+
 	}
-	
+
 	public Comunidade getComunidade() {
 		return comunidade;
 	}
-	
+
 	public void setComunidade(Comunidade comunidade) {
 		this.comunidade = comunidade;
 	}
