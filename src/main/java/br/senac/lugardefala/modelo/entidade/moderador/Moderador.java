@@ -134,6 +134,5 @@ public class Moderador extends Usuario {
     public boolean removerComunidade(Comunidade comunidade) {
         return comunidades.remove(comunidade);
     }
-  
     
 }
