@@ -78,13 +78,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public void atualizar(Usuario usuario) {
 		try (Session session = getSessionFactory().openSession()) {
 			session.beginTransaction();
-
-			if (usuario.getId() != null && session.get(Usuario.class, usuario.getId()) != null) {
-				session.update(usuario);
-			} else {
-				System.out.println("Erro: Tentativa de atualizar uma entidade não gerenciada ou com ID nulo.");
-			}
-
+			session.update(usuario);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			System.out.println("Erro ao atualizar usuário: " + e.getMessage());
