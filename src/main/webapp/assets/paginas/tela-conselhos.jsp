@@ -11,14 +11,16 @@
 <style>
 </style>
 </head>
+
+<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
+	
 <body>
-	<div>
-		<header>
-			<form action="#">
-				<input type="text" name="pesquisa" id="pesquisa">
-			</form>
-		</header>
-	</div>
 	<div>
 		<nav>
 			<div>

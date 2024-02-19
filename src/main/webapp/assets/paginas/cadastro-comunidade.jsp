@@ -8,6 +8,13 @@
     <style>
     </style>
 </head>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
 <body>
 <div>
     <div>

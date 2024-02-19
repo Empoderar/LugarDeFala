@@ -8,6 +8,13 @@
 <meta charset="UTF-8">
 <title>Perfil Usuário</title>
 </head>
+	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
+	</c:if>
 <body>
 <div><button onclick="#">Editar perfil</button></div>
 	<div>
