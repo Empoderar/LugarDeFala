@@ -83,7 +83,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         }
     }
 
-    public List<Relato> recuperarRelato() {
+    public List<Relato> recuperarTodosRelato() {
         List<Relato> relatos = null;
         Session session = null;
         try {
@@ -110,7 +110,7 @@ public class RelatoDAOImpl implements RelatoDAO {
     }
 
 
-    public List <Relato> recuperarPorUsuario(Usuario usuario) {
+    public List <Relato> recuperarRelatosPorUsuario(Usuario usuario) {
     	List<Relato> relatosUsuario = null;
     	Session session = null;
   	  
@@ -144,7 +144,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosUsuario;
     }
 
-    public List<Relato> recuperarPorStatus(Status status) {   	
+    public List<Relato> recuperarRelatosPorStatus(Status status) {   	
     	List<Relato> relatosStatus = null;
     	Session session = null; 	  
     	try {
@@ -176,7 +176,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosStatus;
     }
 
-    public List <Relato> recuperarPorComunidade(Comunidade comunidade) {
+    public List <Relato> recuperarRelatosPorComunidade(Comunidade comunidade) {
     	
     	List<Relato> relatosComunidade = null;
     	Session session = null;
@@ -211,7 +211,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosComunidade;
     }
 
-    public List<Relato> recuperarPorCategoria(Categoria categoria) {
+    public List<Relato> recuperarRelatosPorCategoria(Categoria categoria) {
         List<Relato> relatosCategoria = null;
         Session session = null;
         try {
@@ -244,7 +244,7 @@ public class RelatoDAOImpl implements RelatoDAO {
         return relatosCategoria;
     }
     
-    public Relato recuperarPorId(Long id) {
+    public Relato recuperarRelatoPorId(Long id) {
     	Relato relatosPorId = null;
     	Session session = null;
     	try {

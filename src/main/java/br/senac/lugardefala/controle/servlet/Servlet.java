@@ -252,6 +252,12 @@ public class Servlet extends HttpServlet {
 				mostrarTelaDeletarModerador(request, response);
 
 				break;
+          
+       case "/deletar-comunidade": // precisa testar
+
+				mostrarTelaDeletarComunidade(request, response);
+
+				break;
 
 			case "/editar-perfil": // funcionando
 
@@ -365,11 +371,12 @@ public class Servlet extends HttpServlet {
 
 			case "/metodo-deletar-moderador": // precisa ser feito
 
-				deletarModerador(request, response);
+				
+          (request, response);
 
 				break;
 
-			case "/deletar-comunidade": // precisa ser feito
+			case "/metodo-deletar-comunidade": // precisa ser feito
 
 				deletarComunidade(request, response);
 
@@ -452,7 +459,7 @@ public class Servlet extends HttpServlet {
 	private void resultadoPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String termoPesquisa = request.getParameter("pesquisar");
-		List<Usuario> usuarios = usuarioDao.recuperarPorNomes(termoPesquisa);
+		List<Usuario> usuarios = usuarioDao.recuperarUsuariosPorNomes(termoPesquisa);
 		request.setAttribute("usuarios", usuarios);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
@@ -461,7 +468,7 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Usuario> usuarios = usuarioDao.recuperarTodos();
+		List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
 		request.setAttribute("usuarios", usuarios);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
@@ -471,7 +478,7 @@ public class Servlet extends HttpServlet {
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String termoPesquisa = request.getParameter("pesquisar");
-		List<Comunidade> comunidades = comunidadeDao.recuperarPorNome(termoPesquisa);
+		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorNome(termoPesquisa);
 		request.setAttribute("comunidades", comunidades);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
@@ -480,7 +487,7 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Comunidade> comunidades = comunidadeDao.recuperarTodas();
+		List<Comunidade> comunidades = comunidadeDao.recuperarTodasComunidades();
 		request.setAttribute("comunidades", comunidades);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
@@ -604,10 +611,10 @@ public class Servlet extends HttpServlet {
 			String descricao = request.getParameter("descricao");
 			usuario.setDescricao(descricao);
 
-			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(usuario);
+			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(usuario);
 			request.setAttribute("comunidades", comunidades);
 
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
@@ -628,10 +635,10 @@ public class Servlet extends HttpServlet {
 			String descricao = request.getParameter("descricao");
 			moderador.setDescricao(descricao);
 
-			List<Comunidade> comunidades = comunidadeDao.recuperarPorUsuario(moderador);
+			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(moderador);
 			request.setAttribute("comunidades", comunidades);
 
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(moderador);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(moderador);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-moderador.jsp");
@@ -648,7 +655,7 @@ public class Servlet extends HttpServlet {
 		Comunidade comunidade = (Comunidade) request.getSession().getAttribute("comunidade");
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		if (comunidade != null && usuario != null) {
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
@@ -710,7 +717,7 @@ public class Servlet extends HttpServlet {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		if (usuario != null) {
-			List<Relato> relatos = relatoDao.recuperarPorUsuario(usuario);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("relatos", relatos);
@@ -886,6 +893,21 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
+  
+  	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		if (usuario == null && moderador == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-comunidade.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 
 	private void mostrarTelaEditarPerfil(HttpServletRequest request, HttpServletResponse response)
 
@@ -964,8 +986,8 @@ public class Servlet extends HttpServlet {
 
 		HttpSession sessao = request.getSession();
 
-		Usuario usuario = usuarioDao.obterPorCredenciais(email, senha);
-		Moderador moderador = moderadorDao.obterPorCredenciais(email, senha);
+		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
+		Moderador moderador = moderadorDao.obterModeradorPorCredenciais(email, senha);
 
 		if (usuario != null) {
 			sessao.setAttribute("usuario", usuario);
@@ -1441,7 +1463,6 @@ public class Servlet extends HttpServlet {
 
 	private void deletarModerador(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		Moderador moderadorLogado = (Moderador) session.getAttribute("moderador");
 
@@ -1465,6 +1486,7 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
 			System.out.println("Não foi possível realizar a exclusão: moderador não está logado");
+
 		}
 	}
 
@@ -1594,13 +1616,13 @@ public class Servlet extends HttpServlet {
 
 		String senha = request.getParameter("senha");
 
-		boolean existe = usuarioDao.verificarCredenciais(apelido, senha);
+		boolean existe = usuarioDao.verificarCredenciaisUsuario(apelido, senha);
 
 		if (!existe)
 
 			response.sendRedirect("confirmar-exclusao");
 
-		Usuario usuario = usuarioDao.recuperarPorApelido(apelido);
+		Usuario usuario = usuarioDao.recuperarUsuarioPorApelido(apelido);
 
 		usuarioDao.deletar(usuario);
 

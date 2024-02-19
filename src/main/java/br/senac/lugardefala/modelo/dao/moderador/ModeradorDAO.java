@@ -13,12 +13,12 @@ public interface ModeradorDAO {
 
 	void atualizar(Moderador moderador);
 
-	Moderador recuperarPorNome(String nome);
+	Moderador recuperarModeradorPorNome(String nome);
 	
-	Moderador obterPorCredenciais(String email, String senha);
+	Moderador obterModeradorPorCredenciais(String email, String senha);
 	
-	List<Moderador> recuperarPorComunidade(Comunidade comunidade);
+	List<Moderador> recuperarModeradoresPorComunidade(Comunidade comunidade);
 
-	List<Moderador> recuperarPorId(Long id);
+	List<Moderador> recuperarModeradoresPorId(Long id);
 
 }

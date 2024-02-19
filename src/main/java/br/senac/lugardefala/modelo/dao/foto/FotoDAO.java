@@ -13,7 +13,7 @@ public interface FotoDAO {
 
     void atualizar(Foto foto);
 
-    List<Foto> recuperarPorUsuario(Usuario usuario);
+    List<Foto> recuperarFotosPorUsuario(Usuario usuario);
 
     Foto recuperarPorId(int id);
 }

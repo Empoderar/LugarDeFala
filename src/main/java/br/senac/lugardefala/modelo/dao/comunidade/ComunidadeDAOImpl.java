@@ -86,7 +86,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 	}
 
-	public List<Comunidade> recuperarPorIdModerador(Long id) {
+	public List<Comunidade> recuperarComunidadesPorIdModerador(Long id) {
 		Session session = null;
 		List<Comunidade> comunidade = null;
 
@@ -116,7 +116,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarPorIdUsuario(Long id) {
+	public List<Comunidade> recuperarComunidadesPorIdUsuario(Long id) {
 		Session session = null;
 		List<Comunidade> comunidade = null;
 
@@ -146,7 +146,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public Comunidade recuperarPorId(Long id) {
+	public Comunidade recuperarComunidadePorId(Long id) {
 		Comunidade comunidade = null;
 		Session session = null;
 		try {
@@ -173,7 +173,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarPorUsuario(Usuario usuario) {
+	public List<Comunidade> recuperarComunidadesPorUsuario(Usuario usuario) {
 		Session session = null;
 		List<Comunidade> comunidade = null;
 		try {
@@ -202,7 +202,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarPorNome(String nome) {
+	public List<Comunidade> recuperarComunidadesPorNome(String nome) {
 		Session session = null;
 		List<Comunidade> comunidade = null;
 		try {
@@ -228,7 +228,7 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		return comunidade;
 	}
 
-	public List<Comunidade> recuperarTodas() {
+	public List<Comunidade> recuperarTodasComunidades() {
 
 		Session sessao = null;
 		List<Comunidade> comunidades = null;
