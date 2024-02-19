@@ -252,8 +252,8 @@ public class Servlet extends HttpServlet {
 				mostrarTelaDeletarModerador(request, response);
 
 				break;
-          
-       case "/deletar-comunidade": // precisa testar
+
+			case "/deletar-comunidade": // precisa testar
 
 				mostrarTelaDeletarComunidade(request, response);
 
@@ -370,9 +370,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/metodo-deletar-moderador": // precisa ser feito
-
-				
-          (request, response);
+				deletarModerador(request, response);
 
 				break;
 
@@ -893,8 +891,8 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
-  
-  	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
+
+	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
