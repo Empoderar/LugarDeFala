@@ -13,8 +13,14 @@
   </head>
   <body>
  
- <%@include file="/assets/barras-navegacao/home-deslogada.jsp"%>
- 
+ 	<c:if test="${usuario == null}">
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+	</c:if>
+
+	<c:if test="${usuario != null}">
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+	</c:if>
+	
     <main class="menu-inicio">
       <img src="img/mulher.svg" alt="" class="imagem-mulher" />
  
