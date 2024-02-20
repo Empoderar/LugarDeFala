@@ -43,9 +43,9 @@
 			</div>
 			<div>
 <%-- 				<c:forEach var="comunidade" items="${comunidades}"> --%>
-<!-- 					USUARIOS: -->
-<!-- 			<!--  	<c:out value="${comunidade.icone}"></c:out>--> -->
-<%-- <%-- 				<c:out value="${comunidade.nome}"></c:out> --%> --%>
+<!-- 				USUARIOS: -->
+<!-- 			  	<c:out value="${comunidade.icone}"></c:out>-->
+<%-- 				<c:out value="${comunidade.nome}"></c:out> --%>
 <%-- 				</c:forEach> --%>
 			</div>
 			<div>
@@ -86,7 +86,7 @@
 		</div>
 		<div>
 			<c:forEach var="comunidade" items="${comunidades}">
-				<c:out value="${comunidade.icone}"></c:out>
+<%-- 				<c:out value="${comunidade.icone}"></c:out> --%>
 				<c:out value="${comunidade.nome}"></c:out>
 			</c:forEach>
 		</div>
@@ -94,10 +94,11 @@
 			<c:forEach var="relato" items="${relatos}">
 				<c:out value="${relato.conteudo}"></c:out>
 				<c:out value="${usuario.nome}"></c:out>
-				<c:out value="${usuario.icone}"></c:out>
+<%-- 			<c:out value="${usuario.icone}"></c:out> --%>
 				<c:out value="${relato.categoria}"></c:out>
-			</c:forEach></div>
-		<%@include file="../rodape/rodape.jsp" %>
+			</c:forEach>
+		</div>
 	</div>
+	<%@include file="../rodape/rodape.jsp" %>
 </body>
 </html>
