@@ -5,118 +5,120 @@
 
 <html lang="pt-br">
 
-  <head>
+<head>
 
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Cadastro</title>
+<title>Cadastro</title>
 
-   <style type="text/css"><%@ include file = "/assets/css/style.css"%></style>
+<style type="text/css">
+<%@
+include
+file="/assets/css/style.css"%>
+</style>
 
-  </head>
- 
- 
-  <body class="cadastro">
+</head>
 
-    <div class="container">
 
-        <div class="form"> 
+<body class="cadastro">
 
-            <form action="inserir-usuario" method="post">
+	<div class="container">
 
-                <div class="form-header">
+		<div class="form">
 
-                    <div class="titulo">F
+			<form action="/inserir-usuario" method="post">
 
-                        <h1>Cadastre-se</h1>
+				<div class="form-header">
 
-                    </div>
+					<div class="titulo">
+						F
 
-                    <div class="input-group-cadastro">
+						<h1>Cadastre-se</h1>
 
-                        <div class="input-box-cadastro">
+					</div>
 
-                            <label for="nome">Nome</label>
+					<div class="input-group-cadastro">
 
-                            <input type="text" name="nome" id="nome" placeholder="Digite o seu primeiro nome" required>
+						<div class="input-box-cadastro">
 
-                        </div>
+							<label for="nome">Nome</label> <input type="text" name="nome"
+								id="nome" placeholder="Digite o seu primeiro nome" required>
 
-                        <div class="input-box-cadastro">
+						</div>
 
-                            <label for="sobrenome">Sobrenome</label>
+						<div class="input-box-cadastro">
 
-                            <input type="text" name="sobrenome" id="sobrenome" placeholder="Digite o seu sobrenome" required>
+							<label for="sobrenome">Sobrenome</label> <input type="text"
+								name="sobrenome" id="sobrenome"
+								placeholder="Digite o seu sobrenome" required>
 
-                        </div>
+						</div>
 
-                        <div class="input-box-cadastro">
+						<div class="input-box-cadastro">
 
-                            <label for="telefone">Telefone</label>
+							<label for="telefone">Telefone</label> <input type="tel"
+								name="telefone" id="telefone" placeholder="(xx) xxxx-xxxx"
+								required>
 
-                            <input type="tel" name="telefone" id="telefone" placeholder="(xx) xxxx-xxxx" required>
+						</div>
 
-                        </div>
+						<div class="input-box-cadastro">
 
-                        <div class="input-box-cadastro">
+							<label for="usuario">Nome de Usuário</label> <input type="text"
+								name="apelido" id="apelido"
+								placeholder="Crie o seu nome de usuário" required>
 
-                            <label for="usuario">Nome de Usuário</label>
+						</div>
 
-                            <input type="text" name="apelido" id="apelido" placeholder="Crie o seu nome de usuário" required>
+						<div class="input-box-cadastro">
 
-                        </div>
+							<label for="email">E-mail</label> <input type="email"
+								name="email" id="email" placeholder="Digite o seu e-mail"
+								required>
 
-                        <div class="input-box-cadastro">
+						</div>
 
-                            <label for="email">E-mail</label>
+						<div class="input-box-cadastro">
 
-                            <input type="email" name="email" id="email" placeholder="Digite o seu e-mail" required>
+							<label for="data">Data de Nascimento</label> <input type="date"
+								name="data-nascimento" id="data-nascimento"
+								placeholder="Digite a sua data de nascimento" required>
 
-                        </div>
+						</div>
 
-                        <div class="input-box-cadastro">
+						<div class="input-box-cadastro">
 
-                            <label for="data">Data de Nascimento</label>
+							<label for="senha">Senha</label> <input type="password"
+								name="senha" id="senha" placeholder="Crie a sua senha" required>
 
-                            <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a sua data de nascimento" required>
+						</div>
 
-                        </div>
+						<div class="input-box-cadastro">
 
-                        <div class="input-box-cadastro">
+							<label for="senha-confirme">Confirme a sua senha</label> <input
+								type="password" name="senha" id="senha"
+								placeholder="Repita a sua senha" required>
 
-                            <label for="senha">Senha</label>
+						</div>
 
-                            <input type="password" name="senha" id="senha" placeholder="Crie a sua senha" required>
+					</div>
 
-                        </div>
+				</div>
 
-                        <div class="input-box-cadastro">
+				<div class="continuar-button">
 
-                            <label for="senha-confirme">Confirme a sua senha</label>
+					<button type="submit">Continuar</button>
 
-                            <input type="password" name="senha" id="senha" placeholder="Repita a sua senha" required>
+				</div>
 
-                        </div>
+			</form>
 
-                    </div>
+		</div>
 
-                </div>
+	</div>
 
-                <div class="continuar-button">
-
-                    <button type="submit">Continuar</button>
-
-                </div>
-
-              </form>
-
-        </div>
-
-    </div>
-
-  </body>
+</body>
 
 </html>
- 

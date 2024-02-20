@@ -24,7 +24,7 @@
            	 		<label for="email">E-mail</label>
             			<input type="email" id="email" name="email" required maxlength="40">
             		<label for="nascimento">Data de Nascimento</label>
-            			<input type="date" id="nascimento" name="data-nascimento">
+            			<input type="date" id="data-nascimento" name="data-nascimento">
             		<label for="senha">Senha</label>
             			<input type="password" id="senha" name="senha" required maxlength="20">
             		<label for="csenha">Confirmar senha</label>
