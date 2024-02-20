@@ -7,94 +7,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comunidades</title>
-<style>
-</style>
-</head>
-<body>
+		<title>Comunidades</title>
+		<style>
+		</style>
+	</head>
+	<body>
 	<c:if test="${usuario == null}">
-		<%@ include file="/assets/barras-navegacao/usuario-deslogado.jsp"%>
+		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
-		<%@ include file="/assets/barras-navegacao/usuario-logado.jsp"%>
+		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
-	<div>
-	<div>
+
 		<div>
-			<hr>
-			<a href="#">Página inicial</a> <a href="#">Popular</a>
+			<div>
+				<hr>
+				<a href="#">Página inicial</a> <a href="#">Popular</a>
+			</div>
+			<div>
+				<a href="#">Comunidades</a> <a href="#">Violência física</a> <a
+					href="#">Violência psicológica</a> <a href="#">Violência moral</a>
+				<a href="#">Violência sexual</a> <a href="#">Violência
+					patrimonial</a>
+			</div>
+			<c:forEach var="comunidade" items="${comunidades}">
+				<p>
+					COMUNIDADES:
+					<c:out value="${comunidade.nome}" />
+				</p>
+			</c:forEach>
+			<button onclick="#">Relatar</button>
 		</div>
-		<div>
-			<a href="#">Comunidades</a> <a href="#">Violência física</a> <a
-				href="#">Violência psicológica</a> <a href="#">Violência moral</a> <a
-				href="#">Violência sexual</a> <a href="#">Violência patrimonial</a>
-		</div>
-		<c:forEach var="comunidade" items="${comunidades}">
+		<c:forEach var="relato" items="${relatos}">
 			<p>
-				COMUNIDADES:
-				<c:out value="${comunidade.nome}" />
+				RELATOS:
+				<c:out value="${usuario.nome}"></c:out>
+				<c:out value="${relato.conteudo}"></c:out>
 			</p>
 		</c:forEach>
-		<button onclick="#">Relatar</button>
-	</div>
-	<c:forEach var="relato" items="${relatos}">
-		<p>
-			RELATOS:
-			<c:out value="${usuario.nome}"></c:out>
-			<c:out value="${relato.conteudo}"></c:out>
-		</p>
-	</c:forEach>
-	<div>
-		<p>
-		<p>NOME:</p>
-		<c:out value="${comunidade.nome}" />
-		<p>DESCRIÇÃO:</p>
-		<c:out value="${comunidade.descricao}" />
-	</div>
-	<div>
-		<form action="perfil-comunidade" method="post">
-			<c:forEach var="moderadores" items="${moderadores}">
-				<p>
-					MODERADORES:
-					<c:out value="${moderadores.nome}" />
-				</p>
-			</c:forEach>
-		</form>
-		<form action="perfil-comunidade" method="post">
-			<c:forEach var="relatos" items="${relatos}">
-				<p>
-					RELATOS:
-					<c:out value="${relatos.conteudo}" />
-					<c:out value="${relatos.data}" />
-					<c:out value="${relatos.avaliacao}" />
-					<c:out value="${relatos.status}" />
-				</p>
-			</c:forEach>
-		</form>
-	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
+		<div>
+			<p>
+			<p>NOME:</p>
+			<c:out value="${comunidade.nome}" />
+			<p>DESCRIÇÃO:</p>
+			<c:out value="${comunidade.descricao}" />
+		</div>
+		<div>
+			<form action="perfil-comunidade" method="post">
+				<c:forEach var="moderadores" items="${moderadores}">
+					<p>
+						MODERADORES:
+						<c:out value="${moderadores.nome}" />
+					</p>
+				</c:forEach>
+			</form>
+			<form action="perfil-comunidade" method="post">
+				<c:forEach var="relatos" items="${relatos}">
+					<p>
+						RELATOS:
+						<c:out value="${relatos.conteudo}" />
+						<c:out value="${relatos.data}" />
+						<c:out value="${relatos.avaliacao}" />
+						<c:out value="${relatos.status}" />
+					</p>
+				</c:forEach>
+			</form>
+		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
+		</div>
 	</div>
 
 	<!-- Comunidade violência física logada-->
@@ -125,21 +126,7 @@
 						<c:out value="${comunidade.nome}" />
 					</p>
 				</c:forEach>
-				<button onclick="myFunction()">Fazer relato</button>
-
-				<div id="/cadastro-relato"></div>
-
-				<script>
-					function myFunction() {
-  					var inserir = document.getElementById("cadastro");
-  					if (inserir.style.display === "none") {
-    					inserir.style.display = "block";
-  					} else {
-   					 inserir.style.display = "none";
-  					}
-				}
-				</script>
-
+				<button onclick="#">Relatar</button>
 			</nav>
 		</div>
 		<c:forEach var="relato" items="${relatos}">
@@ -175,6 +162,28 @@
 					</p>
 				</c:forEach>
 			</form>
+		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
 		</div>
 	</div>
 	<!-- Comunidade violência psicológica logada-->
@@ -240,6 +249,28 @@
 					</p>
 				</c:forEach>
 			</form>
+		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
 		</div>
 	</div>
 
@@ -307,6 +338,28 @@
 				</c:forEach>
 			</form>
 		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
+		</div>
 	</div>
 
 	<!-- Comunidade violência sexual logada -->
@@ -372,6 +425,28 @@
 					</p>
 				</c:forEach>
 			</form>
+		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
 		</div>
 	</div>
 
@@ -441,7 +516,101 @@
 				</c:forEach>
 			</form>
 		</div>
+		<div>
+			<footer>
+				<div>
+					<p>Lugar de Fala</p>
+					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				</div>
+				<div>
+					<p>Atendimento</p>
+					<a href="#">Contato</a> <a href="#">Termos de uso</a>
+				</div>
+				<div>
+					<p>Redes Sociais</p>
+					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+				</div>
+				<div>
+					<p>Lugar de Fala</p>
+				</div>
+				<div>
+					<p>2023 Todos os direitos reservados</p>
+				</div>
+			</footer>
+		</div>
 	</div>
-	<%@include file="../rodape/rodape.jsp" %>
+	=======
+	<div>
+		<a href="#">Comunidades</a> <a href="#">Violência física</a> <a
+			href="#">Violência psicológica</a> <a href="#">Violência moral</a> <a
+			href="#">Violência sexual</a> <a href="#">Violência patrimonial</a>
+		<!--tem que mudar a cor-->
+	</div>
+	<c:forEach var="comunidade" items="${comunidades}">
+		<p>
+			COMUNIDADES:
+			<c:out value="${comunidade.nome}" />
+		</p>
+	</c:forEach>
+	<button onclick="#">Relatar</button>
+	</nav>
+	</div>
+	<c:forEach var="relato" items="${relatos}">
+		<p>
+			RELATOS:
+			<c:out value="${usuario.nome}"></c:out>
+			<c:out value="${relato.conteudo}"></c:out>
+		</p>
+	</c:forEach>
+	<div>
+		<p>NOME:</p>
+		<c:out value="${comunidade.nome}" />
+		<p>DESCRIÇÃO:</p>
+		<c:out value="${comunidade.descricao}" />
+	</div>
+	<div>
+		<form action="perfil-comunidade" method="post">
+			<c:forEach var="moderadores" items="${moderadores}">
+				<p>
+					MODERADORES:
+					<c:out value="${moderadores.nome}" />
+				</p>
+			</c:forEach>
+		</form>
+		<form action="perfil-comunidade" method="post">
+			<c:forEach var="relatos" items="${relatos}">
+				<p>
+					RELATOS:
+					<c:out value="${relatos.conteudo}" />
+					<c:out value="${relatos.data}" />
+					<c:out value="${relatos.avaliacao}" />
+					<c:out value="${relatos.status}" />
+				</p>
+			</c:forEach>
+		</form>
+	</div>
+	<div>
+		<footer>
+			<div>
+				<p>Lugar de Fala</p>
+				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+			</div>
+			<div>
+				<p>Atendimento</p>
+				<a href="#">Contato</a> <a href="#">Termos de uso</a>
+			</div>
+			<div>
+				<p>Redes Sociais</p>
+				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
+			</div>
+			<div>
+				<p>Lugar de Fala</p>
+			</div>
+			<div>
+				<p>2023 Todos os direitos reservados</p>
+			</div>
+		</footer>
+	</div>
+	</div>
 </body>
 </html>

@@ -5,20 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Pesquisar Comunidades</title>
-    
-    <script>
-        function validarFormulario() {
-            var pesquisa = document.getElementById("pesquisar").value;
-            if (pesquisa.trim() === "") {
-                alert("Digite algo para pesquisar.");
-                return false;
-            }
-            return true;
-        }
-    </script>
 </head>
 <body>
-	<%@ include file="/assets/barras-navegacao/usuario-logado.jsp"%>
     <h1>Pesquisar Comunidades</h1>
     <form action="resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
@@ -38,6 +26,5 @@
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
     </c:if>
-    <%@include file="../rodape/rodape.jsp" %>
 </body>
 </html>
