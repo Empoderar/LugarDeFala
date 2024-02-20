@@ -36,10 +36,6 @@ public class Moderador extends Usuario {
     @OneToMany(mappedBy = "moderador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DenunciaModerador> denunciaDeModerador;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_moderador")
-    private Contato contato;
-    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "comunidade_moderador",joinColumns = @JoinColumn(name = "id_moderador"),
             inverseJoinColumns = @JoinColumn(name = "id_comunidade")
@@ -138,14 +134,6 @@ public class Moderador extends Usuario {
 
     public boolean removerComunidade(Comunidade comunidade) {
         return comunidades.remove(comunidade);
-    }
-    
-    public Contato getContato() {
-        return contato;
-    }
-
-    public void setContato(Contato contato) {
-        this.contato = contato;
     }
     
 }
