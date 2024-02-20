@@ -252,8 +252,8 @@ public class Servlet extends HttpServlet {
 				mostrarTelaDeletarModerador(request, response);
 
 				break;
-          
-       case "/deletar-comunidade": // precisa testar
+
+			case "/deletar-comunidade": // precisa testar
 
 				mostrarTelaDeletarComunidade(request, response);
 
@@ -494,11 +494,12 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
+
 		HttpSession sessao = request.getSession();
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+
 		if (usuario != null && moderador != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
@@ -506,6 +507,7 @@ public class Servlet extends HttpServlet {
 		if (moderador == null && usuario != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
 			dispatcher.forward(request, response);
+
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
 
@@ -892,8 +894,8 @@ public class Servlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
-  
-  	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
+
+	private void mostrarTelaDeletarComunidade(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
@@ -985,20 +987,27 @@ public class Servlet extends HttpServlet {
 
 		HttpSession sessao = request.getSession();
 
-		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
-		Moderador moderador = moderadorDao.obterModeradorPorCredenciais(email, senha);
+		if (!usuarioDao.verificarCredenciaisUsuario(email, senha)) {
 
-		if (usuario != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
+			dispatcher.forward(request, response);
+		}
+
+		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
+
+		if (usuario instanceof Moderador) {
+
+			sessao.setAttribute("moderador", usuario);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			dispatcher.forward(request, response);
+
+		} else {
+
 			sessao.setAttribute("usuario", usuario);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
-		} else if (moderador != null) {
-			sessao.setAttribute("moderador", moderador);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			response.sendRedirect("./assets/paginas/home.jsp");
 		}
+
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -1006,31 +1015,21 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
-
 		String sobrenome = request.getParameter("sobrenome");
-
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
-
 		String apelido = request.getParameter("apelido");
-
 		String senha = request.getParameter("senha");
-
 		String telefone = request.getParameter("telefone");
-
 		String email = request.getParameter("email");
 
 		Usuario usuarioParaInserir = new Usuario(nome, sobrenome, dataNascimento, apelido, senha);
-
 		Contato contatoParaInserir = new Contato(telefone, email);
-
 		usuarioParaInserir.setContato(contatoParaInserir);
 
 		contatoDao.inserir(contatoParaInserir);
-
 		usuarioDao.inserir(usuarioParaInserir);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
-
 		dispatcher.forward(request, response);
 
 	}

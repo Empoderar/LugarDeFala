@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC   "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/LugarDeFala?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC&amp;useLegacyDatetimeCode=false</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+		
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.conselho.Conselho.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.comunidade.Comunidade.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.denuncia.Denuncia.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.denuncia.DenunciaModerador.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.denuncia.DenunciaRelato.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.denuncia.DenunciaConselho.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.moderador.Moderador.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.relato.Relato.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.status.Status.class" />
+		<mapping
+			class="br.senac.lugardefala.modelo.entidade.usuario.Usuario.class" />
+
+	</session-factory>
+</hibernate-configuration>

@@ -15,7 +15,7 @@ public interface UsuarioDAO {
 
     void atualizar(Usuario usuario);
 
-    boolean verificarCredenciaisUsuario(String apelido, String senha);
+    boolean verificarCredenciaisUsuario(String email, String senha);
 
     Usuario recuperarUsuarioPorNome(String nome);
     

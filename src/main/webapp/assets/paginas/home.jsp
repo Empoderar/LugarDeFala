@@ -1,135 +1,219 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Home</title>
-		<style>
-		</style>
-	</head>
-	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-	</c:if>
-
-	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
-	</c:if>
-
-	<body>
-		<div>
-			<div>
-				<h1>Lugar de fala</h1>
-				<h3>JUNTE-SE A N√ìS COMO VOLUNT√ÅRIA NESTA REDE DE APOIO PR√ì-MULHER!</h3>
-				<p>Somos uma rede de apoio dedicada a oferecer assist√™ncia para
-				mulheres cisg√™neras, transg√™neras e travestis que foram v√≠timas de
-				viol√™ncia. Nosso compromisso √© criar um espa√ßo seguro onde essas
-				mulheres possam encontrar conforto</p>
-			</div>
-			<div>
-				<a href="cadastro-relato">Fa√ßa seu relato</a>
-			</div>
-			<div>
-				<a href="perfil-comunidade">Comunidades</a>
-			</div>
-			<div>
-				<a href="#">Seja Voluntario</a>
-			</div>
-			<div>
-				<a href="#">Sobre N√≥s</a>
-			</div>
-			<div>
-<%-- 				<c:forEach var="comunidade" items="${comunidades}"> --%>
-<!-- 					USUARIOS: -->
-<!-- 			<!--  	<c:out value="${comunidade.icone}"></c:out>--> -->
-<%-- <%-- 				<c:out value="${comunidade.nome}"></c:out> --%> --%>
-<%-- 				</c:forEach> --%>
-			</div>
-			<div>
-				<h1>VENHA FAZER PARTE</h1>
-				<p>Durante a pandemia, 8 mulheres apanharam por minuto no Brasil.
-					A viol√™ncia psicol√≥gica, que n√£o deixa marcas f√≠sicas, feriu tamb√©m
-					a dignidade de muitas. Mostre seu apoio √† outras mulheres fazendo
-					seu relato, pois n√µo estamos sozinhas nessa luta!</p>
-			</div>
-			<div>
-				<div>
-					<p>Como me tornar um volunt√°rio?</p>
-					<p>Para se tornar um volunt√°rio √© necess√°rio fazer o cadastro de
-						volunt√°rio, que apresenta um PDF com as informa√ß√µes que um
-						volunt√°rio deve saber e um breve teste sobre os conhecimentos
-						adquiridos.</p>
-				</div>
-				<div>
-					<p>Como fazer um relato?</p>
-					<p>Para fazer seu relato √© necess√°rio criar uma conta, fazer
-						login no site e escolher uma comunidade, ent√£o clicar no bot√£o
-						relatar e se abrir com pessoas que passam ou j√° passaram pelo
-						mesmo.</p>
-				</div>
-				<div>
-					<p>O que s√£o as comunidades?</p>
-					<p>As comunidades s√£o grandes grupos, cada comunidade representa
-						um tipo de viol√™ncia onde voc√™ pode buscar acolhimento.</p>
-				</div>
-				<div>
-					<p>O que √© um volunt√°rio?</p>
-					<p>Volunt√°rios s√£o usu√°rios comuns que moderam as comunidades e
-						gerenciam poss√≠veis problemas.</p>
-				</div>
-			</div>
-			<div>
-				<footer>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre n√≥s</a> <a href="#">P√°gina inicial</a>
-
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-					<p>Lugar de Fala</p>
-
-					<p>2023 Todos os direitos reservados</p>
-				</footer>
-			</div>
-		</div>
-	<div>
-
-		<div>
-			<h1>Comunidades em destaque</h1>
-		</div>
-		<div>
-			<c:forEach var="comunidade" items="${comunidades}">
-				<c:out value="${comunidade.icone}"></c:out>
-				<c:out value="${comunidade.nome}"></c:out>
-			</c:forEach>
-		</div>
-		<div>
-			<c:forEach var="relato" items="${relatos}">
-				<c:out value="${relato.conteudo}"></c:out>
-				<c:out value="${usuario.nome}"></c:out>
-				<c:out value="${usuario.icone}"></c:out>
-				<c:out value="${relato.categoria}"></c:out>
-			</c:forEach></div>
-		<div>
-			<footer>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre n√≥s</a> <a href="#">P√°gina inicial</a>
-
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-				<p>Lugar de Fala</p>
-
-				<p>2023 Todos os direitos reservados</p>
-			</footer>
-		</div>
-	</div>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <img src="img/logo.svg" alt="" class="logo-lugar" />
+ 
+      <div class="menu-escolhas">
+        <a href="/cadastro-relato.jsp">FA«A UM RELATO</a>
+        <a href="/cadastro-usuario.jsp">CADASTRE-SE</a>
+        <a href="/perfil-comunidade.jsp">COMUNIDADES</a>
+        <a href="/LugarDeFala/fazer-login">ENTRAR</a>
+      </div>
+    </header>
+ 
+    <main class="menu-inicio">
+      <img src="img/mulher.svg" alt="" class="imagem-mulher" />
+ 
+      <div class="conteudo-home-principal">
+        <h1 class="titulo-fala">LUGAR DE FALA</h1>
+ 
+        <h2 class="subtitulo">
+          Junte-se a nÛs como volunt·ria nesta rede de apoio prÛ-mulher!
+        </h2>
+ 
+        <p class="texto-home">
+          Somos uma rede de apoio dedicada a oferecer assistÍncia para mulheres
+          cisgÍneras, transgÍneras e travestis que foram vÌtimas de violÍncia.
+          Nosso compromisso È criar um espaÁo seguro onde essas mulheres possam
+          encontrar conforto
+        </p>
+ 
+        <div class="conteudo-home">
+          <div class="botao-conteudo">
+            <button class="botao-home">FaÁa seu relato</button>
+            <button class="botao-home">Comunidades</button>
+          </div>
+          <div class="botao-conteudo">
+            <button class="botao-home">Seja Volunt·rio</button>
+            <button class="botao-home">Sobre NÛs</button>
+          </div>
+        </div>
+      </div>
+    </main>
+ 
+    <section class="conteudos-cartoes">
+      <div class="cartao-1">
+        <div>
+          <img
+            src="img/cartoes/027e0b5b-326c-4829-bb4e-57909479e858 1.svg"
+            alt=""
+            class="imagem-cartao-1"
+          />
+        </div>
+ 
+        <p class="texto-cartao-1">ViolÍncia</p>
+        <p class="texto-cartao-1">FÌsica</p>
+      </div>
+ 
+      <div class="cartao-1">
+        <div>
+          <img
+            src="img/cartoes/Untitled Project 1.svg"
+            alt=""
+            class="imagem-cartao-2"
+          />
+        </div>
+ 
+        <p class="texto-cartao-1">ViolÍncia</p>
+        <p class="texto-cartao-1">PsicolÛgica</p>
+      </div>
+ 
+      <div class="cartao-1">
+        <div>
+          <img
+            src="img/cartoes/Mulher jovem com uma folha de papel vÌtima de bullying e m„os atacando _ Vetor Premium 1.svg"
+            alt=""
+            class="imagem-cartao-3"
+          />
+        </div>
+ 
+        <p class="texto-cartao-1">ViolÍncia</p>
+        <p class="texto-cartao-1">Moral</p>
+      </div>
+ 
+      <div class="cartao-1">
+        <div>
+          <img
+            src="img/cartoes/Untitled Project (2) 1.svg"
+            alt=""
+            class="imagem-cartao-4"
+          />
+        </div>
+ 
+        <p class="texto-cartao-1">ViolÍncia</p>
+        <p class="texto-cartao-1">Sexual</p>
+      </div>
+ 
+      <div class="cartao-1">
+        <div>
+          <img
+            src="img/cartoes/Horoskop_ Warum du das Sternzeichen Fische im Leben brauchst 1.svg"
+            alt=""
+            class="imagem-cartao-5"
+          />
+        </div>
+ 
+        <p class="texto-cartao-1">ViolÍncia</p>
+        <p class="texto-cartao-1">Patrimonial</p>
+      </div>
+    </section>
+ 
+    <section class="conteudo-parte">
+      <div>
+        <h1 class="titulo-parte">VENHA FAZER PARTE</h1>
+        <p class="texto-parte">Durante a pandemia, 8 mulheres apanharam por minuto no Brasil. A violÍncia psicolÛgica, que n„o deixa marcas fÌsicas, feriu tambÈm a dignidade de muitas.
+          Mostre seu apoio ‡ outras mulheres fazendo seu relato, pois nıo estamos sozinhas nessa luta!</p>
+      </div>
+    </section>
+    <section class="conteudo-duvidas">
+      <div class="fundo-duvidas">
+        <div class="container-duvidas">
+          <div>
+            <h1 class="titulo-duvida">Como me tornar um volunt·rio? <i class="fa-solid fa-magnifying-glass"></i></h1>
+            <p class="texto-duvida-1">Para se tornar um volunt·rio È necess·rio fazer o cadastro de volunt·rio, que apresenta um PDF com as informaÁıes que um volunt·rio deve saber e um breve teste sobre os conhecimentos adquiridos.</p>
+          </div>
+ 
+          <div>
+            <h1 class="titulo-duvida">Como fazer um relato? <i class="fa-solid fa-magnifying-glass"></i></h1>
+            <p class="texto-duvida">Para  fazer seu relato È necess·rio criar uma conta, fazer login no site e escolher uma comunidade, ent„o clicar no bot„o reletar e se abrir com pessoas que passam ou j· passaram pelo mesmo.</p>
+          </div>
+        </div>
+ 
+        <div class="container-duvidas-2">          
+          <div>
+            <h1 class="titulo-duvida">O que È um volunt·rio? <i class="fa-solid fa-magnifying-glass"></i></h1>
+            <p class="texto-duvida">Volunt·rios s„o usu·rios comuns que moderam as comunidades e gerenciam possiveis problemas.</p>
+          </div>
+ 
+          <div>
+            <h1 class="titulo-duvida">O que s„o as comunidades? <i class="fa-solid fa-magnifying-glass"></i></h1>
+            <p class="texto-duvida">As comunidades s„o grandes grupos, cada comunidade representa um tipo de violÍncia onde vocÍ pode buscar acolhimento</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <footer>
+      <div id="footer_conteudo">
+          <div id="footer_contatos">
+              <h3>Lugar de Fala</h3>
+              <p>Rede de apoio prÛ-mulher.</p>
+ 
+              <div id="footer_rede_social">
+                  <a href="#" class="footer-link" id="instagram">
+                      <i class="fa-brands fa-instagram"></i>
+ 
+                      <a href="#" class="footer-link" id="linkedin">
+                          <i class="fa-brands fa-linkedin"></i>
+                      </a>
+ 
+                      <a href="#" class="footer-link" id="github">
+                          <i class="fa-brands fa-github"></i>
+                      </a>
+                  </a>
+              </div>
+          </div>
+          <ul class="footer-lista">
+              <li>
+                  <h3>Lugar de Fala</h3>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">Sobre NÛs</a>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">P·gina inicial</a>
+              </li>
+          </ul>
+ 
+          <ul class="footer-lista">
+              <li>
+                  <h3>Atendimento</h3>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">Contato</a>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">Termos de uso</a>
+              </li>
+          </ul>
+ 
+          <ul class="footer-lista">
+              <li>
+                  <h3>Redes Sociais</h3>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">Whatsapp</a>
+              </li>
+              <li>
+                  <a href="#" class="footer-link">Instagram</a>
+              </li>
+          </ul>
+         
+      </div>
+      <div id="footer-copyright">
+         <h4>2024 todos os direitos reservados.</h4> 
+      </div>
+  </footer>
+   
+ 
+  </body>
+</html>
