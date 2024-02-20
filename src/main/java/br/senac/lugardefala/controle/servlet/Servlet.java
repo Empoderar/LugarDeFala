@@ -1039,31 +1039,21 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
-
 		String sobrenome = request.getParameter("sobrenome");
-
 		LocalDate dataNascimento = LocalDate.parse(request.getParameter("data-nascimento"));
-
 		String apelido = request.getParameter("apelido");
-
 		String senha = request.getParameter("senha");
-
 		String telefone = request.getParameter("telefone");
-
 		String email = request.getParameter("email");
 
 		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
-
 		Contato contatoParaInserir = new Contato(telefone, email);
-
-		contatoDao.inserir(contatoParaInserir);
-
-		moderadorDao.inserir(moderadorParaInserir);
-
 		moderadorParaInserir.setContato(contatoParaInserir);
-
+				
+		contatoDao.inserir(contatoParaInserir);
+		moderadorDao.inserir(moderadorParaInserir);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
-
 		dispatcher.forward(request, response);
 
 	}

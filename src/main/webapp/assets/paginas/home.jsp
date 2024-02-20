@@ -12,7 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
- 
+    <header class="cabecalho">
+      <img src="img/logo.svg" alt="" class="logo-lugar" />
+      <div class="menu-escolhas">
+        <a href="/LugarDeFala/cadastro-relato">FA�A UM RELATO</a>
+        <a href="/LugarDeFala/cadastro-usuario">CADASTRE-SE</a>
+        <a href="/LugarDeFala/perfil-comunidade">COMUNIDADES</a>
+        <a href="/LugarDeFala/login">ENTRAR</a>
+      </div>
+    </header>
  	<c:if test="${usuario == null}">
 		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
 	</c:if>

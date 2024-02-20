@@ -29,11 +29,11 @@
                     <form action="/LugarDeFala/fazer-login" method="post">
                         <h1>Login</h1>
                         <div class="input-box">
-                            <input type="text" placeholder="Usuário" required>
+                            <input type="text" placeholder="Usuário" name="email" required>
                             <i class="fa-solid fa-user"></i>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Senha" required>
+                            <input type="password" placeholder="Senha" name="senha" required>
                             <i class="fa-solid fa-lock"></i>
                         </div>
                         <div class="lembrar-esqueceu">
