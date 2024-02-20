@@ -13,10 +13,10 @@
       <img src="img/logo.svg" alt="" class="logo-lugar" />
  
       <div class="menu-escolhas">
-        <a href="/cadastro-relato.jsp">FAÇA UM RELATO</a>
-        <a href="/cadastro-usuario.jsp">CADASTRE-SE</a>
-        <a href="/perfil-comunidade.jsp">COMUNIDADES</a>
-        <a href="/LugarDeFala/fazer-login">ENTRAR</a>
+        <a href="/LugarDeFala/cadastro-relato">FAÇA UM RELATO</a>
+        <a href="/LugarDeFala/cadastro-usuario">CADASTRE-SE</a>
+        <a href="/LugarDeFala/perfil-comunidade">COMUNIDADES</a>
+        <a href="/LugarDeFala/login">ENTRAR</a>
       </div>
     </header>
  

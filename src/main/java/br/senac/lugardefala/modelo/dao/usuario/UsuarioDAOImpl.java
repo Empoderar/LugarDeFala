@@ -115,7 +115,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 
-		return usuario != null;
+		return usuario == null;
 	}
 
 	public Usuario recuperarUsuarioPorNome(String nome) {
