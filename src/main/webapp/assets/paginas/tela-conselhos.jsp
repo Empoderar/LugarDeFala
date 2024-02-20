@@ -12,11 +12,11 @@
 </head>	
 <body>
 	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+		<%@ include file="../barras-navegacao/deslogada.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+		<%@ include file="../barras-navegacao/logada.jsp"%>
 	</c:if>
 	<div>
 		<nav>
@@ -54,28 +54,6 @@
 			</p>
 		</c:forEach>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nos</a> <a href="#">Pagina inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
+		<%@include file="../rodape/rodape.jsp" %>
 </body>
-
 </html>

@@ -118,7 +118,7 @@ file="/assets/css/style.css"%>
 		</div>
 
 	</div>
-
+	<%@include file="../rodape/rodape.jsp" %>
 </body>
 
 </html>

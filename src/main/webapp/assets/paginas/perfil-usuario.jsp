@@ -15,7 +15,9 @@
 	<c:if test="${usuario != null}">
 		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
 	</c:if>
-<div><button onclick="#">Editar perfil</button></div>
+	<div>
+<div>
+<button onclick="#">Editar perfil</button></div>
 	<div>
 		<form action="inserir-usuario" method="post">
 				<p>Nome:</p>
@@ -36,28 +38,7 @@
 				</c:forEach>
 		</form>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				S <a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
+	<%@include file="../rodape/rodape.jsp" %>
 	</div>
-	
 </body>
 </html>

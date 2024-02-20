@@ -7,6 +7,7 @@
     <title>Pesquisar Comunidades</title>
 </head>
 <body>
+	<%@ include file="../barras-navegacao/logada.jsp"%>
     <h1>Pesquisar Comunidades</h1>
     <form action="resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
@@ -26,5 +27,6 @@
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
     </c:if>
+    <%@include file="../rodape/rodape.jsp" %>
 </body>
 </html>

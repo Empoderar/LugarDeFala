@@ -12,11 +12,11 @@
 		</style>
 	</head>
 	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+		<%@ include file="../barras-navegacao/deslogada.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
+		<%@ include file="../barras-navegacao/logada.jsp"%>
 	</c:if>
 
 	<body>
@@ -81,25 +81,6 @@
 						gerenciam possíveis problemas.</p>
 				</div>
 			</div>
-			<div>
-				<footer>
-					<p>Lugar de Fala</p>
-					<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-
-					<p>Atendimento</p>
-					<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-					<p>Redes Sociais</p>
-					<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-					<p>Lugar de Fala</p>
-
-					<p>2023 Todos os direitos reservados</p>
-				</footer>
-			</div>
-		</div>
-	<div>
-
 		<div>
 			<h1>Comunidades em destaque</h1>
 		</div>
@@ -116,20 +97,7 @@
 				<c:out value="${usuario.icone}"></c:out>
 				<c:out value="${relato.categoria}"></c:out>
 			</c:forEach></div>
-		<div>
-			<footer>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-
-				<p>Lugar de Fala</p>
-
-				<p>2023 Todos os direitos reservados</p>
-			</footer>
-		</div>
+		<%@include file="../rodape/rodape.jsp" %>
 	</div>
+</body>
+</html>

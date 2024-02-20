@@ -19,6 +19,7 @@
     </script>
 </head>
 <body>
+	<%@ include file="../barras-navegacao/logada.jsp"%>
     <h1>Pesquisar Usuarios</h1>
     
     <form action="resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">
@@ -39,5 +40,6 @@
     <c:if test="${empty usuarios}">
         <p>Nenhuma usuario encontrada.</p>
     </c:if>
+    	<%@include file="../rodape/rodape.jsp" %>
 </body>
 </html>
