@@ -13,7 +13,11 @@
 
 <title>Cadastro</title>
 
-<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
+<style type="text/css">
+<%@
+include
+file="/assets/css/style.css"%>
+</style>
 
 </head>
 
@@ -24,11 +28,12 @@
 
 		<div class="form">
 
-			<form action="/LugarDeFala/inserir-usuario" method="post">
+			<form action="/inserir-usuario" method="post">
 
 				<div class="form-header">
 
 					<div class="titulo">
+						F
 
 						<h1>Cadastre-se</h1>
 

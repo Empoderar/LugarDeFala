@@ -1,23 +1,13 @@
 package br.senac.lugardefala.modelo.entidade.contato;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Table(name = "contato")
@@ -35,35 +25,20 @@ public class Contato implements Serializable {
 
     @Column(name = "email_contato", length = 40, nullable = true, unique = true)
     private String email;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_id_usuario", referencedColumnName = "id_usuario")
-    private Usuario usuario;
     
-    @ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "usuario", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_moderador"))
-    private List<Usuario> usuarios;
-    public Contato() {
-    }
+    public Contato() { }
 
     public Contato(String telefone, String email) {
         this.telefone = telefone;
         this.email = email;
     }
 
-    public Contato(long id, String telefone, String email,Usuario usuario) {
+    public Contato(long id, String telefone, String email) {
         this.id = id;
         this.telefone = telefone;
         this.email = email;
-        this.usuario = usuario;
-        usuarios = new ArrayList<>();
     }
     
-    public Contato(String telefone, String email, Usuario usuario) {
-        this.telefone = telefone;
-        this.email = email;
-    }
-
     public Long getId() {
         return id;
     }
@@ -86,22 +61,5 @@ public class Contato implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public Usuario getUsuario() {
-	    return usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-	    this.usuario = usuario;
-    }
-    
+    }   
 }
