@@ -6,7 +6,7 @@
    		<title>Denunciar</title>
 	</head>
 	<body>
-		<%@include file="../barras-navegacao/logada.jsp" %>
+		<%@include file="/assets/barras-navegacao/usuario-logado.jsp" %>
     	<div>
     		<form action="retirar-denuncia-relato" method="post">
 				<c:forEach var="denuncia-relato" items="${denuncias-relatos}">

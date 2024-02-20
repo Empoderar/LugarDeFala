@@ -12,11 +12,11 @@
 		</style>
 	</head>
 	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/deslogada.jsp"%>
+		<%@ include file="/assets/barras-navegacao/usuario-deslogado.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/logada.jsp"%>
+		<%@ include file="/assets/barras-navegacao/usuario-logado.jsp"%>
 	</c:if>
 
 	<body>
@@ -99,6 +99,6 @@
 			</c:forEach>
 		</div>
 	</div>
-	<%@include file="../rodape/rodape.jsp" %>
+	<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>

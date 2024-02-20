@@ -7,7 +7,7 @@
     <title>Pesquisar Comunidades</title>
 </head>
 <body>
-	<%@ include file="../barras-navegacao/logada.jsp"%>
+	<%@ include file="/assets/barras-navegacao/usuario-logado.jsp"%>
     <h1>Pesquisar Comunidades</h1>
     <form action="resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">

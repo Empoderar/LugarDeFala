@@ -6,7 +6,7 @@
    		<title>Denunciar</title>
 	</head>
 	<body>
-		<%@include file="../barras-navegacao/logada.jsp" %>
+		<%@include file="/assets/barras-navegacao/usuario-logado.jsp" %>
     	<div>
         	<h1>Denúncias de relatos</h1>
         	<a href="#">Filtrar denúncias</a>

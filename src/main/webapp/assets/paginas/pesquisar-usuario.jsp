@@ -19,7 +19,7 @@
     </script>
 </head>
 <body>
-	<%@ include file="../barras-navegacao/logada.jsp"%>
+	<%@ include file="/assets/barras-navegacao/usuario-deslogado.jsp"%>
     <h1>Pesquisar Usuarios</h1>
     
     <form action="resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">

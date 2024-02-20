@@ -13,11 +13,11 @@
 	</head>
 	<body>
 	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/deslogada.jsp"%>
+		<%@ include file="/assets/barras-navegacao/usuario-deslogado.jsp"%>
 	</c:if>
 
 	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/logada.jsp"%>
+		<%@ include file="/assets/barras-navegacao/usuario-logado.jsp"%>
 	</c:if>
 	<div>
 		<div>
