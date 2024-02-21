@@ -44,8 +44,8 @@
  
         <div class="conteudo-home">
             <div class="botao-conteudo">
-                 <a href="/LugarDeFala/cadastro-usuario" class="botao-home"> Faça seu cadastro</a>
-                <a href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</a>
+                 <button href="/LugarDeFala/cadastro-usuario" class="botao-home"> Faça seu cadastro</button>
+                <button href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</button>
             </div>
             <div class="botao-conteudo">
                 <button class="botao-home">Seja Voluntário</button>
