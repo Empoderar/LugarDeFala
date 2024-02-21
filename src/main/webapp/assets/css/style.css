@@ -492,54 +492,65 @@ footer {
 
 /* -------------------------------- Cadastro ----------------------------------------------------*/
 
-.cadastro {
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: var(--cor-fundo);
+.body-cadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('img/tela-cadastro.svg') center;
 }
-
+ 
 .moldura-cadastro {
-	width: 100vw;
-	color: var(--cor-letra-1);
-	height: 80vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: -10rem;
+  width: 800px;
+  color: var(--cor-letra-1);
+  border-radius: 4px;
+  padding: 30px 40px;
 }
-
-.form-header h1 {
-	color: var(--cor-constraste);
-	font-weight: 500;
-	width: 100vw;
-	margin-top: 10rem;
+ 
+.moldura-cadastro h1 {
+  font-size: 50px;
+  text-align: center;
+  color: var(--cor-constraste);
 }
-
-.input-group-cadastro {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	padding: 1rem;
+ 
+.moldura-cadastro .input-box-c {
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
 }
-
-.input-box-cadastro {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 1.1rem;
+ 
+.input-box-c input {
+  width: 100%;
+  height: 90%;
+  background: var(--cor-detalhe);
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 4px;
 }
-
-.input-box-cadastro input {
-	margin: 0.6rem 0;
-	padding: 0.8rem 1.2 rem;
-	border: none;
-	background-color: var(--cor-detalhe);
-	border-radius: 4px;
-	box-shadow: 1px 1px 6px #0000001c;
+ 
+.input-box-c input::placeholder {
+  color: var(--cor-letra-1);
+  padding: 10px;
 }
-
-.input-box-cadastro input:hover {
-	background-color: var(--cor-letra-2);
+ 
+.moldura-cadastro .button {
+  width: 38%;
+  height: 30px;
+  background: var(--cor-primária);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: var(--cor-letra-2);
+  font-weight: 400;
+  margin-left: 13.5rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  font-size: 16px;
+}
+ 
+.moldura-cadastro .cadastrar-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 11px;
 }

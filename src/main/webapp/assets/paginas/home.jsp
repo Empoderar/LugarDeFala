@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -12,12 +13,7 @@
     <header class="cabecalho">
     <img src="img/logo.svg" alt="" class="logo-lugar" />
     <div class="menu-escolhas">
-		<c:if test="${usuario == null}">
-    		<%@ include file="/assets/barras-navegacao/deslogado-usuario.jsp"%>
-		</c:if>
-		<c:if test="${usuario != null}">
-   			 <%@ include file="../barras-navegacao/logada-usuario.jsp"%>
-		</c:if>
+    	<%@ include file="/assets/barras-navegacao/deslogado-usuario.jsp"%>
     </div>
 </header>
     <main class="menu-inicio">
@@ -107,8 +103,7 @@
           <img
             src="img/cartoes/Horoskop_ Warum du das Sternzeichen Fische im Leben brauchst 1.svg"
             alt=""
-            class="imagem-cartao-5"
-          />
+            class="imagem-cartao-5"/>
         </div>
  
         <p class="texto-cartao-1">Violência</p>
