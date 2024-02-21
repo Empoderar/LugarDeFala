@@ -39,5 +39,6 @@
     <c:if test="${empty usuarios}">
         <p>Nenhuma usuario encontrado.</p>
     </c:if>
+    <%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
 </html>

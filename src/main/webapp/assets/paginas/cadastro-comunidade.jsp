@@ -9,13 +9,7 @@
 <style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
-<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-	</c:if>
-
-	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
-	</c:if>
+<%@ include file="/assets/barras-navegacao/logada.jsp"%>
 <div  class="grid-container-cadastro">
 	<div class="item1 header">
 	<header class="header">
@@ -48,34 +42,6 @@
             </div>
         </form>
     </div>
-<div class="item4 footer">
-
-			<div class="footer-column">
-
-				<h3>Lugar de Fala</h3>
-
-				<a href="#">Sobre nós</a> <a href="home.jsp">Página Inicial</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Atendimento</h3>
-
-				<a href="#">Contato</a> <a href="#">Termos de Uso</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Redes Sociais</h3>
-
-				<a href="#">WhatsApp</a> <a href="#">Instagram</a>
-
-			</div>
-
-		</div>
-		</div>
-
+<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>
