@@ -1,70 +1,113 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
-	<head>
-    	<meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-   		<title>Cadastrar Moderador</title>
-    	 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
-	</head>
-	<body>
-		<div>
-    		<h1>Cadastro de moderador</h1>
-    		<div>
-        		<form action="/inserir-moderador" method="post">
-            		<label for="fnome">Nome</label>
-            			<input type="text" id="fnome" name="nome" required maxlength="50">
-            		<label for="sobrenome">Sobrenome</label>
-            			<input type="text" id="sobrenome" name="sobrenome" required maxlength="50">
-            		<label for="telefone">Telefone</label>
-            			<input type="tel" id="telefone" name="telefone" pattern="[0-9]{2}[0-9]{5}[0-9]{4}" required>
-            		<label for="user">Nome de usuário</label>
-            			<input type="text" id="user" name="apelido" required maxlength="35">
-           	 		<label for="email">E-mail</label>
-            			<input type="email" id="email" name="email" required maxlength="40">
-            		<label for="nascimento">Data de Nascimento</label>
-            			<input type="date" id="data-nascimento" name="data-nascimento">
-            		<label for="senha">Senha</label>
-            			<input type="password" id="senha" name="senha" required maxlength="20">
-            		<label for="csenha">Confirmar senha</label>
-            			<input type="password" id="csenha" name="senha" required maxlength="20">
-            		<button type="submit">Próximo</button>
-        		</form>
-    		</div>
-    		<div>
-        		<p>Enviamos um código para o e-mail</p>
-        		<p>Reenviar código em 60 segundos</p>
-        		<button type="button">Próximo</button>
-    		</div>
-    		<div>
-        		<p>Cadastro concluído com sucesso!</p>
-        		<button type="button">Ok!</button>
-    		</div>
-   	 		<div>
-        		<footer>
-           	 		<div>
-         	       		<p>Lugar de Fala</p>
-                		<a href="#">Sobre nós</a>
-                		<a href="/LugarDeFala/home">Página inicial</a>
-            		</div>
-           	 		<div>
-                		<p>Atendimento</p>
-                		<a href="#">Contato</a>
-                		<a href="#">Termos de uso</a>
-            		</div>
-            		<div>
-               			<p>Redes Sociais</p>
-                		<a href="#">Whatsapp</a>
-                		<a href="#">Instagram</a>
-            		</div>
-            		<div>
-               	 		<p>Lugar de Fala</p>
-            		</div>
-            		<div>
-                		<p>2023 Todos os direitos reservados</p>
-            		</div>
-       	 		</footer>
-    		</div>
-		</div>
-	</body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastrar Moderador</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
+</head>
+<meta charset="UTF-8">
+<body class="body-cadastro">
+    <div class="moldura-cadastro">
+      <form action="/LugarDeFala/inserir-moderador">
+        <h1>Cadastro</h1>
+        <div class="input-box-c">
+          <label for="nome">Nome</label>
+          <input
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Digite o seu primeiro nome"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="sobrenome">Sobrenome</label>
+          <input
+            type="text"
+            name="sobrenome"
+            id="sobrenome"
+            placeholder="Digite o seu sobrenome"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="telefone">Telefone</label>
+          <input
+            type="tel"
+            name="telefone"
+            id="telefone"
+            placeholder="(xx) xxxx-xxxx"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="usuario">Nome de Moderador</label>
+          <input
+            type="text"
+            name="apelido"
+            id="apelido"
+            placeholder="Crie o seu nome de usuário"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Digite o seu e-mail"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="data">Data de Nascimento</label>
+          <input
+            type="date"
+            name="data-nascimento"
+            id="data-nascimento"
+            placeholder="Digite a sua data de nascimento"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Crie a sua senha"
+            required
+          />
+        </div>
+ 
+        <div class="input-box-c">
+          <label for="senha-confirme">Confirme a sua senha</label>
+          <input
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Repita a sua senha"
+            required
+          />
+        </div>
+ 
+        <button type="submit" class="button">Confirmar</button>
+ 
+        <div class="cadastrar-link">
+          <p>Já tem uma conta? <a href="/LugarDeFala/login">Entre</a></p>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

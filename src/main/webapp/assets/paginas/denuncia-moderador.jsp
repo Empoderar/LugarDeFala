@@ -25,7 +25,7 @@
 			<label for="motivo">Justifique sua denuncia</label> 
 			<input type="text" id="motivo" name="motivo" required maxlength="500">
 			<p>Usuário Denunciante:</p>
-			<c:out value="${usuario.nome}" />
+			<c:out value="${usuarioLogado.nome}" />
 			<p>Moderador Denunciado:</p>
 			<c:out value="${moderador.nome}" />
 			<p>Data atual da Denúncia: ${dataAtual}</p>

@@ -28,7 +28,7 @@
 				<p>Status:</p>
 				<c:out value="${status}" />
 				<p>Usuário Denunciante:</p>
-				<c:out value="${usuario.nome}" />
+				<c:out value="${usuarioLogado.nome}" />
 				<p>Conselho Denunciado:</p>
 				<c:out value="${conselho.conteudo}" />
 			<input type="submit" value="Salvar">
