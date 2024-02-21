@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir Conta</title>
-    <style>
-    </style>
+   <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
@@ -27,7 +26,7 @@
         <p>Você não poderá recuperar sua conta depois de excluí-la</p>
     </div>
     <div>
-        <form action="metodo-deletar-moderador" method="post">
+        <form action="/metodo-deletar-moderador" method="post">
             <p>Confirme sua senha para excluir a conta</p>
             <input type="password" name="senha" id="senha" required maxlength="20" placeholder="Digite a senha"> 
             <a href="recuperar-senha.html">Esqueci minha senha</a>

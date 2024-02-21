@@ -5,10 +5,11 @@
 
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidades</title>
-    <style></style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Comunidades</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
     <c:forEach var="comunidade" items="${comunidades}">
@@ -114,7 +115,6 @@
     </c:forEach>
 </body>
 </html>
-
 
 	<!-- Comunidade violência física logada-->
 

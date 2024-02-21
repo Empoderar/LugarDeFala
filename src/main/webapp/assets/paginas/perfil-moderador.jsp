@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Perfil Moderador</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 	<div>
-		<form action="inserir-moderador" method="post">
+		<form action="/metodo-editar-perfil" method="post">
 				<p>nome:</p>
 				<c:out value="${moderador.nome}" />
 				<p>nome de usuário:</p>
@@ -53,7 +54,7 @@
 		<footer>
 			<div>
 				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				<a href="#">Sobre nós</a> <a href="/LugarDeFala/home">Página inicial</a>
 			</div>
 			<div>
 				<p>Atendimento</p>

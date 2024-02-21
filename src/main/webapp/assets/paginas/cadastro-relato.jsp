@@ -3,12 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Relato</title>
+    <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
     <h1>Cadastrar relato</h1>
-    <form action="inserir-relato" method="post">
+    <form action="/inserir-relato" method="post">
         <input type="text" value="${conteudo}" id="conteudo" name="conteudo" placeholder="Digite aqui seu relato...">
         <p>Data atual do relato: ${dataAtual}</p>
 

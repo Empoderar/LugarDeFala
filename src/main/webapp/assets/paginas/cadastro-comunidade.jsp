@@ -36,7 +36,7 @@
 
         <h1>Cadastrar Comunidade</h1>
         </div>
-        <form class="right-form-login" action="inserir-comunidade" method="post">
+        <form class="right-form-login" action="/inserir-comunidade" method="post">
             <label for="cor">Cor</label> 
             <input class="input-cadastro" type="color" name="cor" id="cor">
             <label for="nomeComunidade">Nome</label> 

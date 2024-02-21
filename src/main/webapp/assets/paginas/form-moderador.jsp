@@ -6,15 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cadastro</title>
-    <style>
-    </style>
+  <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 
 <body>
 <div>
     <h1>Cadastro de Moderador</h1>
     <div>
-    	<form action="form-moderador" method="post">
+    	<form action="/form-moderador" method="post">
         <p>Leia as informações no PDF para responder ao formulário</p>
         <a href="#" target="_self">Link para o PDF</a>
         <button type="submit">Próximo</button>
@@ -29,7 +28,7 @@
             <div>
                 <p>Lugar de Fala</p>
                 <a href="#">Sobre nós</a>
-                <a href="#">Página inicial</a>
+                <a href="/LugarDeFala/home">Página inicial</a>
             </div>
             <div>
                 <p>Atendimento</p>

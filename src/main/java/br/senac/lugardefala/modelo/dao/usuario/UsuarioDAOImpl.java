@@ -86,7 +86,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	public boolean verificarCredenciaisUsuario(String email, String senha) {
-		
+
 		Session session = null;
 		Usuario usuario = null;
 
@@ -417,26 +417,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 			Join<Usuario, Contato> raizContato = raizUsuario.join(Usuario_.CONTATO);
 
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get(Usuario_.SENHA), senha),
-					construtor.equal(raizContato.get(Contato_.EMAIL), email));
-
 			Predicate predicateUsuarioSenha = construtor.equal(raizUsuario.get(Usuario_.SENHA), senha);
 			Predicate predicateContatoEmail = construtor.equal(raizContato.get(Contato_.EMAIL), email);
 			Predicate predicateUsuarioLogin = construtor.and(predicateUsuarioSenha, predicateContatoEmail);
 
-			criteria.where(predicateUsuarioLogin);
+			criteria.select(raizUsuario).where(predicateUsuarioLogin);
 
 			usuario = session.createQuery(criteria).getSingleResult();
 			session.getTransaction().commit();
 
-
 		} catch (Exception sqlException) {
 			sqlException.printStackTrace();
-
-			if (session.getTransaction() != null) {
+			if (session != null && session.getTransaction() != null) {
 				session.getTransaction().rollback();
 			}
-
 		} finally {
 			if (session != null) {
 				session.close();
@@ -445,5 +439,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		return usuario;
 	}
-
 }
