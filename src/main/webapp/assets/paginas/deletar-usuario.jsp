@@ -26,11 +26,11 @@
         <p>Você não poderá recuperar sua conta depois de excluí-la</p>
     </div>
     <div>
-        <form action="/metodo-deletar-usuario" method="post">
+        <form action="/LugarDeFala/metodo-deletar-usuario" method="post">
             <p>Confirme sua senha para excluir a conta</p>
             <input type="password" name="senha" id="senha" required maxlength="20" placeholder="Digite a senha"> 
             <a href="recuperar-senha.html">Esqueci minha senha</a>
-            <button type="submit">Excluir</button>
+            <button href="/LugarDeFala/" type="submit">Excluir</button>
         </form>
     </div>
     <div>

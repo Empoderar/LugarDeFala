@@ -19,9 +19,9 @@
 </head>
 <body>
     <h1>Pesquisar Comunidades</h1>
-    <form action="/resultado-pesquisar-comunidade" method="get">
+    <form action="/LugarDeFala/resultado-pesquisar-comunidade" method="post" onsubmit="return validarFormulario()">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
-        <button type="submit">Pesquisar</button>
+        <button href="/LugarDeFala/pesquisar-comunidade" type="submit">Pesquisar</button>
     </form>
     
     <c:if test="${not empty comunidades}">

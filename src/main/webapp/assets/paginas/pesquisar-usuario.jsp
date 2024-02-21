@@ -21,9 +21,9 @@
 <body>
     <h1>Pesquisar Usuarios</h1>
     
-    <form action="/resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">
+    <form action="/LugarDeFala/resultado-pesquisar-usuario" method="post" onsubmit="return validarFormulario()">
         <input type="text" placeholder="Pesquisar Usuario" oninput="this.className = ''" name="pesquisar" id="pesquisar">
-        <button type="submit">Pesquisar</button>
+        <button href="/LugarDeFala/pesquisar-usuario" type="submit">Pesquisar</button>
     </form>
     
     <c:if test="${not empty usuarios}">
