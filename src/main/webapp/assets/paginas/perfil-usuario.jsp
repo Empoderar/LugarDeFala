@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Perfil Usuário</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 	<c:if test="${usuario == null}">
@@ -17,7 +18,7 @@
 	</c:if>
 <div><button onclick="#">Editar perfil</button></div>
 	<div>
-		<form action="inserir-usuario" method="post">
+		<form action="/metodo-editar-perfil" method="post">
 				<p>Nome:</p>
 				<c:out value="${usuario.nome}" />
 				<p>Nome de usuário</p>
@@ -40,7 +41,7 @@
 		<footer>
 			<div>
 				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				<a href="#">Sobre nós</a> <a href="/LugarDeFala/home">Página inicial</a>
 			</div>
 			<div>
 				<p>Atendimento</p>

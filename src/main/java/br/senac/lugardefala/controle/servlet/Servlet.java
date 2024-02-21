@@ -1049,10 +1049,10 @@ public class Servlet extends HttpServlet {
 		Moderador moderadorParaInserir = new Moderador(nome, sobrenome, dataNascimento, apelido, senha);
 		Contato contatoParaInserir = new Contato(telefone, email);
 		moderadorParaInserir.setContato(contatoParaInserir);
-				
+
 		contatoDao.inserir(contatoParaInserir);
 		moderadorDao.inserir(moderadorParaInserir);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/login.jsp");
 		dispatcher.forward(request, response);
 

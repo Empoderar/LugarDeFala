@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Excluir Comunidade</title>
-<style>
-</style>
+ <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 	<div>
@@ -18,7 +18,7 @@
 			<hr>
 		</div>
 		<div>
-			<form action="metodo-deletar-comunidade" method="post">
+			<form action="/metodo-deletar-comunidade" method="post">
 				<p>Confirme sua senha para excluir a conta</p>
 				<input type="password" name="senha" id="senha" required
 					maxlength="20" placeholder="Digite a senha"> <a

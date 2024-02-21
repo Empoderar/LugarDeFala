@@ -29,7 +29,7 @@
                     <form action="/LugarDeFala/fazer-login" method="post">
                         <h1>Login</h1>
                         <div class="input-box">
-                            <input type="text" placeholder="Usuário" name="email" required>
+                            <input type="text" placeholder="Email" name="email" required>
                             <i class="fa-solid fa-user"></i>
                         </div>
                         <div class="input-box">

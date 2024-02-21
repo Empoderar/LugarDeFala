@@ -5,6 +5,7 @@
 <html>
 	<head>
  	 <title>tela-de-bloqueados</title>
+ 	 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 	</head>
 	<body>
 		<div>

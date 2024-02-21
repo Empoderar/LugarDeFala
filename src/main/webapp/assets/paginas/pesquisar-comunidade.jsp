@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pesquisar Comunidades</title>
-    
+    <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
     <script>
         function validarFormulario() {
             var pesquisa = document.getElementById("pesquisar").value;
@@ -19,7 +19,7 @@
 </head>
 <body>
     <h1>Pesquisar Comunidades</h1>
-    <form action="resultado-pesquisar-comunidade" method="get">
+    <form action="/resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
         <button type="submit">Pesquisar</button>
     </form>

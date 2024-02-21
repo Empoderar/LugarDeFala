@@ -5,6 +5,7 @@
 <head>
     <title>Denunciar</title>
 </head>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 <body>
     <div>
         <h1>Denúncias de relatos</h1>

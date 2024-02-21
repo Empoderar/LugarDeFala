@@ -5,6 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Pesquisar Comunidades</title>
+    
+    <script>
+        function validarFormulario() {
+            var pesquisa = document.getElementById("pesquisar").value;
+            if (pesquisa.trim() === "") {
+                alert("Digite algo para pesquisar.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h1>Pesquisar Comunidades</h1>

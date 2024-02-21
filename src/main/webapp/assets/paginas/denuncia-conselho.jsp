@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Denunciar Conselho</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
@@ -38,7 +39,7 @@
 		<h3>Denunciar</h3>
 		<p>Denúncia concluída, deseja bloquear usuário que fez este
 			conselho?</p>
-		<form action="Bloquear-usuario" method="post">
+		<form action="bloquear-usuario" method="post">
 			<input type="submit" value="Sim"> <input type="submit"
 				value="Não">
 		</form>

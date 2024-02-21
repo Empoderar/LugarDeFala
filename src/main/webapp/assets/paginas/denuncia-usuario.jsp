@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Denunciar Usuario</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
 	<div>
 		<h1>Denunciar Usuario</h1>
-		<form action="inserir-denuncia-de-usuario" method="post">
+		<form action="/inserir-denuncia-de-usuario" method="post">
 			<input type="submit" value="Spam"> <input type="submit"
 				value="Violação das diretrizes"> <input type="submit"
 				value="Discurso de ódio">

@@ -2,12 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastrar Categoria</title>
-<style>
-<%@
-include
- 
-file="/assets/css/style.css">
-</style>
+  <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 	<div class="grid-container-cadastro">
@@ -53,7 +48,7 @@ file="/assets/css/style.css">
 
 				<h3>Lugar de Fala</h3>
 
-				<a href="#">Sobre ns</a> <a href="home.jsp">Página Inicial</a>
+				<a href="#">Sobre nós</a> <a href="home.jsp">Página Inicial</a>
 
 			</div>
 
@@ -72,7 +67,6 @@ file="/assets/css/style.css">
 				<a href="#">WhatsApp</a> <a href="#">Instagram</a>
 
 			</div>
-
 		</div>
 	</div>
 </body>

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Desativar Conta</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,7 +26,7 @@
 
 	<div class="container">
 		<h2>Desativar a conta</h2>
-		<form action="metodo-desativar-conta" method="post">
+		<form action="/metodo-desativar-conta" method="post">
 			<label for="apelido">Apelido:</label> 
 			<input type="text" id="apelido" name="apelido" required>
 			<label for="senha">Senha:</label> 
@@ -33,7 +34,7 @@
 			<button type="submit">Desativar Conta</button>
 		</form>
 		<p>
-			Não deseja desativar sua conta? <a href="home.jsp">Voltar para a
+			Não deseja desativar sua conta? <a href="/LugarDeFala/home">Voltar para a
 				página inicial</a>
 		</p>
 	</div>
