@@ -43,7 +43,7 @@
 
                         <button type="submit" class="button">Confirmar</button>
                         <div class="cadastrar-link">
-                            <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+                            <p>Não tem uma conta? <a href="/LugarDeFala/cadastro-usuario">Cadastre-se</a></p>
 
                         </div>
                     </form>

@@ -13,21 +13,17 @@
   </head>
   <body>
     <header class="cabecalho">
-      <img src="img/logo.svg" alt="" class="logo-lugar" />
-      <div class="menu-escolhas">
-        <a href="/LugarDeFala/cadastro-relato">FAÇA UM RELATO</a>
-        <a href="/LugarDeFala/cadastro-usuario">CADASTRE-SE</a>
-        <a href="/LugarDeFala/perfil-comunidade">COMUNIDADES</a>
-        <a href="/LugarDeFala/login">ENTRAR</a>
-      </div>
-    </header>
- 	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-	</c:if>
+    <img src="img/logo.svg" alt="" class="logo-lugar" />
+    <div class="menu-escolhas">
+        <c:if test="${usuario == null}">
+    		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
+		</c:if>
+		<c:if test="${usuario != null}">
+   			 <%@ include file="../barras-navegacao/home-logada.jsp"%>
+		</c:if>
 
-	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
-	</c:if>
+    </div>
+</header>
 	
     <main class="menu-inicio">
       <img src="img/mulher.svg" alt="" class="imagem-mulher" />
@@ -47,16 +43,15 @@
         </p>
  
         <div class="conteudo-home">
-          <div class="botao-conteudo">
-            <button class="botao-home">Faça seu relato</button>
-            <button class="botao-home">Comunidades</button>
-          </div>
-          <div class="botao-conteudo">
-            <button class="botao-home">Seja Voluntário</button>
-            <button class="botao-home">Sobre Nós</button>
-          </div>
+            <div class="botao-conteudo">
+                 <a href="/LugarDeFala/cadastro-usuario" class="botao-home"> Faça seu cadastro</a>
+                <a href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</a>
+            </div>
+            <div class="botao-conteudo">
+                <button class="botao-home">Seja Voluntário</button>
+                <button class="botao-home">Sobre Nós</button>
+            </div>
         </div>
-      </div>
     </main>
  
     <section class="conteudos-cartoes">
@@ -170,6 +165,14 @@
               <div id="footer_rede_social">
                   <a href="#" class="footer-link" id="instagram">
                       <i class="fa-brands fa-instagram"></i>
+ 
+                      <a href="#" class="footer-link" id="linkedin">
+                          <i class="fa-brands fa-linkedin"></i>
+                      </a>
+ 
+                      <a href="#" class="footer-link" id="github">
+                          <i class="fa-brands fa-github"></i>
+                      </a>
                   </a>
               </div>
           </div>
@@ -181,7 +184,7 @@
                   <a href="#" class="footer-link">Sobre Nós</a>
               </li>
               <li>
-                  <a href="/LugarDeFala/home" class="footer-link">Página inicial</a>
+                  <a href="#" class="footer-link">Página inicial</a>
               </li>
           </ul>
  
