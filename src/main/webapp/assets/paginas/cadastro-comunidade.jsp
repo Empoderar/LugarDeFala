@@ -9,11 +9,11 @@
 <style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
-<c:if test="${usuario == null}">
+<c:if test="${usuarioLogado == null}">
 		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
 	</c:if>
 
-	<c:if test="${usuario != null}">
+	<c:if test="${usuarioLogado != null}">
 		<%@ include file="../barras-navegacao/home-logada.jsp"%>
 	</c:if>
 <div  class="grid-container-cadastro">
