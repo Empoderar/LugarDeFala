@@ -114,6 +114,21 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+
+		if (usuario instanceof Usuario) {
+			String usuarioLogado = "1";
+			request.setAttribute("usuarioLogado", usuarioLogado);
+		}
+
+		else if (usuario instanceof Moderador) {
+			String moderadorLogado = "2";
+			request.setAttribute("moderadorLogado", moderadorLogado);
+		} else {
+			String usuarioDeslogado = "3";
+			request.setAttribute("usuarioDeslogado", "usuarioDeslogado");
+		}
 
 		String action = request.getServletPath();
 
@@ -467,11 +482,20 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+
 		List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
 		request.setAttribute("usuarios", usuarios);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
-		dispatcher.forward(request, response);
+		if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
+			dispatcher.forward(request, response);
+
+		} else if (usuario instanceof Usuario) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -486,68 +510,48 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+
 		List<Comunidade> comunidades = comunidadeDao.recuperarTodasComunidades();
 		request.setAttribute("comunidades", comunidades);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
-		dispatcher.forward(request, response);
+		if (usuario instanceof Moderador) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
+			dispatcher.forward(request, response);
+
+		} else if (usuario instanceof Usuario) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-comunidade.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void mostrarTelaCadastroUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-
-		if (usuario != null && moderador != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		}
-		if (moderador == null && usuario != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-			dispatcher.forward(request, response);
-
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
-
-			dispatcher.forward(request, response);
-		}
-
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/cadastro-usuario.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaCadastroModerador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		if (usuario != null && moderador != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario == null && moderador != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-			dispatcher.forward(request, response);
-		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaCadastroComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario != null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-usuario.jsp");
+		if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-comunidade.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -555,13 +559,12 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaCadastroRelato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador == null && usuario == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+		if (usuario instanceof Usuario) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -570,23 +573,15 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador != null && usuario != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario == null && moderador != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-usuario.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/form-moderador.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
 
 	private void mostrarTelaLoginUsuario(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
@@ -598,19 +593,17 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-
 		dispatcher.forward(request, response);
 
 	}
 
 	private void mostrarTelaPerfilDoUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession sessao = request.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-		if (usuario != null) {
-			String descricao = request.getParameter("descricao");
-			usuario.setDescricao(descricao);
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+
+		if (usuario instanceof Usuario) {
 
 			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(usuario);
 			request.setAttribute("comunidades", comunidades);
@@ -630,16 +623,16 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador != null) {
+		if (usuario instanceof Moderador) {
 			String descricao = request.getParameter("descricao");
-			moderador.setDescricao(descricao);
+			usuario.setDescricao(descricao);
 
-			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(moderador);
+			List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorUsuario(usuario);
 			request.setAttribute("comunidades", comunidades);
 
-			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(moderador);
+			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 			request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-moderador.jsp");
@@ -683,13 +676,12 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador == null && usuario == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+		if (usuario instanceof Usuario) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-conselhos.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -700,14 +692,10 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador == null && usuario == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario == null && moderador != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
+		if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-categoria.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -715,9 +703,9 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
-		if (usuario != null) {
+		if (usuario instanceof Usuario) {
 			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
 
 			request.setAttribute("usuario", usuario);
@@ -726,37 +714,30 @@ public class Servlet extends HttpServlet {
 			for (Relato r : relatos) {
 				System.out.println("Conteúdo dos relatos: " + r.getConteudo());
 			}
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
 			dispatcher.forward(request, response);
 		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-conselho.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaDenuncias(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		if (moderador == null) {
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-moderador.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-denuncias.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
 
 	private void mostrarTelaDenunciaConselho(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-		if (moderador == null && usuario == null) {
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+
+		if (usuario instanceof Usuario) {
 			Conselho conselho = (Conselho) request.getSession().getAttribute("conselho");
 			LocalDate dataAtual = LocalDate.now();
 
@@ -767,9 +748,9 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("dataAtual", dataAtual);
 			request.setAttribute("status", status);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-conselho.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-conselho.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -778,10 +759,10 @@ public class Servlet extends HttpServlet {
 	private void mostrarTelaDenunciaModerador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
 
-		if (moderador == null && usuario == null) {
+		if (usuario instanceof Usuario) {
 			LocalDate dataAtual = LocalDate.now();
 			Status status = Status.PENDENTE;
 
@@ -790,9 +771,9 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("dataAtual", dataAtual);
 			request.setAttribute("status", status);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-moderador.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if ((usuario instanceof Moderador)) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-moderador.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -802,10 +783,9 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-		if (moderador == null && usuario == null) {
+		if (usuario instanceof Usuario) {
 
 			Relato relato = (Relato) sessao.getAttribute("relato");
 			LocalDate dataAtual = LocalDate.now();
@@ -816,9 +796,10 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("dataAtual", dataAtual);
 			request.setAttribute("status", status);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-relato.jsp");
 			dispatcher.forward(request, response);
-		} else {
+
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-relato.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -828,11 +809,10 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuarioDenunciante = (Usuario) sessao.getAttribute("usuario");
+		Usuario usuarioDenunciante = (Usuario) sessao.getAttribute("usuarioLogado");
 		Usuario usuarioDenunciado = (Usuario) sessao.getAttribute("usuario");
 
-		if (usuarioDenunciante == null && moderador == null) {
+		if (usuarioDenunciante instanceof Usuario) {
 
 			LocalDate dataAtual = LocalDate.now();
 			Status status = Status.APROVADO;
@@ -842,9 +822,9 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("dataAtual", dataAtual);
 			request.setAttribute("status", status);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-usuario.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuarioDenunciante instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/denuncia-usuario.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -854,12 +834,11 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/desativar-conta.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/desativar-conta.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -869,12 +848,8 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-usuario.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -884,12 +859,8 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-moderador.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -899,12 +870,8 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-comunidade.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -914,15 +881,13 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
-
+			dispatcher.forward(request, response);
+		} else if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
@@ -931,31 +896,25 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-relato.jsp");
-
+			dispatcher.forward(request, response);
+		} else if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-relato.jsp");
 			dispatcher.forward(request, response);
 		}
-
 	}
 
 	private void mostrarTelaEditarSenha(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario != null && moderador == null) {
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
 			dispatcher.forward(request, response);
-		} else {
+
+		} else if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-senha.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -965,15 +924,12 @@ public class Servlet extends HttpServlet {
 
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Moderador moderador = (Moderador) sessao.getAttribute("moderador");
-		Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-		if (usuario == null && moderador == null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-		} else {
-
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		if (usuario instanceof Usuario) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
-
+			dispatcher.forward(request, response);
+		} else if (usuario instanceof Moderador) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-relatos.jsp");
 			dispatcher.forward(request, response);
 		}
 
@@ -994,18 +950,14 @@ public class Servlet extends HttpServlet {
 		}
 
 		Usuario usuario = usuarioDao.obterUsuarioPorCredenciais(email, senha);
+		sessao.setAttribute("usuarioLogado", usuario);
 
 		if (usuario instanceof Moderador) {
 
-			sessao.setAttribute("moderador", usuario);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("assets/paginas/home.jsp").forward(request, response);
 
 		} else {
-
-			sessao.setAttribute("usuario", usuario);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("assets/paginas/home.jsp").forward(request, response);
 		}
 
 	}
@@ -1315,31 +1267,20 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		String nome = request.getParameter("nome");
-
 		String sobrenome = request.getParameter("sobrenome");
-
 		String descricao = request.getParameter("descricao");
-
 		String apelido = request.getParameter("apelido");
-
 		String email = request.getParameter("email");
-
 		String telefone = request.getParameter("telefone");
-
 		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido, descricao);
 
 		usuarioDao.atualizar(usuarioParaAtualizar);
-
 		Contato contatoParaAtualizar = new Contato(telefone, email);
-
 		contatoDao.atualizar(contatoParaAtualizar);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-usuario.jsp");
-
-		dispatcher.forward(request, response);
-
 		usuarioParaAtualizar.setContato(contatoParaAtualizar);
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-usuario.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void editarSenha(HttpServletRequest request, HttpServletResponse response)
