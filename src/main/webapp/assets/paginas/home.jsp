@@ -15,7 +15,7 @@
     <header class="cabecalho">
       <img src="img/logo.svg" alt="" class="logo-lugar" />
       <div class="menu-escolhas">
-        <a href="/LugarDeFala/cadastro-relato">FA�A UM RELATO</a>
+        <a href="/LugarDeFala/cadastro-relato">FAÇA UM RELATO</a>
         <a href="/LugarDeFala/cadastro-usuario">CADASTRE-SE</a>
         <a href="/LugarDeFala/perfil-comunidade">COMUNIDADES</a>
         <a href="/LugarDeFala/login">ENTRAR</a>
@@ -170,14 +170,6 @@
               <div id="footer_rede_social">
                   <a href="#" class="footer-link" id="instagram">
                       <i class="fa-brands fa-instagram"></i>
- 
-                      <a href="#" class="footer-link" id="linkedin">
-                          <i class="fa-brands fa-linkedin"></i>
-                      </a>
- 
-                      <a href="#" class="footer-link" id="github">
-                          <i class="fa-brands fa-github"></i>
-                      </a>
                   </a>
               </div>
           </div>
@@ -189,7 +181,7 @@
                   <a href="#" class="footer-link">Sobre Nós</a>
               </li>
               <li>
-                  <a href="#" class="footer-link">Página inicial</a>
+                  <a href="/LugarDeFala/home" class="footer-link">Página inicial</a>
               </li>
           </ul>
  

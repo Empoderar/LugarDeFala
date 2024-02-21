@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisar Usuario</title>
-
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
     <script>
         function validarFormulario() {
             var pesquisa = document.getElementById("pesquisar").value;
@@ -21,7 +21,7 @@
 <body>
     <h1>Pesquisar Usuarios</h1>
     
-    <form action="resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">
+    <form action="/resultado-pesquisar-usuario" method="get" onsubmit="return validarFormulario()">
         <input type="text" placeholder="Pesquisar Usuario" oninput="this.className = ''" name="pesquisar" id="pesquisar">
         <button type="submit">Pesquisar</button>
     </form>
@@ -37,7 +37,7 @@
     </c:if>
     
     <c:if test="${empty usuarios}">
-        <p>Nenhuma usuario encontrada.</p>
+        <p>Nenhuma usuario encontrado.</p>
     </c:if>
 </body>
 </html>

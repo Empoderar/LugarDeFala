@@ -8,8 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Comunidades</title>
-<style>
-</style>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 	<c:if test="${usuario == null}">
@@ -77,7 +76,7 @@
 		<footer>
 			<div>
 				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
+				<a href="#">Sobre nós</a> <a href="/LugarDeFala/home">Página inicial</a>
 			</div>
 			<div>
 				<p>Atendimento</p>

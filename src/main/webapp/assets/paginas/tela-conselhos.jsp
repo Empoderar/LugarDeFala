@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Conselhos</title>
-<style>
-</style>
+ <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>	
 <body>
 	<c:if test="${usuario == null}">
@@ -23,16 +22,16 @@
 			<div>
 
 				<div>
-					<a href="#">PÃ¡gina inicial</a> <a href="#">Popular</a>
+					<a href="#">Página Inicial</a> <a href="#">Popular</a>
 					<hr>
 				</div>
 				<div>
 					<a href="#">Comunidades</a> 
-					<a href="#">ViolÃªncia fÃ­sica</a> 
-					<a href="#">Violência psicolÃ³gica</a> 
-					<a href="#">ViolÃªncia moral</a> 
-					<a href="#">ViolÃªncia sexual</a> 
-					<a href="#">ViolÃªncia patrimonial</a>
+					<a href="#">Violência física</a> 
+					<a href="#">Violência psicológica</a> 
+					<a href="#">Violência moral</a> 
+					<a href="#">Violência sexual</a> 
+					<a href="#">Violência patrimonial</a>
 					<hr>
 				</div>
 			</div>

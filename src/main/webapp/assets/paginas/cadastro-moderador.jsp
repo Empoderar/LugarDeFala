@@ -5,14 +5,13 @@
     	<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
    		<title>Cadastrar Moderador</title>
-    	<style>
-    	</style>
+    	 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 	</head>
 	<body>
 		<div>
     		<h1>Cadastro de moderador</h1>
     		<div>
-        		<form action="inserir-moderador" method="post">
+        		<form action="/inserir-moderador" method="post">
             		<label for="fnome">Nome</label>
             			<input type="text" id="fnome" name="nome" required maxlength="50">
             		<label for="sobrenome">Sobrenome</label>
@@ -28,7 +27,7 @@
             		<label for="senha">Senha</label>
             			<input type="password" id="senha" name="senha" required maxlength="20">
             		<label for="csenha">Confirmar senha</label>
-            			<input type="password" id="csenha" name="outra-senha" required maxlength="20">
+            			<input type="password" id="csenha" name="senha" required maxlength="20">
             		<button type="submit">Próximo</button>
         		</form>
     		</div>
@@ -46,7 +45,7 @@
            	 		<div>
          	       		<p>Lugar de Fala</p>
                 		<a href="#">Sobre nós</a>
-                		<a href="#">Página inicial</a>
+                		<a href="/LugarDeFala/home">Página inicial</a>
             		</div>
            	 		<div>
                 		<p>Atendimento</p>

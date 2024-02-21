@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Denunciar Moderador</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
 	<div>
 		<h1>Denunciar Moderador</h1>
-		<form action="inserir-denuncia-de-moderador" method="post">
+		<form action="/inserir-denuncia-de-moderador" method="post">
 			<input type="submit" value="Abuso "> 
 			<input type="submit" value="Violação das diretrizes"> 
 			<input type="submit" value="Discurso de ódio">

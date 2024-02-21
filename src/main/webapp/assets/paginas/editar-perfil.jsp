@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Editar perfil</title>
+<style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
 <div>
@@ -13,7 +14,7 @@
 	</div>
 	<div>
 
-		<form action="metodo-editar-perfil" method="post">
+		<form action="/metodo-editar-perfil" method="post">
 			<label for="fnome">Nome</label> 
 			<input type="text" id="fnome" name="nome" required maxlength="50"> 
 			<label for="lnome">Sobrenome</label>

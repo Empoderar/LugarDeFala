@@ -16,10 +16,10 @@
       <img src="/assets/img/logo.svg" alt="" class="logo-lugar" />
  
       <div class="menu-escolhas">
-        <a href="">FAÇA UM RELATO</a>
-        <a href="">CADASTRE-SE</a>
-        <a href="">COMUNIDADES</a>
-        <a href="">ENTRAR</a>
+        <a href="/LugarDeFala/cadastro-relato">FAÇA UM RELATO</a>
+        <a href="/LugarDeFala/cadastro-usuario">CADASTRE-SE</a>
+        <a href="/LugarDeFala/perfil-comunidade">COMUNIDADES</a>
+        <a href="/LugarDeFala/login">ENTRAR</a>
       </div>
     </header></div>
 	<div class="tela-de-erro">
@@ -97,7 +97,7 @@
 
 			<h3>Lugar de Fala</h3>
 
-			<a href="#">Sobre nós</a> <a href="home.jsp">Página Inicial</a>
+			<a href="#">Sobre nós</a> <a href="/LugarDeFala/home">Página Inicial</a>
 
 		</div>
 
