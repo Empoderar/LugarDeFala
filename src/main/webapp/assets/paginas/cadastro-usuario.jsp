@@ -9,9 +9,16 @@
 <title>Cadastrar Usuário</title>
 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
+<<<<<<< HEAD
 <body class="body-cadastro">
     <div class="moldura-cadastro">
       <form action="">
+=======
+<meta charset="UTF-8">
+<body class="body-cadastro">
+    <div class="moldura-cadastro">
+      <form action="/LugarDeFala/inserir-usuario">
+>>>>>>> development
         <h1>Cadastro</h1>
         <div class="input-box-c">
           <label for="nome">Nome</label>
@@ -50,8 +57,13 @@
           <label for="usuario">Nome de Usuário</label>
           <input
             type="text"
+<<<<<<< HEAD
             name="usuario"
             id="usuario"
+=======
+            name="apelido"
+            id="apelido"
+>>>>>>> development
             placeholder="Crie o seu nome de usuário"
             required
           />
@@ -72,8 +84,8 @@
           <label for="data">Data de Nascimento</label>
           <input
             type="date"
-            name="data"
-            id="data"
+            name="data-nascimento"
+            id="data-nascimento"
             placeholder="Digite a sua data de nascimento"
             required
           />
@@ -91,12 +103,12 @@
         </div>
  
         <div class="input-box-c">
-          <label for="senha-confirme">Confirme a sua senha</label>
+          <label for="senha">Senha</label>
           <input
             type="password"
-            name="senha-confirme"
-            id="senha-confirme"
-            placeholder="Repita a sua senha"
+            name="senha"
+            id="senha"
+            placeholder="Crie a sua senha"
             required
           />
         </div>

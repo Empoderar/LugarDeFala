@@ -9,33 +9,24 @@
 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
-	<c:if test="${usuario == null}">
 		<%@ include file="/assets/barras-navegacao/barra-de-navegacao.jsp"%>
-	</c:if>
-
-	<c:if test="${usuario != null}">
-		<%@ include file="/assets/barras-navegacao/barra-de-navegacao.jsp"%>
-	</c:if>
-<div><button onclick="#">Editar perfil</button></div>
+<div>
+<a href="<%=request.getContextPath()%>/editar-perfil">Editar perfil</a>
+<button onclick="/editar-perfil"></button></div>
 	<div>
-		<form action="/metodo-editar-perfil" method="post">
 				<p>Nome:</p>
-				<c:out value="${usuario.nome}" />
+				<c:out value="${usuarioLogado.nome}" />
 				<p>Nome de usuário</p>
-				<c:out value="${usuario.apelido}" /> 
+				<c:out value="${usuarioLogado.apelido}" /> 
 				<p>Biografia:</p>
-				<c:out value="${usuario.descricao}" /> 
+				<c:out value="${usuarioLogado.descricao}" /> 
 				<p>Comunidades:</p>
 				<c:forEach var="comunidade" items="${comunidades}">
 				<c:out value="${comunidade.nome}" />
 				</c:forEach>
 				<p>Relatos:</p>
 				<c:forEach var="relato" items="${relatos}">
-				<c:out value="${usuario.icone}"/>
-				<c:out value="${usuario.nome} "/>
-				<c:out value="${relato.conteudo}" />
 				</c:forEach>
-		</form>
 	</div>
 	<%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
