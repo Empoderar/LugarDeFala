@@ -9,13 +9,7 @@
 <style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
-<c:if test="${usuarioLogado == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-	</c:if>
-
-	<c:if test="${usuarioLogado != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
-	</c:if>
+		<%@ include file="/assets/barras-navegacao/logada.jsp"%>
 <div  class="grid-container-cadastro">
 	<div class="item1 header">
 	<header class="header">

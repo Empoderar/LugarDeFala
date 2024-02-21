@@ -9,16 +9,10 @@
 <title>Cadastrar Usuário</title>
 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
-<<<<<<< HEAD
-<body class="body-cadastro">
-    <div class="moldura-cadastro">
-      <form action="">
-=======
 <meta charset="UTF-8">
 <body class="body-cadastro">
     <div class="moldura-cadastro">
       <form action="/LugarDeFala/inserir-usuario">
->>>>>>> development
         <h1>Cadastro</h1>
         <div class="input-box-c">
           <label for="nome">Nome</label>
@@ -120,5 +114,6 @@
         </div>
       </form>
     </div>
+    <%@include file="/assets/rodape/rodape.jsp" %>
   </body>
 </html>

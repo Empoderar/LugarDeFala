@@ -52,6 +52,5 @@
         <button type="reset">Cancelar</button>
     </form>
 </div> 
-<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>

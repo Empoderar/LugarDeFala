@@ -10,13 +10,7 @@
  <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>	
 <body>
-	<c:if test="${usuario == null}">
-		<%@ include file="/assets/barras-navegacao/delogado-usuario.jsp"%>
-	</c:if>
-
-	<c:if test="${usuario != null}">
-		<%@ include file="/assets/barras-navegacao/logado-usuario.jsp"%>
-	</c:if>
+		<%@ include file="/assets/barras-navegacao/logado.jsp"%>
 	<div>
 		<nav>
 			<div>

@@ -18,12 +18,7 @@
     </script>
 </head>
 <body>
-		<c:if test="${usuario == null}">
-    		<%@ include file="/assets/barras-navegacao/deslogado-usuario.jsp"%>
-		</c:if>
-		<c:if test="${usuario != null}">
-   			 <%@ include file="../barras-navegacao/logado-usuario.jsp"%>
-   		</c:if>
+   	<%@ include file="/assets/barras-navegacao/logado.jsp"%>
     <h1>Pesquisar Comunidades</h1>
     <form action="/resultado-pesquisar-comunidade" method="get">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">

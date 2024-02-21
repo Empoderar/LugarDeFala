@@ -13,7 +13,7 @@
     <header class="cabecalho">
     <img src="img/logo.svg" alt="" class="logo-lugar" />
     <div class="menu-escolhas">
-    	<%@ include file="/assets/barras-navegacao/deslogado-usuario.jsp"%>
+    	<%@ include file="/assets/barras-navegacao/deslogado.jsp"%>
     </div>
 </header>
     <main class="menu-inicio">
