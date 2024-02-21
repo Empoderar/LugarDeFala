@@ -543,3 +543,67 @@ footer {
 .input-box-cadastro input:hover {
 	background-color: var(--cor-letra-2);
 }
+
+/* -------------------------------- form moderador ----------------------------------------------------*/
+.form-moderador {
+  background-color: rgba(253, 232, 226, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-center;
+  justify-content: center;
+  padding: 20px;
+  color: rgba(77, 77, 77, 100%);
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+}
+ 
+.form-moderador h1 {
+  color: var(--cor-constraste);
+  font-size: 50px;
+  margin: 6px;
+}
+ 
+.form-moderador p {
+  margin-top: 98px;
+  margin-bottom: 68px;
+}
+ 
+.form-moderador .button {
+ 
+  width: 424px;
+ 
+  height: 52px;
+ 
+  background: var(--cor-primária);
+ 
+  border: none;
+ 
+  outline: none;
+ 
+  color: var(--cor-letra-2);
+ 
+  border-radius: 4px;
+ 
+  cursor: pointer;
+ 
+  font-size: 16px;
+ 
+  font-weight: bold;
+ 
+  margin: 26px;
+ 
+}
+ 
+.responder-formulario {
+  display: none;
+}
+ 
+.clique-icone {
+  font-size: 25px;
+ 
+  margin: 26px;
+}
+ 
