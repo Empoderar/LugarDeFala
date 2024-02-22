@@ -11,13 +11,13 @@
 </head>
 <body>
     <div>
-        <h1>Bem-vindo, ${usuario.nome}</h1>
+        <h1>Bem-vindo, ${usuarioLogado.nome}</h1>
         <c:forEach var="relato" items="${relatos}">
             <p>${relato.conteudo}</p>
         </c:forEach>
-        <form action="inserir-conselho" method="post">
+        <form action="/LugarDeFala/inserir-conselho" method="post">
             <label for="conselho">Conselho</label> 
-            <input type="text" id="conselho" name="conselho" required maxlength="500">
+            <input type="text" id="conselho" name="conteudo" required maxlength="500">
             <button type="submit">Publicar Conselho</button>
         </form>
     </div>

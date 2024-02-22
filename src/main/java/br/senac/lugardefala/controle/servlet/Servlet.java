@@ -500,6 +500,7 @@ public class Servlet extends HttpServlet {
 
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String termoPesquisa = request.getParameter("pesquisar");
 		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorNome(termoPesquisa);
 		request.setAttribute("comunidades", comunidades);
@@ -510,11 +511,9 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-
-		List<Comunidade> comunidades = comunidadeDao.recuperarTodasComunidades();
-		request.setAttribute("comunidades", comunidades);
 
 		if (usuario instanceof Moderador) {
 
@@ -1298,11 +1297,8 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException {
 
 		long id = Long.parseLong(request.getParameter("id"));
-
 		String nome = request.getParameter("nome");
-
 		String descricao = request.getParameter("descricao");
-
 		Comunidade comunidadeParaAtualizar = new Comunidade(id, nome, descricao);
 
 		comunidadeDao.atualizar(comunidadeParaAtualizar);
@@ -1324,39 +1320,24 @@ public class Servlet extends HttpServlet {
 	private void atualizarConselho(HttpServletRequest request, HttpServletResponse response) {
 
 		long id = Long.parseLong(request.getParameter("id"));
-
 		String conteudo = request.getParameter("conteudo");
-
 		Integer avaliacaoBoa = Integer.parseInt(request.getParameter("avaliacao"));
-
 		Integer avaliacaoRuim = Integer.parseInt(request.getParameter("avaliacao"));
-
 		LocalDate data = LocalDate.parse(request.getParameter("data"));
-
 		String nome = request.getParameter("nome");
-
 		String sobrenome = request.getParameter("sobrenome");
-
 		String apelido = request.getParameter("apelido");
-
 		Integer avaliacao = Integer.parseInt(request.getParameter("avaliacao"));
-
 		Status status = Status.valueOf(request.getParameter("status"));
-
 		Conselho conselhoParaAtualizar = new Conselho(id, conteudo, avaliacaoBoa, avaliacaoRuim, data);
 
 		conselhoDao.atualizar(conselhoParaAtualizar);
-
 		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido);
-
 		usuarioDao.atualizar(usuarioParaAtualizar);
-
 		Relato relatoParaAtualizar = new Relato(conteudo, data, avaliacao, status);
-
 		relatoDao.atualizar(relatoParaAtualizar);
 
 		conselhoParaAtualizar.setUsuario(usuarioParaAtualizar);
-
 		conselhoParaAtualizar.setRelato(relatoParaAtualizar);
 
 	}
@@ -1367,9 +1348,9 @@ public class Servlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 
-		if (usuarioLogado != null) {
-			Contato contatoUsuarioLogado = usuarioLogado.getContato();
+		if (usuarioLogado instanceof Usuario) {
 
+			Contato contatoUsuarioLogado = usuarioLogado.getContato();
 			String senhaDoUsuario = usuarioLogado.getSenha();
 			String senhaDigitada = request.getParameter("senha");
 
@@ -1377,16 +1358,13 @@ public class Servlet extends HttpServlet {
 				usuarioDao.deletar(usuarioLogado);
 				contatoDao.deletar(contatoUsuarioLogado);
 				session.invalidate();
-				response.sendRedirect(request.getContextPath() + "/home.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
+				dispatcher.forward(request, response);
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-de-erro.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/deletar-usuario.jsp");
 				dispatcher.forward(request, response);
 				System.out.println("Senhas incompatíveis");
 			}
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
-			dispatcher.forward(request, response);
-			System.out.println("Não foi possível realizar a exclusão: usuário não está logado");
 		}
 	}
 

@@ -43,7 +43,7 @@ style
 			<div class="texto-cadastro">
 				<h1>Cadastrar categoria</h1>
 			</div>
-			<form class="right-form-login" action="/inserir-categoria"
+			<form class="right-form-login" action="/LugarDeFala/inserir-categoria"
 				method="post">
 				<label for="nomeCategoria">Nome</label> <input
 					class="input-cadastro" type="text" id="nomeCategoria" name="nome"
