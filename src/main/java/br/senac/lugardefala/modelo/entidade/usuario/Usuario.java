@@ -33,160 +33,164 @@ import br.senac.lugardefala.modelo.entidade.relato.Relato;
 @Table(name = "usuario")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	private Long id;
 
-    @Column(name = "nome_usuario", length = 50, nullable = false, unique = false)
-    private String nome;
+	@Column(name = "nome_usuario", length = 50, nullable = false, unique = false)
+	private String nome;
 
-    @Column(name = "sobrenome_usuario", length = 50, nullable = false, unique = false)
-    private String sobrenome;
+	@Column(name = "sobrenome_usuario", length = 50, nullable = false, unique = false)
+	private String sobrenome;
 
-    @Column(name = "data_nascimento_usuario", nullable = false, unique = false)
-    private LocalDate dataNascimento;
+	@Column(name = "data_nascimento_usuario", nullable = true, unique = false)
+	private LocalDate dataNascimento;
 
-    @Column(name = "apelido_usuario", length = 35, nullable = true, unique = true)
-    private String apelido;
+	@Column(name = "apelido_usuario", length = 35, nullable = true, unique = true)
+	private String apelido;
 
-    @Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
-    private String senha;
-    
-    @Column(name = "descricao_usuario", length = 500, nullable = true, unique = false)
+	@Column(name = "senha_usuario", length = 20, nullable = false, unique = false)
+	private String senha;
+
+	@Column(name = "descricao_usuario", length = 500, nullable = true, unique = false)
 	private String descricao;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_foto")
-    private Foto foto;
-    
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Conselho> conselhos;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
-    private Contato contato;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_foto")
+	private Foto foto;
 
-    @ManyToMany
-    @JoinTable(
-            name = "contato_usuario",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_contato")
-    )
-    private List<Contato> contatos;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Conselho> conselhos;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DenunciaUsuario> denunciasDeUsuario;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "contato_id_contato", referencedColumnName = "id_contato")
+	private Contato contato;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Relato> relatos;
+	@ManyToMany
+	@JoinTable(name = "contato_usuario", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_contato"))
+	private List<Contato> contatos;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "comunidade_usuario",joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_comunidade")
-    )
-    private List<Comunidade> comunidades;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<DenunciaUsuario> denunciasDeUsuario;
 
-    public Usuario() {
-    	
-    }
-    
-    public Usuario(String senha) {
-         this.senha = senha;
-     }
-    
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
-     	this.nome = nome;
-         this.sobrenome = sobrenome;
-         this.dataNascimento = dataNascimento;
-         this.apelido = apelido;
-         this.senha = senha;
-         denunciasDeUsuario = new ArrayList<>();
-         relatos = new ArrayList<>();
-         conselhos = new ArrayList<>();
-         comunidades = new ArrayList<>();
-         contatos = new ArrayList<>();
-     }
-    public Usuario(String nome, String sobrenome, String apelido, String descricao) {
-     	this.nome = nome;
-         this.sobrenome = sobrenome;
-         this.apelido = apelido;
-         this.descricao = descricao;
-         denunciasDeUsuario = new ArrayList<>();
-         relatos = new ArrayList<>();
-         conselhos = new ArrayList<>();
-         comunidades = new ArrayList<>();
-         contatos = new ArrayList<>();
-     }
-    
-    
-    
-    public Usuario(Long id,String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
-    	this.id = id;
-     	this.nome = nome;
-         this.sobrenome = sobrenome;
-         this.dataNascimento = dataNascimento;
-         this.apelido = apelido;
-         this.senha = senha;
-         this.descricao = descricao;
-         relatos = new ArrayList<>();
-     }
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Relato> relatos;
 
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, Comunidade comunidade) {
-     	this.nome = nome;
-         this.sobrenome = sobrenome;
-         this.dataNascimento = dataNascimento;
-         this.apelido = apelido;
-         this.senha = senha;
-         comunidades = new ArrayList<>();
-         relatos = new ArrayList<>();
-     }
-    
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao, Comunidade comunidade) {
-    	this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.apelido = apelido;
-        this.senha = senha;
-        this.descricao = descricao;
-        comunidades = new ArrayList<>();
-        relatos = new ArrayList<>();
-    }
-    
-       
-    public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao) {
-    	this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.apelido = apelido;
-        this.senha = senha;
-        this.descricao = descricao;
-        comunidades = new ArrayList<>();
-        relatos = new ArrayList<>();
-    }
-    
-    public Usuario(String nome, String sobrenome, String descricao, LocalDate dataNascimento, String apelido) {
-    	this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.apelido = apelido;
-        this.descricao = descricao;
-        comunidades = new ArrayList<>();
-        relatos = new ArrayList<>();
-    }
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "comunidade_usuario", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_comunidade"))
+	private List<Comunidade> comunidades;
 
-    public Usuario(String nome, String sobrenome, String apelido) {
+	public Usuario() {
+
+	}
+
+	public Usuario(String senha) {
+		this.senha = senha;
+	}
+
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		denunciasDeUsuario = new ArrayList<>();
+		relatos = new ArrayList<>();
+		conselhos = new ArrayList<>();
+		comunidades = new ArrayList<>();
+		contatos = new ArrayList<>();
+	}
+
+	public Usuario(String nome, String sobrenome, String apelido, String descricao) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.apelido = apelido;
+		this.descricao = descricao;
+		denunciasDeUsuario = new ArrayList<>();
+		relatos = new ArrayList<>();
+		conselhos = new ArrayList<>();
+		comunidades = new ArrayList<>();
+		contatos = new ArrayList<>();
+	}
+
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		this.descricao = descricao;
+		relatos = new ArrayList<>();
+	}
+
+	public Usuario(Long id, String nome, String sobrenome, String descricao, String apelido, Contato contato) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.apelido = apelido;
+		this.contato = contato;
+		this.descricao = descricao;
+	}
+
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			Comunidade comunidade) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		comunidades = new ArrayList<>();
+		relatos = new ArrayList<>();
+	}
+
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao, Comunidade comunidade) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		this.descricao = descricao;
+		comunidades = new ArrayList<>();
+		relatos = new ArrayList<>();
+	}
+
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		this.descricao = descricao;
+		comunidades = new ArrayList<>();
+		relatos = new ArrayList<>();
+	}
+
+	public Usuario(String nome, String sobrenome, String descricao, LocalDate dataNascimento, String apelido) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.descricao = descricao;
+		comunidades = new ArrayList<>();
+		relatos = new ArrayList<>();
+	}
+
+	public Usuario(String nome, String sobrenome, String apelido) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.apelido = apelido;
 		comunidades = new ArrayList<>();
-		 relatos = new ArrayList<>();
+		relatos = new ArrayList<>();
 	}
-    
-    
-    public String getDescricao() {
+
+	public String getDescricao() {
 		return descricao;
 	}
 
@@ -194,160 +198,160 @@ public class Usuario implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
-            Conselho conselho, Contato contato, Comunidade comunidade) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.apelido = apelido;
-        this.senha = senha;
-        this.descricao = descricao;
-        this.id = id;
-        this.contato = contato;
-        denunciasDeUsuario = new ArrayList<>();
-        relatos = new ArrayList<>();
-        conselhos = new ArrayList<>();
-        this.comunidades = new ArrayList<>();
-        this.comunidades.add(comunidade);
-        contatos = new ArrayList<>();
-        this.contatos.add(contato);
-    }
-	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha, String descricao,
-            Comunidade comunidade) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.apelido = apelido;
-        this.senha = senha;
-        this.descricao = descricao;
-        this.id = id;
-        denunciasDeUsuario = new ArrayList<>();
-        relatos = new ArrayList<>();
-        conselhos = new ArrayList<>();
-        this.comunidades = new ArrayList<>();
-        this.comunidades.add(comunidade);
-        contatos = new ArrayList<>();
-        this.contatos.add(contato);
-    }
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao, Conselho conselho, Contato contato, Comunidade comunidade) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		this.descricao = descricao;
+		this.id = id;
+		this.contato = contato;
+		denunciasDeUsuario = new ArrayList<>();
+		relatos = new ArrayList<>();
+		conselhos = new ArrayList<>();
+		this.comunidades = new ArrayList<>();
+		this.comunidades.add(comunidade);
+		contatos = new ArrayList<>();
+		this.contatos.add(contato);
+	}
 
-    public List<Comunidade> getComunidades() {
-        return comunidades;
-    }
+	public Usuario(Long id, String nome, String sobrenome, LocalDate dataNascimento, String apelido, String senha,
+			String descricao, Comunidade comunidade) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.apelido = apelido;
+		this.senha = senha;
+		this.descricao = descricao;
+		this.id = id;
+		denunciasDeUsuario = new ArrayList<>();
+		relatos = new ArrayList<>();
+		conselhos = new ArrayList<>();
+		this.comunidades = new ArrayList<>();
+		this.comunidades.add(comunidade);
+		contatos = new ArrayList<>();
+		this.contatos.add(contato);
+	}
 
-    public void setComunidades(List<Comunidade> comunidades) {
-        this.comunidades = comunidades;
-    }
+	public List<Comunidade> getComunidades() {
+		return comunidades;
+	}
 
-    public boolean adicionarComunidade(Comunidade comunidade) {
-        return comunidades.add(comunidade);
-    }
+	public void setComunidades(List<Comunidade> comunidades) {
+		this.comunidades = comunidades;
+	}
 
-    public boolean removerComunidade(Comunidade comunidade) {
-        return comunidades.remove(comunidade);
-    }
-    
+	public boolean adicionarComunidade(Comunidade comunidade) {
+		return comunidades.add(comunidade);
+	}
 
-    public boolean adicionarRelato(Relato relato) {
-        return relatos.add(relato);
-    }
+	public boolean removerComunidade(Comunidade comunidade) {
+		return comunidades.remove(comunidade);
+	}
 
-    public boolean removerRelato(Relato relato) {
-        return relatos.remove(relato);
-    }
+	public boolean adicionarRelato(Relato relato) {
+		return relatos.add(relato);
+	}
 
-    public List<Conselho> getConselhos() {
-        return conselhos;
-    }
+	public boolean removerRelato(Relato relato) {
+		return relatos.remove(relato);
+	}
 
-    public void setConselhos(List<Conselho> conselhos) {
-        this.conselhos = conselhos;
-    }
+	public List<Conselho> getConselhos() {
+		return conselhos;
+	}
 
-    public List<DenunciaUsuario> getDenunciasDeUsuario() {
-        return denunciasDeUsuario;
-    }
+	public void setConselhos(List<Conselho> conselhos) {
+		this.conselhos = conselhos;
+	}
 
-    public void setDenunciasDeUsuario(List<DenunciaUsuario> denunciasDeUsuario) {
-        this.denunciasDeUsuario = denunciasDeUsuario;
-    }
+	public List<DenunciaUsuario> getDenunciasDeUsuario() {
+		return denunciasDeUsuario;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setDenunciasDeUsuario(List<DenunciaUsuario> denunciasDeUsuario) {
+		this.denunciasDeUsuario = denunciasDeUsuario;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
+	public String getSobrenome() {
+		return sobrenome;
+	}
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public String getApelido() {
-        return apelido;
-    }
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public void setApelido(String apelido) {
-        this.apelido = apelido;
-    }
+	public String getApelido() {
+		return apelido;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public Contato getContato() {
-        return contato;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public void setContato(Contato contato) {
-        this.contato = contato;
-    }
+	public Contato getContato() {
+		return contato;
+	}
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
-    }
-    
-    public List<Relato> getRelatos() {
-        return relatos;
-    }
+	public List<Contato> getContatos() {
+		return contatos;
+	}
 
-    public void setRelatos(List<Relato> relatos) {
-        this.relatos = relatos;
-    }
-    
-    public Foto getFoto() {
-        return foto;
-    }
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
 
-    public void setFoto(Foto foto) {
-        this.foto = foto;
-    }
+	public List<Relato> getRelatos() {
+		return relatos;
+	}
+
+	public void setRelatos(List<Relato> relatos) {
+		this.relatos = relatos;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 }

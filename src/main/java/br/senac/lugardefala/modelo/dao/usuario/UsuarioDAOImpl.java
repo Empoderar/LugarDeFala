@@ -439,4 +439,42 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		return usuario;
 	}
+
+	public Usuario recuperarUsuarioComContatoPorId(Long id) {
+	    Session session = null;
+	    Usuario usuario = null;
+
+	    try {
+	    	session = getSessionFactory().openSession();
+			session.beginTransaction();
+
+	        CriteriaBuilder construtor = session.getCriteriaBuilder();
+	        CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+	        Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+	       
+	        raizUsuario.fetch("contato", JoinType.LEFT);
+
+	        criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), id));
+
+
+	        usuario = session.createQuery(criteria).uniqueResult();
+
+	        session.getTransaction().commit();
+
+	    } catch (Exception sqlException) {
+	        sqlException.printStackTrace();
+
+	        if (session.getTransaction() != null && session.getTransaction().isActive()) {
+	        	session.getTransaction().rollback();
+	        }
+
+	    } finally {
+	        if (session != null) {
+	        	session.close();
+	        }
+	    }
+
+	    return usuario;
+	}
 }
