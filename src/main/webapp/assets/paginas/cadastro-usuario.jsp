@@ -51,13 +51,8 @@
           <label for="usuario">Nome de Usuário</label>
           <input
             type="text"
-<<<<<<< HEAD
-            name="usuario"
-            id="usuario"
-=======
             name="apelido"
             id="apelido"
->>>>>>> development
             placeholder="Crie o seu nome de usuário"
             required
           />
@@ -114,6 +109,5 @@
         </div>
       </form>
     </div>
-    <%@include file="/assets/rodape/rodape.jsp" %>
   </body>
 </html>
