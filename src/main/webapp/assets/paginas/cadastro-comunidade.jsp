@@ -9,7 +9,7 @@
 <style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
-		<%@ include file="/assets/barras-navegacao/logada.jsp"%>
+		<%@ include file="/assets/barras-navegacao/logado.jsp"%>
 <div  class="grid-container-cadastro">
 	<div class="item1 header">
 	<header class="header">

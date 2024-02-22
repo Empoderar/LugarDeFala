@@ -56,9 +56,6 @@ public class Comunidade implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario_criador")
-	
-	private Usuario usuario;
-	
 	private Moderador moderador;
 
 	public Comunidade() {
@@ -168,14 +165,6 @@ public class Comunidade implements Serializable {
 
 	public void setModerador(Moderador moderador) {
 		this.moderador = moderador;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 }

@@ -24,12 +24,10 @@
                 <div>
 					<form action="perfil-comunidade" method="post">
 			        	<c:forEach var="relato" items="${relatos}">
-			               	<c:if relato.comunidade = comunidade>
 								<c:out value="${usuario.nome}"></c:out>
 								<c:out value="${relato.conteudo}"></c:out>
 <%-- 							<c:out value="${relato.categoria}"></c:out> --%>
 								<c:out value="${relato.avaliacao}"></c:out>
-							</c:if>
 						</c:forEach>
 					</form>
                 	<div>

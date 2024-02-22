@@ -22,12 +22,13 @@
 		<div>
 			<form action="/LugarDeFala/metodo-deletar-comunidade" method="post">
 			<c:forEach var="comunidade" items="${comunidades}">
-    <div>
-        <h2>${comunidade.nome}</h2>
- 		<h3>${comunidade.descricao}</h3>
-        <a href="/LugarDeFala/deletar-comunidade?id=${comunidade.id}">Excluir</a>
-    </div>
-</c:forEach>
+    		<div>
+        		<h2>${comunidade.nome}</h2>
+ 				<h3>${comunidade.descricao}</h3>
+        		<a href="/LugarDeFala/deletar-comunidade?idComunidade=<c:out value='${comunidade.id}'/>">Excluir</a>	
+        		
+    		</div>
+			</c:forEach>
 				<p>Confirme sua senha para excluir a comunidade</p>
 				<input type="password" name="senha" id="senha" required
 					maxlength="20" placeholder="Digite a senha"> <a

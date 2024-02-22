@@ -28,7 +28,6 @@
 		</div>
 		<div>
 			<c:forEach var="conselho" items="${conselhos}"> 
-					<c:if conselho.relato = relato>></c:if>
 					<c:out value="${usuario.nome} " />
 					<c:out value="${Conselho.conteudo}" />
 			</c:forEach>

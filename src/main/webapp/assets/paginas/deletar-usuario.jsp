@@ -31,7 +31,7 @@
             <p>Confirme sua senha para excluir a conta</p>
             <input type="password" name="senha" id="senha" required maxlength="20" placeholder="Digite a senha"> 
             <a href="recuperar-senha.html">Esqueci minha senha</a>
-            <button href="/LugarDeFala/" type="submit">Excluir</button>
+            <button type="submit">Excluir</button>
         </form>
     </div>
     <div>
