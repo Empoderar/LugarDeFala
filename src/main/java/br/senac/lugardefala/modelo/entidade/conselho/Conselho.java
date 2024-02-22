@@ -60,7 +60,8 @@ public class Conselho implements Serializable {
 
 	}
 
-	public Conselho(String conteudo, LocalDate data) {
+	public Conselho(Usuario usuario, String conteudo, LocalDate data) {
+		this.usuario = usuario;
 		this.conteudo = conteudo;
 		this.data = data;
 	}

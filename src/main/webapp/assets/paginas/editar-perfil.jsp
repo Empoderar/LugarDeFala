@@ -25,9 +25,9 @@
 			<label for="user">Nome de usuário</label> 
 			<input type="text" id="apelido" name="apelido" required maxlength="50" value="${usuarioLogado.apelido}"> 
 			<label for="email">E-mail</label> 
-			<input type="email" id="email" name="email" required maxlength="40"  > 
+    		<input type="email" id="email" name="email" required maxlength="40" value="${usuarioLogado.contato.email}"> 
 			<label for="telefone">Telefone</label>
-			<input type="tel" id="telefone" name="telefone" pattern="[0-9]{2}[0-9]{5}[0-9]{4}" required>
+			<input type="tel" id="telefone" name="telefone" pattern="[0-9]{2}[0-9]{5}[0-9]{4}" value="${usuarioLogado.contato.telefone}"> 
 			<button type="submit">Salvar</button>
 		</form>
 	</div>

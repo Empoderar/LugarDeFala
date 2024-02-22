@@ -82,7 +82,8 @@ public class Relato implements Serializable {
 	}
 	
 	
-	public Relato(String conteudo, LocalDate data) {
+	public Relato(Usuario usuario, String conteudo, LocalDate data) {
+		this.usuario = usuario;
 		this.conteudo = conteudo;
 		this.data = data;
 		categoriaRelato = new ArrayList<>();
