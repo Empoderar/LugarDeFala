@@ -29,7 +29,7 @@
         <ul>
             <c:forEach var="comunidade" items="${comunidades}">
                 <li>
-                    <a href="perfil-comunidade?id=${comunidade.id}">${comunidade.nome}</a>
+                    <a href="/LugarDeFala/perfil-comunidade?id=<c:out value='${comunidade.id}'/>">${comunidade.nome}</a>
                 </li>
             </c:forEach>
         </ul>
