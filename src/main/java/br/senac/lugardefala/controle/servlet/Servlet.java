@@ -471,36 +471,27 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void resultadoPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String termoPesquisa = request.getParameter("pesquisar");
-		List<Usuario> usuarios = usuarioDao.recuperarUsuariosPorNomes(termoPesquisa);
-		request.setAttribute("usuarios", usuarios);
+	        throws ServletException, IOException {
+	    String termoPesquisa = request.getParameter("pesquisar");
+	    List<Usuario> usuarios = usuarioDao.recuperarUsuariosPorNomes(termoPesquisa);
+	    request.setAttribute("usuarios", usuarios);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
-		dispatcher.forward(request, response);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/pesquisar-usuario.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession sessao = request.getSession();
-		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+	        throws ServletException, IOException {
+	    List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
+	    request.setAttribute("usuarios", usuarios);
 
-		List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
-		request.setAttribute("usuarios", usuarios);
-
-		if (usuario instanceof Moderador) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
-			dispatcher.forward(request, response);
-
-		} else if (usuario instanceof Usuario) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
-			dispatcher.forward(request, response);
-		}
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/pesquisar-usuario.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String termoPesquisa = request.getParameter("pesquisar");
 		List<Comunidade> comunidades = comunidadeDao.recuperarComunidadesPorNome(termoPesquisa);
 		request.setAttribute("comunidades", comunidades);
@@ -560,13 +551,23 @@ public class Servlet extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
+		List<Categoria> categorias = categoriaDao.recuperarTodasCategorias();
+		LocalDate dataAtual = LocalDate.now();
+
+		request.setAttribute("categorias", categorias);
+		request.setAttribute("dataAtual", dataAtual);
+
 		if (usuario instanceof Usuario) {
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
 			dispatcher.forward(request, response);
+
 		} else if (usuario instanceof Moderador) {
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/cadastro-relato.jsp");
 			dispatcher.forward(request, response);
 		}
+
 	}
 
 	private void mostrarTelaFormularioModerador(HttpServletRequest request, HttpServletResponse response)
@@ -701,7 +702,7 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaCadastroConselho(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
 		if (usuario instanceof Usuario) {
@@ -877,18 +878,11 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarTelaEditarPerfil(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
-		if (usuario instanceof Usuario) {
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
-			dispatcher.forward(request, response);
-		} else if (usuario instanceof Moderador) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
-			dispatcher.forward(request, response);
-		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/editar-perfil.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTelaEditarRelato(HttpServletRequest request, HttpServletResponse response)
@@ -1010,103 +1004,33 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirRelato(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, IOException, ServletException {
-
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 		try {
-
 			String conteudo = request.getParameter("conteudo");
-
 			LocalDate dataAtual = LocalDate.now();
 
-			Relato relatoParaInserir = new Relato(conteudo, dataAtual);
+			Relato relatoParaInserir = new Relato(usuario, conteudo, dataAtual);
 
 			relatoDao.inserir(relatoParaInserir);
 
-			List<Categoria> categoriasParaInserir = new ArrayList<Categoria>();
+			List<Categoria> categorias = categoriaDao.recuperarTodasCategorias();
 
-			if (request.getParameter("sororidade") != null) {
-
-				Categoria categoria = new Categoria("Sororidade");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			if (request.getParameter("ajude-me") != null) {
-
-				Categoria categoria = new Categoria("Ajude-me");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			if (request.getParameter("desabafo") != null) {
-
-				Categoria categoria = new Categoria("Desabafo");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			if (request.getParameter("aconselhamento-juridico") != null) {
-
-				Categoria categoria = new Categoria("Aconselhamento Jurídico");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			if (request.getParameter("acolhimento-temporario") != null) {
-
-				Categoria categoria = new Categoria("Acolhimento Temporário");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			if (request.getParameter("assistencia-social") != null) {
-
-				Categoria categoria = new Categoria("Assistência Social");
-
-				categoriaDao.inserir(categoria);
-
-				categoriasParaInserir.add(categoria);
-
-			}
-
-			relatoParaInserir.setCategoriaRelato(categoriasParaInserir);
-
+			request.setAttribute("categorias", categorias);
 			request.setAttribute("dataAtual", dataAtual);
-
 			request.setAttribute("relato", relatoParaInserir);
-
 			request.setAttribute("conteudo", conteudo);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
-
 			dispatcher.forward(request, response);
 
 			System.out.println("Relato inserido com sucesso.");
 
 		} catch (Exception e) {
-
 			System.out.println("Erro ao inserir relato: " + e.getMessage());
-
 			e.printStackTrace();
-
 		}
-
 	}
 
 	private void inserirCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -1114,47 +1038,45 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
-
 		Categoria categoria = new Categoria(nome);
 
 		categoriaDao.inserir(categoria);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/cadastro-relato.jsp");
-
 		dispatcher.forward(request, response);
 
 	}
 
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
+		Moderador moderador = (Moderador) session.getAttribute("moderador");
 
 		String nome = request.getParameter("nome");
-
 		String descricao = request.getParameter("descricao");
 
-		Comunidade comunidadeParaInserir = new Comunidade(nome, descricao);
+		Comunidade comunidadeParaInserir = new Comunidade(moderador, nome, descricao);
 
 		comunidadeDao.inserir(comunidadeParaInserir);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-comunidade.jsp");
-
 		dispatcher.forward(request, response);
-
 	}
 
 	private void inserirConselho(HttpServletRequest request, HttpServletResponse response)
 
 			throws SQLException, IOException, ServletException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
 		String conteudo = request.getParameter("conteudo");
+		LocalDate dataAtual = LocalDate.now();
 
-		Conselho conselhoParaInserir = new Conselho(conteudo);
+		Conselho conselhoParaInserir = new Conselho(usuario, conteudo, dataAtual);
 
 		conselhoDao.inserir(conselhoParaInserir);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-conselhos.jsp");
-
 		dispatcher.forward(request, response);
 
 	}
@@ -1262,8 +1184,9 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void editarPerfil(HttpServletRequest request, HttpServletResponse response)
-
 			throws SQLException, ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
 		String nome = request.getParameter("nome");
 		String sobrenome = request.getParameter("sobrenome");
@@ -1271,12 +1194,18 @@ public class Servlet extends HttpServlet {
 		String apelido = request.getParameter("apelido");
 		String email = request.getParameter("email");
 		String telefone = request.getParameter("telefone");
-		Usuario usuarioParaAtualizar = new Usuario(nome, sobrenome, apelido, descricao);
 
-		usuarioDao.atualizar(usuarioParaAtualizar);
-		Contato contatoParaAtualizar = new Contato(telefone, email);
-		contatoDao.atualizar(contatoParaAtualizar);
-		usuarioParaAtualizar.setContato(contatoParaAtualizar);
+		usuario.setNome(nome);
+		usuario.setSobrenome(sobrenome);
+		usuario.setDescricao(descricao);
+		usuario.setApelido(apelido);
+
+		Contato contato = usuario.getContato();
+		contato.setEmail(email);
+		contato.setTelefone(telefone);
+		usuario.setContato(contato);
+
+		usuarioDao.atualizar(usuario);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/perfil-usuario.jsp");
 		dispatcher.forward(request, response);
@@ -1421,14 +1350,16 @@ public class Servlet extends HttpServlet {
 				comunidadeDao.deletar(comunidadeExistente);
 
 				session.invalidate();
-				response.sendRedirect(request.getContextPath() + "/home.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
+				dispatcher.forward(request, response);
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/tela-de-erro.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/deletar-comunidade.jsp");
 				dispatcher.forward(request, response);
 			}
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/home.jsp");
 			dispatcher.forward(request, response);
+			System.out.println("Não achou nada"); // usado para debbug
 		}
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,15 @@
 			<hr>
 		</div>
 		<div>
-			<form action="/metodo-deletar-comunidade" method="post">
-				<p>Confirme sua senha para excluir a conta</p>
+			<form action="/LugarDeFala/metodo-deletar-comunidade" method="post">
+			<c:forEach var="comunidade" items="${comunidades}">
+    <div>
+        <h2>${comunidade.nome}</h2>
+ 		<h3>${comunidade.descricao}</h3>
+        <a href="/LugarDeFala/deletar-comunidade?id=${comunidade.id}">Excluir</a>
+    </div>
+</c:forEach>
+				<p>Confirme sua senha para excluir a comunidade</p>
 				<input type="password" name="senha" id="senha" required
 					maxlength="20" placeholder="Digite a senha"> <a
 					href="recuperar-senha.html">Esqueci minha senha</a>

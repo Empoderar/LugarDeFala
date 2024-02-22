@@ -2,19 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastrar Categoria</title>
-<style type="text/css">
-<%@
-includefile
-="/
-assets
-/
-css
-/
-style
-.css
-"%
->
-</style>
+<style><%@include file= "/assets/css/style.css"%></style>
 </head>
 <body>
 	<div class="grid-container-cadastro">
@@ -35,7 +23,6 @@ style
 </defs>
 </svg>
 				</div>
-
 			</header>
 		</div>
 
