@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
@@ -47,17 +48,24 @@ public class Comunidade implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "comunidade_usuario", joinColumns = @JoinColumn(name = "id_comunidade"), inverseJoinColumns = @JoinColumn(name = "id_usuario"))
 	private List<Usuario> usuarios;
+	
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "comunidade_moderador", joinColumns = @JoinColumn(name = "id_comunidade"), inverseJoinColumns = @JoinColumn(name = "id_moderador"))
 	private List<Moderador> moderadores;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario_criador")
+	
+	private Usuario usuario;
+	
 	private Moderador moderador;
 
 	public Comunidade() {
 	}
 
-	public Comunidade(String nome, String descricao) {
+	public Comunidade(Moderador moderador, String nome, String descricao) {
+		this.moderador = moderador;
 		this.nome = nome;
 		this.descricao = descricao;
 	}
@@ -160,6 +168,14 @@ public class Comunidade implements Serializable {
 
 	public void setModerador(Moderador moderador) {
 		this.moderador = moderador;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
