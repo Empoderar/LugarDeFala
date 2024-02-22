@@ -115,6 +115,43 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 		}
 		return comunidade;
 	}
+	
+	 public Comunidade recuperarRelatosDaComunidade(Long id) {
+	    	
+		    
+	    	Comunidade relatosDaComunidade = null;
+	    	Session session = null;
+	    	
+	    	try {
+	        	session = getSessionFactory().openSession();
+	            session.beginTransaction();
+	            
+	    		CriteriaBuilder builder = session.getCriteriaBuilder();
+	    		CriteriaQuery<Comunidade> criteriaQuery = builder.createQuery(Comunidade.class);
+
+	    		Root<Comunidade> comunidadeRoot = criteriaQuery.from(Comunidade.class);
+	    		comunidadeRoot.fetch("relatos", JoinType.LEFT);
+
+	    		criteriaQuery.select(comunidadeRoot).distinct(true);
+	    		criteriaQuery.where(builder.equal(comunidadeRoot.get(Comunidade_.id), id));
+
+	    		relatosDaComunidade = session.createQuery(criteriaQuery).getSingleResult();
+
+		
+		    session.getTransaction().commit();
+	    
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    	finally {
+	    		if (session != null) {
+	    			session.close();
+	    			}
+
+	    	}
+	        return relatosDaComunidade;
+	    }
 
 	public List<Comunidade> recuperarComunidadesPorIdUsuario(Long id) {
 		Session session = null;

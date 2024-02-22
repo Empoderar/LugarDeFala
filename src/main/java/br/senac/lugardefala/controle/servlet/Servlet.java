@@ -649,22 +649,17 @@ public class Servlet extends HttpServlet {
 		}
 	}
 
-	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaPerfilDaComunidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Comunidade comunidade = comunidadeDao.recuperarComunidadePorId(Long.parseLong(request.getParameter("id")));
+		List<Relato> relatos = relatoDao.recuperarRelatosPorComunidade(comunidade);
 
-			throws ServletException, IOException {
-		Comunidade comunidade = (Comunidade) request.getSession().getAttribute("comunidade");
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-		if (comunidade != null && usuario != null) {
-			List<Relato> relatos = relatoDao.recuperarRelatosPorUsuario(usuario);
-			request.setAttribute("relatos", relatos);
+		request.setAttribute("comunidade", comunidade);
+		request.setAttribute("relatos", relatos);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/perfil-comunidade.jsp");
 			dispatcher.forward(request, response);
-		}
 
-		else {
-			response.sendRedirect("./assets/paginas/home.jsp");
-		}
 
 	}
 

@@ -17,13 +17,3 @@
 		<!-- uma setinha de voltar aqui --><c:out value="${usuario.apelido}"></c:out>
 	</header>
 </div>
-            <script>
-                function alternarMenu(menuId) {
-                    var menu = document.getElementById(menuId);
-                    if (menu.style.display === "none") {
-                        menu.style.display = "block";
-                    } else {
-                        menu.style.display = "none";
-                    }
-                }
-            </script>

@@ -2,6 +2,8 @@ package br.senac.lugardefala.modelo.dao.comunidade;
 
 import java.util.List;
 
+
+
 import br.senac.lugardefala.modelo.entidade.comunidade.Comunidade;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
