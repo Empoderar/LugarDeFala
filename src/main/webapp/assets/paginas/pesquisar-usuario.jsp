@@ -23,7 +23,7 @@
         <ul>
             <c:forEach var="usuario" items="${usuarios}">
                 <li>
-                    <a href="perfil-usuario?id=${usuario.id}">${usuario.nome}</a>
+                    <a href="/LugarDeFala/perfil-usuario?id=<c:out value='${usuario.id}'/>">${usuario.nome}</a>
                 </li>
             </c:forEach>
         </ul>

@@ -296,19 +296,19 @@ public class Servlet extends HttpServlet {
 				mostrarTelaPesquisarUsuario(request, response);
 
 				break;
-
-			case "/resultado-pesquisar-usuario": // funcionando
-				resultadoPesquisarComunidade(request, response);
-
+				
+			case "/resultado-pesquisar-usuario": // precisa testar
+				resultadoPesquisarUsuario(request, response);
+				
 				break;
-
+				
 			case "/pesquisar-comunidade": // precisa testar
 				mostrarTelaPesquisarComunidade(request, response);
-
+				
 				break;
 
-			case "/resultado-pesquisar-comunidade": // precisa testar
-				resultadoPesquisarUsuario(request, response);
+			case "/resultado-pesquisar-comunidade": // funcionando
+				resultadoPesquisarComunidade(request, response);
 
 				break;
 
@@ -461,9 +461,7 @@ public class Servlet extends HttpServlet {
 		} catch (SQLException ex) {
 
 			request.setAttribute("erro", ex.getMessage());
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/tela-de-erro.jsp");
-
 			dispatcher.forward(request, response);
 
 		}
@@ -482,11 +480,19 @@ public class Servlet extends HttpServlet {
 
 	private void mostrarTelaPesquisarUsuario(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    List<Usuario> usuarios = usuarioDao.recuperarTodosUsuarios();
-	    request.setAttribute("usuarios", usuarios);
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/assets/paginas/pesquisar-usuario.jsp");
-	    dispatcher.forward(request, response);
+		if (usuario instanceof Usuario) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
+			dispatcher.forward(request, response);
+
+		} else if (usuario instanceof Moderador) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./assets/paginas/pesquisar-usuario.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	private void resultadoPesquisarComunidade(HttpServletRequest request, HttpServletResponse response)
@@ -871,6 +877,11 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		
+		List<Comunidade> comunidades = comunidadeDao.recuperarTodasComunidades();
+		request.setAttribute("comunidades", comunidades);
+		
+		
 		if (usuario instanceof Moderador) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/deletar-comunidade.jsp");
 			dispatcher.forward(request, response);
@@ -1050,7 +1061,7 @@ public class Servlet extends HttpServlet {
 	private void inserirComunidade(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
-		Moderador moderador = (Moderador) session.getAttribute("moderador");
+		Moderador moderador = (Moderador) session.getAttribute("usuarioLogado");
 
 		String nome = request.getParameter("nome");
 		String descricao = request.getParameter("descricao");
@@ -1275,7 +1286,7 @@ public class Servlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 
 		if (usuarioLogado instanceof Usuario) {
 
@@ -1330,7 +1341,7 @@ public class Servlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		Comunidade comunidadeExistente = (Comunidade) session.getAttribute("comunidade");
+		Comunidade comunidadeExistente = comunidadeDao.recuperarComunidadePorId(Long.parseLong(request.getParameter("idComunidade")));
 		Moderador moderadorLogado = (Moderador) session.getAttribute("moderador");
 
 		if (comunidadeExistente != null && moderadorLogado != null) {
