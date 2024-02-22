@@ -41,7 +41,7 @@
                             <a href="#">Esqueceu a senha?</a>
                         </div>
 
-                        <button href="/LugarDeFala/home-logada" type="submit" class="button">Confirmar</button>
+                        <button href="/LugarDeFala/src/main/webapp/assets/paginas/perfil-comunidade" type="submit" class="button">Confirmar</button>
                         <div class="cadastrar-link">
                             <p>Não tem uma conta? <a href="/LugarDeFala/cadastro-usuario">Cadastre-se</a></p>
 
@@ -51,5 +51,4 @@
             </div>  
         </div>
 </body>
- 
 </html>

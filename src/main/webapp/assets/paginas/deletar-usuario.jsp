@@ -8,6 +8,7 @@
    <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
+<%@ include file="/assets/barras-navegacao/barra-de-navegacao.jsp"%>
 <div>
     <div>
         <h1>Excluir a conta</h1>
@@ -38,5 +39,6 @@
         <button type="submit">Ok</button>
     </div>
 </div>
+<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>

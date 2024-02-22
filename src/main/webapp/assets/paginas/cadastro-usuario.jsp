@@ -51,8 +51,13 @@
           <label for="usuario">Nome de Usuário</label>
           <input
             type="text"
+<<<<<<< HEAD
+            name="usuario"
+            id="usuario"
+=======
             name="apelido"
             id="apelido"
+>>>>>>> development
             placeholder="Crie o seu nome de usuário"
             required
           />
@@ -92,12 +97,12 @@
         </div>
  
         <div class="input-box-c">
-          <label for="senha-confirme">Confirme a sua senha</label>
+          <label for="senha">Senha</label>
           <input
             type="password"
             name="senha"
             id="senha"
-            placeholder="Repita a sua senha"
+            placeholder="Crie a sua senha"
             required
           />
         </div>
@@ -109,5 +114,6 @@
         </div>
       </form>
     </div>
+    <%@include file="/assets/rodape/rodape.jsp" %>
   </body>
 </html>

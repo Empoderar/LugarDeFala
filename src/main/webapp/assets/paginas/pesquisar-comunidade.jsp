@@ -18,6 +18,7 @@
     </script>
 </head>
 <body>
+   	<%@ include file="/assets/barras-navegacao/logado.jsp"%>
     <h1>Pesquisar Comunidades</h1>
     <form action="/LugarDeFala/resultado-pesquisar-comunidade" method="post" onsubmit="return validarFormulario()">
         <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
@@ -37,5 +38,6 @@
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
     </c:if>
+    <%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
 </html>

@@ -19,18 +19,19 @@
         <button type="submit">Pesquisar</button>
     </form>
     
-   <c:if test="${not empty usuarios}">
-    <ul>
-        <c:forEach var="usuario" items="${usuarios}">
-            <li>
-                <a href="perfil-usuario?id=${usuario.id}">${usuario.nome}</a>
-            </li>
-        </c:forEach>
-    </ul>
-</c:if>
-
-<c:if test="${empty usuarios}">
-    <p>Nenhum usuário encontrado.</p>
-</c:if>
+    <c:if test="${not empty usuarios}">
+        <ul>
+            <c:forEach var="usuario" items="${usuarios}">
+                <li>
+                    <a href="perfil-usuario?id=${usuario.id}">${usuario.nome}</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
+    
+    <c:if test="${empty usuarios}">
+        <p>Nenhuma usuario encontrado.</p>
+    </c:if>
+    <%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
 </html>

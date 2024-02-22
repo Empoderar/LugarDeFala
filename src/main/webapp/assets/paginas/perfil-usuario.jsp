@@ -9,14 +9,7 @@
 <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
 </head>
 <body>
-	<c:if test="${usuarioLogado == null}">
-		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
-	</c:if>
-
-	<c:if test="${usuarioLogado != null}">
-		<%@ include file="../barras-navegacao/barra-de-navegacao.jsp"%>
-	</c:if>
-	
+		<%@ include file="/assets/barras-navegacao/barra-de-navegacao.jsp"%>
 <div>
 <a href="<%=request.getContextPath()%>/editar-perfil">Editar perfil</a>
 <button onclick="/editar-perfil"></button></div>
@@ -35,28 +28,6 @@
 				<c:forEach var="relato" items="${relatos}">
 				</c:forEach>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="/LugarDeFala/home">Página inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				S <a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
-	
+	<%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
 </html>

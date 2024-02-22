@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<%@ include file="/assets/barras-navegacao/barra-de-navegacao.jsp"%>
 <div>
 	<h1>Desativar a conta</h1>
 	<h3>Ao desativar sua conta ela poderá ser reativada a qualquer
@@ -38,29 +39,8 @@
 				página inicial</a>
 		</p>
 	</div>
-	<footer>
-		<div>
-			<p>Lugar de Fala</p>
-			<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-		</div>
-		<div>
-			<p>Atendimento</p>
-			<a href="#">Contato</a> <a href="#">Termos de uso</a>
-		</div>
-		<div>
-			<p>Redes Sociais</p>
-			<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-		</div>
-		<div>
-			<p>Lugar de Fala</p>
-		</div>
-		<div>
-			<p>2023 Todos os direitos reservados</p>
-		</div>
-	</footer>
 	<div>
-		<a href="#"> <img src="#" alt="setinha"
-			style="width: 42px; height: 42px;">
+		<a href="#"> <img src="#" alt="setinha">
 		</a>
 	</div>
 	<div>
@@ -73,28 +53,7 @@
 			<button type="submit">Desativar Conta</button>
 		</form>
 	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nós</a> <a href="#">Página inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
 </div>
+<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>

@@ -41,32 +41,7 @@
 			</form>
 
 		</div>
-		<div class="item4 footer">
-
-			<div class="footer-column">
-
-				<h3>Lugar de Fala</h3>
-
-				<a href="#">Sobre nós</a> <a href="home.jsp">Página Inicial</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Atendimento</h3>
-
-				<a href="#">Contato</a> <a href="#">Termos de Uso</a>
-
-			</div>
-
-			<div class="footer-column">
-
-				<h3>Redes Sociais</h3>
-
-				<a href="#">WhatsApp</a> <a href="#">Instagram</a>
-
-			</div>
-		</div>
 	</div>
+    	<%@include file="/assets/rodape/rodape.jsp" %>
 </body>
 </html>

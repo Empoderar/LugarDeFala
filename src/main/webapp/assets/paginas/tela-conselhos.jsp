@@ -7,74 +7,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Conselhos</title>
- <style type="text/css"><%@includefile="/assets/css/style.css"%></style>
+<style type="text/css"><%@include file="/assets/css/style.css"%></style>
 </head>	
 <body>
-	<c:if test="${usuario == null}">
-		<%@ include file="../barras-navegacao/home-deslogada.jsp"%>
-	</c:if>
-
-	<c:if test="${usuario != null}">
-		<%@ include file="../barras-navegacao/home-logada.jsp"%>
-	</c:if>
+	<%@ include file="/assets/barras-navegacao/logado.jsp"%>
 	<div>
-		<nav>
-			<div>
-
+		<div>
+			<nav>
 				<div>
-					<a href="#">Página Inicial</a> <a href="#">Popular</a>
-					<hr>
+					<a href="#">Página Inicial</a> <a href="#">Popular</a>		
 				</div>
-				<div>
-					<a href="#">Comunidades</a> 
-					<a href="#">Violência física</a> 
-					<a href="#">Violência psicológica</a> 
-					<a href="#">Violência moral</a> 
-					<a href="#">Violência sexual</a> 
-					<a href="#">Violência patrimonial</a>
-					<hr>
-				</div>
-			</div>
-			<button onclick="#">Relatar</button>
-		</nav>
+				<button onclick="#">Relatar</button>
+			</nav>
+		</div>
+		<div>
+			<c:out value="${relato.conteudo}"></c:out>
+			<form action="publicar-conselho" method="post">
+				<button type="submit">Publicar</button>
+			</form>
+		</div>
+		<div>
+			<c:forEach var="conselho" items="${conselhos}"> 
+					<c:if conselho.relato = relato>></c:if>
+					<c:out value="${usuario.nome} " />
+					<c:out value="${Conselho.conteudo}" />
+			</c:forEach>
+		</div>
 	</div>
-	<div>
-		<p>Relato</p>
-		<form action="publicar-conselho" method="post">
-			<button type="submit">Publicar</button>
-		</form>
-	</div>
-	<div>
-		<c:forEach var="conselho" items="${conselhos}">
-			<p>
-				CONSELHOS:
-				<c:out value="${usuario.nome} " />
-				<c:out value="${Conselho.conteudo}" />
-			</p>
-		</c:forEach>
-	</div>
-	<div>
-		<footer>
-			<div>
-				<p>Lugar de Fala</p>
-				<a href="#">Sobre nos</a> <a href="#">Pagina inicial</a>
-			</div>
-			<div>
-				<p>Atendimento</p>
-				<a href="#">Contato</a> <a href="#">Termos de uso</a>
-			</div>
-			<div>
-				<p>Redes Sociais</p>
-				<a href="#">Whatsapp</a> <a href="#">Instagram</a>
-			</div>
-			<div>
-				<p>Lugar de Fala</p>
-			</div>
-			<div>
-				<p>2023 Todos os direitos reservados</p>
-			</div>
-		</footer>
-	</div>
+    	<%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
-
 </html>
