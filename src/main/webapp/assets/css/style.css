@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+button:hover {
+  transform: scale(1.01);
+  opacity: 0.9;
+}
+
 :root {
 	--cor-fundo: #fde8e2;
 	--cor-constraste: #f9866f;
@@ -554,3 +559,570 @@ footer {
   text-align: center;
   margin: 11px;
 }
+
+/* --------------------------------telas de sucesso ----------------------------------------------------*/
+ 
+.excluir-sucesso {
+  background-color: rgba(253, 232, 226, 100%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: rgba(77, 77, 77, 100%);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  width: 25vw;
+}
+ 
+.excluir-sucesso button {
+ 
+	width: 15vw;
+   
+	height: 45px;
+   
+	background: var(--cor-primária);
+   
+	border: none;
+   
+	outline: none;
+   
+	color: var(--cor-letra-2);
+   
+	border-radius: 4px;
+   
+	cursor: pointer;
+   
+	font-size: 16px;
+   
+	font-weight: bold;
+	
+	margin-top: 2vw;
+   
+}
+ 
+.arquivar-sucesso {
+  background-color: rgba(253, 232, 226, 100%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: rgba(77, 77, 77, 100%);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  width: 25vw;
+}
+ 
+.arquivar-sucesso button {
+ 
+	width: 15vw;
+   
+	height: 45px;
+   
+	background: var(--cor-primária);
+   
+	border: none;
+   
+	outline: none;
+   
+	color: var(--cor-letra-2);
+   
+	border-radius: 4px;
+   
+	cursor: pointer;
+   
+	font-size: 16px;
+   
+	font-weight: bold;
+	
+	margin-top: 2vw;
+   
+}
+
+/* --------------------------------excluir relato ----------------------------------------------------*/
+ 
+.excluir-relato {
+	
+  background-color: rgba(253, 232, 226, 100%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: rgba(77, 77, 77, 100%);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  width: 35vw;
+  font-size: 2vw;
+	
+}
+ 
+.excluir-relato .button-sim {
+	
+	width: 10vw;
+   
+	height: 45px;
+   
+	background: var(--cor-primária);
+   
+	border: none;
+   
+	outline: none;
+   
+	color: var(--cor-letra-2);
+   
+	border-radius: 4px;
+   
+	cursor: pointer;
+   
+	font-size: 16px;
+   
+	font-weight: bold;
+	
+	margin-top: 2vw;
+	
+	margin-right: 2vw;
+	
+}
+.excluir-relato .button-nao {
+	
+	width: 10vw;
+   
+	height: 45px;
+   
+	background: var(--cor-primária);
+   
+	border: none;
+   
+	outline: none;
+   
+	color: var(--cor-letra-2);
+   
+	border-radius: 4px;
+   
+	cursor: pointer;
+   
+	font-size: 16px;
+   
+	font-weight: bold;
+	
+	margin-top: 2vw;
+	
+	margin-left: 2vw;
+	
+}
+ 
+.excluir-relato p {
+	
+	margin-bottom: 2vw;
+	
+}
+
+/* -------------------------------- Tela de Erro ----------------------------------------------------*/
+ 
+.tela-de-erro {
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-center;
+  justify-content: center;
+  padding: 20px;
+  color: var(--cor-letra-1);
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+}
+ 
+.tela-de-erro h1 {
+  color: var(--cor-fundo);
+  font-size: 360px;
+  -webkit-text-stroke: 5px var(--cor-contraste);
+}
+
+/* -------------------------------- Perfil do Usuario ----------------------------------------------------*/
+ 
+.fotos {
+	
+	width: 100%;
+	height: 20vw;
+	background-color: var(--cor-detalhe);
+	margin-bottom: 20vw var(--cor-fundo);
+	border-bottom: solid 5vw var(--cor-fundo);
+	
+}
+
+.foto-fundo {
+
+	display: flex;
+	width: 100%;
+	height: 100%;
+
+}
+ 
+.foto-perfil {
+	
+	display: flex;
+	background-color: white;
+	float: left;
+	border: solid var(--cor-fundo) 0.5vw;
+	border-radius: 100%;
+	width: 13vw;
+	height: 13vw;
+	margin-left: 7vw;
+	margin-top: -7vw;
+	
+}
+ 
+.nome {
+	
+	color: var(--cor-letra-1);
+	justify-content: space-between;
+	align-items: column;
+	font-size: 20px;
+	margin-bottom: 2vw;
+	margin-left: 5vw;
+	
+}
+ 
+.nome p {
+	
+	margin: 1vw;
+	
+}
+ 
+.nome .user {
+	
+	font-size: 15px;
+	
+}
+ 
+.button {
+ 
+	width: 15vw;
+   
+	height: 45px;
+   
+	background: var(--cor-primária);
+   
+	border: none;
+   
+	outline: none;
+   
+	color: var(--cor-letra-2);
+   
+	border-radius: 4px;
+   
+	cursor: pointer;
+   
+	font-size: 16px;
+   
+	font-weight: bold;
+ 
+	float: right;
+	
+	margin-right: 5vw;
+ 
+	margin-top: 30px;
+   
+  }
+  
+.comunidade {
+ 
+  width: 20vw;
+ 
+  height: 15vw;
+ 
+  background-color: #fcd9d1;
+ 
+  border-radius: 11.84px;
+ 
+  display: flex;
+ 
+  flex-direction: column;
+ 
+  justify-content: center;
+ 
+  align-items: center;
+ 
+}
+ 
+.comunidade img {
+ 
+	display: flex;
+	background-color: white;
+	float: left;
+	border-radius: 100%;
+	border: 0;
+	width: 7vw;
+	height: 7vw;
+	margin-bottom: 4vw;
+	justify-content: center;
+	
+}
+
+/* --------------------------------relato ----------------------------------------------------*/
+ 
+.fotinha-perfil {
+ 
+	display: flex;
+	background-color: white;
+	float: left;
+	border: solid var(--cor-fundo) 0.5vw;
+	border-radius: 100%;
+	width: 4vw;
+	height: 4vw;
+ 
+ 
+}
+ 
+.relato {
+ 
+margin-bottom: 3vw;
+margin-right: 5vw;
+margin-left: 5vw;
+ 
+}
+ 
+.relato .nome-usuario {
+ 
+color: var(--cor-primária);
+font-size: 1vw;
+ 
+}
+ 
+.relato .nome-comunidade {
+ 
+margin-left: 0.5vw;
+color: var(--cor-letra-1);
+font-size: 0.8vw;
+ 
+}
+ 
+.relato .nomes {
+ 
+margin-top: 1vw;
+display: flex;
+ 
+}
+ 
+.relato .categoria {
+ 
+color: var(--cor-primária);
+font-size: 0.8vw;
+ 
+}
+ 
+.relato .conteudo {
+ 
+color: var(--cor-letra-1);
+font-size: 1.7vw;
+ 
+}
+ 
+.relato .botoes {
+	
+	display: flex;
+	justify-content: right;
+	border: none;
+	
+}
+ 
+.relato button {
+	
+	background-color: var(--cor-fundo);
+	border: none;
+	margin-right: 0.5vw;
+	
+}
+ 
+.opcoes-relato {
+	
+  border: none;
+  background-color: rgba(253, 232, 226, 100%);
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  width: 12vw;
+	
+}
+ 
+.opcoes-relato button {
+ 
+  height: 45px;
+ 
+  background: var(--cor-fundo);
+ 
+  border: none;
+ 
+  outline: none;
+ 
+  color: var(--cor-letra-1);
+ 
+  border-radius: 4px;
+ 
+  cursor: pointer;
+ 
+  font-size: 30px;
+ 
+  margin-top: 1vw;
+  
+  margin-bottom: 0.1vw;
+ 
+}
+
+/* --------------------------------editar perfil----------------------------------------------------*/
+
+.moldura-editar-perfil {
+	color: var(--cor-letra-1);
+	border-radius: 4px;
+	display: flex;
+	justify-content: start;
+	margin-left: 10vw;
+	margin-right: 10vw;
+  }
+  form {
+	flex: 1;
+  }
+   
+  .input-box-e {
+	width: 100%;
+	flex: 1;
+	height: 50px;
+	margin: 3vw 0;
+  }
+   
+  .input-box-e input {
+	width: 100%;
+	height: 90%;
+	background: var(--cor-detalhe);
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 4px;
+  }
+   
+  .input-box-e input::placeholder {
+	color: var(--cor-letra-1);
+	padding: 10px;
+  }
+
+  .moldura-editar-perfil .button {
+
+	background-color: var(--cor-fundo);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+  }
+   
+  .moldura-editar-perfil .button button {
+	width: 40%;
+	height: 3vw;
+	background: var(--cor-primária);
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	color: var(--cor-letra-2);
+	font-weight: 400;
+	margin-top: 2rem;
+	cursor: pointer;
+	font-size: 16px;
+  }
+
+/* --------------------------------editar senha----------------------------------------------------*/
+
+.body-editar-senha{
+
+	align-items: center;
+	width: 100%;
+	background-color: var(--cor-fundo);
+
+}
+
+.moldura-editar-senha {
+	background-color: var(--cor-fundo);
+	color: var(--cor-letra-1);
+	border-radius: 4px;
+	display: flex;
+	justify-content: start;
+	margin-left: 10vw;
+	margin-right: 10vw;
+	flex-direction: column;
+  }
+ 
+  .moldura-editar-senha .img{
+
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+
+}
+
+.moldura-editar-senha .img img{
+
+	width: 20vw;
+	height: 20vw;
+
+}
+
+  form {
+	flex: 1;
+  }
+   
+  .input-box-e {
+	width: 100%;
+	flex: 1;
+	height: 4vw;
+	margin: 3vw 0;
+  }
+   
+  .input-box-e input {
+	width: 100%;
+	height: 90%;
+	background: var(--cor-detalhe);
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 4px;
+  }
+   
+  .input-box-e input::placeholder {
+	color: var(--cor-letra-1);
+	padding: 10px;
+  }
+
+  .moldura-editar-senha .button {
+
+	background-color: var(--cor-fundo);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+  }
+   
+  .moldura-editar-senha .button button {
+	width: 40%;
+	height: 3vw;
+	background: var(--cor-primária);
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	color: var(--cor-letra-2);
+	font-weight: 400;
+	margin-top: 2rem;
+	cursor: pointer;
+	font-size: 16px;
+  }
+
+  .moldura-editar-senha h2 {
+	font-size: 50px;
+	text-align: center;
+	color: var(--cor-constraste);
+
+  }
