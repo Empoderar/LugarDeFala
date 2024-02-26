@@ -27,7 +27,6 @@
             </div>
         </header>
     </c:if>
-</header>
     <main class="menu-inicio">
       <img src="img/mulher.svg" alt="" class="imagem-mulher" />
  

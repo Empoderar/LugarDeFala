@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Usuário ou Moderador</title>
+    <title>Cadastrar Moderador</title>
     <style type="text/css"><%@ include file="/assets/css/style.css" %></style>
 </head>
 <body class="body-cadastro">
