@@ -15,7 +15,9 @@
     <h1>Cadastrar relato</h1>
     <form action="/LugarDeFala/inserir-relato" method="post">
         <input type="text" value="${conteudo}" id="conteudo" name="conteudo" placeholder="Digite aqui seu relato...">
-        <p>Data atual do relato: ${dataAtual}</p>
+        <span>Data atual do relato: ${dataAtual}</span>
+        
+        <input type="hidden" name="id" value="${comunidade.id}">
 
         <fieldset>
             <legend>Categorias:</legend>
