@@ -29,29 +29,32 @@ body {
 /* -------------------------------- header ----------------------------------------------------*/
 
 .cabecalho {
-	width: 100%;
-	height: 125px;
-	background-color: #5ea3a5;
-	position: sticky;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  width: 100%;
+  height: 125px;
+  background-color: #5ea3a5;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 
-	-webkit-box-shadow: 0 4px 4px 0 #a69e9e;
-	-moz-box-shadow: 0 4px 4px 0 #a69e9e;
-	box-shadow: 0 4px 4px 0 #a69e9e;
+  -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
+  -moz-box-shadow: 0 4px 4px 0 #a69e9e;
+  box-shadow: 0 4px 4px 0 #a69e9e;
 }
 
 .logo-lugar {
-	padding-left: 78px;
+  flex-shrink: 0;
 }
 
 .menu-escolhas {
-	padding-right: 148px;
-	font-size: xx-large;
-	display: flex;
-	gap: 80px;
+  display: flex;
+  font-size: xx-large;
 }
+
+.menu-escolhas a {
+  margin-right: 120px; 
+}
+
 
 /* -------------------------------- home principal da landing page ----------------------------------------------------*/
 
@@ -123,6 +126,7 @@ body {
 	border-radius: 5px;
 	color: #4d4d4d;
 	border: none;
+	text-align: center;
 }
 
 /* -------------------------------- painel de escolhas ----------------------------------------------------*/
