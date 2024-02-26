@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuário ou Moderador</title>
     <title>Cadastrar Moderador</title>
     <style type="text/css"><%@ include file="/assets/css/style.css" %></style>
 </head>
 <body class="body-cadastro">
     <div class="moldura-cadastro">
-        <form action="/LugarDeFala/inserir-usuario" onsubmit="return validarFormulario()">
+        <form action="inserir-moderador" onsubmit="return validarFormulario()">
             <h1>Cadastro</h1>
 
             <div class="input-box-c">
@@ -54,10 +53,11 @@
 
             <button type="submit" class="button">Confirmar</button>
 
-            <div class="cadastrar-link">
+        </form>
+        
+        <div class="cadastrar-link">
                 <p>Já tem uma conta? <a href="/LugarDeFala/login">Entre</a></p>
             </div>
-        </form>
     </div>
 
     <script>
@@ -71,8 +71,8 @@
             var dataNascimento = new Date(idadeEntrada.value);
             var idade = hoje.getFullYear() - dataNascimento.getFullYear();
 
-            if (idade < 14) {
-                alert("Você deve ter no mínimo 14 anos para se cadastrar.");
+            if (idade < 18/) {
+                alert("Você deve ter no mínimo 18 anos para se cadastrar.");
                 return false;
             }
 
