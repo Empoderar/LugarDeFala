@@ -29,32 +29,107 @@ body {
 /* -------------------------------- header ----------------------------------------------------*/
 
 .cabecalho {
-  width: 100%;
-  height: 125px;
-  background-color: #5ea3a5;
-  position: sticky;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-
-  -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
-  -moz-box-shadow: 0 4px 4px 0 #a69e9e;
-  box-shadow: 0 4px 4px 0 #a69e9e;
+    width: 100%;
+    height: 100px;
+    background-color: #5ea3a5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
 }
 
 .logo-lugar {
   flex-shrink: 0;
 }
 
+.menu-content {
+    display: none;
+    position: fixed;
+    background-color: #5ea3a5;
+    width: 200px;
+    top: 100px;
+    left: 0;
+    height: calc(100vh - 125px);
+    z-index: 999;
+}
+
+.menu-content ol {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-content ol li {
+    padding: 8px 20px;
+}
+
+.menu-content ol li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.menu-content ol li a:hover {
+    background-color: #478c8e;
+}
+
+.icone-content {
+    display: none;
+    position: fixed;
+    background-color: #5ea3a5;
+    width: 200px;
+    top: 100px;
+    right: 0;
+    height: calc(100vh - 125px);
+    z-index: 999;
+}
+
+.icone-content ol {
+    list-style: none;
+    padding: 0;
+}
+
+.icone-content ol li {
+    padding: 8px 20px;
+}
+
+.icone-content ol li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.icone-content ol li a:hover {
+    background-color: #478c8e;
+}
+
+.menu-hamburguer-hamburguer{
+	color: white;
+	background: transparent;
+	font-size: 50px;
+	border: none;
+}
+
+.menu-icone-icone{
+	color: white;
+	background: transparent;
+	font-size: 20px;
+	border: none;
+}
+
 .menu-escolhas {
   display: flex;
-  font-size: xx-large;
+  font-size: 24px;
 }
 
 .menu-escolhas a {
   margin-right: 120px; 
 }
-
 
 /* -------------------------------- home principal da landing page ----------------------------------------------------*/
 
@@ -87,6 +162,7 @@ body {
 	font-size: 100px;
 	font-weight: 400;
 	margin-left: 176px;
+	padding-top: 60px;
 }
 
 .subtitulo {
@@ -94,6 +170,7 @@ body {
 	text-transform: uppercase;
 	font-weight: 200;
 	margin-left: 90px;
+	font-size: 24px;
 }
 
 .texto-home {
@@ -192,7 +269,7 @@ body {
 
 .titulo-parte {
 	padding-top: 20px;
-	color: var(--cor-letra-1);
+	color: #00333e;
 	font-size: 100px;
 	margin-left: 100px;
 	font-weight: 400;
