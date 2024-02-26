@@ -29,32 +29,107 @@ body {
 /* -------------------------------- header ----------------------------------------------------*/
 
 .cabecalho {
-  width: 100%;
-  height: 125px;
-  background-color: #5ea3a5;
-  position: sticky;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-
-  -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
-  -moz-box-shadow: 0 4px 4px 0 #a69e9e;
-  box-shadow: 0 4px 4px 0 #a69e9e;
+    width: 100%;
+    height: 100px;
+    background-color: #5ea3a5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
 }
 
 .logo-lugar {
   flex-shrink: 0;
 }
 
+.menu-content {
+    display: none;
+    position: fixed;
+    background-color: #5ea3a5;
+    width: 200px;
+    top: 100px;
+    left: 0;
+    height: calc(100vh - 125px);
+    z-index: 999;
+}
+
+.menu-content ol {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-content ol li {
+    padding: 8px 20px;
+}
+
+.menu-content ol li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.menu-content ol li a:hover {
+    background-color: #478c8e;
+}
+
+.icone-content {
+    display: none;
+    position: fixed;
+    background-color: #5ea3a5;
+    width: 200px;
+    top: 100px;
+    right: 0;
+    height: calc(100vh - 125px);
+    z-index: 999;
+}
+
+.icone-content ol {
+    list-style: none;
+    padding: 0;
+}
+
+.icone-content ol li {
+    padding: 8px 20px;
+}
+
+.icone-content ol li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.icone-content ol li a:hover {
+    background-color: #478c8e;
+}
+
+.menu-hamburguer-hamburguer{
+	color: white;
+	background: transparent;
+	font-size: 50px;
+	border: none;
+}
+
+.menu-icone-icone{
+	color: white;
+	background: transparent;
+	font-size: 20px;
+	border: none;
+}
+
 .menu-escolhas {
   display: flex;
-  font-size: xx-large;
+  font-size: 24px;
 }
 
 .menu-escolhas a {
   margin-right: 120px; 
 }
-
 
 /* -------------------------------- home principal da landing page ----------------------------------------------------*/
 
@@ -87,6 +162,7 @@ body {
 	font-size: 100px;
 	font-weight: 400;
 	margin-left: 176px;
+	padding-top: 60px;
 }
 
 .subtitulo {
@@ -94,6 +170,7 @@ body {
 	text-transform: uppercase;
 	font-weight: 200;
 	margin-left: 90px;
+	font-size: 24px;
 }
 
 .texto-home {
@@ -192,7 +269,7 @@ body {
 
 .titulo-parte {
 	padding-top: 20px;
-	color: var(--cor-letra-1);
+	color: #00333e;
 	font-size: 100px;
 	margin-left: 100px;
 	font-weight: 400;
@@ -557,4 +634,266 @@ footer {
   font-size: 14.5px;
   text-align: center;
   margin: 11px;
+}
+
+/* -------------------------------- página logada ----------------------------------------------------*/
+.cabeçalho-logado {
+  width: 100%;
+  height: 125px;
+  background-color: #5ea3a5;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
+  -moz-box-shadow: 0 4px 4px 0 #a69e9e;
+  box-shadow: 0 4px 4px 0 #a69e9e;
+}
+
+.menu-logado {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-foto {
+  padding-right: 40px;
+}
+
+.menu-link {
+  padding-left: 60px;
+  color: var(--cor-letra-2);
+  font-size: 30px;
+}
+
+.conteudo-logado {
+  padding-top: 10px;
+  text-align: left;
+}
+
+.titulo-logado {
+  margin-top: 30px;
+  font-weight: 300;
+  font-size: 28px;
+  margin-right: 62rem;
+  color: var(--cor-letra-1);
+}
+
+.comunidades-destaque {
+  display: flex;
+}
+
+.violencia-F {
+  padding: 0 20px 0 2px;
+}
+
+.violencia-Pa {
+  padding: 0 20px 0 2px;
+}
+
+.violencia-Ps {
+  padding: 0 20px 0 2px;
+}
+
+.relatos-recente {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  text-align: left;
+  margin-right: 74.5rem;
+  margin-top: 30px;
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--cor-letra-1);
+}
+
+.principal-pagina {
+  width: 100%;
+  height: 230vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+/* -------------------------------- Relatos sz ----------------------------------------------------*/
+
+.relato-container {
+  width: 1280px;
+  height: 298px;
+  margin-right: 20px;
+}
+
+.header-relato {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conteudo-header-relato {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.nome-usuario-relato {
+  color: var(--cor-primária);
+  font-size: 22px;
+}
+
+.comunidade-relato {
+  color: var(--cor-letra-1);
+  font-size: 14px;
+}
+
+.fa-ellipsis {
+  color: var(--cor-constraste);
+  font-size: 25px;
+}
+
+.categorias-relato {
+  position: relative;
+  bottom: 20px;
+  left: 84px;
+  font-size: 12px;
+  color: var(--cor-primária);
+}
+
+.texto-relato {
+  color: var(--cor-letra-1);
+  font-size: 20px;
+  text-align: justify;
+  width: 1100px;
+  height: 180px;
+  margin-left: 80px;
+}
+
+.footer-relato {
+  display: flex;
+  color: var(--cor-constraste);
+  justify-content: flex-end;
+  font-size: 24px;
+  gap: 10px;
+}
+
+/* -------------------------------- Comunidade ----------------------------------------------------*/
+
+.header-comunidade {
+  width: 100%;
+  background-color: #F0BBC0;
+  height: 142px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.esquerda-header-comunidade {
+  color: var(--cor-letra-2);
+}
+
+.direita-header-comunidade {
+  display: flex;
+  gap: 20px;
+}
+
+.info-comunidade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--cor-letra-2);
+}
+
+.botao-sair {
+  padding: 10px 30px 10px 30px;
+  background: var(--cor-primária);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: var(--cor-letra-2);
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 60px;
+}
+
+.botao-entrar {
+  padding: 10px 30px 10px 30px;
+  background: var(--cor-primária);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: var(--cor-letra-2);
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 60px;
+}
+
+/* -------------------------------- Pesquisa Comunidade ----------------------------------------------------*/
+
+.menu-pesquisa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.input-pesquisa {
+  width: 1108px;
+  background: transparent;
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid var(--cor-letra-1);
+  outline: none;
+}
+
+.titulo-pesquisa {
+  color: var(--cor-letra-1);
+  margin-right: 750px;
+  font-weight: 400;
+}
+
+.comunidades-populares {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 70px;
+}
+
+.comunidade-card {
+  display: flex;
+  gap: 20px;
+}
+
+/* -------------------------------- Pesquisa Usuario ----------------------------------------------------*/
+
+.titulo-pesquisa-usuario {
+  color: var(--cor-letra-1);
+  margin-right: 900px;
+  font-weight: 400;
+}
+
+/* -------------------------------- Pesquisa Categoria ----------------------------------------------------*/
+
+.categorias-populares {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 70px;
+}
+
+.categoria {
+  display: flex;
+  width: 1108px;
+  height: 70px;
+  background-color: var(--cor-detalhe);
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0px 30px 0px 30px;
+  border: 1px solid var(--cor-constraste);
 }

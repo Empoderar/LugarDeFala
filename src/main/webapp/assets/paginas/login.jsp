@@ -46,7 +46,7 @@
 					</div>
 
 					<button
-						href="/LugarDeFala/src/main/webapp/assets/paginas/perfil-comunidade"
+						href="/LugarDeFala/home-logada"
 						type="submit" class="button">Confirmar</button>
 					<div class="cadastrar-link">
 						<p>
