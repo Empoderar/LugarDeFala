@@ -81,7 +81,7 @@
 					<form action="perfil-comunidade" method="post">
 						<c:forEach var="relato" items="${relatos}">
 							<c:if test="${relato.comunidade eq comunidade}">
-								<c:out value="${usuario.nome}"></c:out>
+								<c:out value="${usuarioLogado.nome}"></c:out>
 								<c:out value="${relato.conteudo}"></c:out>
 								<!-- <c:out value="${relato.categoria}"></c:out> -->
 								<c:out value="${relato.avaliacao}"></c:out>
@@ -89,8 +89,7 @@
 						</c:forEach>
 					</form>
 					<div>
-						<button id="btnCadastroRelato" onclick="cadastroRelato()">Fazer
-							relato</button>
+						<a href="/LugarDeFala/cadastro-relato?id=<c:out value='${comunidade.id}'/>">Fazer Relato</a>
 						<div id="cadastro-relato" style="display: none;">
 							<div id="user-icon">&#128100;</div>
 							<textarea id="relatoTexto"
