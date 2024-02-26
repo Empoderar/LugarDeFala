@@ -10,12 +10,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
-    <header class="cabecalho">
-    <img src="img/logo.svg" alt="" class="logo-lugar" />
-    <div class="menu-escolhas">
-    	<%@ include file="/assets/barras-navegacao/deslogado.jsp"%>
-    </div>
-</header>
+    <c:if test="${empty usuarioLogado}">
+        <header class="cabecalho">
+            <img src="img/logo.svg" alt="" class="logo-lugar" />
+            <div class="menu-escolhas">
+                <%@ include file="/assets/barras-navegacao/deslogado.jsp" %>
+            </div>
+        </header>
+    </c:if>
+
+    <c:if test="${not empty usuarioLogado}">
+        <header class="cabecalho">
+            <img src="img/logo.svg" alt="" class="logo-lugar" />
+            <div class="menu-escolhas">
+                <%@ include file="/assets/barras-navegacao/logado.jsp" %>
+            </div>
+        </header>
+    </c:if>
     <main class="menu-inicio">
       <img src="img/mulher.svg" alt="" class="imagem-mulher" />
  
@@ -34,82 +45,85 @@
         </p>
  
         <div class="conteudo-home">
-            <div class="botao-conteudo">
-                 <button href="/LugarDeFala/cadastro-usuario" class="botao-home"> FaÃ§a seu cadastro</button>
-                <button href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</button>
-            </div>
-            <div class="botao-conteudo">
-                <button class="botao-home">Seja Voluntário</button>
-                <button class="botao-home">Sobre Nós</button>
-            </div>
+    <div class="botao-conteudo">
+        <a href="/LugarDeFala/cadastro-usuario" class="botao-home"> Faça seu cadastro</a>
+        <a href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</a>
+    </div>
+    <div class="botao-conteudo">
+        <a href="#" class="botao-home">Seja Voluntário</a>
+        <a href="#" class="botao-home">Sobre Nós</a>
+    </div>
+</div>
+
         </div>
     </main>
  
     <section class="conteudos-cartoes">
-      <div class="cartao-1">
-        <div>
-          <img
-            src="img/cartoes/027e0b5b-326c-4829-bb4e-57909479e858 1.svg"
-            alt=""
-            class="imagem-cartao-1"
-          />
-        </div>
- 
-        <p class="texto-cartao-1">Violência</p>
-        <p class="texto-cartao-1">Física</p>
-      </div>
- 
-      <div class="cartao-1">
-        <div>
-          <img
-            src="img/cartoes/Untitled Project 1.svg"
-            alt=""
-            class="imagem-cartao-2"
-          />
-        </div>
- 
-        <p class="texto-cartao-1">Violência</p>
-        <p class="texto-cartao-1">Psicológica</p>
-      </div>
- 
-      <div class="cartao-1">
-        <div>
-          <img
-            src="img/cartoes/Mulher jovem com uma folha de papel vítima de bullying e mãos atacando _ Vetor Premium 1.svg"
-            alt=""
-            class="imagem-cartao-3"
-          />
-        </div>
- 
-        <p class="texto-cartao-1">Violência</p>
-        <p class="texto-cartao-1">Moral</p>
-      </div>
- 
-      <div class="cartao-1">
-        <div>
-          <img
-            src="img/cartoes/Untitled Project (2) 1.svg"
-            alt=""
-            class="imagem-cartao-4"
-          />
-        </div>
- 
-        <p class="texto-cartao-1">Violência</p>
-        <p class="texto-cartao-1">Sexual</p>
-      </div>
- 
-      <div class="cartao-1">
-        <div>
-          <img
-            src="img/cartoes/Horoskop_ Warum du das Sternzeichen Fische im Leben brauchst 1.svg"
-            alt=""
-            class="imagem-cartao-5"/>
-        </div>
- 
-        <p class="texto-cartao-1">Violência</p>
-        <p class="texto-cartao-1">Patrimonial</p>
-      </div>
-    </section>
+  <a href="/pagina-violencia-fisica" class="cartao-1">
+    <div>
+      <img
+        src="img/cartoes/027e0b5b-326c-4829-bb4e-57909479e858 1.svg"
+        alt=""
+        class="imagem-cartao-1"
+      />
+    </div>
+
+    <p class="texto-cartao-1">Violência</p>
+    <p class="texto-cartao-1">Física</p>
+  </a>
+
+  <a href="/pagina-violencia-psicologica" class="cartao-1">
+    <div>
+      <img
+        src="img/cartoes/Untitled Project 1.svg"
+        alt=""
+        class="imagem-cartao-2"
+      />
+    </div>
+
+    <p class="texto-cartao-1">Violência</p>
+    <p class="texto-cartao-1">Psicológica</p>
+  </a>
+
+  <a href="/pagina-violencia-moral" class="cartao-1">
+    <div>
+      <img
+        src="img/cartoes/Mulher jovem com uma folha de papel vítima de bullying e mãos atacando _ Vetor Premium 1.svg"
+        alt=""
+        class="imagem-cartao-3"
+      />
+    </div>
+
+    <p class="texto-cartao-1">Violência</p>
+    <p class="texto-cartao-1">Moral</p>
+  </a>
+
+  <a href="/pagina-violencia-sexual" class="cartao-1">
+    <div>
+      <img
+        src="img/cartoes/Untitled Project (2) 1.svg"
+        alt=""
+        class="imagem-cartao-4"
+      />
+    </div>
+
+    <p class="texto-cartao-1">Violência</p>
+    <p class="texto-cartao-1">Sexual</p>
+  </a>
+
+  <a href="/pagina-violencia-patrimonial" class="cartao-1">
+    <div>
+      <img
+        src="img/cartoes/Horoskop_ Warum du das Sternzeichen Fische im Leben brauchst 1.svg"
+        alt=""
+        class="imagem-cartao-5"
+      />
+    </div>
+
+    <p class="texto-cartao-1">Violência</p>
+    <p class="texto-cartao-1">Patrimonial</p>
+  </a>
+</section>
  
     <section class="conteudo-parte">
       <div>

@@ -973,7 +973,7 @@ public class Servlet extends HttpServlet {
 		HttpSession sessao = request.getSession();
 
 		if (!usuarioDao.verificarCredenciaisUsuario(email, senha)) {
-
+			request.setAttribute("erroLogin", "Credenciais inválidas. Por favor, verifique seu email e senha.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/login.jsp");
 			dispatcher.forward(request, response);
 		}
