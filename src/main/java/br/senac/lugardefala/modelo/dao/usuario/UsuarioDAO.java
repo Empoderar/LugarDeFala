@@ -24,6 +24,8 @@ public interface UsuarioDAO {
     Usuario recuperarUsuarioPorApelido(String apelido);
 
     Usuario recuperarUsuarioPorId(Long id);
+    
+    Usuario recuperarUsuarioComContatoPorId(Long id);
 
     Usuario recuperarUsuarioPorIdFetch(Long id);
 
