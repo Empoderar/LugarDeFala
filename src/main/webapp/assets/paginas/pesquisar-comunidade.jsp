@@ -15,15 +15,28 @@
             }
             return true;
         }
-    </script>
+    </script> 
 </head>
 <body>
-   	<%@ include file="/assets/barras-navegacao/logado.jsp"%>
+<%@ include file="/assets/barras-navegacao/logado.jsp"%>
+    
     <h1>Pesquisar Comunidades</h1>
     <form action="/LugarDeFala/resultado-pesquisar-comunidade" method="post" onsubmit="return validarFormulario()">
-        <input type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
+        <input class="input-pesquisa" type="text" placeholder="Pesquisar Comunidade" oninput="this.className = ''" name="pesquisar" id="pesquisar">
         <button href="/LugarDeFala/pesquisar-comunidade" type="submit">Pesquisar</button>
     </form>
+    
+    <h2 class="titulo-pesquisa"> Comunidades populares</h2>
+        <div class="comunidades-populares">
+           <div class="comunidade-card">
+                <img src="img/comunidades/violencia-fisica.svg" alt="">
+                <img src="img/comunidades/violencia-sexual.svg" alt="">
+           </div>
+           <div class="comunidade-card">
+                <img src="img/comunidades/violencia-psicologica.svg" alt="">
+                <img src="img/comunidades/violencia-patrimonial.svg" alt="">
+           </div>
+        </div>
     
     <c:if test="${not empty comunidades}">
         <ul>
@@ -37,7 +50,7 @@
     
     <c:if test="${empty comunidades}">
         <p>Nenhuma comunidade encontrada.</p>
-    </c:if>
+    </c:if> 
     <%@include file="/assets/rodape/rodape.jsp" %> 
 </body>
 </html>
