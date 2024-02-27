@@ -33,8 +33,6 @@
 			class="br.senac.lugardefala.modelo.entidade.status.Status.class" />
 		<mapping
 			class="br.senac.lugardefala.modelo.entidade.usuario.Usuario.class" />
-		<mapping
-			class="br.senac.lugardefala.modelo.entidade.foto.Foto.class" />
 
 	</session-factory>
 </hibernate-configuration>
