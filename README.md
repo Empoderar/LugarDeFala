@@ -1,9 +1,11 @@
 # ![Logo](https://drive.google.com/file/d/1bpqw69p4pVd3KXLbZLD07Jlj8ui1-ZmT/view?usp=drive_link) Bem Vindo ao LugarDeFala!
 
 ## Quem somos? 
-Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, transgêneras e travestis que foram vítimas de violência.
----
 
+Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, transgêneras e travestis que foram vítimas de violência.
+
+
+---
 ## Como funcionamos?
 
 O Lugar de Fala é uma plataforma de apoio projetada para permitir que mulheres compartilhem suas histórias em comunidades dedicadas à violência física, psicológica, moral, sexual e patrimonial, fornecendo um espaço seguro para fazer seus relatos. 
@@ -19,4 +21,3 @@ Contamos também com os moderadores, responsáveis por aprovar, arquivar e exclu
 - Ana Luiza Abreu: [Linkedin](https://linktr.ee/ana._abreu)
 - Lucas Söthe: [Linkedin](https://www.linkedin.com/in/lucas-s%C3%B6the-loes-9627b9227/)
 - Aquila Hapuque: [Linkedin](https://www.linkedin.com/in/aquila-hapuque-41a5a62b1/)
-
