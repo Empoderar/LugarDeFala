@@ -12,12 +12,25 @@
     <script src="seu-arquivo-js.js"></script>
 </head>
 <body>
+	<%@ include file="/assets/barras-navegacao/logado.jsp"%>
     <h1>Pesquisar Usuários</h1>
     
     <form action="/LugarDeFala/resultado-pesquisar-usuario" method="post" onsubmit="return validarFormulario()">
-        <input type="text" placeholder="Pesquisar Usuário" oninput="this.className = ''" name="pesquisar" id="pesquisar">
+        <input class="input-pesquisa" type="text" placeholder="Pesquisar Usuário" oninput="this.className = ''" name="pesquisar" id="pesquisar">
         <button type="submit">Pesquisar</button>
     </form>
+    
+     <h2 class="titulo-pesquisa-usuario"> Recomendados </h2>
+        <div class="comunidades-populares">
+           <div class="comunidade-card">
+                <img src="img/usuarios/usuario1.svg" alt="">
+                <img src="img/usuarios/usuario2.svg" alt="">
+           </div>
+           <div class="comunidade-card">
+                <img src="img/usuarios/usuario3.svg" alt="">
+                <img src="img/usuarios/usuario4.svg" alt="">
+           </div>
+        </div>
     
     <c:if test="${not empty usuarios}">
         <ul>
