@@ -1,6 +1,7 @@
 # ![Logo](https://drive.google.com/file/d/1bpqw69p4pVd3KXLbZLD07Jlj8ui1-ZmT/view?usp=drive_link) Bem Vindo ao LugarDeFala!
 
-## Quem somos? Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, transgêneras e travestis que foram vítimas de violência.
+## Quem somos? 
+Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, transgêneras e travestis que foram vítimas de violência.
 ---
 
 ## Como funcionamos?
@@ -11,11 +12,11 @@ Contamos também com os moderadores, responsáveis por aprovar, arquivar e exclu
 
 ---
 ### Nossos Desenvolvedores: :computer:
--Brenda Eising [Linkedin]([https://github.com](https://www.linkedin.com/in/brenda-eising-0501a4215/)
--João Toureiro: [Linkedin](linkedin.com/in/joão-victor-morais-toureiro-90b702257)
--Maria Fernanda Rengel: [Linkedin](https://www.linkedin.com/in/maria-fernanda-rengel)
--Gabriela Adara: [Linkedin](https://www.linkedin.com/in/gabriela-adara-amarante-b831452a3/)
--Ana Luiza Abreu: [Linkedin](https://linktr.ee/ana._abreu)
--Lucas Söthe: [Linkedin](https://www.linkedin.com/in/lucas-s%C3%B6the-loes-9627b9227/)
--Aquila Hapuque: [Linkedin](https://www.linkedin.com/in/aquila-hapuque-41a5a62b1/)
+- Brenda Eising [Linkedin](https://www.linkedin.com/in/brenda-eising-0501a4215/)
+- João Toureiro: [Linkedin](linkedin.com/in/joão-victor-morais-toureiro-90b702257)
+- Maria Fernanda Rengel: [Linkedin](https://www.linkedin.com/in/maria-fernanda-rengel)
+- Gabriela Adara: [Linkedin](https://www.linkedin.com/in/gabriela-adara-amarante-b831452a3/)
+- Ana Luiza Abreu: [Linkedin](https://linktr.ee/ana._abreu)
+- Lucas Söthe: [Linkedin](https://www.linkedin.com/in/lucas-s%C3%B6the-loes-9627b9227/)
+- Aquila Hapuque: [Linkedin](https://www.linkedin.com/in/aquila-hapuque-41a5a62b1/)
 
