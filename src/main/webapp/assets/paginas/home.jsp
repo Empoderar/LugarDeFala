@@ -69,8 +69,8 @@
         <a href="/LugarDeFala/perfil-comunidade" class="botao-home"> Comunidades</a>
     </div>
     <div class="botao-conteudo">
-        <a href="#" class="botao-home">Seja Voluntário</a>
-        <a href="#" class="botao-home">Sobre Nós</a>
+        <a href="/LugarDeFala/cadastro-moderador" class="botao-home">Seja Voluntário</a>
+        <a href="https://linktr.ee/grupoempoderar" class="botao-home">Sobre Nós</a>
     </div>
 </div>
 
@@ -78,7 +78,7 @@
     </main>
  
     <section class="conteudos-cartoes">
-  <a href="/pagina-violencia-fisica" class="cartao-1">
+  <a href="/LugarDeFala/perfil-comunidade?id=1" class="cartao-1"> <!-- Violencia Fisica -->
     <div>
       <svg width="321" height="359" viewBox="0 0 321 359" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="321" height="359" rx="13" fill="#FCD9D1"/>
@@ -97,7 +97,7 @@
     </div>
   </a>
 
-  <a href="/pagina-violencia-psicologica" class="cartao-1">
+  <a href="/LugarDeFala/perfil-comunidade?id=2" class="cartao-1">  <!-- Violencia Psicologica -->
     <div>
       <svg width="321" height="359" viewBox="0 0 321 359" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="321" height="359" rx="13" fill="#FCD9D1"/>
@@ -115,7 +115,7 @@
     </div>
   </a>
 
-  <a href="/pagina-violencia-moral" class="cartao-1">
+  <a href="/LugarDeFala/perfil-comunidade?id=3" class="cartao-1"> <!-- Violencia Moral -->
     <div>
      <svg width="321" height="359" viewBox="0 0 321 359" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="321" height="359" rx="13" fill="#FCD9D1"/>
@@ -133,7 +133,7 @@
     </div>
   </a>
 
-  <a href="/pagina-violencia-sexual" class="cartao-1">
+  <a href="/LugarDeFala/perfil-comunidade?id=4" class="cartao-1"> <!-- Violencia Sexual -->
     <div>
       <svg width="321" height="359" viewBox="0 0 321 359" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="321" height="359" rx="13" fill="#FCD9D1"/>
