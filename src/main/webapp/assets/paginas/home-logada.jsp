@@ -24,13 +24,12 @@
 
     <div id="hamburguer" class="menu-content">
         <ol>
-            <li><a href="home">Página inicial</a></li>
-            <li><a href="perfil-comunidade">Comunidades</a></li>
-            <li><a href="#">c=Categorias</a></li>
-            <li><a href="pesquisar-usuario">Encontrar usuários</a></li>
-            <li><a href="relatos-arquivados">Relatos arquivados</a></li>
-            <li><a href="tela-denuncias-usuarios">Denuncias</a></li>
-            <li><a href="usuario-virar-moderador">Virar moderador</a></li>
+            <li><a href="/LugarDeFala/home">Página inicial</a></li>
+            <li><a href="/LugarDeFala/pesquisar-comunidade">Encontre comunidades</a></li>
+            <li><a href="/LugarDeFala/pesquisar-usuario">Encontre usuários</a></li>
+            <li><a href="/LugarDeFala/relatos-arquivados">Relatos arquivados</a></li>
+            <li><a href="/LugarDeFala/tela-denuncias-usuarios">Denuncias</a></li>
+            <li><a href="/LugarDeFala/usuario-virar-moderador">Virar moderador</a></li>
         </ol>
     </div>
 
@@ -38,11 +37,11 @@
 
     <div id="icone" class="icone-content">
         <ol>
-            <li><a href="perfil-usuario">Meu perfil</a></li>
-            <li><a href="tela-de-bloqueado">Bloqueados</a></li>
-            <li><a href="deletar-usuario">Excluir Conta</a></li>
-            <li><a href="desativar-perfil">Desativar Conta</a></li>
-            <li><a href="home-deslogada">Sair</a></li>
+            <li><a href="/LugarDeFala/perfil-usuario">Meu perfil</a></li>
+            <li><a href="/LugarDeFala/tela-de-bloqueado">Bloqueados</a></li>
+            <li><a href="/LugarDeFala/deletar-usuario">Excluir Conta</a></li>
+            <li><a href="/LugarDeFala/desativar-perfil">Desativar Conta</a></li>
+            <li><a href="/LugarDeFala/home">Sair</a></li>
         </ol>
     </div>
 
