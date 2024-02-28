@@ -639,13 +639,13 @@ footer {
 /* -------------------------------- página logada ----------------------------------------------------*/
 .cabeçalho-logado {
   width: 100%;
-  height: 125px;
+  height: 150px;
   background-color: #5ea3a5;
   position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
   -webkit-box-shadow: 0 4px 4px 0 #a69e9e;
   -moz-box-shadow: 0 4px 4px 0 #a69e9e;
   box-shadow: 0 4px 4px 0 #a69e9e;
@@ -677,12 +677,13 @@ footer {
   margin-top: 30px;
   font-weight: 300;
   font-size: 28px;
-  margin-right: 62rem;
   color: var(--cor-letra-1);
 }
 
 .comunidades-destaque {
   display: flex;
+  justify-content: space-around;
+  padding: 20px 0; /* Adicionei padding para espaçamento */
 }
 
 .violencia-F {
@@ -701,7 +702,6 @@ footer {
   padding-top: 10px;
   padding-bottom: 40px;
   text-align: left;
-  margin-right: 74.5rem;
   margin-top: 30px;
   font-weight: 300;
   font-size: 24px;
@@ -756,8 +756,8 @@ footer {
 
 .categorias-relato {
   position: relative;
-  bottom: 20px;
-  left: 84px;
+  bottom: 5px;
+  left: 30px; 
   font-size: 12px;
   color: var(--cor-primária);
 }
@@ -778,6 +778,113 @@ footer {
   font-size: 24px;
   gap: 10px;
 }
+
+.botaoCadastroRelato {
+  position: absolute;
+  bottom: 200px; 
+  right: 20px;
+  background-color: #5ea3a5;
+  color: #fff; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+}
+
+.botaoCadastroRelato:hover {
+  background-color: #45a049; 
+}
+
+.popupCadastro {
+    color: green;
+}
+
+.conteudo::placeholder {
+    color: green;
+}
+
+.btnAdicionarCategoria {
+    background-color: pink;
+    color: white;
+}
+
+.popupCategorias input[type="checkbox"] {
+    color: pink;
+}
+
+.popupCadastro button[type="button"],
+.popupFooter button {
+    background-color: green;
+    color: white;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 10px;
+    max-width: 80%;
+    width: 400px;
+    text-align: center;
+    resize: none;
+}
+
+.popup textarea {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    margin-top: 20px;
+    color: orangered;
+    background-color: white;
+}
+
+.popup h2 {
+    margin-bottom: 10px;
+}
+
+.popup button {
+    background-color: #fff;
+    color: orangered;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.popup button:last-child {
+    margin-right: 0;
+}
+
+.popupCategorias {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 1000;
+    border: none;
+    width: calc(100% - 20px);
+}
+
+.popupCategorias div {
+    display: flex;
+    align-items: center;
+}
+
+.popupCategorias input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+
 
 /* -------------------------------- Comunidade ----------------------------------------------------*/
 
