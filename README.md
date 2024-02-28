@@ -6,7 +6,7 @@ Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, tr
 
 
 ---
-## Nosso Objetivo: :bulb:
+## Nossas Funcionalidades: :bulb:
 
 O Lugar de Fala é uma plataforma de apoio projetada para permitir que mulheres compartilhem suas histórias em comunidades dedicadas à violência física, psicológica, moral, sexual e patrimonial, fornecendo um espaço seguro para fazer seus relatos. 
 "Lugar de Fala" é composto por comunidades para cada tipo de violência, onde as usuárias podem compartilhar suas histórias e vivências. Os relatos são enriquecidos com conselhos e curtidas, promovendo a interação entre as mulheres, e são organizados em categorias que abrangem os diversos aspectos dos relatos das usuárias.
