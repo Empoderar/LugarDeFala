@@ -17,7 +17,7 @@ import br.senac.lugardefala.modelo.entidade.foto.Foto;
 import br.senac.lugardefala.modelo.entidade.foto.Foto_;
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
-public class FotoDAOImpl {
+public class FotoDAOImpl implements FotoDAO {
 
 	private static final SessionFactory sessionFactory;
 

@@ -26,7 +26,7 @@
         <ol>
             <li><a href="home">Página inicial</a></li>
             <li><a href="perfil-comunidade">Comunidades</a></li>
-            <li><a href="#">categorias</a></li>
+            <li><a href="#">c=Categorias</a></li>
             <li><a href="pesquisar-usuario">Encontrar usuários</a></li>
             <li><a href="relatos-arquivados">Relatos arquivados</a></li>
             <li><a href="tela-denuncias-usuarios">Denuncias</a></li>
