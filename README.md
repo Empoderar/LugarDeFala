@@ -1,12 +1,12 @@
-# ![Logo](https://drive.google.com/file/d/1bpqw69p4pVd3KXLbZLD07Jlj8ui1-ZmT/view?usp=drive_link) Bem Vindo ao LugarDeFala!
+# [![imagem.png](https://i.postimg.cc/5tq6PtSt/imagem.png)](https://postimg.cc/PLJXJTcG) Bem Vindo ao LugarDeFala!
 
-## Quem somos? 
+## Quem somos? :raising_hand:
 
 Uma rede de apoio dedicada a oferecer assistência para mulheres cisgêneras, transgêneras e travestis que foram vítimas de violência.
 
 
 ---
-## Como funcionamos?
+## Nosso Objetivo: :bulb:
 
 O Lugar de Fala é uma plataforma de apoio projetada para permitir que mulheres compartilhem suas histórias em comunidades dedicadas à violência física, psicológica, moral, sexual e patrimonial, fornecendo um espaço seguro para fazer seus relatos. 
 "Lugar de Fala" é composto por comunidades para cada tipo de violência, onde as usuárias podem compartilhar suas histórias e vivências. Os relatos são enriquecidos com conselhos e curtidas, promovendo a interação entre as mulheres, e são organizados em categorias que abrangem os diversos aspectos dos relatos das usuárias.
