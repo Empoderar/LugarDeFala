@@ -26,6 +26,7 @@ import br.senac.lugardefala.modelo.entidade.conselho.Conselho;
 import br.senac.lugardefala.modelo.entidade.contato.Contato;
 import br.senac.lugardefala.modelo.entidade.denuncia.DenunciaUsuario;
 import br.senac.lugardefala.modelo.entidade.relato.Relato;
+import br.senac.lugardefala.modelo.entidade.foto.Foto;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -77,6 +78,9 @@ public class Usuario implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "comunidade_usuario", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_comunidade"))
 	private List<Comunidade> comunidades;
+
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Foto foto;
 
 	public Usuario() {
 
@@ -340,6 +344,14 @@ public class Usuario implements Serializable {
 
 	public void setRelatos(List<Relato> relatos) {
 		this.relatos = relatos;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
 	}
 
 }

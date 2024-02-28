@@ -29,6 +29,8 @@ import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAO;
 import br.senac.lugardefala.modelo.dao.denuncia.relato.DenunciaRelatoDAOImpl;
 import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAO;
 import br.senac.lugardefala.modelo.dao.denuncia.usuario.DenunciaUsuarioDAOImpl;
+import br.senac.lugardefala.modelo.dao.foto.FotoDAO;
+import br.senac.lugardefala.modelo.dao.foto.FotoDAOImpl;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAO;
 import br.senac.lugardefala.modelo.dao.moderador.ModeradorDAOImpl;
 import br.senac.lugardefala.modelo.dao.relato.RelatoDAO;
@@ -76,6 +78,8 @@ public class Servlet extends HttpServlet {
 
 	private CategoriaDAO categoriaDao;
 
+	private FotoDAO fotoDao;
+
 	public void init() {
 
 		moderadorDao = new ModeradorDAOImpl();
@@ -99,6 +103,8 @@ public class Servlet extends HttpServlet {
 		categoriaDao = new CategoriaDAOImpl();
 
 		usuarioDao = new UsuarioDAOImpl();
+
+		fotoDao = new FotoDAOImpl();
 
 	}
 
@@ -186,6 +192,12 @@ public class Servlet extends HttpServlet {
 			case "/": // funcionando
 
 				mostrarHome(request, response);
+
+				break;
+
+			case "/home-logada": // funcionando
+
+				mostrarHomeLogada(request, response);
 
 				break;
 
@@ -575,7 +587,7 @@ public class Servlet extends HttpServlet {
 
 		List<Categoria> categorias = categoriaDao.recuperarTodasCategorias();
 		LocalDate dataAtual = LocalDate.now();
-		
+
 		Comunidade comunidade = comunidadeDao.recuperarComunidadePorId(Long.parseLong(request.getParameter("id")));
 		request.setAttribute("comunidade", comunidade);
 
@@ -619,6 +631,20 @@ public class Servlet extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home.jsp");
 		dispatcher.forward(request, response);
+
+	}
+
+	private void mostrarHomeLogada(HttpServletRequest request, HttpServletResponse response)
+
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+
+		if (usuario instanceof Usuario) {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("assets/paginas/home-logada.jsp");
+			dispatcher.forward(request, response);
+		}
 
 	}
 
@@ -985,10 +1011,10 @@ public class Servlet extends HttpServlet {
 
 		if (usuario instanceof Moderador) {
 
-			request.getRequestDispatcher("assets/paginas/home.jsp").forward(request, response);
+			request.getRequestDispatcher("assets/paginas/home-logada.jsp").forward(request, response);
 
 		} else {
-			request.getRequestDispatcher("assets/paginas/home.jsp").forward(request, response);
+			request.getRequestDispatcher("assets/paginas/home-logada.jsp").forward(request, response);
 		}
 
 	}
@@ -1050,11 +1076,11 @@ public class Servlet extends HttpServlet {
 		try {
 
 			String conteudo = request.getParameter("conteudo");
-			//Comunidade comunidade = (Comunidade) sessao.getAttribute("comunidade");
+			// Comunidade comunidade = (Comunidade) sessao.getAttribute("comunidade");
 
 			Comunidade comunidade = comunidadeDao.recuperarComunidadePorId(Long.parseLong(request.getParameter("id")));
 			request.setAttribute("comunidade", comunidade);
-			
+
 			LocalDate dataAtual = LocalDate.now();
 
 			Relato relatoParaInserir = new Relato(usuario, conteudo, dataAtual, comunidade);

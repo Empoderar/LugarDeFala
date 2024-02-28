@@ -1,30 +1,32 @@
 package br.senac.lugardefala.modelo.entidade.foto;
 
-import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Lob;
 
 import br.senac.lugardefala.modelo.entidade.usuario.Usuario;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "foto")
-public class Foto{
+public class Foto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToOne(mappedBy = "foto")
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-    
+
     @Lob
     @Column(name = "binario_foto", nullable = false)
     private byte[] binario;
@@ -35,18 +37,16 @@ public class Foto{
     public Foto() {
     }
 
-
     public Foto(String caminho, byte[] binario) {
-    	setCaminho(caminho);
-    	setBinario(binario);
+        this.caminho = caminho;
+        this.binario = binario;
     }
 
-    public Foto(Long id,String caminho, byte[] binario) {
-    	setId(id);
-    	setCaminho(caminho);
-    	setBinario(binario);
+    public Foto(Long id, String caminho, byte[] binario) {
+        this.id = id;
+        this.caminho = caminho;
+        this.binario = binario;
     }
-
 
     public Long getId() {
         return id;
@@ -63,7 +63,7 @@ public class Foto{
     public void setCaminho(String caminho) {
         this.caminho = caminho;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -71,14 +71,12 @@ public class Foto{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public byte[] getBinario() {
-    	return binario;
-    }
 
+    public byte[] getBinario() {
+        return binario;
+    }
 
     public void setBinario(byte[] binario) {
-    	this.binario = binario;
+        this.binario = binario;
     }
-
 }
