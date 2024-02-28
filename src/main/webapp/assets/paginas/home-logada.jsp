@@ -54,6 +54,7 @@
                 } else {
                     menu.style.display = "none";
                 }
+
             }
         </script>
     </header>
